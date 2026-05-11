@@ -1,0 +1,105 @@
+/* Modal de confirmación CCP */
+.ccp-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .45);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+  animation: ccpModalBg 0.2s ease;
+}
+
+@keyframes ccpModalBg {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ccp-modal {
+  background: var(--ccp-white);
+  border-radius: var(--ccp-radius-lg);
+  padding: 36px 32px;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .2);
+  animation: ccpModalSlide 0.25s ease;
+  text-align: center;
+  font-family: var(--ccp-font);
+}
+
+@keyframes ccpModalSlide {
+  from { opacity: 0; transform: scale(0.92) translateY(-12px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.ccp-modal-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--ccp-primary-pale2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+}
+
+.ccp-modal-icon i { font-size: 1.9rem; color: var(--ccp-primary); }
+
+.ccp-modal-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ccp-text);
+  margin: 0 0 10px;
+}
+
+.ccp-modal-text {
+  font-size: 0.88rem;
+  color: var(--ccp-text-light);
+  line-height: 1.6;
+  margin: 0 0 26px;
+}
+
+.ccp-modal-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+}
+
+.ccp-modal-btn-cancel {
+  padding: 10px 22px;
+  border-radius: 20px;
+  border: 1.5px solid var(--ccp-border);
+  background: var(--ccp-white);
+  color: var(--ccp-text-light);
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: var(--ccp-font);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ccp-modal-btn-cancel:hover {
+  border-color: #9ca3af;
+  color: var(--ccp-text);
+}
+
+.ccp-modal-btn-confirm {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 22px;
+  border-radius: 20px;
+  border: none;
+  background: var(--ccp-primary);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: var(--ccp-font);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ccp-modal-btn-confirm:hover { background: var(--ccp-primary-dark); }

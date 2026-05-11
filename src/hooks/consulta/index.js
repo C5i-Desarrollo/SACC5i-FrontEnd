@@ -1,0 +1,1 @@
+export { useConsultaFinalizados } from './useConsultaFinalizados';

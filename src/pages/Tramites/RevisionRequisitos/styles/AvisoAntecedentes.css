@@ -1,0 +1,154 @@
+/* ============================================
+   AvisoAntecedentes - Modal de advertencia
+   ============================================ */
+
+.aviso-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(12, 7, 10, 0.64);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 7600;
+  padding: 20px;
+}
+
+.aviso-modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.aviso-icono {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #c8b88a33;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.aviso-icono i {
+  font-size: 36px;
+  color: #8B7355;
+}
+
+.aviso-titulo {
+  font-size: 22px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.aviso-descripcion {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.aviso-justificacion {
+  text-align: left;
+  padding: 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.aviso-justificacion h4 {
+  font-size: 15px;
+  color: #333;
+  margin: 0 0 12px;
+}
+
+.aviso-justificacion textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  resize: vertical;
+  font-size: 14px;
+  font-family: inherit;
+  min-height: 100px;
+}
+
+.aviso-justificacion textarea:focus {
+  outline: none;
+  border-color: #7d2447;
+}
+
+.aviso-nota {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  font-size: 12px;
+  color: #999;
+}
+
+.aviso-nota i {
+  font-size: 14px;
+}
+
+.aviso-acciones {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.aviso-btn-cancelar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 24px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background: #fff;
+  color: #555;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.aviso-btn-cancelar:hover {
+  border-color: #999;
+}
+
+.aviso-btn-confirmar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  background: #7d2447;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.aviso-btn-confirmar:hover:not(:disabled) {
+  background: #5e1a35;
+}
+
+.aviso-btn-confirmar:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.aviso-btn-confirmar i {
+  font-size: 18px;
+}

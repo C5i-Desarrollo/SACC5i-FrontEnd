@@ -1,0 +1,72 @@
+/* ============================================
+   C3 Tabla Personas - Card Rows
+   ============================================ */
+
+.c3t-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.c3t-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 2px solid #e8e5df;
+  margin-bottom: 4px;
+}
+
+.c3t-select-all {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #4a5350;
+  cursor: pointer;
+}
+
+.c3t-select-all input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #7d2447;
+  cursor: pointer;
+}
+
+.c3t-list-count {
+  font-size: 13px;
+  color: #8a8a8a;
+  font-style: italic;
+}
+
+/* Empty */
+.c3t-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #8a8a8a;
+}
+
+.c3t-empty i {
+  font-size: 48px;
+  color: #d5d0c8;
+}
+
+.c3t-empty p {
+  margin-top: 12px;
+  font-size: 16px;
+}
+
+/* Dark mode */
+body.dark .c3t-list-header {
+  border-bottom-color: #e8e5df;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .c3t-list-header {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+}

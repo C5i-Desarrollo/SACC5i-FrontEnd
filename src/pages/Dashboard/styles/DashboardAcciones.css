@@ -1,0 +1,205 @@
+/* Dashboard de acciones */
+
+.dba-section {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.dba-headline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.dba-section-title {
+  margin: 0;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #76696e;
+  font-weight: 700;
+}
+
+.dba-headline-tag {
+  font-size: 0.72rem;
+  color: #7b2447;
+  border: 1px solid rgba(123, 36, 71, 0.24);
+  background: rgba(123, 36, 71, 0.08);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-weight: 600;
+}
+
+.dba-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(260px, 1fr);
+  gap: 12px;
+}
+
+.dba-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 11px;
+}
+
+.dba-card {
+  position: relative;
+  border-radius: 14px;
+  border: 1px solid #e9dfdb;
+  background: #fff;
+  padding: 14px 14px 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.dba-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+}
+
+.dba-card-guinda::before { background: #7d2447; }
+.dba-card-dorado::before { background: #a29261; }
+.dba-card-pizarra::before { background: #2f4548; }
+.dba-card-gris::before { background: #7c7375; }
+
+.dba-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(44, 39, 40, 0.1);
+}
+
+.dba-card-guinda:hover { border-color: rgba(125, 36, 71, 0.45); }
+.dba-card-dorado:hover { border-color: rgba(162, 146, 97, 0.45); }
+.dba-card-pizarra:hover { border-color: rgba(47, 69, 72, 0.5); }
+.dba-card-gris:hover { border-color: rgba(124, 115, 117, 0.45); }
+
+.dba-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dba-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.18rem;
+}
+
+.dba-icon-guinda { background: rgba(125, 36, 71, 0.11); color: #7d2447; }
+.dba-icon-dorado { background: rgba(162, 146, 97, 0.19); color: #8c7c4f; }
+.dba-icon-pizarra { background: rgba(47, 69, 72, 0.12); color: #2f4548; }
+.dba-icon-gris { background: rgba(124, 115, 117, 0.12); color: #6f6668; }
+
+.dba-arrow {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #f7f1ee;
+  color: #7a7073;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.dba-card:hover .dba-arrow {
+  transform: translateX(2px);
+}
+
+.dba-card-title {
+  margin: 0 0 4px;
+  color: #332d31;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.dba-card-desc {
+  margin: 0;
+  color: #7c7275;
+  line-height: 1.35;
+  font-size: 0.75rem;
+}
+
+.dba-card-pill {
+  display: inline-flex;
+  margin-top: 8px;
+  min-height: 24px;
+  align-items: center;
+  padding: 0 9px;
+  border-radius: 999px;
+  background: #f4efec;
+  color: #6e6366;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.dba-note-board {
+  border: 1px solid #e6ddd7;
+  border-radius: 14px;
+  background: linear-gradient(170deg, #fff, #fcf8f7);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.dba-note-item {
+  border: 1px solid #eee4df;
+  border-radius: 10px;
+  background: #fff;
+  padding: 9px 10px;
+}
+
+.dba-note-title {
+  display: block;
+  margin-bottom: 4px;
+  color: #6f6268;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+.dba-note-item p {
+  margin: 0;
+  color: #3f363b;
+  font-size: 0.78rem;
+  line-height: 1.34;
+}
+
+.dba-note-item-alt {
+  border-color: rgba(123, 36, 71, 0.23);
+  background: rgba(123, 36, 71, 0.06);
+}
+
+@media (max-width: 1060px) {
+  .dba-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .dba-note-board {
+    order: -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .dba-grid {
+    grid-template-columns: 1fr;
+  }
+}

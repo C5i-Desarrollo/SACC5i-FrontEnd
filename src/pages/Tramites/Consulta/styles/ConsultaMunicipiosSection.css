@@ -1,0 +1,29 @@
+.consulta-btn-action {
+    border: 1px solid #c9b9be;
+    background: #ffffff;
+    color: #6a5b61;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.consulta-btn-action:hover {
+    border-color: #7d2447;
+    color: #7d2447;
+}
+
+.consulta-btn-action.is-active {
+    border-color: #7d2447;
+    background: linear-gradient(135deg, #7d2447, #5a1a33);
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(125, 36, 71, 0.24);
+}
+
+.consulta-table-municipios tbody tr.is-selected {
+    background: #f8eef2;
+}

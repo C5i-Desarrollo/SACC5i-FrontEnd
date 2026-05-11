@@ -1,0 +1,87 @@
+.baja-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 14, 19, 0.56);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 4200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+.baja-modal-card {
+    width: min(760px, 100%);
+    border-radius: 14px;
+    border: 1px solid #eadde2;
+    background: #fff;
+    box-shadow: 0 22px 45px rgba(20, 12, 16, 0.35);
+    overflow: hidden;
+    animation: bajaModalIn 0.22s ease-out;
+}
+
+.baja-modal-header {
+    padding: 13px 16px;
+    border-bottom: 1px solid #f1e7ea;
+    background: linear-gradient(135deg, #7d2447, #5e1a35);
+}
+
+.baja-modal-header h4 {
+    margin: 0;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.baja-modal-body {
+    padding: 15px 16px;
+    color: #4e4248;
+    font-size: 16px;
+}
+
+.baja-modal-body p {
+    margin: 0 0 12px;
+}
+
+.baja-modal-resumen {
+    border: 1px solid #ede2e5;
+    border-radius: 10px;
+    background: #fbf7f8;
+    padding: 10px;
+    display: grid;
+    gap: 6px;
+    font-size: 15px;
+}
+
+.baja-modal-resumen span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.baja-modal-actions {
+    padding: 0 16px 16px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.baja-modal-actions .btn {
+    min-height: 44px;
+    border-radius: 10px;
+    border: 1px solid #d8cdd1;
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.baja-modal-actions .btn-secondary {
+    background: #fff;
+    color: #63575c;
+}
+
+.baja-modal-actions .btn-secondary:hover {
+    background: #f7f3f4;
+}

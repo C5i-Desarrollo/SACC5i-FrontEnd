@@ -1,0 +1,271 @@
+/* ================================
+   ESTILOS ESPECÍFICOS: PASO 1
+   ================================ */
+
+.alta-form {
+  width: 100%;
+}
+
+.paso1-top-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 14px 24px 0;
+}
+
+.alta-solicitud-head {
+  margin: 18px 24px 10px;
+  padding: 20px 20px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #6e1530 0%, #8b1f42 100%);
+  border: 1.5px solid rgba(212, 205, 176, 0.85);
+  box-shadow: 0 12px 28px rgba(125, 36, 71, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.alta-solicitud-head::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #b3a060 0%, #d8ca93 55%, #b3a060 100%);
+}
+
+.alta-solicitud-head h4 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 17px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.alta-solicitud-head p {
+  margin: 4px 0 0 50px;
+  color: #e8d3aa;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.alta-solicitud-icon-wrap {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  flex-shrink: 0;
+}
+
+.alta-solicitud-icon {
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.input-disabled {
+  background-color: #f0eee9;
+  cursor: not-allowed;
+  color: #7a7a7a;
+  border-color: #ddd8ce;
+}
+
+/* Apariencia de campos inspirada en modal Editar Usuario */
+.alta-form-group input,
+.alta-form-group select,
+.alta-form-group textarea {
+  border: 1.5px solid #e0ddd5;
+  border-radius: 10px;
+  background: #ffffff;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.alta-form-group input:focus,
+.alta-form-group select:focus,
+.alta-form-group textarea:focus {
+  outline: none;
+  border-color: #b3a060;
+  box-shadow: 0 0 0 3px rgba(179, 160, 96, 0.18);
+  background: #ffffff;
+}
+
+/* Neutraliza los bordes de validación rojo/verde del navegador */
+.alta-form-group input:invalid,
+.alta-form-group select:invalid,
+.alta-form-group textarea:invalid,
+.alta-form-group input:valid,
+.alta-form-group select:valid,
+.alta-form-group textarea:valid {
+  border-color: #e0ddd5;
+  box-shadow: none;
+}
+
+.alta-field-filled {
+  border-color: #c4b47f !important;
+  box-shadow: 0 0 0 2px rgba(196, 180, 127, 0.16);
+  background: #ffffff !important;
+}
+
+.alta-form-group input:-webkit-autofill,
+.alta-form-group input:-webkit-autofill:hover,
+.alta-form-group input:-webkit-autofill:focus,
+.alta-form-group textarea:-webkit-autofill,
+.alta-form-group textarea:-webkit-autofill:hover,
+.alta-form-group textarea:-webkit-autofill:focus,
+.alta-form-group select:-webkit-autofill,
+.alta-form-group select:-webkit-autofill:hover,
+.alta-form-group select:-webkit-autofill:focus {
+  -webkit-text-fill-color: #3d3d3d;
+  box-shadow: 0 0 0px 1000px #ffffff inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+.alta-form-group input[type='date'] {
+  cursor: pointer;
+}
+
+.btn-group {
+  border-top: 1.5px solid #e0ddd5;
+  background: #faf9f7;
+}
+
+.alta-paso1-btn-guardar {
+  background: linear-gradient(135deg, #7d2447, #5e1a35);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 4px 12px rgba(125, 36, 71, 0.25);
+}
+
+.alta-paso1-btn-guardar:hover:not(:disabled) {
+  background: linear-gradient(135deg, #5e1a35, #4a1228);
+  box-shadow: 0 6px 18px rgba(125, 36, 71, 0.35);
+}
+
+.alta-paso1-btn-cancelar {
+  border: 1.5px solid #e0ddd5;
+  background: #ffffff;
+  color: #4a5350;
+}
+
+.alta-paso1-btn-cancelar:hover:not(:disabled) {
+  background: #f5f3ef;
+  border-color: #bfb591;
+  color: #7d2447;
+}
+
+.btn-siguiente-listado:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  filter: grayscale(0.2);
+  transform: none;
+  box-shadow: none;
+}
+
+.alta-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(23, 16, 21, 0.58);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 4500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+
+.alta-confirm-card {
+  width: min(500px, 100%);
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #eadedf;
+  box-shadow: 0 20px 45px rgba(22, 12, 18, 0.32);
+  overflow: hidden;
+}
+
+.alta-confirm-head {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f1e8ea;
+  background: linear-gradient(135deg, #7d2447, #5e1a35);
+}
+
+.alta-confirm-head h4 {
+  margin: 0;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.alta-confirm-body {
+  padding: 16px;
+  color: #4f4040;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.alta-confirm-body p {
+  margin: 0;
+}
+
+.alta-confirm-actions {
+  padding: 0 16px 16px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.alta-confirm-danger {
+  border: none;
+  background: #8f1f3b;
+  color: #ffffff;
+}
+
+.alta-confirm-danger:hover {
+  background: #6f172f;
+}
+
+/* Grid responsive */
+@media (max-width: 768px) {
+  .paso1-top-nav {
+    margin: 12px 18px 0;
+    gap: 10px;
+  }
+
+  .paso1-top-nav .btn-volver-listado,
+  .paso1-top-nav .btn-siguiente-listado {
+    width: auto;
+    min-width: 0;
+    padding: 10px 12px;
+    font-size: 0.86rem;
+  }
+
+  .alta-solicitud-head {
+    margin: 16px 18px 8px;
+    padding: 14px 15px 16px;
+  }
+
+  .alta-solicitud-head h4 {
+    font-size: 16px;
+  }
+
+  .alta-solicitud-head p {
+    margin-left: 44px;
+  }
+
+  .alta-solicitud-icon-wrap {
+    width: 36px;
+    height: 36px;
+  }
+
+  .alta-form-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

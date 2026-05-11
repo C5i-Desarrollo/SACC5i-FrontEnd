@@ -1,0 +1,116 @@
+/* ============================================================
+   Landing.css — Variables globales y utilidades compartidas
+   ============================================================ */
+
+:root {
+  --lp-guinda:       #701633;
+  --lp-guinda-dark:  #4a0e21;
+  --lp-guinda-deep:  #1a0810;
+  --lp-black:        #0d0408;
+  --lp-gold:         #b3a382;
+  --lp-gold-dim:     rgba(179, 163, 130, 0.15);
+  --lp-white:        #ffffff;
+  --lp-text-muted:   rgba(255, 255, 255, 0.55);
+  --lp-border:       rgba(255, 255, 255, 0.08);
+  --lp-surface:      rgba(255, 255, 255, 0.045);
+  --lp-surface-hover:rgba(255, 255, 255, 0.075);
+}
+
+.lp-root {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--lp-white);
+  overflow-x: hidden;
+  width: 100%;
+  background:
+    linear-gradient(
+      145deg,
+      #0d0408 0%,
+      #180810 30%,
+      #2e0d18 60%,
+      #3f0e1d 100%
+    );
+}
+
+/* ── Shared: section label ── */
+.lp-section-label {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lp-gold);
+  margin-bottom: 14px;
+}
+
+/* ── Shared: primary button ── */
+.lp-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 28px;
+  background: var(--lp-guinda);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: none;
+  box-shadow: 0 10px 26px rgba(57, 16, 39, 0.34);
+  transition: background 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+  will-change: transform;
+}
+
+.lp-btn-primary:hover {
+  background: var(--lp-guinda-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(57, 16, 39, 0.4);
+}
+
+.lp-btn-primary:active {
+  transform: translateY(0);
+}
+
+.lp-btn-arrow {
+  width: 17px;
+  height: 17px;
+  transition: transform 0.22s ease;
+  flex-shrink: 0;
+}
+
+.lp-btn-primary:hover .lp-btn-arrow {
+  transform: translateX(4px);
+}
+
+/* ── Keyframes ── */
+@keyframes lpFadeUp {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes lpFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes lpPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.55; transform: scale(0.8); }
+}
+
+@keyframes lpScrollDot {
+  0%   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  75%  { opacity: 0; transform: translateX(-50%) translateY(12px); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(12px); }
+}
+
+@keyframes lpFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+@keyframes lpOrbitSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}

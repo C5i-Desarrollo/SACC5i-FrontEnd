@@ -1,0 +1,88 @@
+/* ============================================
+   RevisionPasos - Indicador de pasos
+   ============================================ */
+
+.rev-pasos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 20px 0;
+  margin-bottom: 24px;
+}
+
+.rev-paso-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rev-paso-linea {
+  width: 80px;
+  height: 2px;
+  background: #ddd;
+  margin: 0 8px;
+  transition: background 0.4s ease;
+}
+
+.rev-paso-linea.completada {
+  background: #7d2447;
+}
+
+.rev-paso-circulo {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  background: #e0e0e0;
+  color: #666;
+  flex-shrink: 0;
+  transition: background 0.35s ease, color 0.35s ease, box-shadow 0.35s ease, transform 0.3s ease;
+}
+
+.rev-paso-circulo.activo {
+  background: #7d2447;
+  color: #fff;
+  box-shadow: 0 0 0 4px rgba(125, 36, 71, 0.18);
+  transform: scale(1.08);
+}
+
+.rev-paso-circulo.completado {
+  background: #7d2447;
+  color: #fff;
+  font-size: 16px;
+}
+
+.rev-paso-label {
+  font-size: 13px;
+  color: #999;
+  white-space: nowrap;
+  transition: color 0.35s ease, font-weight 0.2s ease;
+}
+
+.rev-paso-label.activo {
+  color: #7d2447;
+  font-weight: 700;
+}
+
+.rev-paso-label.completado-label {
+  color: #7d2447;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .rev-pasos {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .rev-paso-linea {
+    width: 40px;
+  }
+}

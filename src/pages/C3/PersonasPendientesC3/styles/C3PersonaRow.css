@@ -1,0 +1,255 @@
+/* ============================================
+   C3 Persona Row - Card Style
+   ============================================ */
+
+.c3r-card {
+  display: flex;
+  gap: 16px;
+  padding: 20px 24px;
+  background: #ffffff;
+  border: 1px solid #e8e5df;
+  border-radius: 12px;
+  border-left: 4px solid #e8e5df;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.c3r-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  border-left-color: #7d2447;
+}
+
+.c3r-card-selected {
+  background: #fdf6f8;
+  border-color: #d5c0c8;
+  border-left-color: #7d2447;
+}
+
+/* Checkbox */
+.c3r-check {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 4px;
+}
+
+.c3r-check input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #7d2447;
+  cursor: pointer;
+}
+
+/* Contenido */
+.c3r-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Fila principal */
+.c3r-row-main {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.c3r-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 140px;
+}
+
+.c3r-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #8a8a8a;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.c3r-value {
+  font-size: 14px;
+  color: #3d3d3d;
+  font-weight: 500;
+}
+
+.c3r-nombre {
+  font-weight: 700;
+  color: #7d2447;
+}
+
+.c3r-puesto {
+  font-weight: 700;
+  color: #3d3d3d;
+}
+
+.c3r-origin-dep {
+  font-size: 11px;
+  color: #92400e;
+}
+
+.c3r-origin-c5 {
+  font-size: 11px;
+  color: #065f46;
+  font-weight: 600;
+}
+
+.c3r-movimiento {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #7d2447;
+  background: #fdf6f8;
+  padding: 2px 8px;
+  border-radius: 10px;
+  width: fit-content;
+}
+
+/* Dictamen select */
+.c3r-dictamen-select {
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  min-width: 130px;
+  border: 1px solid #e8e5df;
+  transition: border-color 0.2s;
+}
+
+.c3r-dictamen-select:focus {
+  outline: none;
+  border-color: #7d2447;
+  box-shadow: 0 0 0 3px rgba(125, 36, 71, 0.08);
+}
+
+.c3r-dict-proceso {
+  background: #fef3c7;
+  color: #92400e;
+  border-color: #fcd34d;
+}
+
+.c3r-dict-ok {
+  background: #d1fae5;
+  color: #065f46;
+  border-color: #6ee7b7;
+}
+
+.c3r-dict-rechazado {
+  background: #fee2e2;
+  color: #991b1b;
+  border-color: #fca5a5;
+}
+
+.c3r-dict-pendiente {
+  background: #f3f4f6;
+  color: #4b5563;
+  border-color: #d1d5db;
+}
+
+/* Fila secundaria */
+.c3r-row-secondary {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-top: 12px;
+  border-top: 1px solid #f0eee9;
+}
+
+.c3r-detail {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: #8a8a8a;
+  white-space: nowrap;
+}
+
+.c3r-detail i {
+  font-size: 15px;
+  color: #b0a89e;
+}
+
+/* Observaciones */
+.c3r-obs-wrapper {
+  flex: 1;
+  min-width: 200px;
+}
+
+.c3r-obs-input {
+  width: 100%;
+  padding: 8px 14px;
+  border: 1px solid #e8e5df;
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #3d3d3d;
+  background: #f9f8f6;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+.c3r-obs-input::placeholder {
+  color: #b0a89e;
+}
+
+.c3r-obs-input:focus {
+  outline: none;
+  border-color: #7d2447;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(125, 36, 71, 0.08);
+}
+
+/* Dark mode */
+body.dark .c3r-card {
+  background: #ffffff;
+  border-color: #e8e5df;
+}
+
+.c3r-row-bottom {
+  padding-top: 14px;
+  border-top: 1px solid #f0eee9;
+}
+
+.c3r-field-obs {
+  flex: 1.5;
+  min-width: 200px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .c3r-card {
+    padding: 16px;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .c3r-check {
+    padding-top: 0;
+  }
+
+  .c3r-row-main {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .c3r-field {
+    min-width: 100%;
+  }
+
+  .c3r-row-secondary {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .c3r-obs-wrapper {
+    width: 100%;
+  }
+}
+

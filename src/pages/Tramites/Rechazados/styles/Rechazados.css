@@ -1,0 +1,262 @@
+/* ============================================
+   HISTORICO DE TRAMITES NO PROCEDENTES
+   Container principal
+   ============================================ */
+
+.rechazados-container {
+  width: 100%;
+  padding: 20px;
+}
+
+/* Header */
+.rechazados-header {
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #C2B29A;
+}
+
+.rechazados-header h1 {
+  margin: 0 0 4px 0;
+  color: #3d3d3d;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+body.dark .rechazados-header h1 {
+  color: #ffffff !important;
+}
+
+.rechazados-header p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+/* Toolbar */
+.rechazados-toolbar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.rechazados-filtros-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 20px;
+  border: 1.5px solid #d5c0c8;
+  border-radius: 20px;
+  background: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  color: #7d2447;
+  transition: all 0.2s;
+}
+
+.rechazados-filtros-btn:hover {
+  background: #faf0f4;
+  border-color: #7d2447;
+}
+
+.rechazados-filtros-btn.active {
+  background: #7d2447;
+  color: #ffffff;
+  border-color: #7d2447;
+}
+
+.rechazados-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  background: white;
+  min-width: 280px;
+}
+
+.rechazados-search i {
+  color: #999;
+  font-size: 18px;
+}
+
+.rechazados-search input {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  width: 100%;
+  color: #333;
+}
+
+.rechazados-search input::placeholder {
+  color: #aaa;
+}
+
+/* Panel de filtros */
+.rechazados-filtros-panel {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  align-items: end;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.rechazados-filtro-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rechazados-filtro-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+  text-transform: uppercase;
+}
+
+.rechazados-filtro-group input,
+.rechazados-filtro-group select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #333;
+}
+
+.rechazados-filtros-actions {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.rechazados-filtros-actions button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  border: none;
+}
+
+.rechazados-btn-aplicar {
+  background-color: #7d2447;
+  color: white;
+}
+
+.rechazados-btn-limpiar {
+  background-color: #f0f0f0;
+  color: #555;
+}
+
+/* Card tabla */
+.rechazados-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  overflow: visible;
+}
+
+.rechazados-table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Tabla */
+.rechazados-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1180px;
+}
+
+.rechazados-table thead {
+  background-color: #7d2447;
+  color: white;
+}
+
+.rechazados-table thead th {
+  padding: 14px 16px;
+  font-weight: 600;
+  font-size: 13px;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.rechazados-table tbody tr {
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.15s;
+}
+
+.rechazados-table tbody tr:hover {
+  background-color: #fcf9f5;
+}
+
+.rechazados-table tbody td {
+  padding: 14px 16px;
+  font-size: 14px;
+  color: #333;
+  vertical-align: middle;
+}
+
+/* Estados */
+.rechazados-loading,
+.rechazados-empty {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.rechazados-loading i,
+.rechazados-empty i {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.rechazados-loading i {
+  color: #7d2447;
+}
+
+.rechazados-empty i {
+  color: #ccc;
+}
+
+.rechazados-empty p {
+  color: #888;
+  font-size: 16px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .rechazados-table thead th,
+  .rechazados-table tbody td {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .rechazados-container {
+    padding: 10px;
+  }
+  
+  .rechazados-toolbar {
+    flex-direction: column;
+  }
+  
+  .rechazados-search {
+    min-width: 100%;
+  }
+  
+  .rechazados-filtros-panel {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,64 @@
+/* ================================
+   HISTORIAL C3 — Contenedor Principal y Tabla
+   ================================ */
+
+.hist-container {
+  width: 100%;
+  padding: 18px 18px 24px;
+  /* Sin padding lateral si tu layout principal ya lo tiene */
+  background: transparent;
+  /* CORRECCIÓN: Sin fondo blanco para no romper el modo oscuro */
+}
+
+/* CONTENEDOR DE LA TABLA */
+.hist-card {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow-x: auto;
+  overflow-y: visible;
+  /* CORRECCIÓN: No hay overflow-y, esto elimina la doble barra de scroll */
+}
+
+.hist-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.hist-table thead {
+  background: #6c1d45;
+  /* Cabecera Guinda */
+  color: #ffffff;
+}
+
+.hist-table thead th {
+  padding: 14px 16px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.hist-table tbody tr {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.hist-table tbody td {
+  padding: 14px 16px;
+  vertical-align: middle;
+}
+
+/* ESTADOS */
+.hist-loading,
+.hist-empty {
+  text-align: center;
+  padding: 64px 20px;
+}
+
+.hist-loading i {
+  font-size: 3rem;
+  color: #6c1d45;
+}
+
+.hist-empty i {
+  font-size: 3rem;
+  color: #d1d5db;
+}

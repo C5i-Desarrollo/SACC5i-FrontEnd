@@ -1,0 +1,904 @@
+/* ============================================================
+   Login.css — Dark institutional theme (matches Landing)
+   ============================================================ */
+
+/* ── Root ── */
+.lgn-root {
+  min-height: 100svh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(
+    145deg,
+    #0d0408 0%,
+    #180810 30%,
+    #2e0d18 60%,
+    #3f0e1d 100%
+  );
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Background orbs ── */
+.lgn-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: auto;
+}
+
+.lgn-orb-1 {
+  width: 700px;
+  height: 700px;
+  top: -260px;
+  right: -180px;
+  background: radial-gradient(circle, rgba(112, 22, 51, 0.26) 0%, transparent 68%);
+}
+
+.lgn-orb-2 {
+  width: 500px;
+  height: 500px;
+  bottom: -100px;
+  left: -120px;
+  background: radial-gradient(circle, rgba(179, 163, 130, 0.08) 0%, transparent 65%);
+}
+
+.lgn-orb-3 {
+  width: 280px;
+  height: 280px;
+  top: 45%;
+  left: 50%;
+  background: radial-gradient(circle, rgba(112, 22, 51, 0.09) 0%, transparent 60%);
+}
+
+/* ── Subtle grid overlay ── */
+.lgn-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+}
+
+/* ── Topbar ── */
+.lgn-topbar {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 44px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  animation: lgnFadeIn 0.6s ease-out;
+}
+
+.lgn-brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.lgn-brand-logo {
+  height: 34px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(1.1);
+}
+
+.lgn-brand-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.lgn-brand-name span {
+  color: #b3a382;
+}
+
+.lgn-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 7px 18px;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.lgn-back-btn:hover {
+  background: rgba(112, 22, 51, 0.28);
+  border-color: rgba(112, 22, 51, 0.45);
+  color: #fff;
+}
+
+/* ── Center ── */
+.lgn-center {
+  position: relative;
+  z-index: 5;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 36px 20px 48px;
+}
+
+/* ── Card ── */
+.lgn-card {
+  width: 100%;
+  max-width: 420px;
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.045) 58%, rgba(255, 255, 255, 0.015) 100%),
+    rgba(20, 7, 12, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 24px;
+  padding: 38px 36px 30px;
+  box-shadow:
+    0 26px 48px rgba(10, 3, 6, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  animation: lgnSlideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Logo ── */
+.lgn-logo-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.lgn-logo {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(1.1) drop-shadow(0 4px 12px rgba(179, 163, 130, 0.25));
+}
+
+/* ── Badge ── */
+.lgn-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  padding: 5px 14px;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 18px;
+  width: 100%;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.lgn-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #b3a382;
+  flex-shrink: 0;
+  animation: lgnPulse 2.2s ease-in-out infinite;
+}
+
+/* ── Title ── */
+.lgn-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0 0 8px;
+  text-align: center;
+}
+
+.lgn-title-accent {
+  color: #b3a382;
+}
+
+.lgn-subtitle {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
+  margin: 0 0 26px;
+  line-height: 1.55;
+}
+
+/* ── Error ── */
+.lgn-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(220, 38, 38, 0.14);
+  border: 1px solid rgba(220, 38, 38, 0.28);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 20px;
+  animation: lgnSlideDown 0.28s ease-out;
+}
+
+.lgn-error-icon {
+  width: 18px;
+  height: 18px;
+  color: #f87171;
+  flex-shrink: 0;
+}
+
+.lgn-error p {
+  flex: 1;
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #fca5a5;
+}
+
+.lgn-error-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #f87171;
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.lgn-error-close:hover {
+  background: rgba(220, 38, 38, 0.18);
+}
+
+/* ── Form ── */
+.lgn-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.lgn-field {
+  margin-bottom: 18px;
+}
+
+.lgn-label {
+  display: block;
+  font-size: 0.73rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.lgn-input {
+  width: 100%;
+  padding: 13px 16px;
+  background: rgba(255, 255, 255, 0.065);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  font-size: 0.93rem;
+  font-family: 'Montserrat', sans-serif;
+  color: #ffffff;
+  transition: border-color 0.22s, background 0.22s, box-shadow 0.22s;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.lgn-input::placeholder {
+  color: rgba(255, 255, 255, 0.22);
+}
+
+.lgn-input:focus {
+  border-color: #b3a382;
+  background: rgba(255, 255, 255, 0.09);
+  box-shadow: 0 0 0 3px rgba(179, 163, 130, 0.15);
+}
+
+/* ── Password wrapper ── */
+.lgn-pwd-wrap {
+  position: relative;
+}
+
+.lgn-pwd-wrap .lgn-input {
+  padding-right: 46px;
+}
+
+.lgn-pwd-toggle {
+  position: absolute;
+  right: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.32);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+  padding: 0;
+}
+
+.lgn-pwd-toggle:hover {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.lgn-pwd-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ── Forgot ── */
+.lgn-form-aux {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 22px;
+}
+
+.lgn-forgot {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(179, 163, 130, 0.65);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.lgn-forgot:hover {
+  color: #b3a382;
+}
+
+/* ── Submit ── */
+.lgn-submit {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 24px;
+  background: #701633;
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.93rem;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(112, 22, 51, 0.45);
+  transition: background 0.22s, transform 0.22s, box-shadow 0.22s;
+  will-change: transform;
+  margin-bottom: 22px;
+}
+
+.lgn-submit:hover:not(:disabled) {
+  background: #4a0e21;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(112, 22, 51, 0.6);
+}
+
+.lgn-submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.lgn-submit:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.lgn-submit-arrow {
+  width: 15px;
+  height: 15px;
+  transition: transform 0.22s;
+  flex-shrink: 0;
+}
+
+.lgn-submit:hover .lgn-submit-arrow {
+  transform: translateX(4px);
+}
+
+/* ── Support ── */
+.lgn-support {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 0.73rem;
+  color: rgba(255, 255, 255, 0.22);
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.lgn-support i {
+  font-size: 14px;
+  color: rgba(179, 163, 130, 0.38);
+}
+
+/* ── Keyframes ── */
+@keyframes lgnFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes lgnSlideUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes lgnSlideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes lgnPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.78); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 520px) {
+  .lgn-topbar {
+    padding: 16px 18px;
+  }
+
+  .lgn-brand-name {
+    display: none;
+  }
+
+  .lgn-center {
+    padding: 24px 16px 36px;
+  }
+
+  .lgn-card {
+    padding: 30px 22px 24px;
+  }
+
+  .lgn-title {
+    font-size: 1.5rem;
+  }
+}
+
+
+.login-container {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: var(--puebla-guinda-dark);
+  font-family: 'Montserrat', sans-serif;
+  overflow: hidden;
+  padding: 20px 0;
+}
+
+/* --- FONDO (Patrón de Rombos) --- */
+.pattern-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    linear-gradient(135deg, #60122b 25%, transparent 25%),
+    linear-gradient(225deg, #60122b 25%, transparent 25%),
+    linear-gradient(45deg, #60122b 25%, transparent 25%),
+    linear-gradient(315deg, #60122b 25%, transparent 25%);
+  background-position: 40px 0, 40px 0, 0 0, 0 0;
+  background-size: 80px 80px;
+  background-repeat: repeat;
+  opacity: 0.15;
+  z-index: 1;
+}
+
+.login-bg-wave {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  max-height: 50vh;
+  z-index: 2;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* --- LAYOUT PRINCIPAL (Wrapper) --- */
+.login-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  position: relative;
+  z-index: 10;
+  gap: 90px;
+}
+
+/* --- TARJETA IZQUIERDA (Formulario) --- */
+.login-card {
+  flex: 1;
+  max-width: 420px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  animation: slideInLeft 0.8s ease-out;
+}
+
+.login-logo {
+  width: 140px;
+  margin-bottom: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card-header h3 {
+  color: var(--puebla-guinda);
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  text-align: center;
+}
+
+.card-header p {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 5px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--puebla-guinda-dark);
+  margin-bottom: 8px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s;
+  background: #f8fafc;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--puebla-dorado);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(179, 163, 130, 0.1);
+}
+
+/* --- ALERTA DE ERROR MEJORADA --- */
+.error-alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fee2e2;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  color: #dc2626;
+  animation: slideDown 0.3s ease-out;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
+}
+
+.error-left-bar {
+  width: 4px;
+  height: 100%;
+  background-color: #dc2626;
+  border-radius: 4px 0 0 4px;
+  margin-right: 12px;
+  margin-left: -16px;
+  padding-left: 16px;
+}
+
+.error-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 12px;
+}
+
+.error-icon {
+  flex-shrink: 0;
+  color: #dc2626;
+  width: 20px;
+  height: 20px;
+}
+
+.error-content p {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #991b1b;
+}
+
+.error-close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #dc2626;
+  transition: all 0.2s;
+  border-radius: 6px;
+}
+
+.error-close-btn:hover {
+  background-color: rgba(220, 38, 38, 0.1);
+  transform: scale(1.1);
+}
+
+.error-close-btn:active {
+  transform: scale(0.95);
+}
+
+/* Animación de entrada */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 25px;
+}
+
+.forgot-password {
+  font-size: 0.85rem;
+  color: var(--puebla-guinda);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.btn-login {
+  width: 100%;
+  padding: 16px;
+  background: var(--puebla-guinda);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 10px 20px rgba(112, 22, 51, 0.3);
+}
+
+.btn-login:hover {
+  background: var(--puebla-guinda-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(112, 22, 51, 0.4);
+}
+
+.test-credentials {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  font-size: 0.75rem;
+  color: #888;
+  text-align: center;
+}
+
+/* --- LADO DERECHO (Texto Grande) --- */
+.login-text-side {
+  flex: 1;
+  color: white;
+  text-align: left;
+  animation: slideInRight 0.8s ease-out;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;   /* ⬅️ ARRIBA */
+  align-items: flex-start;       /* ⬅️ IZQUIERDA */
+  padding-top: 30px;            /* ⬅️ MISMO NIVEL QUE EL FORM */
+  padding-left: 60px;
+}
+
+.login-text-side img {
+  width: 1000%;
+  max-width: 800px;     /* tamaño grande pero controlado */
+  height: auto;
+  object-fit: contain;
+
+  margin-left: -50px;       /* completamente a la izquierda */
+  margin-right: auto;  /* empuja hacia la izquierda */
+  margin-bottom: 30px;
+}
+
+.pill-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+}
+
+.login-text-side h1 {
+  font-size: 4rem; /* Letras muy grandes como la imagen */
+  line-height: 1.1;
+  font-weight: 800;
+  margin-bottom: 25px;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.login-text-side p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  max-width: 80%;
+  margin-bottom: 40px;
+}
+
+/* Widget flotante decorativo (similar al widget de la imagen 1) */
+.stat-floating {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 15px 25px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.1);
+  gap: 15px;
+}
+
+.stat-icon {
+  font-size: 2rem;
+}
+
+.stat-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-text strong {
+  font-size: 1rem;
+}
+
+.stat-text span {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* Animaciones */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+  .login-wrapper {
+    flex-direction: column-reverse;
+    gap: 40px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .login-text-side {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .login-text-side h1 {
+    font-size: 2.5rem;
+  }
+  .login-text-side p {
+    max-width: 100%;
+  }
+  .login-card {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .login-text-side {
+    padding-top: 100px;
+    padding-left: 40px;
+  }
+
+  .login-text-side img {
+    max-width: 360px;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-text-side {
+    display: none;
+  }
+}
+
+/* ---- PASSWORD TOGGLE SVG ---- */
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  padding-right: 48px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  color: #666;
+}
+
+.toggle-password svg {
+  width: 22px;
+  height: 22px;
+}
+
+.toggle-password:hover {
+  color: #000;
+}
+
+/* ── Back to landing link ── */
+.login-back-link {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.login-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #999;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  transition: color 0.2s, background 0.2s;
+}
+
+.login-back-btn:hover {
+  color: var(--puebla-guinda);
+  background: rgba(112, 22, 51, 0.06);
+}

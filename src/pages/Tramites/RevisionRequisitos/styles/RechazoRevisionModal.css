@@ -1,0 +1,157 @@
+/* ============================================
+   RechazoRevisionModal - Modal de rechazo
+   ============================================ */
+
+.rechazo-modal {
+  position: relative;
+  background: #fff;
+  border-radius: 16px;
+  padding: 36px 32px 32px;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.rechazo-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.rechazo-modal-close:hover {
+  border-color: #999;
+  background: #f5f5f5;
+}
+
+.rechazo-modal-close i {
+  font-size: 20px;
+  color: #666;
+}
+
+.rechazo-modal-icono {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #f5e6eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.rechazo-modal-icono i {
+  font-size: 32px;
+  color: #7d2447;
+}
+
+.rechazo-modal-titulo {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.rechazo-modal-descripcion {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.rechazo-modal-motivos {
+  text-align: left;
+  background: #fdecea;
+  border: 1px solid #f5c6cb;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.rechazo-modal-motivos-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  color: #721c24;
+  font-size: 15px;
+}
+
+.rechazo-modal-motivos-header i {
+  font-size: 18px;
+  color: #dc3545;
+}
+
+.rechazo-modal-motivos-lista {
+  list-style: disc;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.rechazo-modal-motivos-lista li {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
+.rechazo-modal-motivos-lista li strong {
+  color: #721c24;
+}
+
+.rechazo-modal-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #333;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.5;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.rechazo-modal-textarea:focus {
+  outline: none;
+  border-color: #7d2447;
+}
+
+.rechazo-modal-textarea:disabled {
+  background: #f5f5f5;
+  color: #999;
+}
+
+.rechazo-modal-btn {
+  display: inline-block;
+  padding: 12px 32px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background: #fff;
+  color: #333;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.rechazo-modal-btn:hover:not(:disabled) {
+  background: #333;
+  color: #fff;
+}
+
+.rechazo-modal-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

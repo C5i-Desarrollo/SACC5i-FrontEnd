@@ -1,0 +1,209 @@
+/* ============================================
+   RevisionDocumentos - Lista de documentos
+   ============================================ */
+
+.rev-documentos {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.rev-documentos-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: #7d2447;
+  color: #fff;
+}
+
+.rev-documentos-titulo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rev-documentos-titulo h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.rev-documentos-titulo i {
+  font-size: 20px;
+}
+
+.rev-btn-validar-todo {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  background: #4caf50;
+  color: #fff;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.rev-btn-validar-todo:hover:not(:disabled) {
+  background: #388e3c;
+}
+
+.rev-btn-validar-todo:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Lista de documentos */
+.rev-documentos-lista {
+  padding: 8px 0;
+}
+
+.rev-doc-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  border-bottom: 1px solid #f5f5f5;
+  transition: background 0.15s;
+}
+
+.rev-doc-item:hover {
+  background: #fafafa;
+}
+
+.rev-doc-item.validado {
+  background: #f1f8e9;
+}
+
+.rev-doc-item.rechazado {
+  background: #fbe9e7;
+}
+
+.rev-doc-item.no-aplica {
+  background: #edf6ff;
+}
+
+.rev-doc-numero {
+  font-size: 13px;
+  color: #999;
+  min-width: 24px;
+}
+
+.rev-doc-nombre {
+  flex: 1;
+  font-size: 14px;
+  color: #333;
+}
+
+.rev-doc-tag-no-aplica {
+  margin-right: 8px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid #9bc8ff;
+  background: #dceeff;
+  color: #1f5b9d;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.rev-doc-acciones {
+  display: flex;
+  gap: 8px;
+}
+
+.rev-doc-btn-validar,
+.rev-doc-btn-ver,
+.rev-doc-btn-na {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.rev-doc-btn-validar i {
+  font-size: 18px;
+  color: #999;
+}
+
+.rev-doc-btn-validar.activo {
+  background: #4caf50;
+  border-color: #4caf50;
+}
+
+.rev-doc-btn-validar.activo i {
+  color: #fff;
+}
+
+.rev-doc-btn-ver i {
+  font-size: 16px;
+  color: #999;
+}
+
+.rev-doc-btn-ver.rechazado {
+  background: #dc3545;
+  border-color: #dc3545;
+}
+
+.rev-doc-btn-ver.rechazado i {
+  color: #fff;
+}
+
+.rev-doc-btn-na i {
+  font-size: 17px;
+  color: #4f81b8;
+}
+
+.rev-doc-btn-na.activo {
+  background: #2c7be5;
+  border-color: #2c7be5;
+}
+
+.rev-doc-btn-na.activo i {
+  color: #fff;
+}
+
+.rev-doc-btn-validar:disabled,
+.rev-doc-btn-ver:disabled,
+.rev-doc-btn-na:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Progreso */
+.rev-progreso {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+}
+
+.rev-progreso-barra {
+  flex: 1;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.rev-progreso-fill {
+  height: 100%;
+  background: #4caf50;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.rev-progreso-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  min-width: 40px;
+  text-align: right;
+}

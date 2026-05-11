@@ -1,0 +1,184 @@
+/* Dashboard principal */
+
+.db-page {
+  --db-guinda: #7d2447;
+  --db-guinda-dark: #5f1b35;
+  --db-dorado: #b8aa7d;
+  --db-pizarra: #2f4548;
+  --db-azul: #4f6f9d;
+  --db-esmeralda: #4d7f72;
+  --db-nube: #f8f7f5;
+  --db-borde: #e6dfd9;
+  --db-txt: #2f2c2f;
+  --db-txt-soft: #6f6770;
+
+  position: relative;
+  width: 100%;
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: clamp(20px, 2.2vw, 34px) clamp(18px, 2.8vw, 48px) 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+  font-family: 'Poppins', 'Montserrat', sans-serif;
+  isolation: isolate;
+  overflow-x: clip;
+  contain: paint;
+}
+
+.db-page::before,
+.db-page::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  will-change: transform, opacity;
+}
+
+.db-page::before {
+  opacity: 0.24;
+  background-image:
+    radial-gradient(28px 28px at 84% 14%, rgba(125, 36, 71, 0.12), rgba(125, 36, 71, 0)),
+    radial-gradient(20px 20px at 73% 23%, rgba(184, 170, 125, 0.11), rgba(184, 170, 125, 0)),
+    radial-gradient(18px 18px at 63% 14%, rgba(79, 111, 157, 0.1), rgba(79, 111, 157, 0)),
+    radial-gradient(22px 22px at 14% 82%, rgba(77, 127, 114, 0.1), rgba(77, 127, 114, 0)),
+    radial-gradient(14px 14px at 27% 73%, rgba(125, 36, 71, 0.08), rgba(125, 36, 71, 0));
+  animation: dbBubbleFloatA 46s ease-in-out infinite alternate;
+}
+
+.db-page::after {
+  opacity: 0.18;
+  background-image:
+    radial-gradient(44px 44px at 82% 16%, rgba(125, 36, 71, 0.08), rgba(125, 36, 71, 0)),
+    radial-gradient(38px 38px at 11% 84%, rgba(184, 170, 125, 0.08), rgba(184, 170, 125, 0)),
+    radial-gradient(30px 30px at 68% 76%, rgba(79, 111, 157, 0.08), rgba(79, 111, 157, 0));
+  animation: dbBubbleFloatB 58s ease-in-out infinite;
+}
+
+@keyframes dbBubbleFloatA {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-4px, -3px, 0);
+  }
+  100% {
+    transform: translate3d(3px, 4px, 0);
+  }
+}
+
+@keyframes dbBubbleFloatB {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(4px, -3px, 0) scale(1.008);
+  }
+  100% {
+    transform: translate3d(-3px, 4px, 0) scale(0.996);
+  }
+}
+
+.container.sidebar-animating .db-page::before,
+.container.sidebar-animating .db-page::after {
+  animation: none;
+  opacity: 0.12;
+}
+
+/* Modo rendimiento al togglear sidebar en dashboard */
+.container.dashboard-active.sidebar-animating .db-page::before,
+.container.dashboard-active.sidebar-animating .db-page::after {
+  content: none !important;
+}
+
+.container.dashboard-active.sidebar-animating .db-page {
+  contain: strict;
+}
+
+.container.dashboard-active.sidebar-animating .dbw-card,
+.container.dashboard-active.sidebar-animating .dbs-admin-panel,
+.container.dashboard-active.sidebar-animating .dbs-admin-total,
+.container.dashboard-active.sidebar-animating .dbs-admin-card,
+.container.dashboard-active.sidebar-animating .dbs-ccp-panel,
+.container.dashboard-active.sidebar-animating .dbs-ccp-card,
+.container.dashboard-active.sidebar-animating .dbs-ccp-focus,
+.container.dashboard-active.sidebar-animating .dbs-lines-panel,
+.container.dashboard-active.sidebar-animating .dbs-line,
+.container.dashboard-active.sidebar-animating .dbs-insight-panel,
+.container.dashboard-active.sidebar-animating .dba-card,
+.container.dashboard-active.sidebar-animating .dba-side-card {
+  box-shadow: none !important;
+}
+
+.container.dashboard-active.sidebar-animating .dbw-card-pattern {
+  opacity: 0 !important;
+  background: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .db-page::before,
+  .db-page::after {
+    animation: none;
+  }
+}
+
+.db-error-banner {
+  width: 100%;
+  border: 1px solid #e8c9d5;
+  background: linear-gradient(135deg, #fff8fb, #fffdfd);
+  border-radius: 14px;
+  padding: 11px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.db-error-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #8a1f49;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.db-error-main i {
+  font-size: 1.05rem;
+}
+
+.db-error-retry {
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid #8a1f49;
+  border-radius: 18px;
+  background: transparent;
+  color: #8a1f49;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.db-error-retry:hover {
+  background: #8a1f49;
+  color: #fff;
+}
+
+@media (max-width: 900px) {
+  .db-page {
+    padding: 16px 14px 30px;
+    gap: 14px;
+  }
+
+  .db-error-banner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,338 @@
+/* Sidebar Styles */
+:root {
+  --layout-chrome-solid: #7b1a3b;
+}
+
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100%;
+  background: var(--layout-chrome-solid);
+  z-index: 2000;
+  font-family: var(--lato);
+  transition: width 220ms cubic-bezier(0.2, 0.6, 0.2, 1);
+  overflow-x: hidden;
+  scrollbar-width: none;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: width;
+}
+
+.container.sidebar-animating #sidebar {
+  transition-duration: 180ms;
+}
+
+#sidebar::--webkit-scrollbar {
+  display: none;
+}
+
+#sidebar.hide {
+  width: 60px;
+}
+
+#sidebar .brand {
+  font-size: 24px;
+  font-weight: 700;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7d2447;
+  position: sticky;
+  top: 0;
+  left: 0;
+  background: var(--layout-chrome-solid);
+  z-index: 500;
+  padding: 8px 6px;
+  box-sizing: content-box;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+#sidebar .brand .brand-logo {
+  height: 96px;
+  width: 210px;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  margin: 0 auto;
+  clip-path: inset(22% 10% 22% 10%);
+  transform-origin: center;
+  transition: transform 180ms ease, opacity 180ms ease, filter 180ms ease;
+  will-change: transform;
+}
+
+#sidebar .brand .brand-logo:hover {
+  transform: scale(1.06);
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.22));
+}
+
+#sidebar .brand .brand-logo:active {
+  transform: scale(0.98);
+  filter: none;
+}
+
+/* Cuando esta colapsado: mostrar solo icono, centrado */
+#sidebar.hide .brand {
+  height: 96px;
+  padding: 8px 6px;
+  justify-content: center;
+  align-items: center;
+}
+
+#sidebar.hide .brand .brand-logo {
+  height: 36px;
+  width: 36px;
+  min-width: 36px;
+  max-width: 36px;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+  clip-path: none;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #sidebar .brand .brand-logo {
+    transition: opacity 120ms linear;
+  }
+
+  #sidebar .brand .brand-logo:hover,
+  #sidebar .brand .brand-logo:active {
+    transform: none;
+    filter: none;
+  }
+}
+
+#sidebar .brand .text {
+  display: none;
+}
+
+
+#sidebar .side-menu {
+  width: 100%;
+  margin-top: 16px;
+}
+
+#sidebar .side-menu li {
+  height: 48px;
+  background: transparent;
+  margin-left: 6px;
+  border-radius: 48px 0 0 48px;
+  padding: 4px;
+  transition: background-color 220ms ease;
+}
+
+#sidebar .side-menu li.active {
+  background: var(--grey);
+  position: relative;
+}
+
+#sidebar .side-menu li.active::before {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  top: -40px;
+  right: 0;
+  box-shadow: 20px 20px 0 var(--grey);
+  z-index: -1;
+}
+
+#sidebar .side-menu li.active::after {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  bottom: -40px;
+  right: 0;
+  box-shadow: 20px -20px 0 var(--grey);
+  z-index: -1;
+}
+
+#sidebar .side-menu li a {
+  width: 100%;
+  height: 100%;
+  background: var(--layout-chrome-solid);
+  display: flex;
+  align-items: center;
+  border-radius: 48px;
+  font-size: 16px;
+  color: var(--light);
+  white-space: nowrap;
+  overflow-x: hidden;
+  transition: color 220ms ease, background-color 220ms ease, opacity 220ms ease;
+}
+
+
+#sidebar .side-menu.top li.active a {
+  color: var(--gob-light);
+}
+
+#sidebar.hide .side-menu li a {
+  width: calc(48px - (4px * 2));
+  transition: opacity 160ms ease;
+}
+
+#sidebar .side-menu li a.logout {
+  color: var(--red);
+}
+
+#sidebar .side-menu.top li a:hover {
+  color: var(--light);
+}
+
+#sidebar .side-menu.top li:not(.active):hover a {
+  opacity: 0.92;
+}
+
+#sidebar .side-menu li a .bx {
+  min-width: calc(60px  - ((4px + 6px) * 2));
+  display: flex;
+  justify-content: center;
+}
+
+#sidebar .side-menu.bottom li:nth-last-of-type(-n+2) {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+#sidebar .side-menu.bottom li:nth-last-of-type(2) {
+  bottom: 40px;
+}
+
+/* Submenu Styles */
+.submenu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: transparent;
+  overflow: hidden;
+}
+
+.submenu li {
+  height: auto;
+  min-height: 36px;
+  margin-left: 0;
+  margin-bottom: 2px;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.submenu li::before,
+.submenu li::after {
+  display: none;
+}
+
+.submenu li a {
+  padding: 8px 12px 8px 60px;
+  font-size: 14px;
+  color: var(--light);
+  background: transparent;
+  border-radius: 0;
+  height: auto;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.submenu li a:hover {
+  background: rgba(60, 145, 230, 0.1);
+  color: var(--blue);
+}
+
+.submenu li.active a {
+  background: rgba(60, 145, 230, 0.15);
+  color: var(--blue);
+  font-weight: 600;
+}
+
+#sidebar.hide .submenu {
+  display: none;
+}
+
+/* Menu item with submenu container */
+#sidebar .side-menu li.has-submenu {
+  height: auto;
+  padding: 0;
+}
+
+#sidebar .side-menu li.has-submenu > a {
+  margin-bottom: 4px;
+}
+
+/* ==========================================
+   DARK MODE - Sidebar (SOLO COLORES)
+   ========================================== */
+
+body.dark #sidebar {
+  background: var(--layout-chrome-solid);
+}
+
+body.dark #sidebar .brand {
+  background: var(--layout-chrome-solid);
+}
+
+/* Menu items */
+body.dark #sidebar .side-menu li a {
+  color: #ffffff;
+  background: var(--layout-chrome-solid);
+}
+
+body.dark #sidebar .side-menu.top li a:hover {
+  color: #ffe1e1;
+}
+
+/* Item activo */
+body.dark #sidebar .side-menu li.active {
+  background: var(--grey, #ffc7c7);
+}
+
+body.dark #sidebar .side-menu.top li.active a {
+  color: #ffffff;
+}
+
+/* Curvas del activo */
+body.dark #sidebar .side-menu li.active::before {
+  box-shadow: 20px 20px 0 var(--grey, #22223a);
+}
+
+body.dark #sidebar .side-menu li.active::after {
+  box-shadow: 20px -20px 0 var(--grey, #22223a);
+}
+
+/* Iconos */
+body.dark #sidebar .side-menu li a .bx {
+  color: #ffffff;
+}
+
+body.dark #sidebar .side-menu.top li.active a .bx {
+  color: #bfb591;
+}
+
+/* Submenu */
+body.dark .submenu li a {
+  color: #8888a0;
+}
+
+body.dark .submenu li a:hover {
+  background: rgba(191, 181, 145, 0.08);
+  color: #bfb591;
+}
+
+body.dark .submenu li.active a {
+  background: rgba(191, 181, 145, 0.12);
+  color: #bfb591;
+}

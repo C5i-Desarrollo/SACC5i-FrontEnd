@@ -1,0 +1,122 @@
+/* Layout Container */
+.container {
+  position: relative;
+  width: 100%;
+}
+
+#content {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  left: 0;
+  box-sizing: border-box;
+  padding-left: 220px;
+  transition: padding-left 220ms cubic-bezier(0.2, 0.6, 0.2, 1);
+  will-change: padding-left;
+}
+
+#sidebar.hide ~ #content {
+  padding-left: 60px;
+}
+
+.container.sidebar-animating #content {
+  transition-duration: 180ms;
+}
+
+/* En Dashboard priorizamos fluidez sobre animación del layout para evitar lag perceptible */
+.container.dashboard-active #content,
+.container.dashboard-active #sidebar,
+.container.dashboard-active #sidebar.hide .side-menu li a {
+  transition: none !important;
+}
+
+/* Reintroducir una transición breve para evitar cierre "de golpe" sin volver al jank */
+.container.dashboard-active #content {
+  transition: padding-left 140ms cubic-bezier(0.22, 0.61, 0.36, 1) !important;
+}
+
+.container.dashboard-active #sidebar {
+  transition: width 140ms cubic-bezier(0.22, 0.61, 0.36, 1) !important;
+}
+
+.container.dashboard-active #sidebar.hide .side-menu li a {
+  transition: opacity 110ms ease !important;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  #sidebar {
+    width: 200px;
+  }
+
+  #content {
+    padding-left: 200px;
+  }
+
+  #content nav .nav-link {
+    display: none;
+  }
+
+  .categories-menu {
+    left: 20px;
+    width: 180px;
+  }
+
+  #content nav .notification-menu,
+  #content nav .profile-menu {
+    width: 180px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  #content nav .notification-menu,
+  #content nav .profile-menu {
+    width: 150px;
+  }
+
+  #content nav form .form-input input {
+    display: none;
+  }
+
+  #content nav form .form-input button {
+    width: auto;
+    height: auto;
+    background: transparent;
+    border-radius: none;
+    color: var(--dark);
+  }
+
+  #content nav form.show .form-input input {
+    display: block;
+    width: 100%;
+  }
+
+  #content nav form.show .form-input button {
+    width: 36px;
+    height: 100%;
+    border-radius: 0 36px 36px 0;
+    color: var(--light);
+    background: var(--red);
+  }
+
+  #content nav form.show ~ .notification,
+  #content nav form.show ~ .profile {
+    display: none;
+  }
+
+  #content main .box-info {
+    grid-template-columns: 1fr;
+  }
+
+  #content main .table-data .head {
+    min-width: 420px;
+  }
+
+  #content main .table-data .order table {
+    min-width: 420px;
+  }
+
+  #content main .table-data .todo .todo-list {
+    min-width: 420px;
+  }
+}

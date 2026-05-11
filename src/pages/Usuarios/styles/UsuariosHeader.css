@@ -1,0 +1,94 @@
+/* ==========================================
+   PAGE HEADER - Paleta Institucional Puebla
+   ========================================== */
+
+.page-header {
+  margin-bottom: 20px;
+  margin-top: -12px;
+  padding: 0;
+  background: none;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+/* --- Breadcrumb --- */
+.page-header .breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 4px;
+  padding: 0;
+  background: none !important;
+  background-color: transparent !important;
+  border: none;
+  box-shadow: none;
+  list-style: none;
+  font-size: 13px;
+  border-radius: 0;
+}
+
+.page-header .breadcrumb a {
+  color: #6b7280;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.page-header .breadcrumb a:hover {
+  color: #7d2447;
+  text-decoration: underline;
+}
+
+.page-header .breadcrumb span {
+  color: #c0b8a0;
+  font-size: 12px;
+}
+
+.page-header .breadcrumb strong {
+  color: #7d2447;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* --- Titulo --- */
+.page-header .page-titulo {
+  margin: 0 0 2px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #3d3d3d; /* Color gris original */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.2;
+  background: none;
+  transition: color 0.3s ease; /* Suaviza el cambio de color */
+}
+
+/* Lógica para Modo Oscuro */
+body.dark .page-header .page-titulo {
+  color: #ffffff !important;
+}
+
+.page-header .page-titulo svg {
+  color: #7d2447;
+  flex-shrink: 0;
+}
+
+body.dark .page-header .page-titulo svg {
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+/* --- Subtitulo --- */
+.page-header .page-subtitulo {
+  margin: 0;
+  font-size: 15px;
+  color: #8a8a8a;
+  font-weight: 400;
+}
+
+/* Opcional: Subtítulo más claro en modo oscuro para legibilidad */
+body.dark .page-header .page-subtitulo {
+  color: #bbb;
+}

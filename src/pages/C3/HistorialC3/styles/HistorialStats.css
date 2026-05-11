@@ -1,0 +1,49 @@
+/* ================================
+   HISTORIAL C3 — Estadísticas
+   ================================ */
+
+.hist-stats-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.hist-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.hist-stat-card i {
+  font-size: 2rem;
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.hist-stat-card div {
+  display: flex;
+  flex-direction: column;
+}
+
+.hist-stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.hist-stat-label {
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* Colores de iconos */
+.hist-card-total i { color: #6c1d45; background: #fdf2f8; }
+.hist-card-ok i { color: #198754; background: #d1e7dd; }
+.hist-card-rej i { color: #dc3545; background: #f8d7da; }
+.hist-card-mix i { color: #fd7e14; background: #ffe5d0; }

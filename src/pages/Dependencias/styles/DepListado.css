@@ -1,0 +1,107 @@
+/* ============================================
+   DepListado - Tabla de solicitudes
+   ============================================ */
+
+.dep-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.dep-table th {
+  background: #7d2447;
+  color: white;
+  padding: 12px 14px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.dep-table th:first-child {
+  border-radius: 10px 0 0 0;
+}
+
+.dep-table th:last-child {
+  border-radius: 0 10px 0 0;
+}
+
+.dep-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+  color: #333;
+}
+
+.dep-table tbody tr {
+  transition: background 0.15s;
+}
+
+.dep-table tbody tr:hover {
+  background: #faf9f7;
+}
+
+.dep-table .text-center {
+  text-align: center;
+}
+
+/* Badges */
+.dep-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.dep-badge-borrador {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.dep-badge-pendiente {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.dep-badge-enviado {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+.dep-badge-validado {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.dep-badge-rechazado {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.dep-badge-finalizado {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+/* Empty state */
+.dep-empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+.dep-empty-state i {
+  font-size: 48px;
+  color: #d5d0c8;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.dep-empty-state p {
+  margin: 12px 0 20px;
+  font-size: 16px;
+}

@@ -1,0 +1,1083 @@
+/* ============================================
+   VALIDACION CUIP - Container principal
+   ============================================ */
+
+.cuip-main {
+  width: 100%;
+  padding: 20px 20px 36px;
+}
+
+.cuip-loading {
+  text-align: center;
+  padding: 60px;
+  color: #666;
+}
+
+.cuip-loading i {
+  font-size: 40px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+/* Header persona - credencial */
+.cuip-header-card {
+  position: relative;
+  margin-bottom: 12px;
+  padding: 0;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1.5px solid #d4cdb0;
+  box-shadow: 0 2px 10px rgba(125, 36, 71, 0.06);
+  overflow: hidden;
+}
+
+.cuip-header-card-glow {
+  display: none;
+}
+
+.cuip-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 0;
+  padding: 12px 14px;
+  background: linear-gradient(135deg, #7d2447, #5e1a35);
+  border-bottom: 3px solid #bfb591;
+}
+
+.cuip-btn-volver {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cuip-btn-volver:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+}
+
+.cuip-btn-volver i {
+  font-size: 16px;
+}
+
+.cuip-persona-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.cuip-persona-chip i {
+  font-size: 14px;
+  color: #d4cdb0;
+}
+
+.cuip-persona-credencial {
+  display: grid;
+  grid-template-columns: auto minmax(180px, 1fr) minmax(220px, 1.55fr);
+  align-items: center;
+  gap: 10px;
+  margin: 10px 12px 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1.5px solid #e0ddd5;
+  background: #ffffff;
+}
+
+.cuip-persona-avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7d2447;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  background: #faf9f7;
+  border: 1.5px solid #d4cdb0;
+  box-shadow: none;
+}
+
+.cuip-persona-identidad {
+  min-width: 0;
+}
+
+.cuip-persona-identidad h2 {
+  margin: 0;
+  font-size: clamp(16px, 1.7vw, 21px);
+  line-height: 1.15;
+  color: #2d2d2d;
+}
+
+.cuip-persona-identidad p {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #4a5350;
+  font-weight: 600;
+}
+
+.cuip-persona-datos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(136px, 1fr));
+  gap: 8px;
+}
+
+.cuip-persona-dato-item {
+  min-width: 0;
+  border-radius: 8px;
+  padding: 7px 9px;
+  background: #faf9f7;
+  border: 1.5px solid #e0ddd5;
+}
+
+.cuip-persona-dato-item span {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #4a5350;
+  font-weight: 700;
+}
+
+.cuip-persona-dato-item strong {
+  display: block;
+  font-size: 13px;
+  color: #2b2b2b;
+  line-height: 1.2;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Progreso global */
+.cuip-progreso-card {
+  position: relative;
+  background: linear-gradient(135deg, #ffffff 0%, #f9f7f8 100%);
+  border: 1.5px solid #e3dbe0;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 20px rgba(32, 18, 24, 0.08);
+}
+
+.cuip-progreso-head-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.cuip-progreso-title-wrap h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 17px;
+  color: #2d2d2d;
+  margin: 0;
+}
+
+.cuip-progreso-title-wrap h3 i {
+  font-size: 22px;
+  color: #7d2447;
+}
+
+.cuip-progreso-title-wrap p {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #5c5458;
+  font-weight: 500;
+}
+
+.cuip-progreso-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid #d7d0d6;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(32, 18, 24, 0.07);
+}
+
+.cuip-progreso-pill span {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.cuip-progreso-pill strong {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.cuip-progreso-pill.ok {
+  border-color: #b8ddc5;
+  background: #edf8f1;
+  color: #1e6a3a;
+}
+
+.cuip-progreso-pill.riesgo {
+  border-color: #e7c0c0;
+  background: #fff2f2;
+  color: #9a2a2a;
+}
+
+.cuip-progreso-pill.proceso {
+  border-color: #cdd8eb;
+  background: #f2f7ff;
+  color: #2f4f8f;
+}
+
+.cuip-progreso-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(160px, 1fr));
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.cuip-stat-card {
+  border-radius: 12px;
+  border: 1px solid #e4dde2;
+  background: #ffffff;
+  padding: 10px 12px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto auto;
+  column-gap: 10px;
+  row-gap: 2px;
+  align-items: center;
+}
+
+.cuip-stat-card i {
+  grid-row: 1 / 4;
+  font-size: 20px;
+}
+
+.cuip-stat-card small {
+  margin: 0;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+
+.cuip-stat-card strong {
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+.cuip-stat-card span {
+  font-size: 11px;
+  font-weight: 600;
+  color: #60575c;
+}
+
+.cuip-stat-card.validados {
+  border-color: #c8e3d2;
+  background: #f3fbf6;
+}
+
+.cuip-stat-card.validados i,
+.cuip-stat-card.validados small,
+.cuip-stat-card.validados strong {
+  color: #1f6d3c;
+}
+
+.cuip-stat-card.rechazados {
+  border-color: #eac7c7;
+  background: #fff5f5;
+}
+
+.cuip-stat-card.rechazados i,
+.cuip-stat-card.rechazados small,
+.cuip-stat-card.rechazados strong {
+  color: #9a2a2a;
+}
+
+.cuip-stat-card.total {
+  border-color: #d8d3dc;
+  background: #faf8fb;
+}
+
+.cuip-stat-card.total i,
+.cuip-stat-card.total small,
+.cuip-stat-card.total strong {
+  color: #4b3f52;
+}
+
+.cuip-progreso-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.cuip-progreso-foot-label {
+  font-size: 12px;
+  color: #5a5157;
+  font-weight: 600;
+}
+
+.cuip-progreso-bar-wrap {
+  height: 10px;
+  background: #e7e2e5;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.cuip-progreso-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #3db46a 0%, #2a944f 55%, #237e43 100%);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.cuip-progreso-pct {
+  font-size: 15px;
+  font-weight: 800;
+  color: #2e7d32;
+}
+
+/* Toolbar */
+.cuip-toolbar {
+  --cuip-floating-btn-width: 224px;
+  --cuip-floating-btn-height: 44px;
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.cuip-toolbar-left,
+.cuip-toolbar-right,
+.cuip-toolbar-menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: var(--cuip-floating-btn-width);
+  max-width: var(--cuip-floating-btn-width);
+}
+
+.cuip-toolbar-menu {
+  position: relative;
+}
+
+.cuip-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  color: #555;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cuip-btn-secondary:hover {
+  background: #f5f5f5;
+  border-color: #bbb;
+}
+
+.cuip-btn-secondary i {
+  font-size: 16px;
+}
+
+.cuip-toolbar .cuip-btn-secondary {
+  width: 100%;
+  justify-content: center;
+  padding: 0 14px;
+  min-height: var(--cuip-floating-btn-height);
+  border: 1px solid #ded1d6;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7f4f5 100%);
+  color: #574d52;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 7px 18px rgba(48, 26, 33, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  white-space: nowrap;
+}
+
+.cuip-toolbar .cuip-btn-secondary:hover {
+  background: linear-gradient(180deg, #ffffff 0%, #f3ecef 100%);
+  border-color: #ccb8c1;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(48, 26, 33, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+.cuip-toolbar .cuip-btn-secondary i {
+  font-size: 17px;
+}
+
+.cuip-btn-toggle-secciones {
+  border-color: #ccb8c1;
+  color: #5f3f4b;
+}
+
+.cuip-btn-toggle-secciones:hover {
+  border-color: #bca0ab;
+  background: linear-gradient(180deg, #fffefe 0%, #f7edf1 100%);
+  color: #4a3f3f;
+}
+
+.cuip-btn-toggle-secciones.activo {
+  border-color: #bca0ab;
+  background: linear-gradient(180deg, #fbf3f6 0%, #f2e4ea 100%);
+  color: #6a2945;
+}
+
+.cuip-btn-validar-todo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  justify-content: center;
+  padding: 0 14px;
+  min-height: var(--cuip-floating-btn-height);
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #4caf50, #2e7d32);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 8px 18px rgba(20, 95, 45, 0.33);
+  white-space: nowrap;
+}
+
+.cuip-btn-validar-todo:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(20, 95, 45, 0.4);
+}
+
+.cuip-btn-validar-todo:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.cuip-btn-validar-todo.deseleccionar {
+  background: linear-gradient(135deg, #7d2447, #5e1a35);
+  box-shadow: 0 8px 18px rgba(125, 36, 71, 0.32);
+}
+
+.cuip-btn-validar-todo.deseleccionar:hover:not(:disabled) {
+  box-shadow: 0 10px 20px rgba(125, 36, 71, 0.42);
+}
+
+.cuip-btn-validar-todo i {
+  font-size: 17px;
+}
+
+.cuip-btn-acciones-menu {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 14px;
+  min-height: var(--cuip-floating-btn-height);
+  border: 1px solid rgba(255, 255, 255, 0.56);
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(125, 36, 71, 0.86), rgba(73, 25, 48, 0.78));
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  color: #ffffff;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(31, 12, 23, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.28);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+}
+
+.cuip-btn-acciones-menu:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(31, 12, 23, 0.46), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.66);
+}
+
+.cuip-btn-acciones-menu.abierto {
+  background: linear-gradient(135deg, rgba(103, 28, 60, 0.9), rgba(55, 18, 38, 0.82));
+}
+
+.cuip-btn-acciones-menu i {
+  font-size: 17px;
+}
+
+.cuip-acciones-dropdown {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 8px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  background: rgba(249, 245, 248, 0.84);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 0 14px 30px rgba(23, 10, 18, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  opacity: 0;
+  transform: translateY(8px) scale(0.96);
+  transform-origin: bottom right;
+  pointer-events: none;
+  transition: opacity 0.22s ease, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cuip-acciones-dropdown.abierto {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.cuip-acciones-item {
+  width: 100%;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(120, 94, 108, 0.24);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.92);
+  color: #2f2f2f;
+  box-shadow: 0 5px 12px rgba(20, 10, 16, 0.16);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
+}
+
+.cuip-acciones-item i {
+  font-size: 16px;
+}
+
+.cuip-acciones-item:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(20, 10, 16, 0.2);
+  filter: brightness(1.02);
+}
+
+.cuip-acciones-item:disabled {
+  opacity: 0.56;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.cuip-acciones-item.aprobar {
+  background: rgba(220, 245, 230, 0.94);
+  border-color: rgba(98, 161, 120, 0.56);
+  color: #175d31;
+}
+
+.cuip-acciones-item.rechazar {
+  background: rgba(251, 223, 223, 0.94);
+  border-color: rgba(197, 107, 107, 0.56);
+  color: #912727;
+}
+
+.cuip-acciones-item.accion-toggle {
+  background: rgba(220, 234, 255, 0.94);
+  border-color: rgba(111, 146, 206, 0.56);
+  color: #2a4578;
+}
+
+.cuip-acciones-item.accion-validar {
+  background: rgba(214, 244, 224, 0.94);
+  border-color: rgba(97, 165, 121, 0.56);
+  color: #1c5b33;
+}
+
+.cuip-acciones-item.accion-validar.deseleccionar {
+  background: rgba(244, 220, 234, 0.94);
+  border-color: rgba(181, 113, 148, 0.56);
+  color: #6d2f4c;
+}
+
+.cuip-toolbar-status {
+  width: 100%;
+  min-height: var(--cuip-floating-btn-height);
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 700;
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  box-shadow: 0 8px 18px rgba(22, 13, 18, 0.16);
+  padding: 0 14px;
+}
+
+.cuip-toolbar-status.aprobado {
+  background: #e8f5ed;
+  border: 1px solid #b6d9c0;
+  color: #1a7a3f;
+}
+
+.cuip-toolbar-status.con-cita {
+  background: #e9f1ff;
+  border: 1px solid #b8cae8;
+  color: #2f4f8f;
+}
+
+.cuip-toolbar-status i {
+  font-size: 16px;
+}
+
+/* Buscador de secciones/checklist CUIP */
+.cuip-buscador-requisitos-card {
+  margin-bottom: 12px;
+  padding: 12px 14px;
+  border: 1.5px solid #e5d9de;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #fffefe 0%, #fbf7f8 100%);
+  box-shadow: 0 8px 20px rgba(45, 22, 31, 0.08);
+}
+
+.cuip-buscador-requisitos-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.cuip-buscador-requisitos-head h4 {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #4a2a36;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.cuip-buscador-requisitos-head h4 i {
+  font-size: 19px;
+  color: #7d2447;
+}
+
+.cuip-buscador-requisitos-head span {
+  font-size: 11.5px;
+  color: #7a6c72;
+  font-weight: 600;
+}
+
+.cuip-buscador-requisitos {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 0 14px;
+  border: 1px solid #e4d8dc;
+  border-radius: 28px;
+  background: #fffdfd;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cuip-buscador-requisitos:focus-within {
+  border-color: #7d2447;
+  box-shadow: 0 0 0 3px rgba(125, 36, 71, 0.12);
+}
+
+.cuip-buscador-requisitos > i {
+  font-size: 21px;
+  color: #8f8484;
+}
+
+.cuip-buscador-requisitos input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #3a3333;
+  font-size: 0.98rem;
+  font-family: inherit;
+}
+
+.cuip-buscador-requisitos input::placeholder {
+  color: #a29595;
+}
+
+.cuip-buscador-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 29px;
+  height: 29px;
+  border: none;
+  border-radius: 50%;
+  background: #f2ebeb;
+  color: #7d2447;
+  cursor: pointer;
+}
+
+.cuip-buscador-clear i {
+  font-size: 18px;
+}
+
+.cuip-seccion-anchor {
+  scroll-margin-top: 92px;
+}
+
+.cuip-seccion-anchor.is-target {
+  border-radius: 12px;
+  box-shadow: 0 0 0 2px rgba(125, 36, 71, 0.35), 0 12px 22px rgba(125, 36, 71, 0.16);
+  animation: cuipTargetGlow 1.8s ease;
+}
+
+@keyframes cuipTargetGlow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(125, 36, 71, 0.35), 0 0 0 rgba(125, 36, 71, 0.15);
+  }
+  35% {
+    box-shadow: 0 0 0 4px rgba(125, 36, 71, 0.18), 0 14px 26px rgba(125, 36, 71, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 2px rgba(125, 36, 71, 0.35), 0 12px 22px rgba(125, 36, 71, 0.16);
+  }
+}
+
+/* Secciones container */
+.cuip-secciones {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Paginación de secciones — header */
+.cuip-paginacion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cuip-pag-info-secciones {
+  font-size: 13px;
+  color: #666;
+  font-weight: 500;
+}
+
+.cuip-pag-paginas {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.cuip-pag-num {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #555;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cuip-pag-num:hover {
+  border-color: #7d2447;
+  color: #7d2447;
+  background: #fdf4f7;
+}
+
+.cuip-pag-num.activa {
+  background: #7d2447;
+  color: #fff;
+  border-color: #7d2447;
+  box-shadow: 0 2px 6px rgba(125, 36, 71, 0.3);
+}
+
+/* Paginación — footer */
+.cuip-paginacion-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 2px;
+  padding: 0;
+}
+
+.cuip-pag-footer-info {
+  font-size: 13px;
+  color: #666;
+  font-weight: 500;
+  min-width: 100px;
+  text-align: center;
+}
+
+/* Acciones finales */
+.cuip-acciones-finales {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+}
+
+.cuip-btn-rechazar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 24px;
+  border: 1px solid #f44336;
+  border-radius: 8px;
+  background: #fff;
+  color: #f44336;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cuip-btn-rechazar:hover:not(:disabled) {
+  background: #f44336;
+  color: #fff;
+}
+
+.cuip-btn-rechazar:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* --- Botón Aprobar y Generar Cita (reemplaza Completar CUIP) --- */
+.cuip-btn-aprobar-cita {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1a7a3f 0%, #155e30 100%);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(26, 122, 63, 0.35);
+}
+
+.cuip-btn-aprobar-cita:hover:not(:disabled) {
+  background: linear-gradient(135deg, #146e37 0%, #0f4e27 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(26, 122, 63, 0.45);
+}
+
+.cuip-btn-aprobar-cita:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Estado cita generada / CUIP aprobado */
+.cuip-cita-generada {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border-radius: 8px;
+  background: #e8f5ed;
+  border: 1.5px solid #1a7a3f;
+  color: #1a7a3f;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cuip-cita-generada i {
+  font-size: 20px;
+}
+
+/* Legacy completar button kept for compatibility */
+.cuip-btn-completar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 8px;
+  background: #7d2447;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(125, 36, 71, 0.3);
+}
+
+.cuip-btn-completar:hover:not(:disabled) {
+  background: #5e1a35;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(125, 36, 71, 0.4);
+}
+
+.cuip-btn-completar:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cuip-main {
+    padding: 14px 14px 44px;
+  }
+
+  .cuip-header-card {
+    padding: 12px;
+  }
+
+  .cuip-header-top {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cuip-persona-chip {
+    justify-content: center;
+  }
+
+  .cuip-persona-credencial {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .cuip-persona-avatar {
+    margin: 0 auto;
+  }
+
+  .cuip-persona-datos {
+    grid-template-columns: 1fr;
+  }
+
+  .cuip-progreso-head-main {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .cuip-progreso-pill {
+    width: 100%;
+    justify-content: space-between;
+    min-height: 36px;
+    padding: 0 12px;
+  }
+
+  .cuip-progreso-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .cuip-buscador-requisitos-card {
+    padding: 10px 12px;
+  }
+
+  .cuip-buscador-requisitos {
+    min-height: 48px;
+    padding: 0 12px;
+  }
+
+  .cuip-buscador-requisitos input {
+    font-size: 0.92rem;
+  }
+
+  .cuip-stat-card strong {
+    font-size: 18px;
+  }
+
+  .cuip-toolbar {
+    --cuip-floating-btn-width: min(214px, calc(100vw - 24px));
+    --cuip-floating-btn-height: 40px;
+    right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    gap: 6px;
+  }
+
+  .cuip-toolbar-left,
+  .cuip-toolbar-right,
+  .cuip-toolbar-menu {
+    width: var(--cuip-floating-btn-width);
+    max-width: var(--cuip-floating-btn-width);
+  }
+
+  .cuip-btn-toggle-secciones,
+  .cuip-btn-validar-todo,
+  .cuip-btn-acciones-menu,
+  .cuip-toolbar-status {
+    min-height: var(--cuip-floating-btn-height);
+    padding: 0 12px;
+    font-size: 10.5px;
+  }
+
+  .cuip-acciones-item {
+    min-height: 34px;
+    font-size: 10px;
+  }
+
+  .cuip-paginacion-footer {
+    margin-top: 2px;
+    padding: 0;
+    gap: 10px;
+  }
+
+  .cuip-acciones-finales {
+    flex-direction: column;
+  }
+}

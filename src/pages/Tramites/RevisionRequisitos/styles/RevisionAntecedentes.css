@@ -1,0 +1,373 @@
+/* ============================================
+   RevisionAntecedentes - Verificacion RNPSP/SUIC
+   ============================================ */
+
+.rev-antecedentes {
+  background: #fff;
+  border-radius: 12px;
+  padding: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.rev-antecedentes-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px;
+  background: #7d2447;
+  color: #fff;
+  font-size: 16px;
+}
+
+.rev-antecedentes-header h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.rev-antecedentes-header i {
+  font-size: 20px;
+}
+
+/* Consulta card */
+.rev-consulta-card {
+  margin: 12px 16px;
+  padding: 16px;
+  border-radius: 10px;
+  border: 2px solid #e0e0e0;
+  transition: border-color 0.2s;
+}
+
+.rev-consulta-card.rev-resultado-ok {
+  border-color: #4caf50;
+}
+
+.rev-consulta-card.rev-resultado-alerta {
+  border-color: #ff9800;
+}
+
+.rev-consulta-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.rev-consulta-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  flex-shrink: 0;
+}
+
+.rev-consulta-icon i {
+  font-size: 20px;
+  color: #666;
+}
+
+.rev-consulta-info h4 {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.rev-consulta-info p {
+  margin: 0;
+  font-size: 12px;
+  color: #888;
+}
+
+/* Toggle switch */
+.rev-toggle {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.rev-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.rev-toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 24px;
+  transition: 0.3s;
+}
+
+.rev-toggle-slider::before {
+  content: '';
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.rev-toggle input:checked + .rev-toggle-slider {
+  background-color: #4caf50;
+}
+
+.rev-toggle input:checked + .rev-toggle-slider::before {
+  transform: translateX(20px);
+}
+
+/* Resultado badge */
+.rev-consulta-resultado {
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.rev-consulta-resultado.rev-resultado-ok {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.rev-consulta-resultado.rev-resultado-alerta {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.rev-consulta-resultado.rev-resultado-pendiente {
+  background: #f5f5f5;
+  color: #999;
+}
+
+/* Justificacion previa */
+.rev-justificacion-previa {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 12px 16px;
+  padding: 12px;
+  background: #fff3e0;
+  border-radius: 8px;
+  border-left: 3px solid #ff9800;
+}
+
+.rev-justificacion-previa i {
+  font-size: 18px;
+  color: #ff9800;
+  margin-top: 2px;
+}
+
+.rev-justificacion-previa strong {
+  font-size: 13px;
+  color: #333;
+}
+
+.rev-justificacion-previa p {
+  font-size: 13px;
+  color: #555;
+  margin: 4px 0 0;
+}
+
+/* Boton guardar antecedentes */
+.rev-btn-guardar-antecedentes {
+  display: block;
+  width: calc(100% - 32px);
+  margin: 12px 16px;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #7d2447;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.rev-btn-guardar-antecedentes:hover:not(:disabled) {
+  background: #5e1a35;
+}
+
+.rev-btn-guardar-antecedentes:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Acciones */
+.rev-acciones {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  align-items: flex-start;
+}
+
+.rev-btn-rechazar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background: #fff;
+  color: #555;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.rev-btn-rechazar:hover {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.rev-btn-siguiente {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  background: #7d2447;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-left: auto;
+}
+
+.rev-btn-siguiente:hover:not(:disabled) {
+  background: #5e1a35;
+}
+
+.rev-btn-siguiente:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.rev-btn-siguiente i {
+  font-size: 18px;
+}
+
+.rev-sugerencia-rechazo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 16px 14px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #fff1f1;
+  border: 1px solid #f5c7c7;
+  color: #a82424;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.rev-sugerencia-rechazo i {
+  font-size: 18px;
+}
+
+.rev-sugerencia-rechazo-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* Rechazo inline */
+.rev-rechazo-form {
+  flex: 1;
+}
+
+.rev-rechazo-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  resize: vertical;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.rev-rechazo-btns {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.rev-btn-cancelar {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.rev-btn-confirmar-rechazo {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #dc3545;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.rev-btn-confirmar-rechazo:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Nota CUIP */
+.rev-nota-cuip {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 0 16px 16px;
+  padding: 12px;
+  background: #fff3e0;
+  border-radius: 8px;
+  border: 1px solid #ffe0b2;
+}
+
+.rev-nota-cuip i {
+  font-size: 20px;
+  color: #e65100;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.rev-nota-cuip div {
+  font-size: 12px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.rev-nota-cuip strong {
+  color: #e65100;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .rev-acciones {
+    flex-direction: column;
+  }
+
+  .rev-btn-siguiente {
+    margin-left: 0;
+  }
+}

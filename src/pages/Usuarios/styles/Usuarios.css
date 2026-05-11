@@ -1,0 +1,37 @@
+/* ==========================================
+   ESTILOS PRINCIPALES - USUARIOS
+   ========================================== */
+
+.usuarios-container {
+  width: 100%;
+  padding: 36px 24px;
+}
+
+.usuarios-loading {
+  text-align: center;
+  padding: 50px;
+}
+
+.usuarios-loading .spinner {
+  margin: 0 auto;
+}
+
+/* Mensaje de notificación */
+.usuarios-mensaje {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+.usuarios-mensaje.success {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+}
+
+.usuarios-mensaje.error {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+}

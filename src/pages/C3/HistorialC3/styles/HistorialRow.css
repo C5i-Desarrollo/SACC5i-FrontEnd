@@ -1,0 +1,112 @@
+/* ================================
+   HISTORIAL C3 — Filas y Celdas de la Tabla
+   ================================ */
+
+.hist-solicitud-cell {
+    display: flex;
+    flex-direction: column;
+}
+
+.hist-solicitud-cell strong {
+    font-size: 0.9rem;
+    color: #111827;
+    font-weight: 600;
+}
+
+.hist-solicitud-cell small {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-top: 2px;
+}
+
+.hist-analista-cell,
+.hist-fecha-cell {
+    display: flex;
+    flex-direction: column;
+}
+
+.hist-analista-cell span,
+.hist-fecha-cell span {
+    font-weight: 500;
+    color: #374151;
+}
+
+.hist-analista-cell small,
+.hist-fecha-cell small {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-top: 2px;
+}
+
+/* BADGES (Etiquetas de Estado) */
+.hist-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    /* Pill shape */
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    white-space: nowrap;
+}
+
+.hist-badge-dictaminado {
+    background: #e9ecef;
+    color: #495057;
+}
+
+.hist-badge-validado {
+    background: #d1e7dd;
+    color: #0f5132;
+    /* Verde oscuro */
+}
+
+.hist-badge-rechazado {
+    background: #f8d7da;
+    color: #842029;
+    /* Rojo oscuro */
+}
+
+.hist-badge-pendiente {
+    background: #fdf2f8;
+    color: #6c1d45;
+    /* Guinda */
+}
+
+/* MINIESTADÍSTICAS EN TABLA */
+.hist-stats-cell {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.hist-stat {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.hist-stat i {
+    font-size: 0.875rem;
+}
+
+.hist-stat-total {
+    background: #f3f4f6;
+    color: #4b5563;
+}
+
+.hist-stat-ok {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.hist-stat-rej {
+    background: #f8d7da;
+    color: #842029;
+}

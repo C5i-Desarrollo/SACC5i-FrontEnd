@@ -1,0 +1,230 @@
+.baja-card-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 18px;
+    row-gap: 10px;
+}
+
+.baja-header-copy {
+    min-width: 0;
+}
+
+.baja-header-copy h3,
+.baja-header-copy p {
+    margin: 0;
+}
+
+.baja-header-copy p {
+    margin-top: 6px;
+}
+
+.baja-header-kpis {
+    margin-top: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(175px, 215px));
+    gap: 12px;
+    justify-content: end;
+    margin-left: auto;
+}
+
+.baja-header-kpis-right {
+    grid-column: 2;
+    justify-content: end;
+    justify-self: end;
+    margin: 0;
+}
+
+.baja-header-kpis-compact {
+    grid-template-columns: minmax(170px, 250px);
+}
+
+.baja-metric-card {
+    border-radius: 12px;
+    padding: 10px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+}
+
+.baja-metric-card:hover {
+    border-color: rgba(211, 191, 129, 0.85);
+    box-shadow: 0 0 0 1px rgba(211, 191, 129, 0.55) inset;
+    transform: translateY(-1px);
+}
+
+.baja-metric-card small {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    opacity: 0.92;
+}
+
+.baja-metric-card strong {
+    font-size: 36px;
+    line-height: 0.95;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+    margin-top: 1px;
+}
+
+.baja-metric-content {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.baja-metric-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 11px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex: 0 0 auto;
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    background: rgba(255, 255, 255, 0.14);
+}
+
+.metric-disponibles {
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+}
+
+.metric-bajas {
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+}
+
+.metric-manuales {
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+}
+
+.baja-filtros-btn {
+    min-height: 40px;
+    border: 1px solid #ddccd2;
+    background: #ffffff;
+    color: #5c4f56;
+    border-radius: 10px;
+    padding: 0 12px;
+    font-size: 13px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.baja-filtros-btn.active {
+    border-color: #c4b47f;
+    color: #6e5728;
+    background: #faf5e9;
+}
+
+.baja-filtros-panel {
+    margin-top: 10px;
+    border: 1px solid #ebdfe2;
+    border-radius: 10px;
+    background: #fdf7f9;
+    padding: 12px;
+}
+
+.baja-filtros-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(180px, 1fr));
+    gap: 12px;
+    align-items: end;
+}
+
+.baja-filtro-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #5e5359;
+}
+
+.baja-filtro-group select {
+    width: 100%;
+    min-height: 38px;
+    border: 1px solid #d8cfd2;
+    border-radius: 9px;
+    padding: 0 10px;
+    background: #ffffff;
+}
+
+.baja-filtro-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.baja-filtro-actions button {
+    min-height: 38px;
+    border: 1px solid #d8cfd2;
+    background: #ffffff;
+    color: #5f5358;
+    border-radius: 9px;
+    padding: 0 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.baja-table tbody tr.is-selected {
+    background: #fff2f6;
+}
+
+.baja-btn-select {
+    border: 1px solid #c9b9be;
+    background: #ffffff;
+    color: #6a5b61;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.baja-btn-select.active {
+    border-color: #7d2447;
+    background: linear-gradient(135deg, #7d2447, #5a1a33);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(125, 36, 71, 0.28);
+}
+
+@media (max-width: 920px) {
+    .baja-card-header {
+        grid-template-columns: 1fr;
+        align-items: stretch;
+    }
+
+    .baja-header-kpis {
+        grid-template-columns: 1fr;
+        justify-content: stretch;
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .baja-header-kpis-compact {
+        grid-template-columns: 1fr;
+    }
+
+    .baja-header-kpis-right {
+        grid-column: 1;
+        justify-content: stretch;
+        justify-self: stretch;
+    }
+
+    .baja-metric-card strong {
+        font-size: 30px;
+    }
+
+    .baja-filtros-grid {
+        grid-template-columns: 1fr;
+    }
+}

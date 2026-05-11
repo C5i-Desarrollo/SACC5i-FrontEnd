@@ -1,0 +1,194 @@
+/* ================================
+   HISTORIAL C3 — Filtros (Patrón Panel C3)
+   ================================ */
+
+.hist-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.hist-toolbar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.hist-toolbar-row-main {
+  align-items: center;
+}
+
+.hist-search-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 12px;
+  border: 1px solid #e6dbdb;
+  border-radius: 23px;
+  background: #fffdfd;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.hist-search-wrap:focus-within {
+  border-color: #7d2447;
+  box-shadow: 0 0 0 3px rgba(125, 36, 71, 0.12);
+}
+
+.hist-search-wrap > i {
+  font-size: 19px;
+  color: #8f8484;
+}
+
+.hist-search-wrap input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #3a3333;
+  font-size: 0.95rem;
+  font-family: inherit;
+  min-width: 130px;
+}
+
+.hist-search-wrap input::placeholder {
+  color: #a19595;
+}
+
+.hist-search-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #d9c6cd;
+  border-radius: 50%;
+  background: #fff;
+  color: #6f2b48;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hist-search-filter-btn i {
+  font-size: 16px;
+  color: inherit;
+}
+
+.hist-search-filter-btn:hover {
+  border-color: #b98e9f;
+  background: #fbf0f4;
+}
+
+.hist-search-filter-btn.is-active {
+  border-color: #6e1e3f;
+  background: linear-gradient(135deg, #9c3c65 0%, #7d2447 100%);
+  color: #fff;
+  box-shadow: 0 0 0 2px rgba(125, 36, 71, 0.18);
+}
+
+.hist-search-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: #f2ebeb;
+  color: #7d2447;
+  cursor: pointer;
+}
+
+.hist-refresh-btn-small {
+  width: 38px;
+  height: 38px;
+  border: 1px solid #e8e5df;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  color: #7d2447;
+  flex-shrink: 0;
+}
+
+.hist-refresh-btn-small:hover {
+  background: #faf0f4;
+  border-color: #d5c0c8;
+  transform: rotate(180deg);
+}
+
+.hist-refresh-btn-small i {
+  font-size: 18px;
+}
+
+/* Panel blanco redondeado debajo de los filtros */
+.hist-filtros-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 24px;
+  margin-bottom: 24px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  align-items: flex-end;
+}
+
+.hist-filtro-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 200px;
+}
+
+.hist-filtro-group label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+}
+
+.hist-filtro-group input,
+.hist-filtro-group select {
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  outline: none;
+  background: #ffffff;
+}
+
+.hist-filtros-actions {
+  display: flex;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.hist-btn-aplicar {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  background-color: #6c1d45;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.hist-btn-limpiar {
+  padding: 10px 24px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #374151;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}

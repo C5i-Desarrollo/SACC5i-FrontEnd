@@ -1,0 +1,871 @@
+.alta-container {
+  width: 100%;
+  padding: 18px;
+}
+
+.alta-gmail-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 8px 12px 0;
+}
+
+.alta-gmail-tabs-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.alta-gmail-tabs {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid #e8e2d8;
+}
+
+.alta-gmail-refresh-icon {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #e0d4d4;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #7d2447;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.alta-gmail-refresh-icon i {
+  font-size: 19px;
+}
+
+.alta-gmail-refresh-icon:hover {
+  border-color: #c8b7b7;
+  background: #f8f1f3;
+}
+
+.alta-gmail-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.alta-gmail-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 16px;
+  border: none;
+  border-bottom: 3px solid transparent;
+  border-radius: 10px 10px 0 0;
+  background: transparent;
+  color: #756860;
+  font-size: 0.96rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.alta-gmail-tab:hover {
+  color: #7d2447;
+  background: #f8f2f4;
+}
+
+.alta-gmail-tab-active,
+.alta-gmail-tab-active:hover {
+  color: #7d2447;
+  border-bottom-color: #7d2447;
+  background: #fff4f8;
+}
+
+.alta-gmail-tools {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.alta-gmail-search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 14px;
+  border: 1px solid #e6dbdb;
+  border-radius: 23px;
+  background: #fffdfd;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.alta-gmail-search:focus-within {
+  border-color: #7d2447;
+  box-shadow: 0 0 0 3px rgba(125, 36, 71, 0.12);
+}
+
+.alta-gmail-search i {
+  font-size: 19px;
+  color: #8f8484;
+}
+
+.alta-gmail-search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #3a3333;
+  font-size: 0.94rem;
+  font-family: inherit;
+}
+
+.alta-gmail-search input::placeholder {
+  color: #a19595;
+}
+
+.alta-gmail-search-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: #f2ebeb;
+  color: #7d2447;
+  cursor: pointer;
+}
+
+.alta-gmail-search-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #d9c6cd;
+  border-radius: 50%;
+  background: #fff;
+  color: #6f2b48;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.alta-gmail-search-action i {
+  font-size: 16px;
+  color: inherit;
+}
+
+.alta-gmail-search-action:hover {
+  border-color: #b98e9f;
+  background: #fbf0f4;
+}
+
+.alta-gmail-search-action.is-active {
+  border-color: #6e1e3f;
+  background: linear-gradient(135deg, #9c3c65 0%, #7d2447 100%);
+  color: #fff;
+  box-shadow: 0 0 0 2px rgba(125, 36, 71, 0.18);
+}
+
+.alta-btn-nueva {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 11px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.alta-btn-nueva {
+  border: none;
+  background: #7d2447;
+  color: #ffffff;
+}
+
+.alta-btn-nueva:hover {
+  background: #5e1a35;
+  box-shadow: 0 6px 18px rgba(125, 36, 71, 0.3);
+}
+
+.alta-card {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.alta-card.fondo-transparente {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.header-title-flex {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title-icon-alta {
+  color: #7d2447;
+  font-size: 2.2rem;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .alta-gmail-tools {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .alta-gmail-tabs-row {
+    align-items: flex-end;
+  }
+
+  .alta-btn-nueva {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .alta-container {
+    padding: 12px;
+  }
+
+  .alta-gmail-toolbar {
+    padding: 6px 0 0;
+  }
+
+  .alta-gmail-tabs-row {
+    gap: 8px;
+  }
+
+  .alta-gmail-tabs {
+    width: 100%;
+  }
+
+  .alta-gmail-tab {
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 12px;
+    font-size: 0.88rem;
+  }
+
+  .alta-gmail-refresh-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .alta-btn-nueva {
+    width: 100%;
+  }
+}
+
+/* ==========================================
+   MENSAJES
+   ========================================== */
+.mensaje {
+  padding: 14px 20px;
+  border-radius: 10px;
+  margin: 20px 24px;
+  font-weight: 500;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mensaje-success {
+  background-color: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.mensaje-error {
+  background-color: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+/* ==========================================
+   PASOS INDICADOR
+   ========================================== */
+.pasos-indicador {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 20px 24px;
+  gap: 60px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e8e5df;
+}
+
+.paso {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.paso-activo {
+  opacity: 1;
+}
+
+.paso-completado {
+  opacity: 1;
+}
+
+.paso-numero {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #e8e5df;
+  color: #8a8a8a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.paso-activo .paso-numero {
+  background-color: #7d2447;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(125, 36, 71, 0.3);
+}
+
+.paso-completado .paso-numero {
+  background-color: #bfb591;
+  color: #ffffff;
+}
+
+.paso-texto {
+  font-size: 14px;
+  color: #8a8a8a;
+  font-weight: 500;
+}
+
+.paso-activo .paso-texto {
+  color: #7d2447;
+  font-weight: 600;
+}
+
+.paso-completado .paso-texto {
+  color: #bfb591;
+  font-weight: 600;
+}
+
+/* ==========================================
+   FORMULARIOS
+   ========================================== */
+.alta-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px 40px;
+  padding: 24px;
+  margin-bottom: 0;
+}
+
+.alta-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.alta-form-group label {
+  font-weight: 600;
+  color: #3d3d3d;
+  font-size: 14px;
+}
+
+.alta-form-group input,
+.alta-form-group select,
+.alta-form-group textarea {
+  padding: 12px 16px;
+  border: 1.5px solid #e0ddd5;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  background-color: #ffffff;
+  color: #3d3d3d;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.alta-form-group input::placeholder,
+.alta-form-group textarea::placeholder {
+  color: #b0a89e;
+}
+
+.alta-form-group input:focus,
+.alta-form-group select:focus,
+.alta-form-group textarea:focus {
+  outline: none;
+  border-color: #b3a060;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(179, 160, 96, 0.18);
+}
+
+.alta-field-filled {
+  border-color: #c4b47f !important;
+  box-shadow: 0 0 0 2px rgba(196, 180, 127, 0.16);
+  background: #ffffff !important;
+}
+
+.alta-form-group input:-webkit-autofill,
+.alta-form-group input:-webkit-autofill:hover,
+.alta-form-group input:-webkit-autofill:focus,
+.alta-form-group textarea:-webkit-autofill,
+.alta-form-group textarea:-webkit-autofill:hover,
+.alta-form-group textarea:-webkit-autofill:focus,
+.alta-form-group select:-webkit-autofill,
+.alta-form-group select:-webkit-autofill:hover,
+.alta-form-group select:-webkit-autofill:focus {
+  -webkit-text-fill-color: #3d3d3d;
+  box-shadow: 0 0 0px 1000px #ffffff inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+.alta-form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ==========================================
+   TABLA
+   ========================================== */
+.alta-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 0;
+}
+
+.alta-table th {
+  background: linear-gradient(135deg, #7d2447);
+  padding: 14px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: none;
+}
+
+.alta-table th:first-child {
+  border-radius: 0;
+}
+
+.alta-table th:last-child {
+  border-radius: 0;
+}
+
+.alta-table td {
+  padding: 14px 16px;
+  font-size: 14px;
+  color: #4a5350;
+  border-bottom: 1px solid #f0eee9;
+  border-left: none;
+  border-right: none;
+}
+
+.alta-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.alta-table tbody tr:hover {
+  background-color: #faf9f7;
+}
+
+.alta-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ==========================================
+   BADGES
+   ========================================== */
+.alta-badge {
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.alta-badge-borrador {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.alta-badge-enviado {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.alta-badge-validado {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.alta-badge-rechazado {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.alta-badge-pendiente {
+  background-color: #f3f4f6;
+  color: #4b5563;
+}
+
+.alta-badge-finalizado {
+  background-color: #ede9fe;
+  color: #5b21b6;
+}
+
+/* Fase Actual badges */
+.fase-badge {
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.fase-pendiente {
+  background-color: #f3f4f6;
+  color: #4b5563;
+}
+
+.fase-espera {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.fase-rechazado {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.fase-revision-proceso {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.fase-revision-ok {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.fase-cuip-proceso {
+  background-color: #ede9fe;
+  color: #5b21b6;
+}
+
+.fase-cuip-ok {
+  background-color: #c7d2fe;
+  color: #3730a3;
+}
+
+.fase-otro {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+/* ==========================================
+   BOTONES
+   ========================================== */
+.btn {
+  padding: 10px 22px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #7d2447, #5e1a35);
+  color: #ffffff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #5e1a35, #4a1229);
+  box-shadow: 0 4px 14px rgba(125, 36, 71, 0.35);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: #4a5350;
+  border: 1.5px solid #d5d0c8;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: #f5f4f0;
+  border-color: #b0a89e;
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  color: #ffffff;
+}
+
+.btn-success:hover:not(:disabled) {
+  background: linear-gradient(135deg, #15803d, #166534);
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  color: #ffffff;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: linear-gradient(135deg, #b91c1c, #991b1b);
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.35);
+}
+
+.btn-sm {
+  padding: 7px 14px;
+  font-size: 12px;
+  border-radius: 6px;
+}
+
+.btn-group {
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  padding: 20px 24px;
+  justify-content: flex-end;
+  border-top: 1px solid #f0eee9;
+  background-color: #faf9f7;
+}
+
+/* ==========================================
+   ESTADOS DE CARGA / VACIO
+   ========================================== */
+.loading-state,
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #8a8a8a;
+}
+
+.empty-state i {
+  display: block;
+  margin-bottom: 12px;
+  color: #d5d0c8;
+}
+
+.empty-state p {
+  color: #8a8a8a;
+  margin: 12px 0;
+  font-size: 16px;
+}
+
+/* ==========================================
+   INFO BOX
+   ========================================== */
+.info-box {
+  background-color: #fdf8f0;
+  border-left: 4px solid #bfb591;
+  padding: 18px 20px;
+  margin: 20px 24px;
+  border-radius: 0 10px 10px 0;
+}
+
+.info-box h4 {
+  margin: 0 0 10px 0;
+  color: #7d2447;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.info-box p {
+  margin: 4px 0;
+  color: #5e4a3a;
+  font-size: 14px;
+}
+
+.info-box ul {
+  margin: 8px 0 0 0;
+  padding-left: 20px;
+}
+
+.info-box li {
+  margin: 6px 0;
+  color: #5e4a3a;
+  font-size: 14px;
+}
+
+/* Quita el fondo y bordes solo cuando mostramos listados */
+.alta-card.fondo-transparente {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0; /* Para que ocupe todo el ancho sin márgenes extra */
+}
+
+/* ==========================================
+   DARK MODE - Solo titulo
+   ========================================== */
+body.dark .alta-header h1 {
+  color: #ffffff;
+}
+
+body.dark .alta-header p {
+  color: #a0a0b8;
+}
+
+body.dark .alta-header {
+  border-bottom-color: #e8e5df;
+}
+
+/* ==========================================
+   ANIMACION DE TRANSICION ENTRE TABS
+   ========================================== */
+.alta-card > * {
+  animation: altaFadeIn 0.3s ease-out;
+}
+
+@keyframes altaFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Variante slide desde la derecha para Recibidos */
+.alta-card .recibidos-c3-container {
+  animation: altaSlideRight 0.35s ease-out;
+}
+
+@keyframes altaSlideRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Variante slide desde la izquierda para Mis Solicitudes */
+.alta-card .alta-listado-container {
+  animation: altaSlideLeft 0.35s ease-out;
+}
+
+@keyframes altaSlideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 768px) {
+  .alta-container {
+    padding: 10px;
+  }
+
+  .alta-header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .alta-header h1 {
+    font-size: 22px;
+  }
+
+  .alta-header-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .alta-tabs {
+    width: 100%;
+  }
+
+  .alta-tab {
+    flex: 1;
+    justify-content: center;
+    padding: 9px 12px;
+    font-size: 12px;
+  }
+
+  .alta-form-grid {
+    grid-template-columns: 1fr;
+    padding: 18px;
+  }
+
+  .pasos-indicador {
+    gap: 24px;
+    padding: 16px;
+  }
+
+  .paso-texto {
+    display: none;
+  }
+
+  .alta-table th,
+  .alta-table td {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .btn-group {
+    flex-direction: column-reverse;
+    padding: 16px 18px;
+  }
+
+  .btn-group .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .info-box {
+    margin: 16px 18px;
+  }
+}

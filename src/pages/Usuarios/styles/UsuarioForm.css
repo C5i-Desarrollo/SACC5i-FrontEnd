@@ -1,0 +1,408 @@
+/* ==========================================
+   ESTILOS - FORMULARIOS DE USUARIO
+   Paleta Institucional Puebla - CSS Puro
+   ========================================== */
+
+/* --- Base del formulario --- */
+.usuario-form {
+  border-radius: 14px;
+  border: 1.5px solid #d4cdb0;
+  background-color: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(125, 36, 71, 0.06);
+  animation: slideUp 0.3s ease;
+}
+
+/* ===== FORM CREAR ===== */
+.usuario-form.form-crear {
+  border-color: #d4cdb0;
+  background-color: #ffffff;
+}
+
+/* ===== FORM EDITAR (modal) ===== */
+.usuario-form.form-editar {
+  border-color: #d4cdb0;
+  background-color: #ffffff;
+}
+
+.usuario-form.modal-form {
+  border-radius: 16px;
+  box-shadow:
+    0 20px 50px rgba(125, 36, 71, 0.18),
+    0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* ==========================================
+   HEADER DEL FORMULARIO
+   ========================================== */
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Header para CREAR (inline, no modal) */
+.crear-header {
+  background: linear-gradient(135deg, #7d2447, #5e1a35);
+  padding: 16px 24px;
+  border-bottom: 3px solid #bfb591;
+}
+
+.form-titulo {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-titulo.crear {
+  color: #ffffff;
+}
+
+.form-titulo.crear svg {
+  color: #bfb591;
+}
+
+/* Header para EDITAR (modal) */
+.form-header.modal-header {
+  background: linear-gradient(135deg, #7d2447, #5e1a35);
+  padding: 16px 24px;
+  border-bottom: 3px solid #bfb591;
+}
+
+.form-titulo.editar {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-titulo.editar strong {
+  color: #d4cdb0;
+  font-weight: 700;
+}
+
+/* --- Boton cerrar (modal) --- */
+.btn-cerrar {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  line-height: 1;
+  padding: 0;
+}
+
+.btn-cerrar:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: scale(1.08);
+}
+
+/* ==========================================
+   GRID DEL FORMULARIO
+   ========================================== */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 20px;
+  padding: 28px 24px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Labels --- */
+.form-label {
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  color: #4a5350;
+}
+
+.requerido {
+  color: #7d2447;
+  font-weight: 700;
+}
+
+.form-hint {
+  color: #8a8a8a;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+/* --- Inputs --- */
+.form-input {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #4a5350;
+  background: #faf9f7;
+  border: 1.5px solid #e0ddd5;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.form-input::placeholder {
+  color: #a0a0a0;
+  font-size: 13px;
+}
+
+.form-input:focus {
+  border-color: #bfb591;
+  box-shadow: 0 0 0 3px rgba(191, 181, 145, 0.18);
+  background: #ffffff;
+}
+
+.form-input:read-only,
+.form-input:disabled {
+  background: #f0eee9;
+  color: #7a7a7a;
+  cursor: not-allowed;
+  border-color: #ddd8ce;
+}
+
+/* --- Selects --- */
+.form-select {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #4a5350;
+  background-color: #faf9f7;
+  border: 1.5px solid #e0ddd5;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237d2447' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+.form-select:focus {
+  border-color: #bfb591;
+  box-shadow: 0 0 0 3px rgba(191, 181, 145, 0.18);
+  background-color: #ffffff;
+}
+
+/* ==========================================
+   ACCIONES DEL FORMULARIO
+   ========================================== */
+
+.form-acciones {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Footer para CREAR (inline) */
+.crear-footer {
+  padding: 16px 24px;
+  border-top: 1.5px solid #e0ddd5;
+  background: #faf9f7;
+  justify-content: flex-end;
+}
+
+/* Footer para EDITAR (modal) */
+.form-acciones.modal-footer {
+  padding: 16px 24px;
+  border-top: 1.5px solid #e0ddd5;
+  background: #faf9f7;
+  justify-content: flex-end;
+}
+
+/* --- Boton Submit (base) --- */
+.btn-submit {
+  padding: 11px 26px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+  font-family: inherit;
+}
+
+.btn-submit:hover {
+  transform: translateY(-1px);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
+}
+
+/* Boton Crear */
+.btn-submit.crear {
+  background: linear-gradient(135deg, #7d2447, #5e1a35);
+  box-shadow: 0 4px 12px rgba(125, 36, 71, 0.25);
+}
+
+.btn-submit.crear:hover {
+  background: linear-gradient(135deg, #5e1a35, #4a1228);
+  box-shadow: 0 6px 18px rgba(125, 36, 71, 0.35);
+}
+
+/* Boton Editar */
+.btn-submit.editar {
+  background: linear-gradient(135deg, #7d2447, #5e1a35);
+  box-shadow: 0 4px 12px rgba(125, 36, 71, 0.25);
+}
+
+.btn-submit.editar:hover {
+  background: linear-gradient(135deg, #5e1a35, #4a1228);
+  box-shadow: 0 6px 18px rgba(125, 36, 71, 0.35);
+}
+
+/* --- Boton Cancelar --- */
+.btn-cancelar {
+  padding: 11px 26px;
+  border: 1.5px solid #e0ddd5;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #4a5350;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+  font-family: inherit;
+}
+
+.btn-cancelar:hover {
+  background: #f5f3ef;
+  border-color: #bfb591;
+  color: #7d2447;
+}
+
+/* ==========================================
+   MODAL OVERLAY (Editar)
+   ========================================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(62, 15, 30, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.25s ease;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.modal-container {
+  width: 100%;
+  max-width: 720px;
+  margin: 20px;
+}
+
+.modal-body {
+  padding: 28px 24px;
+  background: #ffffff;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.modal-body::-webkit-scrollbar {
+  width: 5px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background: #bfb591;
+  border-radius: 3px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+  background: #f5f3ef;
+}
+
+/* ==========================================
+   ANIMACIONES
+   ========================================== */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 20px 18px;
+  }
+
+  .crear-header,
+  .form-header.modal-header {
+    padding: 14px 18px;
+  }
+
+  .form-acciones,
+  .crear-footer,
+  .form-acciones.modal-footer {
+    flex-direction: column;
+    padding: 14px 18px;
+  }
+
+  .btn-submit,
+  .btn-cancelar {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .modal-container {
+    margin: 12px;
+  }
+
+  .modal-body {
+    padding: 20px 18px;
+    max-height: 70vh;
+  }
+}

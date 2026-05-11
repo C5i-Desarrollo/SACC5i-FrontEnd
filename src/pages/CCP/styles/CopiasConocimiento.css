@@ -1,0 +1,97 @@
+﻿/* ============================================================
+   CopiasConocimiento.css - Contenedor principal CCP
+   Variables globales + layout de página
+   ============================================================ */
+
+:root {
+  --ccp-primary: #7d2447;
+  --ccp-primary-dark: #5e1a35;
+  --ccp-primary-mid: #a33060;
+  --ccp-primary-pale: #fdf4f7;
+  --ccp-primary-pale2: #f5e6ec;
+  --ccp-green: #16a34a;
+  --ccp-green-pale: #dcfce7;
+  --ccp-amber: #b45309;
+  --ccp-amber-pale: #fef3c7;
+  --ccp-border: #e5e7eb;
+  --ccp-bg: #f3f4f6;
+  --ccp-white: #ffffff;
+  --ccp-text: #1f2937;
+  --ccp-text-light: #6b7280;
+  --ccp-text-xlight: #9ca3af;
+  --ccp-radius-sm: 8px;
+  --ccp-radius-md: 12px;
+  --ccp-radius-lg: 16px;
+  --ccp-shadow-sm: 0 1px 3px rgba(0, 0, 0, .08), 0 1px 2px rgba(0, 0, 0, .04);
+  --ccp-shadow-md: 0 4px 6px rgba(0, 0, 0, .07), 0 2px 4px rgba(0, 0, 0, .05);
+  --ccp-font: 'Poppins', var(--poppins, 'Poppins'), Arial, sans-serif;
+}
+
+.ccp-page {
+  width: 100%;
+  padding: clamp(24px, 2vw, 36px) clamp(20px, 2.5vw, 44px);
+  max-width: none;
+  margin: 0 auto;
+  font-family: var(--ccp-font);
+}
+
+.ccp-error-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #dc2626;
+  border-radius: var(--ccp-radius-sm);
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  font-family: var(--ccp-font);
+}
+
+.ccp-view {
+  animation: ccpFadeSlide 0.3s ease;
+}
+
+.ccp-listado-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.ccp-search-alta-externa {
+  flex: 1 1 560px;
+  width: auto;
+}
+
+@keyframes ccpFadeSlide {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ccpPopIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (min-width: 1600px) {
+  .ccp-page { padding-inline: 56px; }
+}
+
+@media (max-width: 768px) {
+  .ccp-page { padding: 16px; }
+  .ccp-listado-topbar {
+    align-items: stretch;
+    margin-bottom: 10px;
+  }
+  .ccp-search-alta-externa {
+    width: 100%;
+  }
+  .ccp-listado-topbar .ccp-btn-nuevo {
+    align-self: flex-end;
+  }
+}

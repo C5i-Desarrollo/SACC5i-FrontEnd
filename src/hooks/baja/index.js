@@ -1,0 +1,1 @@
+export { useBajaGestion } from './useBajaGestion';

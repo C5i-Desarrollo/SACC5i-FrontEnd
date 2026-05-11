@@ -1,0 +1,250 @@
+/* ==========================================
+   FILTROS DE USUARIOS
+   Paleta Institucional Puebla - CSS Puro
+   ========================================== */
+
+/* --- Contenedor principal --- */
+.usuarios-filtros-container {
+  background: #ffffff;
+  padding: 20px 24px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border: 1.5px solid #e0ddd5;
+  box-shadow: 0 2px 8px rgba(125, 36, 71, 0.05);
+}
+
+/* --- Header: titulo + total --- */
+.filtros-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f0eee9;
+}
+
+.filtros-titulo {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #7d2447;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filtros-titulo svg {
+  color: #bfb591;
+}
+
+.filtros-total {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #6b7280;
+  background: #faf9f7;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid #e0ddd5;
+}
+
+.filtros-total svg {
+  color: #bfb591;
+}
+
+.filtros-total strong {
+  color: #7d2447;
+  font-weight: 700;
+}
+
+/* --- Grid de filtros --- */
+.filtros-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* --- Grupo de filtro --- */
+.filtro-grupo {
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Input con icono de busqueda --- */
+.input-con-icono {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icono {
+  position: absolute;
+  left: 14px;
+  color: #bfb591;
+  pointer-events: none;
+}
+
+.filtro-input {
+  width: 100%;
+  padding: 10px 14px 10px 40px;
+  font-size: 14px;
+  color: #4a5350;
+  background: #faf9f7;
+  border: 1.5px solid #e0ddd5;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.filtro-input::placeholder {
+  color: #a0a0a0;
+  font-size: 13px;
+}
+
+.filtro-input:focus {
+  border-color: #bfb591;
+  box-shadow: 0 0 0 3px rgba(191, 181, 145, 0.18);
+  background: #ffffff;
+}
+
+/* --- Selects --- */
+.filtro-select {
+  width: 100%;
+  padding: 10px 36px 10px 14px;
+  font-size: 14px;
+  color: #4a5350;
+  background-color: #faf9f7;
+  border: 1.5px solid #e0ddd5;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237d2447' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+.filtro-select:focus {
+  border-color: #bfb591;
+  box-shadow: 0 0 0 3px rgba(191, 181, 145, 0.18);
+  background-color: #ffffff;
+}
+
+/* --- Botones de accion --- */
+.filtros-acciones {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Boton Crear Usuario */
+.btn-crear {
+  padding: 10px 22px;
+  background: linear-gradient(135deg, #7d2447, #5e1a35);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: all 0.25s ease;
+  font-family: inherit;
+  box-shadow: 0 3px 10px rgba(125, 36, 71, 0.2);
+}
+
+.btn-crear:hover {
+  background: linear-gradient(135deg, #5e1a35, #4a1228);
+  box-shadow: 0 5px 14px rgba(125, 36, 71, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-crear:active {
+  transform: translateY(0);
+}
+
+/* Estado cancelar */
+.btn-crear.cancelar {
+  background: #ffffff;
+  color: #dc2626;
+  border: 1.5px solid #fecaca;
+  box-shadow: none;
+}
+
+.btn-crear.cancelar:hover {
+  background: #fef2f2;
+  border-color: #dc2626;
+  box-shadow: none;
+}
+
+/* Boton Limpiar Filtros */
+.btn-limpiar {
+  padding: 10px 22px;
+  background: #ffffff;
+  color: #4a5350;
+  border: 1.5px solid #e0ddd5;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: all 0.25s ease;
+  font-family: inherit;
+}
+
+.btn-limpiar:hover {
+  background: #f5f3ef;
+  border-color: #bfb591;
+  color: #7d2447;
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+
+@media (max-width: 900px) {
+  .filtros-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .usuarios-filtros-container {
+    padding: 16px;
+  }
+
+  .filtros-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .filtros-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .filtros-acciones {
+    flex-direction: column;
+  }
+
+  .btn-crear,
+  .btn-limpiar {
+    width: 100%;
+    justify-content: center;
+  }
+}

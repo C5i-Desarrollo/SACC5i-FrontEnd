@@ -1,0 +1,153 @@
+.consulta-toolbar-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+}
+
+.consulta-btn-add-persona {
+    border: 1px solid #7d2447;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #7d2447, #5a1a33);
+    color: #ffffff;
+    min-height: 40px;
+    padding: 0 13px;
+    font-size: 13px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    box-shadow: 0 5px 12px rgba(125, 36, 71, 0.26);
+}
+
+.consulta-btn-add-persona:hover:not(:disabled) {
+    filter: brightness(0.96);
+}
+
+.consulta-btn-add-persona:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.consulta-btn-export {
+    border: 1px solid #1f8f4a;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #1f8f4a, #146c39);
+    color: #ffffff;
+    min-height: 40px;
+    padding: 0 13px;
+    font-size: 13px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.consulta-btn-export.secondary {
+    min-height: 34px;
+    padding: 0 11px;
+    font-size: 12px;
+    background: #ffffff;
+    color: #1f8f4a;
+    border-color: #55a873;
+}
+
+.consulta-btn-export:hover:not(:disabled) {
+    filter: brightness(0.96);
+}
+
+.consulta-btn-export.secondary:hover:not(:disabled) {
+    background: #eef8f1;
+}
+
+.consulta-btn-export:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.consulta-btn-clear-recent {
+    border: 1px solid #d4b36b;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #f4e4bf, #e2c982);
+    color: #5a3f07;
+    min-height: 40px;
+    padding: 0 13px;
+    font-size: 13px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    box-shadow: 0 5px 12px rgba(180, 139, 51, 0.2);
+}
+
+.consulta-btn-clear-recent:hover:not(:disabled) {
+    filter: brightness(0.96);
+}
+
+.consulta-btn-clear-recent:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.consulta-table-personas tbody tr.is-selected {
+    background: #fff2f6;
+}
+
+.consulta-row-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.consulta-row-btn {
+    border: 1px solid #d9ccd1;
+    background: #ffffff;
+    color: #5d5256;
+    border-radius: 8px;
+    padding: 5px 9px;
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.consulta-row-btn.edit:hover {
+    border-color: #7d2447;
+    color: #7d2447;
+}
+
+.consulta-row-btn.delete {
+    border-color: #e6c2ca;
+    color: #9a1f38;
+}
+
+.consulta-row-btn.delete:hover {
+    border-color: #9a1f38;
+    background: #fff0f3;
+}
+
+.consulta-row-lock {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    border: 1px solid #e2d9dc;
+    background: #f7f2f4;
+    color: #7a6f74;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 8px;
+}
+
+.consulta-table input[type='checkbox'] {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}

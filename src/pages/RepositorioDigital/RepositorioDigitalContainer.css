@@ -1,0 +1,72 @@
+.rdc-container {
+  width: 100%;
+  padding: 14px 0;
+  display: block;
+  background: transparent;
+}
+
+.rdc-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e8dfdf;
+  padding-bottom: 8px;
+}
+
+.rdc-tab {
+  border: none;
+  background: transparent;
+  color: #6d6168;
+  padding: 10px 16px;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -8px;
+}
+
+.rdc-tab:hover {
+  color: #5f203e;
+  background: rgba(95, 32, 62, 0.06);
+}
+
+.rdc-tab.is-active {
+  color: #7d2447;
+  border-bottom-color: #7d2447;
+  background: transparent;
+}
+
+.rdc-tab i {
+  font-size: 1.1rem;
+}
+
+.rdc-content {
+  animation: slideIn 0.2s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .rdc-tabs {
+    flex-wrap: wrap;
+  }
+
+  .rdc-tab {
+    padding: 8px 12px;
+    font-size: 0.88rem;
+  }
+}
