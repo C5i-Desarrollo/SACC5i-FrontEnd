@@ -368,16 +368,17 @@ export default function AltaPaso1({
             </select>
           </div>
 
+          {/* Número de Solicitud */}
           <div className="alta-form-group">
-            <label htmlFor="numero_oficio_c5">Numero Oficio C5</label>
+            <label htmlFor="numero_oficio_c5">Número de Solicitud</label>
             <input
               id="numero_oficio_c5"
               name="numero_oficio_c5"
               type="text"
               value={formData.numero_oficio_c5 || ''}
-              onChange={handleNumeroOficioC5Change}
+              onChange={handleChange}
               className={getInputClass('numero_oficio_c5')}
-              placeholder={NUMERO_OFICIO_C5_EJEMPLO}
+              placeholder="Ingrese el número de solicitud"
               autoComplete="off"
               autoCapitalize="characters"
               autoCorrect="off"
