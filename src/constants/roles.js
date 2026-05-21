@@ -10,6 +10,8 @@ export const ROLES = {
   VALIDADOR_C3: 'validador_c3',
   DEPENDENCIA: 'dependencia',
   OPERADOR_CCP: 'operador_ccp'
+  ,MUNICIPIO: 'municipio',
+  COORDINADOR: 'coordinador'
 };
 
 /**
@@ -23,6 +25,8 @@ export const ROLE_LABELS = {
   [ROLES.VALIDADOR_C3]: 'Validador C3',
   [ROLES.DEPENDENCIA]: 'Dependencia',
   [ROLES.OPERADOR_CCP]: 'Operador CCP'
+  ,[ROLES.MUNICIPIO]: 'Municipio',
+  [ROLES.COORDINADOR]: 'Coordinador'
 };
 
 /**
@@ -36,6 +40,8 @@ export const ROLE_HIERARCHY = [
   ROLES.VALIDADOR_C3,
   ROLES.DEPENDENCIA,
   ROLES.OPERADOR_CCP
+  ,ROLES.MUNICIPIO,
+  ROLES.COORDINADOR
 ];
 
 /**

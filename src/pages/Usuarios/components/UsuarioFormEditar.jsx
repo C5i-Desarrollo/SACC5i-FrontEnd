@@ -125,6 +125,8 @@ export default function UsuarioFormEditar({
                   <option value={ROLES.VALIDADOR_C3}>{ROLE_LABELS[ROLES.VALIDADOR_C3]}</option>
                   <option value={ROLES.DEPENDENCIA}>{ROLE_LABELS[ROLES.DEPENDENCIA]}</option>
                   <option value={ROLES.OPERADOR_CCP}>{ROLE_LABELS[ROLES.OPERADOR_CCP]}</option>
+                  <option value={ROLES.MUNICIPIO}>{ROLE_LABELS[ROLES.MUNICIPIO]}</option>
+                  <option value={ROLES.COORDINADOR}>{ROLE_LABELS[ROLES.COORDINADOR]}</option>
                   {(isSuperAdmin || isAdmin) && (
                     <option value={ROLES.DIRECCION}>{ROLE_LABELS[ROLES.DIRECCION]}</option>
                   )}

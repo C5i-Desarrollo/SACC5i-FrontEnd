@@ -123,6 +123,7 @@
 }
 
 .rechazados-btn-cerrar,
+.rechazados-btn-copiar,
 .rechazados-btn-download {
   border: 0;
   border-radius: 10px;
@@ -132,12 +133,40 @@
   gap: 6px;
   cursor: pointer;
   font-weight: 700;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .rechazados-btn-cerrar {
   background: #ece8f1;
   color: #4f4460;
+}
+
+.rechazados-btn-copiar {
+  background: #6c1d45;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.rechazados-btn-copiar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: left 0.4s ease;
+}
+
+.rechazados-btn-copiar.copied::before {
+  left: 100%;
+}
+
+.rechazados-btn-copiar.copied {
+  background: #27ae60;
+  box-shadow: 0 8px 16px rgba(39, 174, 96, 0.3);
+  animation: pulse-success 0.4s ease;
 }
 
 .rechazados-btn-download {
@@ -146,9 +175,30 @@
 }
 
 .rechazados-btn-cerrar:hover,
+.rechazados-btn-copiar:hover:not(.copied),
 .rechazados-btn-download:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
   box-shadow: 0 10px 16px rgba(67, 31, 48, 0.2);
+}
+
+.rechazados-btn-cerrar:disabled,
+.rechazados-btn-copiar:disabled,
+.rechazados-btn-download:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@keyframes pulse-success {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 @media (max-width: 900px) {
@@ -161,6 +211,7 @@
   }
 
   .rechazados-btn-cerrar,
+  .rechazados-btn-copiar,
   .rechazados-btn-download {
     width: 100%;
     justify-content: center;

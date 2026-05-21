@@ -1,11 +1,87 @@
 /**
  * Modal para previsualizar y descargar oficio de rechazo
  */
+import { useState } from 'react';
 import { generarHTMLOficio } from '../utils/oficioTemplate';
 import '../styles/OficioModal.css';
 
 export default function OficioModal({ oficio, onClose }) {
+  const [copying, setCopying] = useState(false);
+  const [copied, setCopied] = useState(false);
+
   if (!oficio) return null;
+
+  const generarTextoOficio = () => {
+    const { oficio: datos_oficio, persona, rechazo, contexto } = oficio;
+    
+    return `No. Solicitud: ${datos_oficio.numero_solicitud}
+
+${datos_oficio.numero_oficio_c3 ? `Oficio C3: ${String(datos_oficio.numero_oficio_c3).toUpperCase()}
+
+` : ''}Puebla de Zaragoza, a ${datos_oficio.fecha_emision}
+
+Por medio del presente, se hace constar que derivado del análisis y evaluación realizada al trámite de alta con número de solicitud ${datos_oficio.numero_solicitud}, se ha determinado que la persona abajo referida NO PROCEDE para ser dada de alta en el puesto solicitado.
+
+Nombre completo:
+${persona.nombre_completo}
+
+Puesto solicitado:
+${persona.puesto_solicitado}
+
+Fecha de nacimiento:
+${persona.fecha_nacimiento}
+
+Municipio:
+${contexto.municipio}
+
+Región:
+${contexto.region}
+
+${contexto.es_dependencia ? `Dependencia:
+${contexto.dependencia}
+
+` : ''}Etapa de rechazo:
+${rechazo.etapa}
+
+Fecha de rechazo:
+${rechazo.fecha}
+
+MOTIVO DE NO PROCEDENCIA
+${rechazo.motivo}
+
+Lo anterior, con fundamento en las disposiciones aplicables en materia de control de confianza y evaluación de personal de seguridad pública del Estado de Puebla.
+
+Se extiende el presente para los fines legales y administrativos que correspondan.`;
+  };
+
+  const handleCopiar = async () => {
+    try {
+      setCopying(true);
+      const texto = generarTextoOficio();
+      
+      if (navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText(texto);
+      } else {
+        // Fallback para navegadores antiguos
+        const textarea = document.createElement('textarea');
+        textarea.value = texto;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+      
+      setCopied(true);
+      setCopying(false);
+      setTimeout(() => setCopied(false), 2500);
+    } catch (error) {
+      console.error('Error al copiar:', error);
+      setCopying(false);
+    }
+  };
 
   const handleDescargar = () => {
     const html = generarHTMLOficio(oficio);
@@ -128,6 +204,14 @@ export default function OficioModal({ oficio, onClose }) {
 
         <div className="rechazados-modal-footer">
           <button className="rechazados-btn-cerrar" onClick={onClose}>Cerrar</button>
+          <button 
+            className={`rechazados-btn-copiar ${copied ? 'copied' : ''}`}
+            onClick={handleCopiar}
+            disabled={copying || copied}
+          >
+            <i className={`bx ${copied ? 'bx-check-circle' : copying ? 'bx-loader-alt bx-spin' : 'bx-copy'}`}></i>
+            {copied ? '¡Copiado!' : copying ? 'Copiando...' : 'Copiar'}
+          </button>
           <button className="rechazados-btn-download" onClick={handleImprimir}>
             <i className='bx bx-printer'></i>
             Imprimir

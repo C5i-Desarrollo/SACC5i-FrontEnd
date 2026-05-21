@@ -101,19 +101,21 @@ export default function UsuarioFormCrear({
             onChange={(e) => setNewUser({...newUser, rol: e.target.value})}
             className="form-select"
           >
-            <option value={ROLES.ANALISTA}>{ROLE_LABELS[ROLES.ANALISTA]}</option>
-            <option value={ROLES.VALIDADOR_C3}>{ROLE_LABELS[ROLES.VALIDADOR_C3]}</option>
-            <option value={ROLES.DEPENDENCIA}>{ROLE_LABELS[ROLES.DEPENDENCIA]}</option>
-            <option value={ROLES.OPERADOR_CCP}>{ROLE_LABELS[ROLES.OPERADOR_CCP]}</option>
-            {(isSuperAdmin || isAdmin) && (
-              <option value={ROLES.DIRECCION}>{ROLE_LABELS[ROLES.DIRECCION]}</option>
-            )}
-            {(isSuperAdmin || isAdmin) && (
-              <option value={ROLES.ADMIN}>{ROLE_LABELS[ROLES.ADMIN]}</option>
-            )}
-            {isSuperAdmin && (
-              <option value={ROLES.SUPER_ADMIN}>{ROLE_LABELS[ROLES.SUPER_ADMIN]}</option>
-            )}
+              <option value={ROLES.ANALISTA}>{ROLE_LABELS[ROLES.ANALISTA]}</option>
+              <option value={ROLES.VALIDADOR_C3}>{ROLE_LABELS[ROLES.VALIDADOR_C3]}</option>
+              <option value={ROLES.DEPENDENCIA}>{ROLE_LABELS[ROLES.DEPENDENCIA]}</option>
+              <option value={ROLES.OPERADOR_CCP}>{ROLE_LABELS[ROLES.OPERADOR_CCP]}</option>
+              <option value={ROLES.MUNICIPIO}>{ROLE_LABELS[ROLES.MUNICIPIO]}</option>
+              <option value={ROLES.COORDINADOR}>{ROLE_LABELS[ROLES.COORDINADOR]}</option>
+              {(isSuperAdmin || isAdmin) && (
+                <option value={ROLES.DIRECCION}>{ROLE_LABELS[ROLES.DIRECCION]}</option>
+              )}
+              {(isSuperAdmin || isAdmin) && (
+                <option value={ROLES.ADMIN}>{ROLE_LABELS[ROLES.ADMIN]}</option>
+              )}
+              {isSuperAdmin && (
+                <option value={ROLES.SUPER_ADMIN}>{ROLE_LABELS[ROLES.SUPER_ADMIN]}</option>
+              )}
           </select>
         </div>
 

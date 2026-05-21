@@ -187,10 +187,16 @@ export default function Usuarios({ setPageTitle }) {
    */
   const handleCreate = async (userData) => {
     try {
-      const response = await crearUsuario(userData);
+      // Limpiar region_id si está vacío
+      const payload = { ...userData };
+      if (!payload.region_id) {
+        delete payload.region_id;
+      }
+      console.log('Payload a enviar:', payload);
+      const response = await crearUsuario(payload);
       const passwordInicial = response.data.password_inicial;
       mostrarMensaje(`Usuario creado exitosamente. Contraseña inicial: ${passwordInicial}`, 'success');
-      showNotification(`Usuario creado: ${userData.usuario}`, 'success');
+      showNotification(`Usuario creado: ${payload.usuario}`, 'success');
       cerrarFormularioCrear();
       cargarUsuarios(obtenerFiltros());
     } catch (error) {

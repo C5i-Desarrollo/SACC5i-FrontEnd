@@ -28,7 +28,7 @@ export default function UsuariosFiltros({
     <div className="usuarios-filtros-container">
       <div className="filtros-header">
         <h3 className="filtros-titulo">
-          <FiFilter size={16} /> Filtros
+          <FiFilter size={16} /> <span>Filtros</span>
         </h3>
         <div className="filtros-total">
           <FiUsers size={14} />
@@ -64,6 +64,8 @@ export default function UsuariosFiltros({
             <option value={ROLES.VALIDADOR_C3}>{ROLE_LABELS[ROLES.VALIDADOR_C3]}</option>
             <option value={ROLES.DEPENDENCIA}>{ROLE_LABELS[ROLES.DEPENDENCIA]}</option>
             <option value={ROLES.OPERADOR_CCP}>{ROLE_LABELS[ROLES.OPERADOR_CCP]}</option>
+              <option value={ROLES.MUNICIPIO}>{ROLE_LABELS[ROLES.MUNICIPIO]}</option>
+              <option value={ROLES.COORDINADOR}>{ROLE_LABELS[ROLES.COORDINADOR]}</option>
           </select>
         </div>
 
@@ -98,13 +100,13 @@ export default function UsuariosFiltros({
       <div className="filtros-acciones">
         <button onClick={onCrearNuevo} className={`btn-crear ${showForm ? 'cancelar' : ''}`}>
           {showForm
-            ? <><FiXCircle size={15} /> Cancelar</>
-            : <><FiUserPlus size={15} /> Crear Usuario</>
+            ? <><FiXCircle size={15} /> <span>Cancelar</span></>
+            : <><FiUserPlus size={15} /> <span>Crear Usuario</span></>
           }
         </button>
 
         <button onClick={onLimpiar} className="btn-limpiar">
-          <FiRefreshCw size={14} /> Limpiar Filtros
+          <FiRefreshCw size={14} /> <span>Limpiar Filtros</span>
         </button>
       </div>
     </div>
