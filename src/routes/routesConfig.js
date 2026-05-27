@@ -22,6 +22,8 @@ const Rechazados = lazy(() => import('../pages/Tramites/Rechazados/Rechazados'))
 // Dependencias
 const TramitesDependencia = lazy(() => import('../pages/Dependencias/TramitesDependencia'));
 
+const TestMunicipio = lazy(() => import('../pages/TestMunicipio/TestMunicipio'));
+
 /**
  * Configuración de rutas protegidas
  * Cada ruta define:
@@ -88,6 +90,14 @@ export const protectedRoutes = [
     element: TramitesDependencia,
     permission: 'VIEW_TRAMITES_DEPENDENCIA',
     title: 'Mis Trámites'
+  },
+  
+  // Ruta de prueba para filtrado por municipio
+  {
+    path: 'test-municipio', // <-- Cambiado de 'test/municipio' a 'test-municipio'
+    element: TestMunicipio,
+    permission: 'VIEW_DASHBOARD', // <-- Cambiado a 'VIEW_DASHBOARD' para que el Admin/Dirección puedan entrar sin problemas de permisos
+    title: 'Test Municipio'
   }
 ];
 
@@ -115,7 +125,8 @@ export const sectionToRoute = {
   PersonasPendientesC3: '/dashboard/c3/pendientes',
   HistorialC3: '/dashboard/c3/historial',
   TramitesDependencia: '/dashboard/dependencia/tramites',
-  ConsultaDependencia: '/dashboard/dependencia/consulta'
+  ConsultaDependencia: '/dashboard/dependencia/consulta',
+  TestMunicipio: '/dashboard/test-municipio'
 };
 
 /**

@@ -23,6 +23,7 @@ import PanelDireccion from '../../../pages/Direccion/PanelDireccion';
 import { getPanelDireccionApi } from '../../../services/api';
 import './MainContent.css';
 import './DireccionSelector.css';
+import TestMunicipio from '../../../pages/TestMunicipio/TestMunicipio';
 
 const normalizarAnalistasDireccion = (lista = []) => {
   const analistasMap = new Map();
@@ -215,6 +216,9 @@ function MainContent({
       case 'Catalogos':
       case 'Configuracion':
         return <NoPermiso />;
+
+      case 'TestMunicipio':
+        return <TestMunicipio />;
         
       default:
         if (isDireccion) {

@@ -11,6 +11,7 @@ import Navbar from './components/layout/Navbar/Navbar';
 import MainContent from './components/layout/MainContent/MainContent';
 import LoadingScreen from './components/ui/components/LoadingScreen';
 import AppErrorBoundary from './components/errors/AppErrorBoundary';
+import { ProtectedRouter } from './routes/ProtectedRouter';
 import NotFound from './pages/Errors/components/NotFound';
 import ServerError from './pages/Errors/components/ServerError';
 import './index.css';
@@ -87,7 +88,8 @@ function DashboardLayout() {
     HistorialC3: '/dashboard/c3/historial',
     TramitesDependencia: '/dashboard/dependencia/tramites',
     ConsultaDependencia: '/dashboard/dependencia/consulta',
-    Perfil: '/dashboard/perfil'
+    Perfil: '/dashboard/perfil',
+    TestMunicipio: '/dashboard/test-municipio'
   };
 
   const pathToSection = Object.entries(sectionToPath).reduce((acc, [section, path]) => {
@@ -357,6 +359,8 @@ function App() {
               <Route path="/welcome" element={<WelcomeScreen />} />
               <Route path="/dashboard/*" element={<DashboardLayout />} />
               <Route path="/error/500" element={<ServerError />} />
+              {/* AQUÍ: Monta ProtectedRouter para todas las rutas protegidas */}
+              <Route path="/*" element={<ProtectedRouter />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </NotificationProvider>
