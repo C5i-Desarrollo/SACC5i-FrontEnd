@@ -69,7 +69,7 @@ function MainContent({
   onSectionChange
 }) {
   const { can } = usePermissions();
-  const esVistaDireccion = isDireccion || can('VIEW_PANEL_DIRECCION');
+  const esVistaDireccion = isDireccion;
   const hasAnalistaSeleccionado = Boolean(Number(selectedAnalista?.id));
 
   const renderDireccionSelector = ({
