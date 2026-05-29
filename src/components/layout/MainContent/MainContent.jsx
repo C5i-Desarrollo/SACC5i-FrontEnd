@@ -69,6 +69,7 @@ function MainContent({
   onSectionChange
 }) {
   const { can } = usePermissions();
+  const esVistaDireccion = isDireccion || can('VIEW_PANEL_DIRECCION');
   const hasAnalistaSeleccionado = Boolean(Number(selectedAnalista?.id));
 
   const renderDireccionSelector = ({
@@ -84,159 +85,211 @@ function MainContent({
     />
   );
 
-  const renderContent = () => {
-    switch (activeSection) {
-      case 'Dashboard':
-        if (isDireccion) {
-          return renderDireccionSelector({
-            mensaje: 'Selecciona un analista para consultar la vista operativa desde el menu lateral.',
-            nextSectionOnSelect: 'EnProceso'
-          });
-        }
-        return <Dashboard />;
+const renderContent = () => {
+  switch (activeSection) {
+    case 'Dashboard':
+      if (esVistaDireccion) {
+        return renderDireccionSelector({
+          mensaje: 'Selecciona un analista para consultar la vista operativa desde el menu lateral.',
+          nextSectionOnSelect: 'EnProceso'
+        });
+      }
+      return <Dashboard />;
 
-      case 'PanelDireccion':
-        if (isDireccion) {
-          return (
-            <DireccionSinAnalista
-              titulo="Panel de direccion deshabilitado"
-              mensaje="Esta cuenta opera en modo solo lectura con seguimiento por analista."
-            />
-          );
-        }
-        return can('VIEW_PANEL_DIRECCION') ? <PanelDireccion setPageTitle={setPageTitle} /> : <NoPermiso />;
-        
-      case 'Usuarios':
-        return can('VIEW_USUARIOS') ? <Usuarios setPageTitle={setPageTitle} /> : <NoPermiso />;
-        
-      case 'Alta':
-        // 2. Pásalo también a Alta para que funcione ahí
-        return can('VIEW_ALTA') ? <Alta setPageTitle={setPageTitle} /> : <NoPermiso />;
-        
-      case 'Baja':
-        return (can('VIEW_BAJA') || isDireccion) ? (
-          <Baja
-            setPageTitle={setPageTitle}
-            isDireccion={isDireccion}
-          />
-        ) : <NoPermiso />;
-        
-      case 'PersonasPendientesC3':
-        return can('VIEW_PENDIENTES_C3') ? <PersonasPendientesC3 setPageTitle={setPageTitle} /> : <NoPermiso />;
-        
-      case 'TramitesDependencia':
-        return can('VIEW_TRAMITES_DEPENDENCIA') ? <TramitesDependencia setPageTitle={setPageTitle} /> : <NoPermiso />;
-        
-      case 'Consulta':
-        return can('VIEW_CONSULTA') ? <Consulta setPageTitle={setPageTitle} /> : <NoPermiso />;
-        
-      case 'Perfil':
-        return <EditarPerfil setPageTitle={setPageTitle} />;
-        
-      case 'RechazosC3':
-        if (isDireccion && !hasAnalistaSeleccionado) {
-          return renderDireccionSelector({
-            mensaje: 'Selecciona un analista para abrir Rechazos en modo solo lectura.'
-          });
-        }
-        return can('VIEW_RECHAZOS_C3') ? (
-          <Rechazados
-            setPageTitle={setPageTitle}
-            analistaId={selectedAnalista?.id}
-            readOnly={isDireccion}
-            requireAnalista={isDireccion}
-          />
-        ) : <NoPermiso />;
+    case 'PanelDireccion':
+      if (esVistaDireccion) {
+        return renderDireccionSelector({
+          mensaje: 'Selecciona un analista para iniciar el seguimiento operativo.'
+        });
+      }
 
-      case 'RevisionRequisitos':
-        return can('VIEW_ALTA') ? <RevisionRequisitos setPageTitle={setPageTitle} /> : <NoPermiso />;
+      return can('VIEW_PANEL_DIRECCION') ? (
+        <PanelDireccion setPageTitle={setPageTitle} />
+      ) : (
+        <NoPermiso />
+      );
 
-      case 'EnProceso':
-        if (isDireccion && !hasAnalistaSeleccionado) {
-          return renderDireccionSelector({
-            mensaje: 'Selecciona un analista para consultar la bandeja de En Proceso.'
-          });
-        }
-        return (can('VIEW_ALTA') || isDireccion) ? (
-          <EnProceso
-            setPageTitle={setPageTitle}
-            analistaId={selectedAnalista?.id}
-            readOnly={isDireccion}
-            requireAnalista={isDireccion}
-          />
-        ) : <NoPermiso />;
+    case 'Usuarios':
+      return can('VIEW_USUARIOS') ? <Usuarios setPageTitle={setPageTitle} /> : <NoPermiso />;
 
-      case 'ValidacionCUIP':
-        // AQUÍ ESTÁ EL ERROR: Te falta pasarla
-        return can('VIEW_ALTA') ? <ValidacionCUIP setPageTitle={setPageTitle} /> : <NoPermiso />;
+    case 'Alta':
+      return can('VIEW_ALTA') ? <Alta setPageTitle={setPageTitle} /> : <NoPermiso />;
 
-      case 'HistorialC3':
-        return can('VIEW_HISTORIAL_C3') ? <HistorialC3 setPageTitle={setPageTitle} /> : <NoPermiso />;
+    case 'Baja':
+      if (esVistaDireccion && !hasAnalistaSeleccionado) {
+        return renderDireccionSelector({
+          mensaje: 'Selecciona un analista para consultar Bajas en modo solo lectura.'
+        });
+      }
 
-      case 'HistorialCitas':
-        if (isDireccion && !hasAnalistaSeleccionado) {
-          return renderDireccionSelector({
-            mensaje: 'Selecciona un analista para consultar la vista de Citas.'
-          });
-        }
-        return (can('VIEW_CITAS') || isDireccion) ? (
-          <HistorialCitas
-            setPageTitle={setPageTitle}
-            analistaId={selectedAnalista?.id}
-            readOnly={isDireccion}
-            requireAnalista={isDireccion}
-          />
-        ) : <NoPermiso />;
+      return (can('VIEW_BAJA') || esVistaDireccion) ? (
+        <Baja
+          setPageTitle={setPageTitle}
+          isDireccion={esVistaDireccion}
+          analistaId={selectedAnalista?.id}
+          readOnly={esVistaDireccion}
+          requireAnalista={esVistaDireccion}
+        />
+      ) : (
+        <NoPermiso />
+      );
 
-      case 'Finalizados':
-        if (isDireccion && !hasAnalistaSeleccionado) {
-          return renderDireccionSelector({
-            mensaje: 'Selecciona un analista para consultar expedientes Finalizados.'
-          });
-        }
-        return can('VIEW_FINALIZADOS') ? (
-          <Finalizados
-            setPageTitle={setPageTitle}
-            analistaId={selectedAnalista?.id}
-            readOnly={isDireccion}
-            requireAnalista={isDireccion}
-          />
-        ) : <NoPermiso />;
+    case 'EnProceso':
+      if (esVistaDireccion && !hasAnalistaSeleccionado) {
+        return renderDireccionSelector({
+          mensaje: 'Selecciona un analista para consultar la bandeja de En Proceso.'
+        });
+      }
 
-      case 'CopiasConocimiento':
-        return can('VIEW_CCP') ? <CopiasConocimiento setPageTitle={setPageTitle} /> : <NoPermiso />;
+      return (can('VIEW_ALTA') || esVistaDireccion) ? (
+        <EnProceso
+          setPageTitle={setPageTitle}
+          analistaId={selectedAnalista?.id}
+          readOnly={esVistaDireccion}
+          requireAnalista={esVistaDireccion}
+        />
+      ) : (
+        <NoPermiso />
+      );
 
-      case 'HistorialOperadorCCP':
-        return can('VIEW_HISTORIAL_CCP') ? <HistorialOperadorCCP setPageTitle={setPageTitle} /> : <NoPermiso />;
+    case 'HistorialCitas':
+      if (esVistaDireccion && !hasAnalistaSeleccionado) {
+        return renderDireccionSelector({
+          mensaje: 'Selecciona un analista para consultar la vista de Citas.'
+        });
+      }
 
+      return (can('VIEW_CITAS') || esVistaDireccion) ? (
+        <HistorialCitas
+          setPageTitle={setPageTitle}
+          analistaId={selectedAnalista?.id}
+          readOnly={esVistaDireccion}
+          requireAnalista={esVistaDireccion}
+        />
+      ) : (
+        <NoPermiso />
+      );
 
-      case 'RepositorioDigital':
-        return can('VIEW_REPOSITORIO_DIGITAL') ? <RepositorioDigitalContainer setPageTitle={setPageTitle} /> : <NoPermiso />;
-      case 'ConsultaDependencia':
-        return <EnDesarrollo seccion={activeSection} />;
+    case 'Finalizados':
+      if (esVistaDireccion && !hasAnalistaSeleccionado) {
+        return renderDireccionSelector({
+          mensaje: 'Selecciona un analista para consultar expedientes Finalizados.'
+        });
+      }
 
-      case 'Catalogos':
-      case 'Configuracion':
-        return <NoPermiso />;
+      return (can('VIEW_FINALIZADOS') || esVistaDireccion) ? (
+        <Finalizados
+          setPageTitle={setPageTitle}
+          analistaId={selectedAnalista?.id}
+          readOnly={esVistaDireccion}
+          requireAnalista={esVistaDireccion}
+        />
+      ) : (
+        <NoPermiso />
+      );
 
-      case 'TestMunicipio':
-        return <TestMunicipio />;
+    case 'RechazosC3':
+      if (esVistaDireccion && !hasAnalistaSeleccionado) {
+        return renderDireccionSelector({
+          mensaje: 'Selecciona un analista para abrir Rechazos en modo solo lectura.'
+        });
+      }
 
-      case 'TestCargaDocumentos':
-        return <TestCargaDocumentos />;
+      return (can('VIEW_RECHAZOS_C3') || esVistaDireccion) ? (
+        <Rechazados
+          setPageTitle={setPageTitle}
+          analistaId={selectedAnalista?.id}
+          readOnly={esVistaDireccion}
+          requireAnalista={esVistaDireccion}
+        />
+      ) : (
+        <NoPermiso />
+      );
 
-      case 'TestRevisionC5': 
-        return <TestRevisionC5 />;
-        
-      default:
-        if (isDireccion) {
-          return renderDireccionSelector({
-            mensaje: 'Selecciona un analista para iniciar el seguimiento operativo.'
-          });
-        }
-        return <Dashboard />;
-    }
-  };
+    case 'PersonasPendientesC3':
+      return can('VIEW_PENDIENTES_C3') ? (
+        <PersonasPendientesC3 setPageTitle={setPageTitle} />
+      ) : (
+        <NoPermiso />
+      );
+
+    case 'TramitesDependencia':
+      return can('VIEW_TRAMITES_DEPENDENCIA') ? (
+        <TramitesDependencia setPageTitle={setPageTitle} />
+      ) : (
+        <NoPermiso />
+      );
+
+    case 'Consulta':
+      return can('VIEW_CONSULTA') ? <Consulta setPageTitle={setPageTitle} /> : <NoPermiso />;
+
+    case 'Perfil':
+      return <EditarPerfil setPageTitle={setPageTitle} />;
+
+    case 'RevisionRequisitos':
+      return can('VIEW_ALTA') ? (
+        <RevisionRequisitos setPageTitle={setPageTitle} />
+      ) : (
+        <NoPermiso />
+      );
+
+    case 'ValidacionCUIP':
+      return can('VIEW_ALTA') ? (
+        <ValidacionCUIP setPageTitle={setPageTitle} />
+      ) : (
+        <NoPermiso />
+      );
+
+    case 'HistorialC3':
+      return can('VIEW_HISTORIAL_C3') ? (
+        <HistorialC3 setPageTitle={setPageTitle} />
+      ) : (
+        <NoPermiso />
+      );
+
+    case 'CopiasConocimiento':
+      return can('VIEW_CCP') ? <CopiasConocimiento setPageTitle={setPageTitle} /> : <NoPermiso />;
+
+    case 'HistorialOperadorCCP':
+      return can('VIEW_HISTORIAL_CCP') ? (
+        <HistorialOperadorCCP setPageTitle={setPageTitle} />
+      ) : (
+        <NoPermiso />
+      );
+
+    case 'RepositorioDigital':
+      return can('VIEW_REPOSITORIO_DIGITAL') ? (
+        <RepositorioDigitalContainer setPageTitle={setPageTitle} />
+      ) : (
+        <NoPermiso />
+      );
+
+    case 'ConsultaDependencia':
+      return <EnDesarrollo seccion={activeSection} />;
+
+    case 'Catalogos':
+    case 'Configuracion':
+      return <NoPermiso />;
+
+    case 'TestMunicipio':
+      return <TestMunicipio />;
+
+    case 'TestCargaDocumentos':
+      return <TestCargaDocumentos />;
+
+    case 'TestRevisionC5':
+      return <TestRevisionC5 />;
+
+    default:
+      if (esVistaDireccion) {
+        return renderDireccionSelector({
+          mensaje: 'Selecciona un analista para iniciar el seguimiento operativo.'
+        });
+      }
+
+      return <Dashboard />;
+  }
+};
 
   return <main className="main-section-shell">{renderContent()}</main>;
 }

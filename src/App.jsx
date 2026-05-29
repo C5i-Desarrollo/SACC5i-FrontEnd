@@ -62,7 +62,7 @@ function DashboardLayout() {
   const [pendingNavigationPath, setPendingNavigationPath] = useState('');
   const lastPathRef = useRef(location.pathname);
   const ignoreNextPopstateRef = useRef(false);
-  const isDireccion = user?.rol === 'direccion';
+  const isDireccion = user?.rol === 'direccion' || user?.rol === 'coordinador';
   const isDashboardSection = activeSection === 'Dashboard';
   
   // 1. AÑADIMOS EL ESTADO PARA EL TÍTULO DEL NAVBAR AQUÍ
@@ -311,15 +311,16 @@ function DashboardLayout() {
           isSidebarHidden={isSidebarHidden}
           isDireccion={isDireccion}
           selectedAnalista={selectedAnalista}
-          pageTitle={pageTitle} /* 2. LE PASAMOS EL TÍTULO AL NAVBAR PARA QUE LO DIBUJE */
+          pageTitle={pageTitle}
         />
+
         <MainContent 
           activeSection={activeSection} 
           isDireccion={isDireccion}
           selectedAnalista={selectedAnalista}
           onSelectedAnalistaChange={setSelectedAnalista}
           onSectionChange={handleSectionChange}
-          setPageTitle={setPageTitle} /* 3. LE PASAMOS LA FUNCIÓN AL CONTENIDO PARA QUE ALTA PUEDA ENVIAR SU TÍTULO */
+          setPageTitle={setPageTitle}
         />
       </section>
 
