@@ -22,7 +22,10 @@ const Rechazados = lazy(() => import('../pages/Tramites/Rechazados/Rechazados'))
 // Dependencias
 const TramitesDependencia = lazy(() => import('../pages/Dependencias/TramitesDependencia'));
 
+//test
 const TestMunicipio = lazy(() => import('../pages/TestMunicipio/TestMunicipio'));
+const TestCargaDocumentos = lazy(() => import('../pages/TestCargaDocumentos/TestCargaDocumentos'));
+const TestRevisionC5 = lazy(() => import('../pages/TestRevisionC5/TestRevisionC5'));
 
 /**
  * Configuración de rutas protegidas
@@ -98,6 +101,27 @@ export const protectedRoutes = [
     element: TestMunicipio,
     permission: 'VIEW_DASHBOARD', // <-- Cambiado a 'VIEW_DASHBOARD' para que el Admin/Dirección puedan entrar sin problemas de permisos
     title: 'Test Municipio'
+  },
+
+  // Municipio - carga documentos
+{
+  path: 'municipio/carga-documentos',
+  element: TestCargaDocumentos,
+  permission: 'VIEW_DASHBOARD',
+  title: 'Carga de Documentos'
+},
+  // Municipio - revisión documentos
+{
+  path: 'municipio/revision-documentos',
+  element: TestRevisionC5,
+  permission: 'VIEW_DASHBOARD',
+  title: 'Revisión de Documentos'
+},
+
+  { path: 'revision-municipios', 
+    element: TestRevisionC5, 
+    permission: 'VIEW_DASHBOARD', 
+    title: 'Revisión C5' 
   }
 ];
 
@@ -126,7 +150,9 @@ export const sectionToRoute = {
   HistorialC3: '/dashboard/c3/historial',
   TramitesDependencia: '/dashboard/dependencia/tramites',
   ConsultaDependencia: '/dashboard/dependencia/consulta',
-  TestMunicipio: '/dashboard/test-municipio'
+  TestMunicipio: '/dashboard/test-municipio',
+  TestCargaDocumentos: '/dashboard/municipio/carga-documentos',
+  TestRevisionC5: '/dashboard/revision-municipios'
 };
 
 /**

@@ -89,7 +89,9 @@ function DashboardLayout() {
     TramitesDependencia: '/dashboard/dependencia/tramites',
     ConsultaDependencia: '/dashboard/dependencia/consulta',
     Perfil: '/dashboard/perfil',
-    TestMunicipio: '/dashboard/test-municipio'
+    TestMunicipio: '/dashboard/test-municipio',
+    TestCargaDocumentos: '/dashboard/municipio/carga-documentos',
+    TestRevisionC5: '/dashboard/revision-municipios'
   };
 
   const pathToSection = Object.entries(sectionToPath).reduce((acc, [section, path]) => {
