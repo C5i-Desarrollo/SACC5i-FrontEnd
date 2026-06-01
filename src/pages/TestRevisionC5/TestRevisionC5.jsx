@@ -9,7 +9,8 @@ export default function TestRevisionC5() {
   // NUEVO ESTADO: Controla si vemos "pendientes" o "evaluados"
   const [vistaActual, setVistaActual] = useState('pendientes'); 
 
-  const baseUrl = 'http://10.26.218.76:5000/api';
+  // Buscamos la URL en el archivo .env, si no existe, usamos localhost por defecto.
+  const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
   const [modalBitacora, setModalBitacora] = useState({ isOpen: false, docId: null });
 
   // Modificamos la función para que consulte una ruta u otra según la pestaña
