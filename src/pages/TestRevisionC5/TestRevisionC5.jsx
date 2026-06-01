@@ -14,30 +14,51 @@ export default function TestRevisionC5() {
   const [modalBitacora, setModalBitacora] = useState({ isOpen: false, docId: null });
 
   // Modificamos la función para que consulte una ruta u otra según la pestaña
-  const cargarDocumentos = async (vista) => {
-    setLoading(true);
+  const cargarDocumentos = async (vista, silent = false) => {
+    if (!silent) {
+      setLoading(true);
+    }
+
     setMensaje('');
+
     try {
       const token = localStorage.getItem('token');
       const endpoint = vista === 'pendientes' ? '/pendientes' : '/evaluados';
 
       const response = await fetch(`${baseUrl}/documentos-municipio${endpoint}`, {
-        headers: { 'Authorization': `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` }
       });
 
       const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data?.message || 'Error al cargar documentos');
+      }
+
       setDocumentos(data.data || []);
     } catch (error) {
-      setMensaje('Error al cargar los documentos');
+      console.error('Error cargando documentos:', error);
+
+      if (!silent) {
+        setMensaje(error.message || 'Error al cargar los documentos');
+      }
     } finally {
-      setLoading(false);
+      if (!silent) {
+        setLoading(false);
+      }
     }
   };
 
   // Cada vez que cambiamos de pestaña, recargamos la tabla
-  useEffect(() => {
-    cargarDocumentos(vistaActual);
-  }, [vistaActual]);
+useEffect(() => {
+  cargarDocumentos(vistaActual);
+
+  const intervalo = setInterval(() => {
+    cargarDocumentos(vistaActual, true);
+  }, 5000);
+
+  return () => clearInterval(intervalo);
+}, [vistaActual]);
 
   const handleVerDocumento = async (id) => {
     try {
@@ -109,10 +130,6 @@ export default function TestRevisionC5() {
           Historial (Evaluados)
         </button>
       </div>
-
-      <button onClick={() => cargarDocumentos(vistaActual)} style={{ padding: '8px', marginBottom: '15px' }}>
-        {loading ? 'Actualizando...' : 'Refrescar Bandeja'}
-      </button>
 
       {mensaje && <p style={{ color: 'red' }}>{mensaje}</p>}
 
