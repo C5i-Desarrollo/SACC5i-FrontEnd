@@ -35,8 +35,8 @@ export default function FiltrosControles({
             onChange={(e) => setMunicipioNombre(e.target.value)}
            
           >
-           <option value="">Seleccionar municipio...</option> 
-            
+            <option value="" disabled>Seleccionar municipio...</option> 
+
             <option value="ACAJETE">ACAJETE</option>
             <option value="ACATLÁN">ACATLÁN</option>
             <option value="ACATENO">ACATENO</option>
@@ -253,7 +253,8 @@ export default function FiltrosControles({
             <option value="ZINACATEPEC">ZINACATEPEC</option>
             <option value="ZONGOZOTLA">ZONGOZOTLA</option>
             <option value="ZOQUIAPAN">ZOQUIAPAN</option>
-            <option value="">SELECCIONAR TODOS LOS MUNICIPIOS...</option>
+
+            <option value="TODOS">SELECCIONAR TODOS LOS MUNICIPIOS...</option>
          
           </select>
         </div>
@@ -291,11 +292,11 @@ export default function FiltrosControles({
       {/* BUSCADOR + MOSTRAR */}
       <div className="search-container">
         <input
-          type="text"
-          placeholder="Buscar por número de oficio..."
-          value={terminoBusqueda}
-          onChange={(e) => setTerminoBusqueda(e.target.value)}
-        />
+  type="text"
+  placeholder="Buscar por número de oficio..."
+  value={terminoBusqueda}
+  onChange={(e) => setTerminoBusqueda(e.target.value)}
+/>
 
         <button
           className="mostrar-btn"
