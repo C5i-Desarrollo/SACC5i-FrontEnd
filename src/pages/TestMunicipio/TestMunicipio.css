@@ -1,0 +1,214 @@
+/* CONTENEDOR */
+.filtrado-container {
+  width: 100%;
+  padding: 30px;
+  background: #f6f4f4;
+  border-radius: 20px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* TITULOS */
+.filtrado-subtitle {
+  color: #7b1232;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .5px;
+}
+
+.filtrado-title {
+  margin-top: 10px;
+  font-size: 42px;
+  color: #111;
+  font-weight: 700;
+}
+
+.filtrado-description {
+  margin-top: 8px;
+  color: #666;
+  font-size: 15px;
+}
+
+/* PANEL */
+.filtros-panel {
+  margin-top: 30px;
+  background: #f2efef;
+  border: 1px solid #ddd;
+  border-radius: 18px;
+  padding: 28px;
+  display: flex;
+  gap: 60px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+/* GRUPOS */
+.grupo-filtro {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.grupo-filtro label {
+  font-size: 14px;
+  color: #444;
+  font-weight: 600;
+}
+
+/* SELECT */
+.grupo-filtro select {
+  width: 280px;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid #d5d5d5;
+  padding: 0 15px;
+  font-size: 14px;
+  background: white;
+  outline: none;
+}
+
+/* BOTONES */
+.botones-movimiento {
+  display: flex;
+  gap: 14px;
+}
+
+.mov-btn {
+  min-width: 130px;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid #d7d7d7;
+  background: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.mov-btn:hover {
+  transform: translateY(-1px);
+}
+
+/* ACTIVOS */
+.activo-alta {
+  border: 2px solid #4caf50;
+  color: #4caf50;
+}
+
+.activo-baja {
+  border: 2px solid #df6a6a;
+  color: #df6a6a;
+}
+
+.activo-consulta {
+  border: 2px solid #1697f6;
+  color: #1697f6;
+}
+
+/* BUSCADOR */
+.search-container {
+  margin-top: 18px;
+  display: flex;
+  gap: 15px;
+}
+
+.search-container input {
+  flex: 1;
+  height: 52px;
+  border-radius: 10px;
+  border: 1px solid #d8d8d8;
+  padding: 0 20px;
+  font-size: 14px;
+  outline: none;
+  background: white;
+}
+
+/* BOTON FILTROS */
+.mostrar-btn {
+  width: 190px;
+  border-radius: 10px;
+  border: 1px solid #d6ceb2;
+  background: #efead8;
+  color: #8a7a44;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* RESULTADOS */
+.resultados-box {
+  margin-top: 25px;
+  background: #1f1f1f;
+  color: #00ff88;
+  border-radius: 12px;
+  padding: 20px;
+  max-height: 450px;
+  overflow-y: auto;
+}
+
+.resultados-box pre {
+  margin: 0;
+  font-size: 13px;
+}
+
+/* FILTROS DE ESTATUS Y FECHAS */
+.extra-filtros {
+  margin-top: 20px;
+  display: flex;
+  gap: 100px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.extra-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.extra-group label {
+  font-size: 14px;
+  color: #444;
+  font-weight: 600;
+}
+
+.extra-group select,
+.extra-group input {
+  width: 220px;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid #d6d6d6;
+  padding: 0 15px;
+  background: white;
+  font-size: 14px;
+}
+
+.extra-btn-container {
+  display: flex;
+  align-items: flex-end;
+}
+
+.limpiar-btn {
+  width: 180px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  border: 1px solid #d6ceb2;
+  background: #efead8;
+  color: #8a7a44;
+  color: #8a7a44;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.limpiar-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.extra-filtros.oculto {
+  display: none;
+}
+
+.extra-filtros.activo {
+  display: flex;
+}
