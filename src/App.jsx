@@ -14,6 +14,8 @@ import AppErrorBoundary from './components/errors/AppErrorBoundary';
 import { ProtectedRouter } from './routes/ProtectedRouter';
 import NotFound from './pages/Errors/components/NotFound';
 import ServerError from './pages/Errors/components/ServerError';
+import TestMunicipio from './pages/TestMunicipio/TestMunicipio';
+
 import './index.css';
 
 const UNSAVED_ALTA_MESSAGE = 'Tienes cambios sin guardar en la solicitud de alta. Si sales ahora, se perderan. Deseas continuar?';
@@ -62,7 +64,7 @@ function DashboardLayout() {
   const [pendingNavigationPath, setPendingNavigationPath] = useState('');
   const lastPathRef = useRef(location.pathname);
   const ignoreNextPopstateRef = useRef(false);
-  const isDireccion = user?.rol === 'direccion' || user?.rol === 'coordinador';
+  const isDireccion = user?.rol === 'direccion';
   const isDashboardSection = activeSection === 'Dashboard';
   
   // 1. AÑADIMOS EL ESTADO PARA EL TÍTULO DEL NAVBAR AQUÍ
@@ -311,16 +313,15 @@ function DashboardLayout() {
           isSidebarHidden={isSidebarHidden}
           isDireccion={isDireccion}
           selectedAnalista={selectedAnalista}
-          pageTitle={pageTitle}
+          pageTitle={pageTitle} /* 2. LE PASAMOS EL TÍTULO AL NAVBAR PARA QUE LO DIBUJE */
         />
-
         <MainContent 
           activeSection={activeSection} 
           isDireccion={isDireccion}
           selectedAnalista={selectedAnalista}
           onSelectedAnalistaChange={setSelectedAnalista}
           onSectionChange={handleSectionChange}
-          setPageTitle={setPageTitle}
+          setPageTitle={setPageTitle} /* 3. LE PASAMOS LA FUNCIÓN AL CONTENIDO PARA QUE ALTA PUEDA ENVIAR SU TÍTULO */
         />
       </section>
 
