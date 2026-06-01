@@ -272,7 +272,7 @@ const renderContent = () => {
       return <NoPermiso />;
 
     case 'TestMunicipio':
-      return <TestMunicipio />;
+     return can('VIEW_TEST_MUNICIPIO') ? <TestMunicipio /> : <NoPermiso />;
 
     case 'TestCargaDocumentos':
       return <TestCargaDocumentos />;
