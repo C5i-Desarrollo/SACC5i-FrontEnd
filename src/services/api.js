@@ -73,7 +73,7 @@ export const deleteUsuario = (id) => {
 };
 
 export const purgeRegistrosAnalistaUsuario = (id) => {
-  return api.delete(`/admin/usuarios/${id}/registros-analista`);
+  return api.delete(`/admin/usuarios/${id}/registros`);
 };
 
 export const activateUsuario = (id) => {

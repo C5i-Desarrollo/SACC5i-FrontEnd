@@ -92,7 +92,7 @@ export default function UsuariosTabla({
   onActivar,
   onDesactivar,
   onEliminar,
-  onBorrarRegistrosAnalista,
+  onBorrarRegistros, // <-- Cambiado de onBorrarRegistrosAnalista a onBorrarRegistros
   onResetPassword,
   onAbrirPasswordTemporalModal,
   currentUserId,
@@ -219,7 +219,8 @@ export default function UsuariosTabla({
                               <FiTrash2 size={14} /> Eliminar
                             </button>
                           )}
-                          {usuario.extension && (isSuperAdmin || usuario.rol !== ROLES.SUPER_ADMIN) && (
+                          {/* CORRECCIÓN: Quitamos usuario.extension para que el Reset Pass siempre salga */}
+                          {(isSuperAdmin || usuario.rol !== ROLES.SUPER_ADMIN) && (
                             <button onClick={() => onResetPassword(usuario.id)} className="btn-accion btn-reset" title="Reset">
                               <FiKey size={14} /> Reset Pass
                             </button>
@@ -233,11 +234,12 @@ export default function UsuariosTabla({
                               <FiClock size={14} /> Temporal
                             </button>
                           )}
-                          {isSuperAdmin && usuario.rol === ROLES.ANALISTA && (
+                          {/* CORRECCIÓN: Quitamos usuario.rol === ROLES.ANALISTA para que aparezca en todos si eres SuperAdmin */}
+                          {isSuperAdmin && (
                             <button
-                              onClick={() => onBorrarRegistrosAnalista(usuario)}
+                              onClick={() => onBorrarRegistros(usuario)}
                               className="btn-accion btn-purge-records"
-                              title="Borrar registros del analista"
+                              title="Borrar todos los registros del usuario"
                             >
                               <FiAlertTriangle size={14} /> Borrar Registros
                             </button>
@@ -248,11 +250,12 @@ export default function UsuariosTabla({
                           <button onClick={() => onActivar(usuario.id)} className="btn-accion btn-activar" title="Activar">
                             <FiCheckCircle size={14} /> Activar
                           </button>
-                          {isSuperAdmin && usuario.rol === ROLES.ANALISTA && (
+                          {/* CORRECCIÓN: Lo mismo para los usuarios inactivos */}
+                          {isSuperAdmin && (
                             <button
-                              onClick={() => onBorrarRegistrosAnalista(usuario)}
+                              onClick={() => onBorrarRegistros(usuario)}
                               className="btn-accion btn-purge-records"
-                              title="Borrar registros del analista"
+                              title="Borrar todos los registros del usuario"
                             >
                               <FiAlertTriangle size={14} /> Borrar Registros
                             </button>

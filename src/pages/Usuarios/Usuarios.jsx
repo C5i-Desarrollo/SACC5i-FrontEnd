@@ -477,21 +477,22 @@ export default function Usuarios({ setPageTitle }) {
 
   const handleAbrirPurgeModal = (usuario) => {
     if (!isSuperAdmin()) {
-      const errorMsg = 'Solo Super Admin puede borrar registros de analistas';
+      const errorMsg = 'Solo Super Admin puede borrar registros';
       mostrarMensaje(errorMsg, 'error');
       showNotification(errorMsg, 'error');
       return;
     }
 
     if (!usuario?.id) {
-      const errorMsg = 'No se pudo identificar el analista seleccionado';
+      const errorMsg = 'No se pudo identificar el usuario seleccionado';
       mostrarMensaje(errorMsg, 'error');
       showNotification(errorMsg, 'error');
       return;
     }
 
-    if (usuario.rol !== ROLES.ANALISTA) {
-      const errorMsg = 'La limpieza de registros solo aplica para usuarios con rol analista';
+    
+    if (usuario.rol !== ROLES.ANALISTA && usuario.rol !== 'municipio') {
+      const errorMsg = 'La limpieza de registros solo aplica para analistas o municipios';
       mostrarMensaje(errorMsg, 'error');
       showNotification(errorMsg, 'error');
       return;
@@ -618,7 +619,7 @@ export default function Usuarios({ setPageTitle }) {
         onActivar={handleActivate}
         onDesactivar={handleDeactivate}
         onEliminar={handleDelete}
-        onBorrarRegistrosAnalista={handleAbrirPurgeModal}
+        onBorrarRegistros={handleAbrirPurgeModal}
         onResetPassword={handleResetPassword}
         onAbrirPasswordTemporalModal={handleAbrirPasswordTemporalModal}
         currentUserId={user?.id}
