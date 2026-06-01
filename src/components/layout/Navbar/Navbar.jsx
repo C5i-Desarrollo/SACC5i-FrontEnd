@@ -135,11 +135,35 @@ const Navbar = ({
     onSectionChange('Dashboard');
   };
 
-  const regionText = user?.region_nombre || (user?.region_id ? `Region ${user.region_id}` : 'Sin region');
+  // ==========================================
+  // LÓGICA DE VISUALIZACIÓN DINÁMICA POR ROL
+  // ==========================================
+  const isMunicipio = user?.rol === 'municipio' || user?.rol === 'MUNICIPIO';
 
+  const regionText = user?.region_nombre || (user?.region_id ? `Region ${user.region_id}` : 'Sin region');
   const regionDisplayText = isDireccion
     ? (selectedAnalista?.region || 'Selecciona usuario')
     : regionText;
+
+  // Extrae automáticamente el nombre del municipio del usuario logueado
+  const obtenerNombreMunicipio = () => {
+    // 1. Si el backend ya nos manda el nombre limpio y bonito
+    if (user?.municipio_nombre) return user.municipio_nombre;
+    
+    // 2. Si el usuario es tipo "mun_acajete", le quitamos el "mun_" y lo capitalizamos
+    const identificador = user?.usuario || user?.nombre || '';
+    if (identificador.startsWith('mun_')) {
+      const nombreLimpio = identificador.replace('mun_', '');
+      return nombreLimpio.charAt(0).toUpperCase() + nombreLimpio.slice(1);
+    }
+    
+    // 3. Fallback en caso de que sea un usuario raro
+    return user?.nombre || 'Desconocido';
+  };
+
+  const ubicacionText = isMunicipio 
+    ? `Municipio: ${obtenerNombreMunicipio()}` 
+    : `Region: ${regionDisplayText}`;
 
   return (
     <nav id="content-nav">
@@ -161,6 +185,7 @@ const Navbar = ({
         <div className="nav-spacer" style={{ flexGrow: 1 }}></div>
 
         <div className="nav-right-actions">
+          {/* Lógica para Repositorio / Selector Analista */}
           {isDireccion ? (
             <button
               type="button"
@@ -171,7 +196,8 @@ const Navbar = ({
               <FiUsers size={14} />
               <span>{selectedAnalista?.nombre || 'Seleccionar usuario'}</span>
             </button>
-          ) : (
+          ) : !isMunicipio ? ( 
+            /* Solo renderizamos este botón si NO es municipio */
             <button
               type="button"
               className="nav-repo-pill"
@@ -181,11 +207,12 @@ const Navbar = ({
               <FiDatabase size={14} />
               <span>Repositorio Digital</span>
             </button>
-          )}
+          ) : null}
 
-          <div className="nav-region-pill" title={`Region: ${regionDisplayText}`}>
-            <i className='bx bx-map'></i>
-            <span>{`Region: ${regionDisplayText}`}</span>
+          {/* Pastilla dinámica (Región o Municipio) */}
+          <div className="nav-region-pill" title={ubicacionText}>
+            <i className={isMunicipio ? 'bx bx-buildings' : 'bx bx-map'}></i>
+            <span>{ubicacionText}</span>
           </div>
 
           <NotificationCenter
