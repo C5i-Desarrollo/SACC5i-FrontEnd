@@ -30,6 +30,10 @@ export default function TestCargaDocumentos() {
       });
 
       const data = await response.json();
+      console.log('Respuesta servidor:', data);
+console.log('Status:', response.status);
+
+
       setMensaje(data.message || (response.ok ? 'Cargado con éxito' : 'Error al cargar'));
 
       // Si la respuesta fue exitosa (código 200 o 201), limpiamos el formulario

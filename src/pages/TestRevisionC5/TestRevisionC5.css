@@ -1,0 +1,194 @@
+.revision-container{
+    padding:20px;
+}
+
+.revision-card{
+    background:#fff;
+    border-radius:16px;
+    padding:24px;
+    box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+
+.descripcion{
+    margin-top:8px;
+    color:#808080;
+    font-size:14px;
+}
+
+.tabs-container{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.tab-btn{
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+    background:#e9ecef;
+}
+
+.tab-btn.active{
+    background:#800020;
+    color:white;
+}
+
+.filtros-panel{
+    display:grid;
+    grid-template-columns:
+        repeat(3,minmax(200px,1fr))
+        auto;
+    gap:16px;
+    align-items:end;
+    background:#f8f9fa;
+    border:1px solid #e5e5e5;
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+.filtro-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.filtro-group label{
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:6px;
+    color:#444;
+}
+
+.filtro-group select{
+    height:42px;
+    border:1px solid #ced4da;
+    border-radius:8px;
+    padding:0 10px;
+    background:white;
+}
+
+.filtro-botones{
+    display:flex;
+    gap:10px;
+}
+
+.btn-limpiar{
+    background:#6c757d;
+    color:white;
+    border:none;
+    border-radius:8px;
+    padding:10px 16px;
+    cursor:pointer;
+}
+
+.btn-actualizar{
+    background:#800020;
+    color:white;
+    border:none;
+    border-radius:8px;
+    padding:10px 16px;
+    cursor:pointer;
+}
+
+.tabla-documentos{
+    width:100%;
+    border-collapse:collapse;
+    overflow:hidden;
+    border-radius:12px;
+}
+
+.tabla-documentos thead{
+    background:#800020;
+    color:white;
+}
+
+.tabla-documentos th{
+    padding:14px;
+    text-align:left;
+}
+
+.tabla-documentos td{
+    padding:14px;
+    border-bottom:1px solid #ececec;
+}
+
+.tabla-documentos tbody tr:hover{
+    background:#fafafa;
+}
+
+.btn-pdf{
+    background:#0d6efd;
+    color:white;
+    border:none;
+    border-radius:6px;
+    padding:8px 12px;
+    cursor:pointer;
+    margin-right:8px;
+}
+
+.btn-bitacora{
+    background:#6c757d;
+    color:white;
+    border:none;
+    border-radius:6px;
+    padding:8px 12px;
+    cursor:pointer;
+}
+
+.btn-aprobar{
+    background:#198754;
+    color:white;
+    border:none;
+    border-radius:6px;
+    padding:8px 12px;
+    margin-right:6px;
+    cursor:pointer;
+}
+
+.btn-rechazar{
+    background:#dc3545;
+    color:white;
+    border:none;
+    border-radius:6px;
+    padding:8px 12px;
+    cursor:pointer;
+}
+
+.badge-pendiente{
+    background:#fff3cd;
+    color:#856404;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.badge-aprobado{
+    background:#d1e7dd;
+    color:#0f5132;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.badge-rechazado{
+    background:#f8d7da;
+    color:#842029;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+}
+
+@media (max-width:1200px){
+    .filtros-panel{
+        grid-template-columns:1fr;
+    }
+
+    .filtro-botones{
+        flex-direction:column;
+    }
+}
