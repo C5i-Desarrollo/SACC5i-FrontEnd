@@ -151,8 +151,10 @@ export const sectionToRoute = {
   TramitesDependencia: '/dashboard/dependencia/tramites',
   ConsultaDependencia: '/dashboard/dependencia/consulta',
   TestMunicipio: '/dashboard/test-municipio',
-  TestCargaDocumentos: '/dashboard/municipio/carga-documentos',
-  TestRevisionC5: '/dashboard/revision-municipios'
+CargarDocumentos: '/dashboard/municipio/carga-documentos',
+RevisionMunicipios: '/dashboard/revision-municipios',
+TestCargaDocumentos: '/dashboard/municipio/carga-documentos',
+TestRevisionC5: '/dashboard/revision-municipios'
 };
 
 /**

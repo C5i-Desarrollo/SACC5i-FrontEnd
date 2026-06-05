@@ -269,7 +269,35 @@ export const useDashboard = () => {
           subtitle: 'Seguimiento de oficios, trazabilidad histórica y continuidad operativa del módulo.',
           roleLabel
         });
-      } else if (user.rol === ROLES.DEPENDENCIA) {
+      } else if (user.rol === ROLES.MUNICIPIO) {
+  computedStats = [
+    {
+      key: 'mun_docs',
+      label: 'Documentos enviados',
+      value: 0,
+      icon: 'bxs-cloud-upload',
+      color: 'guinda',
+      description: 'Documentación cargada por el municipio',
+      section: 'CargarDocumentos'
+    },
+    {
+      key: 'mun_pending',
+      label: 'Pendientes de revisión',
+      value: 0,
+      icon: 'bx-time-five',
+      color: 'dorado',
+      description: 'Documentos en espera de validación',
+      section: 'CargarDocumentos'
+    }
+  ];
+
+  setSummary({
+    title: 'Panel General del Municipio',
+    subtitle: 'Monitoreo básico de documentos y actividad registrada por el municipio.',
+    roleLabel
+  });
+  } else if (user.rol === ROLES.DEPENDENCIA) {
+    
         const depRes = await getMisSolicitudesDependencia();
         const solicitudes = asArray(depRes?.data?.data);
 
@@ -290,12 +318,17 @@ export const useDashboard = () => {
         if (activos > 0) {
           computedNotices.push('Hay trámites activos; revisa observaciones para acelerar avance al siguiente paso.');
         }
-
-        setSummary({
-          title: 'Panel de Seguimiento de Dependencia',
-          subtitle: 'Control de solicitudes, estatus operativo y avance de expedientes enviados.',
-          roleLabel
-        });
+    setSummary({
+      title:
+    user.rol === ROLES.MUNICIPIO
+      ? 'Panel General del Municipio'
+      : 'Panel de Seguimiento de Dependencia',
+  subtitle:
+    user.rol === ROLES.MUNICIPIO
+      ? 'Monitoreo de documentos, trámites y actividad registrada por el municipio.'
+      : 'Control de solicitudes, estatus operativo y avance de expedientes enviados.',
+  roleLabel
+});
       } else if (user.rol === ROLES.DIRECCION) {
         const panelRes = await getPanelDireccionApi();
         const resumen = panelRes?.data?.data?.resumen_general || {};

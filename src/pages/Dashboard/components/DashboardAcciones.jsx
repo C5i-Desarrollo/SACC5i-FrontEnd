@@ -158,6 +158,15 @@ const ACCIONES = {
       color: 'dorado',
     },
   ],
+  [ROLES.MUNICIPIO]: [
+  {
+    icon: 'bxs-cloud-upload',
+    title: 'Cargar Documentos',
+    desc: 'Subir documentación correspondiente a los movimientos del municipio.',
+    section: 'CargarDocumentos',
+    color: 'guinda',
+  },
+],
 };
 
 const AVISOS_POR_ROL = {
