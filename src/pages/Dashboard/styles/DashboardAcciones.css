@@ -35,17 +35,22 @@
 
 .dba-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.8fr) minmax(260px, 1fr);
-  gap: 12px;
+  grid-template-columns: 320px 1fr;
+  gap: 16px;
+  align-items: stretch;
 }
 
 .dba-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: 11px;
+  display: flex;
+  align-items: stretch;
+  height: 100%;
 }
 
 .dba-card {
+  width: 100%;
+  max-width: 320px;
+  height: 100%;
+  min-height: 175px;
   position: relative;
   border-radius: 14px;
   border: 1px solid #e9dfdb;
@@ -53,6 +58,7 @@
   padding: 14px 14px 13px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 9px;
   cursor: pointer;
   overflow: hidden;
@@ -150,12 +156,15 @@
 }
 
 .dba-note-board {
+  height: 100%;
+  min-height: 175px;
   border: 1px solid #e6ddd7;
   border-radius: 14px;
   background: linear-gradient(170deg, #fff, #fcf8f7);
   padding: 12px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 9px;
 }
 
@@ -193,8 +202,19 @@
     grid-template-columns: 1fr;
   }
 
+  .dba-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .dba-card {
+    max-width: 100%;
+    height: auto;
+  }
+
   .dba-note-board {
     order: -1;
+    height: auto;
   }
 }
 
