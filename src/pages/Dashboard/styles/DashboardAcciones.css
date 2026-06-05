@@ -33,24 +33,47 @@
   font-weight: 600;
 }
 
+/* Layout general para Admin y demás roles */
 .dba-layout {
   display: grid;
-  grid-template-columns: 320px 1fr;
+  grid-template-columns: minmax(0, 1.6fr) minmax(320px, 1fr);
   gap: 16px;
-  align-items: stretch;
+  align-items: start;
 }
 
 .dba-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 16px;
+}
+
+/* Layout especial SOLO para Municipio */
+.dba-section-municipio .dba-layout {
+  grid-template-columns: 320px 1fr;
+  align-items: stretch;
+}
+
+.dba-section-municipio .dba-grid {
   display: flex;
   align-items: stretch;
   height: 100%;
 }
 
-.dba-card {
-  width: 100%;
+.dba-section-municipio .dba-card {
   max-width: 320px;
   height: 100%;
   min-height: 175px;
+  justify-content: space-between;
+}
+
+.dba-section-municipio .dba-note-board {
+  height: 100%;
+  min-height: 175px;
+  justify-content: space-between;
+}
+
+.dba-card {
+  width: 100%;
   position: relative;
   border-radius: 14px;
   border: 1px solid #e9dfdb;
@@ -58,7 +81,6 @@
   padding: 14px 14px 13px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: 9px;
   cursor: pointer;
   overflow: hidden;
@@ -156,15 +178,12 @@
 }
 
 .dba-note-board {
-  height: 100%;
-  min-height: 175px;
   border: 1px solid #e6ddd7;
   border-radius: 14px;
   background: linear-gradient(170deg, #fff, #fcf8f7);
   padding: 12px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: 9px;
 }
 
@@ -198,23 +217,28 @@
 }
 
 @media (max-width: 1060px) {
-  .dba-layout {
+  .dba-layout,
+  .dba-section-municipio .dba-layout {
     grid-template-columns: 1fr;
   }
 
-  .dba-grid {
+  .dba-grid,
+  .dba-section-municipio .dba-grid {
     display: grid;
     grid-template-columns: 1fr;
   }
 
-  .dba-card {
+  .dba-section-municipio .dba-card {
     max-width: 100%;
+    height: auto;
+  }
+
+  .dba-section-municipio .dba-note-board {
     height: auto;
   }
 
   .dba-note-board {
     order: -1;
-    height: auto;
   }
 }
 

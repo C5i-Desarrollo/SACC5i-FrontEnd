@@ -200,7 +200,7 @@ export default function DashboardAcciones({ tips = [], notices = [] }) {
   };
 
   return (
-    <div className="dba-section">
+    <div className={`dba-section ${user?.rol === ROLES.MUNICIPIO ? 'dba-section-municipio' : ''}`}>
       <div className="dba-headline">
         <h3 className="dba-section-title">Accesos Estratégicos</h3>
         <span className="dba-headline-tag">Navegación del sistema</span>
