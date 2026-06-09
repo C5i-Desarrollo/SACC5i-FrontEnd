@@ -1,481 +1,369 @@
-import {
-  Upload,
-  FileText,
-  Download,
-  CloudUpload,
-  Eye,
-  Trash2,
-  History
-} from "lucide-react";
-
-import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-
-
+import { createPortal } from "react-dom";
+import { useNavigate } from "react-router-dom";
+import { Upload, Download, Eye, Trash2, CloudUpload, X, RefreshCw } from "lucide-react";
+import { FiCheckCircle, FiXCircle } from "react-icons/fi";
+import BitacoraModal from "../../components/layout/Bitacora/BitacoraModal";
 import "./TestCargaDocumentos.css";
 
+const formatearFecha = (fechaString) => {
+  if (!fechaString) return "Sin fecha";
+  const opciones = {
+    day: "2-digit", month: "short", year: "numeric",
+    hour: "2-digit", minute: "2-digit", hour12: true
+  };
+  return new Date(fechaString).toLocaleDateString("es-MX", opciones);
+};
+
 export default function TestCargaDocumentos() {
-  const [archivo, setArchivo] = useState(null);
-  const [tipoMovimiento, setTipoMovimiento] = useState("Alta");
+  const [documentos, setDocumentos] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [mensaje, setMensaje] = useState("");
-  const navigate = useNavigate();
-
+  const [vistaActual, setVistaActual] = useState("pendientes"); 
+  const [filtroMovimiento, setFiltroMovimiento] = useState("");
+  
   const [paginaActual, setPaginaActual] = useState(1);
-  const documentosPorPagina = 5;
+  const documentosPorPagina = 6;
 
-  const baseUrl = import.meta.env.VITE_API_URL;
+  // Estados del Modal de Carga
+  const [modalCargaOpen, setModalCargaOpen] = useState(false);
+  const [archivoCarga, setArchivoCarga] = useState(null);
+  const [movimientoCarga, setMovimientoCarga] = useState("Alta");
+  const [subiendo, setSubiendo] = useState(false);
+  
+  // 🔥 NUEVO: Estado para saber si estamos actualizando un documento rechazado
+  const [docAActualizar, setDocAActualizar] = useState(null);
+
+  const [modalBitacora, setModalBitacora] = useState({ isOpen: false, docId: null });
+  const [toast, setToast] = useState({ show: false, tipo: "", titulo: "", mensaje: "" });
+
+  const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+  const movimientos = ["Alta", "Baja", "Consulta"];
+
+  const mostrarToast = (tipo, titulo, msj) => {
+    setToast({ show: true, tipo, titulo, mensaje: msj });
+    setTimeout(() => setToast({ show: false, tipo: "", titulo: "", mensaje: "" }), 4000);
+  };
+
+  const cargarMisDocumentos = async (silent = false) => {
+    if (!silent) setLoading(true);
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`${baseUrl}/documentos-municipio/mis-documentos`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const data = await res.json();
+      if (res.ok) setDocumentos(data.data || []);
+    } catch (error) {
+      console.error("Error al cargar documentos:", error);
+    } finally {
+      if (!silent) setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    cargarMisDocumentos();
+    const intervalo = setInterval(() => cargarMisDocumentos(true), 5000);
+    return () => clearInterval(intervalo);
+  }, []);
+
+  const documentosFiltrados = documentos.filter((doc) => {
+    const esPendiente = doc.estatus === "En revisión";
+    if (vistaActual === "pendientes" && !esPendiente) return false;
+    if (vistaActual === "evaluados" && esPendiente) return false;
+    if (filtroMovimiento && doc.tipo_movimiento !== filtroMovimiento) return false;
+    return true;
+  }).sort((a, b) => new Date(b.fecha_carga) - new Date(a.fecha_carga));
+
+  const totalPaginas = Math.ceil(documentosFiltrados.length / documentosPorPagina) || 1;
+  const documentosPagina = documentosFiltrados.slice(
+    (paginaActual - 1) * documentosPorPagina,
+    paginaActual * documentosPorPagina
+  );
+
+  useEffect(() => { setPaginaActual(1); }, [vistaActual, filtroMovimiento]);
+
+  // 🔥 NUEVO: Función para abrir el modal en Modo Nuevo o Modo Corregir
+  const handleAbrirModalCarga = (doc = null) => {
+    setDocAActualizar(doc); // Si viene un doc, estamos corrigiendo
+    if (doc) {
+      setMovimientoCarga(doc.tipo_movimiento); // Bloqueamos el movimiento al que ya tenía
+    } else {
+      setMovimientoCarga("Alta");
+    }
+    setArchivoCarga(null);
+    setModalCargaOpen(true);
+  };
 
   const handleSubirDocumento = async (e) => {
     e.preventDefault();
-
-    if (!archivo) {
-      alert("Selecciona un PDF primero");
+    if (!archivoCarga) {
+      mostrarToast("error", "Error", "Selecciona un archivo PDF primero.");
       return;
     }
 
-    setLoading(true);
-
+    setSubiendo(true);
     const token = localStorage.getItem("token");
-
     const formData = new FormData();
-    formData.append("documento", archivo);
-    formData.append("tipo_movimiento", tipoMovimiento);
+    formData.append("documento", archivoCarga);
+    formData.append("tipo_movimiento", movimientoCarga);
+
+    // 🔥 NUEVO: Si hay un docAActualizar, usamos el método PUT hacia la nueva ruta
+    const url = docAActualizar 
+      ? `${baseUrl}/documentos-municipio/${docAActualizar.id}/actualizar`
+      : `${baseUrl}/documentos-municipio/cargar`;
+    
+    const method = docAActualizar ? "PUT" : "POST";
 
     try {
-      const response = await fetch(
-        `${baseUrl}/documentos-municipio/cargar`,
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: formData,
-        }
-      );
+      const res = await fetch(url, {
+        method: method,
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      });
 
-      const data = await response.json();
-
-      setMensaje(
-        data.message ||
-          (response.ok
-            ? "Documento cargado correctamente"
-            : "Error al cargar")
-      );
-
-      if (response.ok) {
-
-        const nuevoDocumento = {
-          archivo: archivo.name,
-          fecha: new Date().toLocaleString("es-MX"),
-          movimiento: tipoMovimiento,
-          estatus: "En revisión",
-          usuario: "Usuario actual",
-          observacion: "Documento enviado a revisión",
-          url: URL.createObjectURL(archivo),
-          validado: false
-        };
-
-        setHistorial(prev => [
-          nuevoDocumento,
-          ...prev
-        ]);
-
-        setArchivo(null);
-
-        const input = document.getElementById("archivo-input");
-
-        if (input) input.value = "";
+      if (res.ok) {
+        mostrarToast("aprobado", "Éxito", docAActualizar ? "Documento corregido y reenviado." : "Documento cargado y enviado a C5.");
+        setModalCargaOpen(false);
+        setArchivoCarga(null);
+        setDocAActualizar(null);
+        cargarMisDocumentos(true);
+        if (docAActualizar) setVistaActual("pendientes"); // Lo regresamos a la bandeja de pendientes
+      } else {
+        throw new Error("Error al cargar");
       }
     } catch (error) {
-      setMensaje("Error al cargar documento");
+      mostrarToast("error", "Error", "Ocurrió un problema al enviar el documento.");
     } finally {
-      setLoading(false);
+      setSubiendo(false);
     }
   };
 
-  // ==========================
-  // DATOS DE EJEMPLO
-  // ==========================
-const [historial, setHistorial] = useState([    
-    {
-      archivo: "Oficio_Consulta.pdf",
-      fecha: "12/05/2026 10:30 a.m",
-      movimiento: "Consulta",
-      estatus: "Aprobado",
-      usuario: "X persona",
-      observacion:
-        "Documento aprobado correctamente",
-      url: "/documentos/Oficio_Consulta.pdf",
-    },
-    {
-      archivo: "Oficio_Alta.pdf",
-      fecha: "12/05/2026 10:30 a.m",
-      movimiento: "Alta",
-      estatus: "En revisión",
-      usuario: "X persona",
-      observacion:
-        "Documento enviado a revisión",
-      url: "/documentos/Oficio_Alta.pdf",
-    },
-    {
-      archivo: "Oficio_Baja.pdf",
-      fecha: "12/05/2026 10:40 a.m",
-      movimiento: "Baja",
-      estatus: "Rechazado",
-      usuario: "X persona",
-      observacion:
-        "El documento no cuenta con fecha",
-      url: "/documentos/Oficio_Baja.pdf",
-    },
-    {
-      archivo: "Alta_02.pdf",
-      fecha: "13/05/2026",
-      movimiento: "Alta",
-      estatus: "Aprobado",
-      usuario: "Usuario 2",
-      observacion: "Validado",
-      url: "/documentos/Alta_02.pdf",
-    },
-    {
-      archivo: "Alta_03.pdf",
-      fecha: "13/05/2026",
-      movimiento: "Alta",
-      estatus: "En revisión",
-      usuario: "Usuario 3",
-      observacion: "En proceso",
-      url: "/documentos/Alta_03.pdf",
-    },
-    {
-      archivo: "Alta_04.pdf",
-      fecha: "14/05/2026",
-      movimiento: "Alta",
-      estatus: "En revisión",
-      usuario: "Usuario 4",
-      observacion: "Revisión",
-      url: "/documentos/Alta_04.pdf",
-    },
-    {
-      archivo: "Alta_05.pdf",
-      fecha: "15/05/2026",
-      movimiento: "Alta",
-      estatus: "Aprobado",
-      usuario: "Usuario 5",
-      observacion: "Correcto",
-      url: "/documentos/Alta_05.pdf",
-    },
-    {
-      archivo: "Alta_06.pdf",
-      fecha: "16/05/2026",
-      movimiento: "Alta",
-      estatus: "Aprobado",
-      usuario: "Usuario 6",
-      observacion: "Correcto",
-      url: "/documentos/Alta_06.pdf",
-    },
-  ]);
-
-  // ==========================
-  // FILTRO POR MOVIMIENTO
-  // ==========================
-  const documentosFiltrados = historial.filter(
-    (doc) =>
-      doc.movimiento.toLowerCase() ===
-      tipoMovimiento.toLowerCase()
-  );
-
-  // ==========================
-  // PAGINACIÓN
-  // ==========================
-  const totalPaginas = Math.ceil(
-    documentosFiltrados.length /
-      documentosPorPagina
-  );
-
-  const indiceInicial =
-    (paginaActual - 1) *
-    documentosPorPagina;
-
-  const indiceFinal =
-    indiceInicial + documentosPorPagina;
-
-  const documentosPagina =
-    documentosFiltrados.slice(
-      indiceInicial,
-      indiceFinal
-    );
-
-  useEffect(() => {
-    setPaginaActual(1);
-  }, [tipoMovimiento]);
-
-  // ==========================
-  // DESCARGA
-  // ==========================
-  const descargarDocumento = (documento) => {
- const descargarDocumento = (documento) => {
-
-    if (!documento.url) {
-      alert("No existe archivo para descargar");
-      return;
+  const visualizarDocumento = async (id) => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`${baseUrl}/documentos-municipio/${id}/archivo`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) throw new Error("Error");
+      const blob = await res.blob();
+      window.open(window.URL.createObjectURL(new Blob([blob], { type: "application/pdf" })), "_blank");
+    } catch (error) {
+      alert("Hubo un problema al visualizar el archivo.");
     }
-
-    const link = document.createElement("a");
-    link.href = documento.url;
-    link.download = documento.archivo;
-
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
   };
 
-    const link = document.createElement("a");
-    link.href = documento.url;
-    link.download = documento.url;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const descargarDocumento = async (id, nombreArchivo) => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`${baseUrl}/documentos-municipio/${id}/archivo`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) throw new Error("Error");
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(new Blob([blob], { type: "application/pdf" }));
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = nombreArchivo || "documento.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      alert("Hubo un problema al descargar el archivo.");
+    }
   };
 
-  const visualizarDocumento = (documento) => {
-  if (documento.url) {
-    window.open(documento.url, "_blank");
-  }
-};  
-
-const eliminarDocumento = (indexEliminar) => {
-  const confirmar = window.confirm(
-    "¿Deseas eliminar este documento?"
-  );
-
-  if (!confirmar) return;
-
-  const nuevaLista = historial.filter(
-    (_, index) => index !== indexEliminar
-  );
-
-  setHistorial(nuevaLista);
-};
+  const eliminarDocumento = async (id) => {
+    if (!window.confirm("¿Seguro que deseas eliminar este documento permanentemente?")) return;
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`${baseUrl}/documentos-municipio/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (res.ok) {
+        mostrarToast("aprobado", "Eliminado", "Documento eliminado correctamente.");
+        cargarMisDocumentos(true);
+      } else {
+        throw new Error("No se pudo eliminar");
+      }
+    } catch (error) {
+      mostrarToast("error", "Error", "Error al eliminar el documento.");
+    }
+  };
 
   return (
-    <div className="carga-container">
-      {/* CABECERA */}
-      <div className="carga-header">
+    <div className="carga-page-container">
+      <div className="carga-page-card">
+        
+        <div className="carga-page-header">
+          <h1>
+            {/* Le damos el color vino y un tamaño más grande solo al ícono */}
+            <CloudUpload size={34} color="#7D2447" style={{ marginRight: '12px' }} />
+            Carga de Documentos
+          </h1>
+          <p>Sube tus documentos o revisa el estado de los que ya enviaste a C5.</p>
+        </div>
 
-  <div className="header-superior">
+        <div className="carga-controls">
+          <div className="carga-tabs">
+            <button className={`carga-tab-btn ${vistaActual === "pendientes" ? "active" : ""}`} onClick={() => setVistaActual("pendientes")}>
+              Documentos en Revisión
+            </button>
+            <button className={`carga-tab-btn ${vistaActual === "evaluados" ? "active" : ""}`} onClick={() => setVistaActual("evaluados")}>
+              Historial (Evaluados)
+            </button>
+          </div>
 
-    <div className="titulo-wrapper">
-      <div className="icon-circle">
-        <CloudUpload size={32} />
-      </div>
-
-      <div>
-        <h1>Carga de Documentos</h1>
-
-        <p>
-          Selecciona un municipio y tipo de movimiento
-          para revisar los trámites registrados
-        </p>
-      </div>
-    </div>
-
-    <button
-      className="btn-historial"
-      onClick={() =>
-        navigate("/dashboard/historial-documentos")
-      }
-    >
-      <History size={18} />
-      Historial de Cambios
-    </button>
-
-  </div>
-
-        {/* FORMULARIO */}
-        <form
-          className="form-upload"
-          onSubmit={handleSubirDocumento}
-        >
-          <div className="select-container">
-            <select
-              value={tipoMovimiento}
-              onChange={(e) =>
-                setTipoMovimiento(
-                  e.target.value
-                )
-              }
-            >
-              <option value="Alta">
-                Alta
-              </option>
-
-              <option value="Baja">
-                Baja
-              </option>
-
-              <option value="Consulta">
-                Consulta
-              </option>
+          <div className="carga-actions-right">
+            <select className="carga-filtro-select" value={filtroMovimiento} onChange={(e) => setFiltroMovimiento(e.target.value)}>
+              <option value="">Todos los movimientos</option>
+              {movimientos.map(m => <option key={m} value={m}>{m}</option>)}
             </select>
+            
+            <button className="btn-abrir-modal-carga" onClick={() => handleAbrirModalCarga(null)}>
+              <Upload size={18} /> Cargar Documento
+            </button>
           </div>
+        </div>
 
-          <div className="file-container">
-            <label
-              htmlFor="archivo-input"
-              className="file-btn"
-            >
-              Seleccionar archivo
-            </label>
-
-            <input
-              id="archivo-input"
-              type="file"
-              accept=".pdf"
-              onChange={(e) =>
-                setArchivo(
-                  e.target.files[0]
-                )
-              }
-            />
-
-            <span className="file-name">
-              {archivo
-                ? archivo.name
-                : "Sin archivo seleccionado"}
-            </span>
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="upload-btn"
-          >
-            <Upload size={18} />
-
-            {loading
-              ? "Subiendo..."
-              : "Cargar Documento"}
-          </button>
-        </form>
-
-        {mensaje && (
-          <div className="mensaje-upload">
-            {mensaje}
-          </div>
-        )}
-      </div>
-
-      {/* TABLA */}
-      <div className="tabla-wrapper">
-        <table className="tabla-documentos">
+        <table className="tabla-limpia">
           <thead>
             <tr>
               <th>Archivo</th>
-              <th>Fecha y hora</th>
-              <th>Tipo de movimiento</th>
+              <th>Fecha de envío</th>
+              <th>Movimiento</th>
               <th>Estatus</th>
-              <th>Observaciones</th>
               <th>Acciones</th>
             </tr>
           </thead>
-
           <tbody>
-            {documentosPagina.map(
-              (item, index) => (
-                <tr key={index}>
-                  <td className="archivo-col">
-                    <FileText size={20} />
-                    {item.archivo}
-                  </td>
-
-                  <td>{item.fecha}</td>
-
+            {loading && documentos.length === 0 ? (
+              <tr><td colSpan="5" style={{textAlign:'center'}}>Cargando documentos...</td></tr>
+            ) : documentosPagina.length === 0 ? (
+              <tr><td colSpan="5" style={{textAlign:'center'}}>No se encontraron documentos en esta bandeja.</td></tr>
+            ) : (
+              documentosPagina.map((doc) => (
+                <tr key={doc.id}>
+                  <td className="tabla-archivo-nombre">{doc.archivo_nombre}</td>
+                  <td>{formatearFecha(doc.fecha_carga)}</td>
+                  <td>{doc.tipo_movimiento}</td>
                   <td>
-                    {item.movimiento}
-                  </td>
-
-                  <td>
-                    <span
-                      className={`estatus ${item.estatus
-                        .toLowerCase()
-                        .replace(
-                          " ",
-                          "-"
-                        )}`}
-                    >
-                      {item.estatus}
+                    <span className={`badge-limpio badge-${doc.estatus ? doc.estatus.toLowerCase().replace(" ", "-") : "pendiente"}`}>
+                      {doc.estatus}
                     </span>
                   </td>
-
                   <td>
-                    {item.observacion}
+                    <div className="acciones-limpias">
+                      <button className="btn-accion view" onClick={() => visualizarDocumento(doc.id)} title="Ver PDF">
+                        <Eye size={18} />
+                      </button>
+                      <button className="btn-accion download" onClick={() => descargarDocumento(doc.id, doc.archivo_nombre)} title="Descargar">
+                        <Download size={18} />
+                      </button>
+                      
+                      {vistaActual === "pendientes" ? (
+                        <button className="btn-accion delete" onClick={() => eliminarDocumento(doc.id)} title="Cancelar envío">
+                          <Trash2 size={18} />
+                        </button>
+                      ) : (
+                        <>
+                          {/* 🔥 NUEVO: Botón de Corregir que solo sale si está rechazado */}
+                          {doc.estatus === "Rechazado" && (
+                            <button className="btn-accion update" onClick={() => handleAbrirModalCarga(doc)} title="Corregir documento">
+                              <RefreshCw size={16} style={{ marginRight: '4px' }}/> Corregir
+                            </button>
+                          )}
+                          <button className="btn-accion bitacora" onClick={() => setModalBitacora({ isOpen: true, docId: doc.id })} title="Ver observaciones">
+                            Ver más
+                          </button>
+                        </>
+                      )}
+                    </div>
                   </td>
-
-      <td className="acciones">
-          <button 
-          className="view-btn"
-          onClick={() => visualizarDocumento(item)}
-          >
-          <Eye size={16} />
-          </button>
-
-          <button
-          className="download-btn"
-          onClick={() => descargarDocumento(item)}
-          >
-          <Download size={16} />
-          </button>
-
-          <button
-          className="delete-btn"
-          onClick={() =>
-          eliminarDocumento(
-          historial.findIndex(
-            doc => doc.archivo === item.archivo
-            ) ) } >
-          <Trash2 size={16} />
-          </button>
-          </td>
-          </tr>
-            ) ) }
+                </tr>
+              ))
+            )}
           </tbody>
-          </table>
+        </table>
 
-        {/* PAGINACIÓN */}
-        <div className="pagination">
-          <button
-            disabled={
-              paginaActual === 1
-            }
-            onClick={() =>
-              setPaginaActual(
-                paginaActual - 1
-              )
-            }
-          >
-            {"<"}
+        <div className="paginacion-limpia">
+          <button disabled={paginaActual === 1} onClick={() => setPaginaActual(paginaActual - 1)}>
+            &lt; Anterior
           </button>
-
-          <span>
-            Página {paginaActual} de{" "}
-            {totalPaginas || 1}
-          </span>
-
-          <button
-            disabled={
-              paginaActual ===
-              totalPaginas
-            }
-            onClick={() =>
-              setPaginaActual(
-                paginaActual + 1
-              )
-            }
-          >
-            {">"}
+          <span>Página {paginaActual} de {totalPaginas}</span>
+          <button disabled={paginaActual === totalPaginas} onClick={() => setPaginaActual(paginaActual + 1)}>
+            Siguiente &gt;
           </button>
         </div>
       </div>
+
+      {/* MODAL DE CARGA (Sirve para Nuevo y para Actualizar) */}
+      {modalCargaOpen && createPortal(
+        <div className="modal-carga-overlay">
+          <div className="modal-carga-box">
+            <div className="modal-carga-header">
+              <h3>{docAActualizar ? "CORREGIR DOCUMENTO RECHAZADO" : "CARGA DE DOCUMENTOS"}</h3>
+              <button className="close-btn" onClick={() => setModalCargaOpen(false)}><X size={20}/></button>
+            </div>
+            
+            <div className="modal-carga-body">
+              <label className="carga-drop-zone">
+                <CloudUpload size={40} color="#800020" />
+                <p>{docAActualizar ? "Arrastra tu nuevo documento corregido aquí" : "Arrastra tu documento aquí"}<br/>o</p>
+                <span className="fake-btn">Seleccionar archivo</span>
+                <input type="file" accept=".pdf" onChange={(e) => setArchivoCarga(e.target.files[0])} style={{display: 'none'}} />
+              </label>
+              {archivoCarga && <p className="archivo-seleccionado">📄 {archivoCarga.name}</p>}
+
+              <div className="carga-input-group">
+                <label>TIPO DE MOVIMIENTO</label>
+                <select 
+                  value={movimientoCarga} 
+                  onChange={(e) => setMovimientoCarga(e.target.value)}
+                  disabled={!!docAActualizar} // Lo bloqueamos si estamos corrigiendo
+                  style={{ backgroundColor: docAActualizar ? '#f0f0f0' : 'white' }}
+                >
+                  {movimientos.map(m => <option key={m} value={m}>{m}</option>)}
+                </select>
+                {docAActualizar && <span style={{fontSize: '12px', color: '#888'}}>* No puedes cambiar el tipo de movimiento al corregir un rechazo.</span>}
+              </div>
+            </div>
+
+            <div className="modal-carga-footer">
+              <button className="btn-cancelar" onClick={() => setModalCargaOpen(false)} disabled={subiendo}>
+                Cancelar
+              </button>
+              <button className="btn-subir" onClick={handleSubirDocumento} disabled={subiendo || !archivoCarga}>
+                {subiendo ? "Subiendo..." : (docAActualizar ? "Guardar y Reenviar" : "Subir Documento")}
+              </button>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
+
+      {modalBitacora.isOpen && createPortal(
+        <div className="envoltura-magica-bitacora">
+          <BitacoraModal documentoId={modalBitacora.docId} baseUrl={baseUrl} onClose={() => setModalBitacora({ isOpen: false, docId: null })} />
+        </div>,
+        document.body 
+      )}
+
+      {createPortal(
+        <div className={`toast-container ${toast.show ? "show" : ""}`}>
+          <div className={`toast toast-${toast.tipo}`}>
+            <div className="toast-icon">
+              {toast.tipo === "aprobado" ? <FiCheckCircle size={20} /> : <FiXCircle size={20} />}
+            </div>
+            <div className="toast-content">
+              <h4>{toast.titulo}</h4>
+              <p>{toast.mensaje}</p>
+            </div>
+            <button className="toast-close" onClick={() => setToast({ ...toast, show: false })}><X size={16} /></button>
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 }
