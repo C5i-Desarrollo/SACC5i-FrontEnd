@@ -105,6 +105,31 @@ const personaC3EsAprobada = (persona = {}) => {
   const fase = String(persona.fase_c3 || '').toLowerCase();
   return Boolean(persona.validado) || fase === 'validado_c3';
 };
+const getDocumentosMunicipio = async () => {
+  const token = localStorage.getItem('token');
+
+  const baseUrl =
+    import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
+  const response = await fetch(
+    `${baseUrl}/documentos-municipio/mis-documentos`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
+
+  const data = await response.json();
+
+  console.log('DOCUMENTOS DASHBOARD:', data);
+
+  if (!response.ok) {
+    throw new Error('Error al obtener documentos');
+  }
+
+  return data;
+};
 
 /**
  * useDashboard — Hook principal del Dashboard por rol.
@@ -270,11 +295,23 @@ export const useDashboard = () => {
           roleLabel
         });
       } else if (user.rol === ROLES.MUNICIPIO) {
+  const documentosRes = await getDocumentosMunicipio();
+
+  const documentos = Array.isArray(documentosRes?.data)
+    ? documentosRes.data
+    : [];
+
+  const totalDocumentos = documentos.length;
+
+  const pendientesRevision = documentos.filter(
+    (doc) => doc.estatus === 'En revisión'
+  ).length;
+
   computedStats = [
     {
       key: 'mun_docs',
       label: 'Documentos enviados',
-      value: 0,
+      value: totalDocumentos,
       icon: 'bxs-cloud-upload',
       color: 'guinda',
       description: 'Documentación cargada por el municipio',
@@ -283,13 +320,19 @@ export const useDashboard = () => {
     {
       key: 'mun_pending',
       label: 'Pendientes de revisión',
-      value: 0,
+      value: pendientesRevision,
       icon: 'bx-time-five',
       color: 'dorado',
       description: 'Documentos en espera de validación',
       section: 'CargarDocumentos'
     }
   ];
+
+  if (pendientesRevision > 0) {
+    computedNotices.push(
+      `Tienes ${pendientesRevision} documento(s) pendiente(s) de revisión.`
+    );
+  }
 
   setSummary({
     title: 'Panel General del Municipio',
