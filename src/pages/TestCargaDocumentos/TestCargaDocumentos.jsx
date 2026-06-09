@@ -16,6 +16,8 @@ const formatearFecha = (fechaString) => {
 };
 
 export default function TestCargaDocumentos() {
+  const [modalEliminarOpen, setModalEliminarOpen] = useState(false);
+  const [documentoAEliminar, setDocumentoAEliminar] = useState(null);
   const [documentos, setDocumentos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [vistaActual, setVistaActual] = useState("pendientes"); 
@@ -26,7 +28,7 @@ export default function TestCargaDocumentos() {
 
   // Estados del Modal de Carga
   const [modalCargaOpen, setModalCargaOpen] = useState(false);
-  const [archivoCarga, setArchivoCarga] = useState(null);
+  const [archivosCarga, setArchivosCarga] = useState([]);
   const [movimientoCarga, setMovimientoCarga] = useState("Alta");
   const [subiendo, setSubiendo] = useState(false);
   
@@ -90,13 +92,13 @@ export default function TestCargaDocumentos() {
     } else {
       setMovimientoCarga("Alta");
     }
-    setArchivoCarga(null);
+    setArchivosCarga([]);
     setModalCargaOpen(true);
   };
 
   const handleSubirDocumento = async (e) => {
     e.preventDefault();
-    if (!archivoCarga) {
+    if (archivosCarga.length === 0) {
       mostrarToast("error", "Error", "Selecciona un archivo PDF primero.");
       return;
     }
@@ -104,7 +106,9 @@ export default function TestCargaDocumentos() {
     setSubiendo(true);
     const token = localStorage.getItem("token");
     const formData = new FormData();
-    formData.append("documento", archivoCarga);
+    archivosCarga.forEach((archivo) => {
+      formData.append("documentos", archivo);
+    });
     formData.append("tipo_movimiento", movimientoCarga);
 
     // 🔥 NUEVO: Si hay un docAActualizar, usamos el método PUT hacia la nueva ruta
@@ -124,7 +128,7 @@ export default function TestCargaDocumentos() {
       if (res.ok) {
         mostrarToast("aprobado", "Éxito", docAActualizar ? "Documento corregido y reenviado." : "Documento cargado y enviado a C5.");
         setModalCargaOpen(false);
-        setArchivoCarga(null);
+        setArchivosCarga([]);
         setDocAActualizar(null);
         cargarMisDocumentos(true);
         if (docAActualizar) setVistaActual("pendientes"); // Lo regresamos a la bandeja de pendientes
@@ -172,24 +176,92 @@ export default function TestCargaDocumentos() {
     }
   };
 
-  const eliminarDocumento = async (id) => {
-    if (!window.confirm("¿Seguro que deseas eliminar este documento permanentemente?")) return;
-    try {
-      const token = localStorage.getItem("token");
-      const res = await fetch(`${baseUrl}/documentos-municipio/${id}`, {
-        method: 'DELETE',
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      if (res.ok) {
-        mostrarToast("aprobado", "Eliminado", "Documento eliminado correctamente.");
-        cargarMisDocumentos(true);
-      } else {
-        throw new Error("No se pudo eliminar");
+const eliminarDocumento = async (id) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const res = await fetch(
+      `${baseUrl}/documentos-municipio/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       }
-    } catch (error) {
-      mostrarToast("error", "Error", "Error al eliminar el documento.");
+    );
+
+    if (res.ok) {
+      mostrarToast(
+        "aprobado",
+        "Eliminado",
+        "Documento eliminado correctamente."
+      );
+
+      cargarMisDocumentos(true);
+    } else {
+      throw new Error();
     }
-  };
+  } catch (error) {
+    mostrarToast(
+      "error",
+      "Error",
+      "Error al eliminar el documento."
+    );
+  }
+};
+
+const handleDropArchivo = (e) => {
+  e.preventDefault();
+  validarYGuardarArchivos(
+    e.dataTransfer.files
+  );
+};
+
+const handleDragOverArchivo = (e) => {
+  e.preventDefault();
+};
+  
+const validarYGuardarArchivos = (files, input = null) => {
+  const archivos = Array.from(files || []);
+
+  if (archivos.length === 0) return;
+
+if (archivos.length > 10) {
+  mostrarToast(
+    "error",
+    "Límite de documentos excedido",
+    "No puedes subir más de 10 documentos a la vez. Selecciona máximo 10 archivos PDF."
+  );
+
+  setArchivosCarga([]);
+
+  if (input) input.value = "";
+
+  return;
+}
+
+  const pdfs = archivos.filter(
+    (file) => file.type === "application/pdf"
+  );
+
+  if (pdfs.length !== archivos.length) {
+    mostrarToast(
+      "error",
+      "Archivo inválido",
+      "Solo se permiten archivos PDF."
+    );
+
+    setArchivosCarga([]);
+
+    if (input) input.value = "";
+
+    return;
+  }
+
+  setArchivosCarga(archivos);
+
+  if (input) input.value = "";
+};
 
   return (
     <div className="carga-page-container">
@@ -262,7 +334,14 @@ export default function TestCargaDocumentos() {
                       </button>
                       
                       {vistaActual === "pendientes" ? (
-                        <button className="btn-accion delete" onClick={() => eliminarDocumento(doc.id)} title="Cancelar envío">
+                        <button
+                          className="btn-accion delete"
+                          onClick={() => {
+                            setDocumentoAEliminar(doc.id);
+                            setModalEliminarOpen(true);
+                          }}
+                          title="Cancelar envío"
+                        >
                           <Trash2 size={18} />
                         </button>
                       ) : (
@@ -307,14 +386,41 @@ export default function TestCargaDocumentos() {
             </div>
             
             <div className="modal-carga-body">
-              <label className="carga-drop-zone">
+              <label
+                className="carga-drop-zone"
+                onDrop={handleDropArchivo}
+                onDragOver={handleDragOverArchivo}
+              >
                 <CloudUpload size={40} color="#800020" />
-                <p>{docAActualizar ? "Arrastra tu nuevo documento corregido aquí" : "Arrastra tu documento aquí"}<br/>o</p>
-                <span className="fake-btn">Seleccionar archivo</span>
-                <input type="file" accept=".pdf" onChange={(e) => setArchivoCarga(e.target.files[0])} style={{display: 'none'}} />
-              </label>
-              {archivoCarga && <p className="archivo-seleccionado">📄 {archivoCarga.name}</p>}
+                <p>
+                  {docAActualizar
+                    ? "Arrastra tu nuevo documento corregido aquí"
+                    : "Arrastra tu documento aquí"}
+                  <br />
+                  o
+                </p>
 
+                <span className="fake-btn">Seleccionar archivo</span>
+                <input
+                  type="file"
+                  accept=".pdf"
+                  multiple
+                  onChange={(e) =>
+                    validarYGuardarArchivos(
+                      e.target.files,
+                      e.target
+                    )
+                  }
+                  style={{ display: "none" }}
+                />
+              </label>
+              {archivosCarga.length > 0 && (
+                <div className="archivo-seleccionado">
+                  {archivosCarga.map((archivo, index) => (
+                    <p key={index}>📄 {archivo.name}</p>
+                  ))}
+                </div>
+              )}
               <div className="carga-input-group">
                 <label>TIPO DE MOVIMIENTO</label>
                 <select 
@@ -333,7 +439,7 @@ export default function TestCargaDocumentos() {
               <button className="btn-cancelar" onClick={() => setModalCargaOpen(false)} disabled={subiendo}>
                 Cancelar
               </button>
-              <button className="btn-subir" onClick={handleSubirDocumento} disabled={subiendo || !archivoCarga}>
+              <button className="btn-subir" onClick={handleSubirDocumento} disabled={subiendo || archivosCarga.length === 0}>
                 {subiendo ? "Subiendo..." : (docAActualizar ? "Guardar y Reenviar" : "Subir Documento")}
               </button>
             </div>
@@ -349,21 +455,102 @@ export default function TestCargaDocumentos() {
         document.body 
       )}
 
-      {createPortal(
-        <div className={`toast-container ${toast.show ? "show" : ""}`}>
-          <div className={`toast toast-${toast.tipo}`}>
-            <div className="toast-icon">
-              {toast.tipo === "aprobado" ? <FiCheckCircle size={20} /> : <FiXCircle size={20} />}
-            </div>
-            <div className="toast-content">
-              <h4>{toast.titulo}</h4>
-              <p>{toast.mensaje}</p>
-            </div>
-            <button className="toast-close" onClick={() => setToast({ ...toast, show: false })}><X size={16} /></button>
+{modalEliminarOpen &&
+  createPortal(
+    <div className="modal-carga-overlay">
+      <div
+        className="modal-carga-box"
+        style={{ maxWidth: "450px" }}
+      >
+        <div className="modal-carga-header">
+          <h3>ELIMINAR DOCUMENTO</h3>
+          <button
+            className="close-btn"
+            onClick={() => setModalEliminarOpen(false)}
+          >
+            <X size={20} />
+          </button>
+        </div>
+
+        <div className="modal-carga-body">
+          <p>
+            ¿Estás seguro de que deseas eliminar este documento?
+          </p>
+
+          <p
+            style={{
+              color: "#dc3545",
+              fontWeight: "bold"
+            }}
+          >
+            Esta acción no se puede deshacer.
+          </p>
+        </div>
+
+        <div className="modal-carga-footer">
+          <button
+            className="btn-cancelar"
+            onClick={() => {
+              setModalEliminarOpen(false);
+              setDocumentoAEliminar(null);
+            }}
+          >
+            Cancelar
+          </button>
+
+          <button
+            className="btn-subir"
+            style={{
+              backgroundColor: "#dc3545"
+            }}
+            onClick={() => {
+              eliminarDocumento(documentoAEliminar);
+              setModalEliminarOpen(false);
+              setDocumentoAEliminar(null);
+            }}
+          >
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>,
+    document.body
+  )}
+
+    {createPortal(
+      <div className={`toast-container ${toast.show ? "show" : ""}`}>
+        <div className={`toast toast-${toast.tipo}`}>
+          <div className="toast-icon">
+            {toast.tipo === "aprobado" ? (
+              <FiCheckCircle size={20} />
+            ) : (
+              <FiXCircle size={20} />
+            )}
           </div>
-        </div>,
-        document.body
-      )}
+
+          <div className="toast-content">
+            <h4>{toast.titulo}</h4>
+            <p>{toast.mensaje}</p>
+          </div>
+
+          <button
+            className="toast-close"
+            onClick={() =>
+              setToast({
+                show: false,
+                tipo: "",
+                titulo: "",
+                mensaje: ""
+              })
+            }
+          >
+            <X size={16} />
+          </button>
+        </div>
+      </div>,
+      document.body
+    )}
+
     </div>
   );
 }
