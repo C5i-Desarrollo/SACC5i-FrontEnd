@@ -24,7 +24,7 @@ function TablaBaja({ data, resumen }) {
         <h1>Movimientos de Baja</h1>
       </div>
 
-      <TarjetasResumen resumen={resumen} />
+      <TarjetasResumen resumen={resumenCalculado} />
 
       <div className="tabla-box">
         <table className="tabla-estilizada">

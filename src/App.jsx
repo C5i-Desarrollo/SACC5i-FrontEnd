@@ -15,6 +15,8 @@ import { ProtectedRouter } from './routes/ProtectedRouter';
 import NotFound from './pages/Errors/components/NotFound';
 import ServerError from './pages/Errors/components/ServerError';
 import TestMunicipio from './pages/TestMunicipio/TestMunicipio';
+import TestCargaDocumentos from "./pages/TestCargaDocumentos/TestCargaDocumentos";
+import HistorialDocumentos from "./pages/TestCargaDocumentos/HistorialDocumentos";
 
 import './index.css';
 
@@ -363,6 +365,10 @@ function App() {
               <Route path="/welcome" element={<WelcomeScreen />} />
               <Route path="/dashboard/*" element={<DashboardLayout />} />
               <Route path="/error/500" element={<ServerError />} />
+
+              <Route path="/dashboard/carga-documentos" element={<TestCargaDocumentos />} />
+              <Route path="/dashboard/historial-documentos" element={<HistorialDocumentos />} />
+              
               {/* AQUÍ: Monta ProtectedRouter para todas las rutas protegidas */}
               <Route path="/*" element={<ProtectedRouter />} />
               <Route path="*" element={<NotFound />} />
