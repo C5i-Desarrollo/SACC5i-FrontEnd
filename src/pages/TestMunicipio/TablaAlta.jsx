@@ -9,7 +9,7 @@ function TablaAlta({ data, resumen }) {
         <h1>Movimientos de Alta</h1>
       </div>
 
-      <TarjetasResumen resumen={resumen} />
+      <TarjetasResumen resumen={resumenCalculado} />
       <div className="tabla-box">
         <table className="tabla-estilizada">
           <thead>
