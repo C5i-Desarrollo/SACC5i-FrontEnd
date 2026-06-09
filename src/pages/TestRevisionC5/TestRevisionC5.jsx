@@ -5,6 +5,20 @@ import { FiCheckCircle, FiXCircle, FiInfo, FiX } from "react-icons/fi";
 import "./TestRevisionC5.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
+// 1. NUEVA FUNCIÓN: Para que la fecha se lea amigable
+const formatearFecha = (fechaString) => {
+  if (!fechaString) return "Sin fecha";
+  const opciones = {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true
+  };
+  return new Date(fechaString).toLocaleDateString("es-MX", opciones);
+};
+
 export default function TestRevisionC5() {
   const [documentos, setDocumentos] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -48,7 +62,7 @@ export default function TestRevisionC5() {
     setToast({ show: true, tipo, titulo, mensaje: msj });
     setTimeout(() => {
       setToast({ show: false, tipo: "", titulo: "", mensaje: "" });
-    }, 4000); // Se oculta después de 4 segundos
+    }, 4000); 
   };
 
   const cargarDocumentos = async (vista, silent = false) => {
@@ -89,6 +103,7 @@ export default function TestRevisionC5() {
 
   useEffect(() => {
     let resultado = [...documentos];
+    
     if (municipioFiltro)
       resultado = resultado.filter(
         (doc) => doc.municipio_nombre === municipioFiltro,
@@ -99,6 +114,10 @@ export default function TestRevisionC5() {
       );
     if (estatusFiltro)
       resultado = resultado.filter((doc) => doc.estatus === estatusFiltro);
+
+    // 2. ORDENAR POR FECHA (DEL MÁS RECIENTE AL MÁS ANTIGUO)
+    resultado.sort((a, b) => new Date(b.fecha_carga) - new Date(a.fecha_carga));
+
     setDocumentosFiltrados(resultado);
   }, [documentos, municipioFiltro, movimientoFiltro, estatusFiltro]);
 
@@ -118,7 +137,6 @@ export default function TestRevisionC5() {
     }
   };
 
-  // Abre el modal en lugar de usar window.prompt
   const abrirModalEvaluar = (doc, estatus) => {
     setDocAEvaluar(doc);
     setEstatusNuevo(estatus);
@@ -151,7 +169,6 @@ export default function TestRevisionC5() {
 
       if (!response.ok) throw new Error("Error al evaluar");
 
-      // Mostrar el toast de éxito
       const tituloToast =
         estatusNuevo === "Aprobado"
           ? "Documento aprobado"
@@ -289,7 +306,14 @@ export default function TestRevisionC5() {
               <th>Municipio</th>
               <th>Movimiento</th>
               <th>Archivo</th>
-              <th>Estatus</th>
+              
+              {/* 3. COLUMNA DINÁMICA: Fecha o Estatus */}
+              {vistaActual === "pendientes" ? (
+                <th>Fecha de llegada</th>
+              ) : (
+                <th>Estatus</th>
+              )}
+              
               {vistaActual === "pendientes" && <th>Acciones</th>}
             </tr>
           </thead>
@@ -326,13 +350,22 @@ export default function TestRevisionC5() {
                       </button>
                     )}
                   </td>
+                  
+                  {/* 4. CONTENIDO DINÁMICO: La Fecha o la Etiqueta de Estatus */}
                   <td>
-                    <span
-                      className={`badge-${doc.estatus ? doc.estatus.toLowerCase() : "pendiente"}`}
-                    >
-                      {doc.estatus}
-                    </span>
+                    {vistaActual === "pendientes" ? (
+                      <span style={{ color: "#555", fontSize: "14px", fontWeight: "500" }}>
+                        {formatearFecha(doc.fecha_carga)}
+                      </span>
+                    ) : (
+                      <span
+                        className={`badge-${doc.estatus ? doc.estatus.toLowerCase() : "pendiente"}`}
+                      >
+                        {doc.estatus}
+                      </span>
+                    )}
                   </td>
+
                   {vistaActual === "pendientes" && (
                     <td>
                       <button
@@ -357,12 +390,15 @@ export default function TestRevisionC5() {
       </div>
 
       {/* MODAL DE BITÁCORA */}
-      {modalBitacora.isOpen && (
-        <BitacoraModal
-          documentoId={modalBitacora.docId}
-          baseUrl={baseUrl}
-          onClose={() => setModalBitacora({ isOpen: false, docId: null })}
-        />
+      {modalBitacora.isOpen && createPortal(
+        <div className="envoltura-magica-bitacora">
+          <BitacoraModal
+            documentoId={modalBitacora.docId}
+            baseUrl={baseUrl}
+            onClose={() => setModalBitacora({ isOpen: false, docId: null })}
+          />
+        </div>,
+        document.body 
       )}
 
       {/* MODAL DE EVALUACIÓN PERSONALIZADO (TELETRANSPORTADO) */}
@@ -436,7 +472,7 @@ export default function TestRevisionC5() {
               </div>
             </div>
           </div>,
-          document.body, // <--- ESTO LO MANDA HASTA EL FRENTE DE TODA LA PÁGINA
+          document.body,
         )}
 
       {/* TOAST DE NOTIFICACIÓN (TELETRANSPORTADO) */}
@@ -462,7 +498,7 @@ export default function TestRevisionC5() {
             </button>
           </div>
         </div>,
-        document.body, // <--- ESTO LO MANDA HASTA EL FRENTE DE TODA LA PÁGINA
+        document.body,
       )}
     </div>
   );

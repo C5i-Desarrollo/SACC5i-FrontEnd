@@ -454,6 +454,24 @@
     color: #333;
 }
 
+/* Este div es invisible, solo sirve para atrapar a la bitácora */
+.envoltura-magica-bitacora {
+    position: absolute;
+    z-index: 999999;
+}
+
+.envoltura-magica-bitacora > div {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 999999 !important;
+    background-color: rgba(0, 0, 0, 0.6) !important; 
+}
+
 @media (max-width:1200px){
     .filtros-panel{
         grid-template-columns:1fr;
