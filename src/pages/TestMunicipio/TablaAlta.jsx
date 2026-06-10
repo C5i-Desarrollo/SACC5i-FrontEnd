@@ -37,5 +37,6 @@ function TablaAlta({ data, resumen }) {
     </div>
   );} export default TablaAlta;
 
+  //Ya quedo, pero no se subio. jeje
 
   
