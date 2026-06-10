@@ -354,3 +354,47 @@
 .btn-cerrar-modal:hover{
   background: #f5f5f5;
 }
+
+.badge-manual {
+  display: inline-block;
+  background: rgba(122, 18, 53, 0.12);
+  color: #7a1235;
+  border: 1px solid rgba(122, 18, 53, 0.35);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.badge-sistema {
+  display: inline-block;
+  background: rgba(162, 146, 97, 0.16);
+  color: #6f5f2d;
+  border: 1px solid rgba(162, 146, 97, 0.45);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.badge-manual {
+  display: inline-block;
+  background: rgba(122, 18, 53, 0.12);
+  color: #7a1235;
+  border: 1px solid rgba(122, 18, 53, 0.35);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.badge-sistema {
+  display: inline-block;
+  background: rgba(162, 146, 97, 0.16);
+  color: #6f5f2d;
+  border: 1px solid rgba(162, 146, 97, 0.45);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px;
+}

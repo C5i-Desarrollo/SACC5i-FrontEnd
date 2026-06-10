@@ -6,6 +6,11 @@ import TablaConsultaResumen from "./TablaConsultaResumen";
 import TablaConsultaDetalle from "./TablaConsultaDetalle";
 import "./TestMunicipio.css";
 
+import {
+  obtenerBajasRegistradas,
+  obtenerBajasEditables
+} from "../../services/bajaService";
+
 export default function TestMunicipio() {
   const [municipioNombre, setMunicipioNombre] = useState("");
   const [tipoTramite, setTipoTramite] = useState("alta");
@@ -50,16 +55,44 @@ export default function TestMunicipio() {
       const baseUrl = rawBaseUrl.replace(/\/api\/?$/, "");
       const token = localStorage.getItem("token");
 
-      const endpoints = {
-        alta: "/api/tramites/alta/todas-personas-c5",
-        baja: "/api/tramites/alta/bajas",
-        consulta: "/api/tramites/alta/consulta/municipios",
-      };
+      if (tipoTramite === "baja") {
+  const [bajasSistemaRes, bajasManualesRes] = await Promise.all([
+    obtenerBajasRegistradas(),
+    obtenerBajasEditables(),
+  ]);
 
-      const rutaBase = endpoints[tipoTramite];
-      const url = `${baseUrl}${rutaBase}`;
+  const bajasSistema = (bajasSistemaRes.registros || []).map((item) => ({
+    ...item,
+    origen_baja: "sistema",
+  }));
 
-      const response = await fetch(url, {
+  const bajasManuales = (bajasManualesRes.registros || []).map((item) => ({
+    ...item,
+    origen_baja: "manual",
+  }));
+
+  setResultados({
+    data: {
+      registros: [
+        ...bajasSistema,
+        ...bajasManuales,
+      ],
+    },
+  });
+
+  setLoading(false);
+  return;
+}
+
+const endpoints = {
+  alta: "/api/tramites/alta/todas-personas-c5",
+  consulta: "/api/tramites/alta/consulta/municipios",
+};
+
+const rutaBase = endpoints[tipoTramite];
+const url = `${baseUrl}${rutaBase}`;
+
+const response = await fetch(url, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -189,30 +222,76 @@ export default function TestMunicipio() {
       );
     });
 
-    const enRevision = datosFiltrados.filter((item) =>
-      item.estatus_descriptivo
-        ?.toLowerCase()
-        .includes("pendiente")
-    ).length;
+    const normalizarTexto = (valor = "") =>
+      String(valor)
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim()
+        .toLowerCase();
 
+const obtenerTextoEstatus = (item) => {
+  return normalizarTexto(
+    item.estatus_descriptivo ||
+    item.fase_actual ||
+    item.tramite_fase ||
+    item.accion_disponible ||
+    ''
+  );
+};
+
+    const obtenerCategoriaEstatus = (item) => {
+      const estatus = obtenerTextoEstatus(item);
+
+      if (
+        estatus.includes('rechazado') ||
+        estatus.includes('no corresponde')
+      ) {
+        return 'rechazado';
+      }
+
+      if (
+        estatus.includes('aprobado') ||
+        estatus.includes('validado') ||
+        estatus.includes('alta ok') ||
+        estatus.includes('dictaminado')
+      ) {
+        return 'aprobado';
+      }
+
+      if (
+        estatus.includes('revision') ||
+        estatus.includes('validacion') ||
+        estatus.includes('enviado_c3') ||
+        estatus.includes('persona_en_revision') ||
+        estatus.includes('persona_en_cuip')
+      ) {
+        return 'revision';
+      }
+
+      if (estatus.includes('pendiente')) {
+        return 'pendiente';
+      }
+
+      return 'otro';
+    };
+
+    const enRevision = datosFiltrados.filter(
+      (item) => obtenerCategoriaEstatus(item) === 'revision'
+    ).length;
     const aprobados = datosFiltrados.filter(
-      (item) => item.validado === 1
+      (item) => obtenerCategoriaEstatus(item) === 'aprobado'
     ).length;
-
     const rechazados = datosFiltrados.filter(
-      (item) => item.rechazado === 1
+      (item) => obtenerCategoriaEstatus(item) === 'rechazado'
     ).length;
-
-    const pendientes = datosFiltrados.filter((item) =>
-      item.estatus_descriptivo
-        ?.toLowerCase()
-        .includes("pendiente")
+    const pendientes = datosFiltrados.filter(
+      (item) => obtenerCategoriaEstatus(item) === 'pendiente'
     ).length;
 
     resumen = [
       {
         cantidad: enRevision,
-        estado: "En revisión",
+        estado: "En validación",
         color: "amarillo",
       },
       {
@@ -234,59 +313,79 @@ export default function TestMunicipio() {
   }
 
   // ==========================
-  // BAJAS
-  // ==========================
-  if (
-    tipoTramite === "baja" &&
-    Array.isArray(resultados?.data?.registros)
-  ) {
-    datosFiltrados = resultados.data.registros.filter((item) => {
-      const coincideMunicipio =
-        !municipioNombre ||
-        municipioNombre === "TODOS" ||
-        item.municipio_nombre?.toLowerCase() ===
-          municipioNombre?.toLowerCase();
+// BAJAS
+// ==========================
+if (
+  tipoTramite === "baja" &&
+  Array.isArray(resultados?.data?.registros)
+) {
 
-      const textoBusqueda = terminoBusqueda.toLowerCase();
+  datosFiltrados = resultados.data.registros.filter((item) => {
 
-      const coincideBusqueda =
-        !terminoBusqueda ||
-        item.numero_oficio_c3
-          ?.toLowerCase()
-          .includes(textoBusqueda) ||
-        item.nombre_completo
-          ?.toLowerCase()
-          .includes(textoBusqueda) ||
-        item.municipio_nombre
-          ?.toLowerCase()
-          .includes(textoBusqueda);
+    const coincideMunicipio =
+      !municipioNombre ||
+      municipioNombre === "TODOS" ||
+      item.municipio_nombre?.toLowerCase() ===
+        municipioNombre.toLowerCase();
 
-      const coincideFecha =
-        !fecha ||
-        item.baja_fecha?.split("T")[0] === fecha;
+    const textoBusqueda = terminoBusqueda.toLowerCase();
 
-      return (
-        coincideMunicipio &&
-        coincideBusqueda &&
-        coincideFecha
-      );
-    });
+    const coincideBusqueda =
+      !terminoBusqueda ||
+      item.nombre_elemento
+        ?.toLowerCase()
+        .includes(textoBusqueda) ||
+      item.numero_oficio_municipio
+        ?.toLowerCase()
+        .includes(textoBusqueda) ||
+      item.municipio_nombre
+        ?.toLowerCase()
+        .includes(textoBusqueda) ||
+      item.baja_tipo
+        ?.toLowerCase()
+        .includes(textoBusqueda) ||
+      item.baja_motivo
+        ?.toLowerCase()
+        .includes(textoBusqueda);
 
-    resumen = [
-      {
-        cantidad: datosFiltrados.length,
-        estado: "Elementos dados de baja",
-        color: "rojo",
-      },
-      {
-        cantidad: datosFiltrados.filter(
-          (item) => item.baja_observaciones
-        ).length,
-        estado: "Bajas registradas manualmente",
-        color: "amarillo",
-      },
-    ];
-  }
+    const coincideFecha =
+      !fecha ||
+      item.baja_fecha?.split("T")[0] === fecha;
+
+    return (
+      coincideMunicipio &&
+      coincideBusqueda &&
+      coincideFecha
+    );
+  });
+
+const bajasSistema = datosFiltrados.filter(
+  (item) => item.origen_baja === "sistema"
+).length;
+
+const bajasManuales = datosFiltrados.filter(
+  (item) => item.origen_baja === "manual"
+).length;
+
+resumen = [
+  {
+    cantidad: datosFiltrados.length,
+    estado: "Elementos dados de baja",
+    color: "rojo",
+  },
+  {
+    cantidad: bajasSistema,
+    estado: "Bajas desde el sistema",
+    color: "amarillo",
+  },
+  {
+    cantidad: bajasManuales,
+    estado: "Bajas manuales",
+    color: "gris",
+  },
+];
+
+}
 
   // ==========================
   // CONSULTA
