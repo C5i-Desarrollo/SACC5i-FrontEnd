@@ -106,9 +106,13 @@ export default function TestCargaDocumentos() {
     setSubiendo(true);
     const token = localStorage.getItem("token");
     const formData = new FormData();
-    archivosCarga.forEach((archivo) => {
-      formData.append("documentos", archivo);
-    });
+    if (docAActualizar) {
+      formData.append("documento", archivosCarga[0]);
+    } else {
+      archivosCarga.forEach((archivo) => {
+        formData.append("documentos", archivo);
+      });
+    }
     formData.append("tipo_movimiento", movimientoCarga);
 
     // 🔥 NUEVO: Si hay un docAActualizar, usamos el método PUT hacia la nueva ruta
