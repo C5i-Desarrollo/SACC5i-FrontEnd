@@ -5,7 +5,6 @@ import { FiCheckCircle, FiXCircle, FiInfo, FiX } from "react-icons/fi";
 import "./TestRevisionC5.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-// 1. NUEVA FUNCIÓN: Para que la fecha se lea amigable
 const formatearFecha = (fechaString) => {
   if (!fechaString) return "Sin fecha";
   const opciones = {
@@ -32,19 +31,21 @@ export default function TestRevisionC5() {
   const [vistaActual, setVistaActual] = useState("pendientes");
   const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
+  // 🔥 NUEVOS ESTADOS: Control de paginación
+  const [paginaActual, setPaginaActual] = useState(1);
+  const documentosPorPagina = 8; // Establecido en 10 para llenar la pantalla de forma equilibrada
+
   const [modalBitacora, setModalBitacora] = useState({
     isOpen: false,
     docId: null,
   });
 
-  // ESTADOS PARA EL NUEVO MODAL DE EVALUACIÓN
   const [modalEvaluarOpen, setModalEvaluarOpen] = useState(false);
   const [docAEvaluar, setDocAEvaluar] = useState(null);
   const [estatusNuevo, setEstatusNuevo] = useState("");
   const [observaciones, setObservaciones] = useState("");
   const [evaluando, setEvaluando] = useState(false);
 
-  // ESTADO PARA LA NOTIFICACIÓN (TOAST)
   const [toast, setToast] = useState({
     show: false,
     tipo: "",
@@ -115,11 +116,22 @@ export default function TestRevisionC5() {
     if (estatusFiltro)
       resultado = resultado.filter((doc) => doc.estatus === estatusFiltro);
 
-    // 2. ORDENAR POR FECHA (DEL MÁS RECIENTE AL MÁS ANTIGUO)
     resultado.sort((a, b) => new Date(b.fecha_carga) - new Date(a.fecha_carga));
 
     setDocumentosFiltrados(resultado);
   }, [documentos, municipioFiltro, movimientoFiltro, estatusFiltro]);
+
+  // 🔥 NUEVO: Resetear a la página 1 cuando cambie cualquier filtro o pestaña
+  useEffect(() => {
+    setPaginaActual(1);
+  }, [vistaActual, municipioFiltro, movimientoFiltro, estatusFiltro]);
+
+  // 🔥 LÓGICA DE PAGINACIÓN SACC5i
+  const totalPaginas = Math.ceil(documentosFiltrados.length / documentosPorPagina) || 1;
+  const documentosPagina = documentosFiltrados.slice(
+    (paginaActual - 1) * documentosPorPagina,
+    paginaActual * documentosPorPagina
+  );
 
   const handleVerDocumento = async (id) => {
     try {
@@ -306,29 +318,26 @@ export default function TestRevisionC5() {
               <th>Municipio</th>
               <th>Movimiento</th>
               <th>Archivo</th>
-              
-              {/* 3. COLUMNA DINÁMICA: Fecha o Estatus */}
               {vistaActual === "pendientes" ? (
                 <th>Fecha de llegada</th>
               ) : (
                 <th>Estatus</th>
               )}
-              
               {vistaActual === "pendientes" && <th>Acciones</th>}
             </tr>
           </thead>
           <tbody>
-            {documentosFiltrados.length === 0 ? (
+            {documentosPagina.length === 0 ? (
               <tr>
                 <td
                   colSpan={vistaActual === "pendientes" ? "5" : "4"}
-                  style={{ textAlign: "center" }}
+                  style={{ textAlign: "center", padding: "24px" }}
                 >
                   No hay documentos en esta bandeja.
                 </td>
               </tr>
             ) : (
-              documentosFiltrados.map((doc) => (
+              documentosPagina.map((doc) => (
                 <tr key={doc.id}>
                   <td>{doc.municipio_nombre || doc.municipio_id}</td>
                   <td>{doc.tipo_movimiento}</td>
@@ -350,8 +359,6 @@ export default function TestRevisionC5() {
                       </button>
                     )}
                   </td>
-                  
-                  {/* 4. CONTENIDO DINÁMICO: La Fecha o la Etiqueta de Estatus */}
                   <td>
                     {vistaActual === "pendientes" ? (
                       <span style={{ color: "#555", fontSize: "14px", fontWeight: "500" }}>
@@ -387,6 +394,23 @@ export default function TestRevisionC5() {
             )}
           </tbody>
         </table>
+
+        {/* 🔥 NUEVO: Componente Visual de Paginación Integrado */}
+        <div className="paginacion-limpia">
+          <button 
+            disabled={paginaActual === 1} 
+            onClick={() => setPaginaActual(paginaActual - 1)}
+          >
+            &lt; Anterior
+          </button>
+          <span>Página {paginaActual} de {totalPaginas}</span>
+          <button 
+            disabled={paginaActual === totalPaginas} 
+            onClick={() => setPaginaActual(paginaActual + 1)}
+          >
+            Siguiente &gt;
+          </button>
+        </div>
       </div>
 
       {/* MODAL DE BITÁCORA */}
@@ -401,7 +425,7 @@ export default function TestRevisionC5() {
         document.body 
       )}
 
-      {/* MODAL DE EVALUACIÓN PERSONALIZADO (TELETRANSPORTADO) */}
+      {/* MODAL DE EVALUACIÓN PERSONALIZADO */}
       {modalEvaluarOpen &&
         docAEvaluar &&
         createPortal(
@@ -475,7 +499,7 @@ export default function TestRevisionC5() {
           document.body,
         )}
 
-      {/* TOAST DE NOTIFICACIÓN (TELETRANSPORTADO) */}
+      {/* TOAST DE NOTIFICACIÓN */}
       {createPortal(
         <div className={`toast-container ${toast.show ? "show" : ""}`}>
           <div className={`toast toast-${toast.tipo}`}>

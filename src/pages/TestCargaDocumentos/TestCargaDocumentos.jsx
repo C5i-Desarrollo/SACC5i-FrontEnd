@@ -24,7 +24,7 @@ export default function TestCargaDocumentos() {
   const [filtroMovimiento, setFiltroMovimiento] = useState("");
   
   const [paginaActual, setPaginaActual] = useState(1);
-  const documentosPorPagina = 6;
+  const documentosPorPagina = 10;
 
   // Estados del Modal de Carga
   const [modalCargaOpen, setModalCargaOpen] = useState(false);
