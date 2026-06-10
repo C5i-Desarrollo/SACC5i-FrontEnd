@@ -74,10 +74,10 @@
 
 .usuarios-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 320px));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 14px;
   justify-content: flex-start;
-  align-items: start;
+  align-items: stretch;
 }
 
 .usuario-card {
@@ -90,11 +90,11 @@
   gap: 10px;
   justify-content: flex-start;
   width: 100%;
-  min-height: 340px;
-  overflow: hidden;
+  min-height: 420px;
+  height: auto;
+  overflow: visible;
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
-
 .usuario-card:hover {
   border-color: #baa97f;
   box-shadow: 0 8px 22px rgba(125, 36, 71, 0.14);
@@ -311,17 +311,18 @@
 }
 
 .card-acciones {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 8px;
-  padding-top: 8px;
+  padding-top: 10px;
   margin-top: auto;
   border-top: 1px solid #ece8df;
 }
-
 .btn-accion {
-  padding: 7px 8px;
-  border: none;
+  width: auto;
+  min-width: 110px;
+  min-height: 34px;
+  padding: 7px 10px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 11px;
@@ -332,7 +333,8 @@
   gap: 6px;
   transition: all 0.2s ease;
   font-family: inherit;
-  min-height: 34px;
+  opacity: 1;
+  visibility: visible;
 }
 
 .btn-accion:hover {
@@ -488,4 +490,34 @@
   .btn-accion {
     min-height: 36px;
   }
+}
+
+.btn-temporal {
+  color: #0f4f8a !important;
+  background: #eff6ff !important;
+  border: 1.5px solid #bfdbfe !important;
+}
+
+.btn-desactivar {
+  color: #dc2626 !important;
+  background: #fef2f2 !important;
+  border: 1.5px solid #fecaca !important;
+}
+
+.btn-reset {
+  color: #7d2447 !important;
+  background: #faf9f5 !important;
+  border: 1.5px solid #d4cdb0 !important;
+}
+
+.btn-temporal,
+.btn-desactivar,
+.btn-reset {
+  border-radius: 8px !important;
+  padding: 7px 10px !important;
+  min-height: 34px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
 }
