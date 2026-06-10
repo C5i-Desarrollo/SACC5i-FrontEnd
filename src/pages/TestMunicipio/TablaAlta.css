@@ -125,3 +125,20 @@
   background: #8a1538;
   color: white;
 }
+
+.tabla-estilizada {
+  width: 100%;
+}
+
+.tabla-estilizada th,
+.tabla-estilizada td {
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.tabla-estilizada td {
+  word-break: break-word;
+}
+
+  /*Ya quedo, pero no se subio. jeje*/

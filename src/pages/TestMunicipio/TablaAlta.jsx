@@ -19,7 +19,6 @@ function TablaAlta({ data, resumen }) {
               <th>Puesto</th>
               <th>Fecha de solicitud</th>
               <th>Estatus</th>
-              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -29,11 +28,8 @@ function TablaAlta({ data, resumen }) {
                 <td>{item.numero_oficio_c3}</td>
                 <td>{item.puesto_original_nombre}</td>
                 <td>{item.fecha_solicitud ? new Date(item.fecha_solicitud).toLocaleDateString("es-MX") : "-"} </td>
-
                 <td>{item.estatus_descriptivo}</td>
-                <td>
-                  <button className="btn-detalles">
-                    Ver detalles  </button> </td>
+               
                </tr> ))}
           </tbody>
         </table>
@@ -41,5 +37,6 @@ function TablaAlta({ data, resumen }) {
     </div>
   );} export default TablaAlta;
 
+  //Ya quedo, pero no se subio. jeje
 
   
