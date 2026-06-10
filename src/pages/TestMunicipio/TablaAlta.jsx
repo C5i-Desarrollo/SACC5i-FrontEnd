@@ -9,7 +9,7 @@ function TablaAlta({ data, resumen }) {
         <h1>Movimientos de Alta</h1>
       </div>
 
-      <TarjetasResumen resumen={resumenCalculado} />
+      <TarjetasResumen resumen={resumen} />
       <div className="tabla-box">
         <table className="tabla-estilizada">
           <thead>
@@ -28,7 +28,8 @@ function TablaAlta({ data, resumen }) {
                 <td>{item.nombre_completo}</td>
                 <td>{item.numero_oficio_c3}</td>
                 <td>{item.puesto_original_nombre}</td>
-                <td>{item.fecha_solicitud}</td>
+                <td>{item.fecha_solicitud ? new Date(item.fecha_solicitud).toLocaleDateString("es-MX") : "-"} </td>
+
                 <td>{item.estatus_descriptivo}</td>
                 <td>
                   <button className="btn-detalles">
