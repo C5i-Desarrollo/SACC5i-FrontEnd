@@ -66,7 +66,7 @@ function DashboardLayout() {
   const [pendingNavigationPath, setPendingNavigationPath] = useState('');
   const lastPathRef = useRef(location.pathname);
   const ignoreNextPopstateRef = useRef(false);
-  const isDireccion = user?.rol === 'direccion';
+  const isDireccion = user?.rol === 'direccion' || user?.rol === "coordinador";
   const isDashboardSection = activeSection === 'Dashboard';
   
   // 1. AÑADIMOS EL ESTADO PARA EL TÍTULO DEL NAVBAR AQUÍ
