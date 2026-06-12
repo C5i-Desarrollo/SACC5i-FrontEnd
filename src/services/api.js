@@ -419,7 +419,7 @@ export const eliminarAcusePersonaFinalizadoApi = (registroId) =>
   api.delete(`/tramites/alta/finalizados/${registroId}/acuse-persona`);
 
 export const verAcusePersonaFinalizadoApi = (registroId) =>
-  api.get(`/tramites/alta/finalizados/${registroId}/acuse/view`, { responseType: 'blob' });
+  api.get(`/tramites/alta/finalizados/${registroId}/acuse-persona/view`, { responseType: 'blob' });
 
 export const getCatalogoBajasApi = () =>
   api.get('/tramites/alta/bajas/catalogo');

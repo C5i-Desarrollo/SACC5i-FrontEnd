@@ -99,32 +99,50 @@ const esTramiteNuevo = (persona) => {
   return esFechaReciente(fechaBase);
 };
 
+// 🔥 JUSTICIA PARA RENATA: Analiza el motivo textual para que C3 no salga en rojo
 const getDictamenBadge = (persona) => {
-  if (persona.rechazado) {
-    if (esDictamenPendienteRegistrado(persona)) {
-      return { status: 'pendiente', text: 'PENDIENTE', className: 'rc3-dict-pendiente' };
-    }
+  const obs = normalizarTexto(persona.observaciones_c3 || '');
+  const motivo = normalizarTexto(persona.motivo_rechazo || '');
 
+  if (persona.rechazado && motivo.includes('dictamen c3')) {
+    if (motivo.includes('pendiente')) return { status: 'pendiente', text: 'PENDIENTE', className: 'rc3-dict-pendiente' };
     return { status: 'rechazado', text: 'NO PUDO SER DADO DE ALTA', className: 'rc3-dict-rechazado' };
   }
 
-  if (esPendienteDictamenC3(persona)) {
-    return { status: 'enviado', text: 'ENVIADO', className: 'rc3-dict-enviado' };
-  }
-
-  if (persona.validado || persona.accion_disponible === 'revision_requisitos') {
+  if (persona.observaciones_c3 && !obs.includes('pendiente')) {
     return { status: 'aprobado', text: 'ALTA OK', className: 'rc3-dict-aprobado' };
   }
 
+  if (persona.rechazado) {
+    return { status: 'rechazado', text: 'RECHAZADO EN PROCESO', className: 'rc3-dict-rechazado' };
+  }
+
+  if (esPendienteDictamenC3(persona)) return { status: 'enviado', text: 'ENVIADO', className: 'rc3-dict-enviado' };
+  if (persona.validado || persona.accion_disponible === 'revision_requisitos') return { status: 'aprobado', text: 'ALTA OK', className: 'rc3-dict-aprobado' };
+  
   return { status: 'proceso', text: 'EN PROCESO', className: 'rc3-dict-proceso' };
 };
 
 const getFaseHistorial = (persona) => {
-  const clave = persona.accion_disponible && FASE_HISTORIAL_LABEL[persona.accion_disponible]
-    ? persona.accion_disponible
-    : persona.tramite_fase;
+  const estatus = persona.estatus_descriptivo || persona.tramite_fase || 'PROCESADO';
+  const estatusLower = estatus.toLowerCase();
+  const motivo = normalizarTexto(persona.motivo_rechazo || '');
 
-  return FASE_HISTORIAL_LABEL[clave] || { text: (clave || 'PROCESADO').toUpperCase(), className: 'rc3-hist-tag-default' };
+  if (persona.rechazado) {
+    if (motivo.includes('cita') || motivo.includes('asistió')) return { text: 'RECHAZADO EN CITA', className: 'rc3-hist-tag-rechazado' };
+    if (motivo.includes('cuip')) return { text: 'RECHAZADO EN CUIP', className: 'rc3-hist-tag-rechazado' };
+    if (motivo.includes('revisión') || motivo.includes('revision')) return { text: 'RECHAZADO EN REVISIÓN', className: 'rc3-hist-tag-rechazado' };
+    if (motivo.includes('dictamen c3')) return { text: 'RECHAZADO C3', className: 'rc3-hist-tag-rechazado' };
+    return { text: 'RECHAZADO', className: 'rc3-hist-tag-rechazado' };
+  }
+
+  if (estatusLower === 'finalizado') return { text: 'FINALIZADO', className: 'rc3-hist-tag-finalizado' };
+  if (estatusLower.includes('cita')) return { text: 'CITA PROGRAMADA', className: 'rc3-hist-tag-cuip' };
+  if (estatusLower.includes('cuip')) return { text: 'VALIDACIÓN CUIP', className: 'rc3-hist-tag-cuip' };
+  if (estatusLower.includes('proceso') || estatusLower.includes('revisión') || estatusLower.includes('revision')) return { text: 'EN REVISIÓN', className: 'rc3-hist-tag-revision' };
+  if (estatusLower.includes('aprobado') || estatusLower.includes('alta ok')) return { text: 'APROBADO POR C3', className: 'rc3-dict-aprobado' };
+
+  return { text: estatus.toUpperCase(), className: 'rc3-hist-tag-default' };
 };
 
 const getRemitente = (persona) => {
@@ -660,7 +678,7 @@ export default function RecibidosC3({
               <select value={filtroFaseHistorial} onChange={(e) => setFiltroFaseHistorial(e.target.value)}>
                 <option value="">Todas las fases</option>
                 {fasesHistorialDisponibles.map((fase) => (
-                  <option key={fase} value={fase}>{FASE_HISTORIAL_LABEL[fase]?.text || fase}</option>
+                  <option key={fase} value={fase}>{fase}</option>
                 ))}
               </select>
             </div>
@@ -696,7 +714,6 @@ export default function RecibidosC3({
                 const filaActiva = personaSeleccionadaId === persona.id;
                 const remitente = getRemitente(persona);
                 const mostrarNuevo = esTramiteNuevo(persona);
-                const moverEnviadoAFlag = dictamen.status === 'enviado';
 
                 return (
                   <div
@@ -717,9 +734,7 @@ export default function RecibidosC3({
                     }}
                   >
                     <span className="rc3-mail-row-flag">
-                      {moverEnviadoAFlag ? (
-                        <span className={`rc3-dict-badge ${dictamen.className}`}>{dictamen.text}</span>
-                      ) : (mostrarNuevo ? <span className="rc3-new-indicator">Nuevo</span> : null)}
+                      {mostrarNuevo && <span className="rc3-new-indicator">Nuevo</span>}
                     </span>
 
                     <span className="rc3-mail-row-from" title={remitente}>{remitente}</span>
@@ -730,9 +745,7 @@ export default function RecibidosC3({
                     </span>
 
                     <span className="rc3-mail-row-tags">
-                      {!moverEnviadoAFlag && (
-                        <span className={`rc3-dict-badge ${dictamen.className}`}>{dictamen.text}</span>
-                      )}
+                      <span className={`rc3-dict-badge ${dictamen.className}`}>{dictamen.text}</span>
                       {mostrarChipMunicipio(persona, remitente) && (
                         <span className="rc3-mail-row-chip">{persona.municipio_nombre}</span>
                       )}
@@ -799,7 +812,6 @@ export default function RecibidosC3({
                 const filaActiva = personaHistorialSeleccionadaId === persona.id;
                 const remitente = getRemitente(persona);
                 const mostrarNuevo = esTramiteNuevo(persona);
-                const moverEnRechazadosAFlag = fase.text === 'EN RECHAZADOS';
 
                 return (
                   <button
@@ -812,9 +824,7 @@ export default function RecibidosC3({
                     }}
                   >
                     <span className="rc3-mail-row-flag">
-                      {moverEnRechazadosAFlag ? (
-                        <span className={`rc3-hist-tag ${fase.className}`}>{fase.text}</span>
-                      ) : (mostrarNuevo ? <span className="rc3-new-indicator">Nuevo</span> : null)}
+                      {mostrarNuevo && <span className="rc3-new-indicator">Nuevo</span>}
                     </span>
 
                     <span className="rc3-mail-row-from" title={remitente}>{remitente}</span>
@@ -825,9 +835,7 @@ export default function RecibidosC3({
                     </span>
 
                     <span className="rc3-mail-row-tags">
-                      {!moverEnRechazadosAFlag && (
-                        <span className={`rc3-hist-tag ${fase.className}`}>{fase.text}</span>
-                      )}
+                      <span className={`rc3-hist-tag ${fase.className}`}>{fase.text}</span>
                       <span className={`rc3-dict-badge ${dictamen.className}`}>{dictamen.text}</span>
                     </span>
 
@@ -876,9 +884,7 @@ export default function RecibidosC3({
 
       {detalleModal.open && personaDetalleActiva && typeof document !== 'undefined' && createPortal(
         <div className="rc3-detail-modal-backdrop" onClick={(e) => {
-          if (e.target === e.currentTarget) {
-            cerrarDetalle();
-          }
+          if (e.target === e.currentTarget) cerrarDetalle();
         }}>
           <div className="rc3-detail-modal" role="dialog" aria-modal="true" aria-labelledby="rc3-detail-title">
             <button type="button" className="rc3-detail-modal-close" onClick={cerrarDetalle} aria-label="Cerrar detalle">
@@ -903,11 +909,9 @@ export default function RecibidosC3({
 
                 <div className="rc3-mail-detail-status">
                   {detalleModal.source === 'pendientes' && dictamenDetalle ? (
-                    <>
-                      <span className={`rc3-dict-badge ${dictamenDetalle.className}`}>
-                        {dictamenDetalle.text}
-                      </span>
-                    </>
+                    <span className={`rc3-dict-badge ${dictamenDetalle.className}`}>
+                      {dictamenDetalle.text}
+                    </span>
                   ) : null}
 
                   {detalleModal.source === 'historial' && faseDetalle ? (
@@ -957,7 +961,10 @@ export default function RecibidosC3({
                   ) : null}
                   <div className="rc3-mail-kv"><span>Movimiento</span><strong>{personaDetalleActiva.proceso_movimiento || 'Alta'}</strong></div>
                   <div className="rc3-mail-kv"><span>Accion disponible</span><strong>{personaDetalleActiva.accion_disponible || '--'}</strong></div>
-                  <div className="rc3-mail-kv"><span>Fase actual</span><strong>{personaDetalleActiva.tramite_fase || '--'}</strong></div>
+                  <div className="rc3-mail-kv">
+                    <span>Fase actual</span>
+                    <strong>{personaDetalleActiva.estatus_descriptivo || personaDetalleActiva.tramite_fase || '--'}</strong>
+                  </div>
                 </article>
               </div>
 

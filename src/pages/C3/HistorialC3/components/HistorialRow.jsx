@@ -1,4 +1,5 @@
 import '../styles/HistorialRow.css';
+
 /**
  * Fila individual del historial C3
  * Muestra un trámite dictaminado con sus estadísticas de personas
@@ -8,6 +9,8 @@ export default function HistorialRow({ tramite }) {
   const stats = tramite.personas_stats || {};
 
   const getFaseBadge = () => {
+    const faseStr = String(fase || '').toLowerCase();
+
     const map = {
       'dictaminado_c3':         { text: 'Dictaminado',   cls: 'hist-badge-dictaminado' },
       'validado_c3':            { text: 'Validado C3',   cls: 'hist-badge-validado' },
@@ -15,7 +18,18 @@ export default function HistorialRow({ tramite }) {
       'rechazado':              { text: 'Rechazado',     cls: 'hist-badge-rechazado' },
       'rechazado_no_corresponde': { text: 'No corresponde', cls: 'hist-badge-rechazado' },
     };
-    return map[fase] || { text: fase, cls: 'hist-badge-pendiente' };
+
+    if (map[fase]) return map[fase];
+
+    // Nuevos estados dinámicos
+    if (faseStr.includes('rechazado en cita') || faseStr.includes('cita cancelada')) return { text: 'Rechazado en Cita', cls: 'hist-badge-rechazado' };
+    if (faseStr.includes('rechazado')) return { text: fase, cls: 'hist-badge-rechazado' };
+    if (faseStr.includes('finalizado') || faseStr.includes('completa')) return { text: 'Finalizado', cls: 'hist-badge-dictaminado' };
+    if (faseStr.includes('cita')) return { text: 'Cita Programada', cls: 'hist-badge-validado' };
+    if (faseStr.includes('proceso') || faseStr.includes('revisión')) return { text: 'En Revisión', cls: 'hist-badge-pendiente' };
+    if (faseStr.includes('aprobado') || faseStr.includes('validado')) return { text: 'Aprobado', cls: 'hist-badge-validado' };
+
+    return { text: fase || 'Pendiente', cls: 'hist-badge-pendiente' };
   };
 
   const badge = getFaseBadge();

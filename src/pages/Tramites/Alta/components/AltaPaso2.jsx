@@ -100,7 +100,7 @@ export default function AltaPaso2({
 
   const faseActualSolicitud = String(solicitud?.fase_actual || '').toLowerCase();
   const FASES_EDITABLES = ['datos_solicitud', 'validacion_personal'];
-  const FASES_CON_REVISION_DISPONIBLE = ['dictaminado_c3', 'validado_c3', 'revision_requisitos'];
+  const FASES_CON_REVISION_DISPONIBLE = ['dictaminado_c3', 'validado_c3', 'revision_requisitos', 'validacion_cuip', 'cita_programada', 'finalizado'];
   const hayPersonasEnFlujoPosterior = personasAgregadas.some((persona) => {
     const faseRevision = String(persona?.fase_revision || '').toLowerCase();
     const faseCuip = String(persona?.fase_cuip || '').toLowerCase();
@@ -504,45 +504,39 @@ export default function AltaPaso2({
   const puedeEnviar = validadas.length > 0 && pendientes.length === 0;
 
   const getFaseLabel = (persona) => {
-    if (faseActualSolicitud === 'finalizado') {
-      return { label: 'Finalizado', css: 'fase-revision-ok' };
+    if (persona.rechazado) {
+      const motivo = String(persona.motivo_rechazo || '').toLowerCase();
+      if (motivo.includes('cita') || motivo.includes('asistió')) return { label: 'Rechazado en Cita', css: 'fase-rechazado' };
+      if (motivo.includes('cuip')) return { label: 'Rechazado CUIP', css: 'fase-rechazado' };
+      if (motivo.includes('revisión') || motivo.includes('revision')) return { label: 'Rechazado Revisión', css: 'fase-rechazado' };
+      if (motivo.includes('dictamen c3')) return { label: 'Rechazado C3', css: 'fase-rechazado' };
+      return { label: 'Rechazado', css: 'fase-rechazado' };
     }
 
-    if (faseActualSolicitud === 'cita_programada') {
-      return { label: 'Cita Programada', css: 'fase-espera' };
-    }
-
-    if (persona.rechazado) return { label: 'Rechazado C3', css: 'fase-rechazado' };
+    const estatusDesc = String(persona.estatus_descriptivo || '');
+    
+    if (estatusDesc === 'Finalizado') return { label: 'Finalizado', css: 'fase-revision-ok' };
+    if (estatusDesc === 'Cita Programada') return { label: 'Cita Programada', css: 'fase-espera' };
 
     const faseCuip = String(persona.fase_cuip || '').toLowerCase();
     const faseRevision = String(persona.fase_revision || '').toLowerCase();
 
-    if (faseCuip === 'en_proceso') {
-      return { label: 'CUIP en Proceso', css: 'fase-cuip-proceso' };
-    }
-
-    if (faseCuip === 'completado' && ['validacion_cuip', 'cita_programada', 'finalizado'].includes(faseActualSolicitud)) {
-      return { label: 'CUIP Completado', css: 'fase-cuip-ok' };
-    }
-
-    if (faseCuip === 'rechazado_cuip') {
-      return { label: 'Rechazado CUIP', css: 'fase-rechazado' };
-    }
+    if (faseCuip === 'completado') return { label: 'Validación CUIP Completada', css: 'fase-cuip-ok' }; 
+    if (faseCuip === 'en_proceso') return { label: 'CUIP en Proceso', css: 'fase-cuip-proceso' };
 
     const labelsRevision = {
-      en_proceso: { label: 'Revision en Proceso', css: 'fase-revision-proceso' },
+      en_proceso: { label: 'Revisión en Proceso', css: 'fase-revision-proceso' },
       antecedentes: { label: 'Revisando Antecedentes', css: 'fase-revision-proceso' },
       documentos: { label: 'Revisando Documentos', css: 'fase-revision-proceso' },
-      completado: { label: 'Revision Completa', css: 'fase-revision-ok' },
-      rechazado_revision: { label: 'Rechazado Revision', css: 'fase-rechazado' }
+      completado: { label: 'Revisión Completa', css: 'fase-revision-ok' },
+      rechazado_revision: { label: 'Rechazado Revisión', css: 'fase-rechazado' }
     };
 
-    if (faseRevision && faseRevision !== 'pendiente') {
-      return labelsRevision[faseRevision] || { label: faseRevision, css: 'fase-otro' };
-    }
+    if (faseRevision && faseRevision !== 'pendiente') return labelsRevision[faseRevision] || { label: faseRevision, css: 'fase-otro' };
+    if (!persona.validado) return { label: 'Pendiente Validación', css: 'fase-pendiente' };
+    if (persona.observaciones_c3) return { label: 'Aprobado C3', css: 'fase-cuip-ok' }; 
 
-    if (!persona.validado) return { label: 'Pendiente Validacion', css: 'fase-pendiente' };
-    return { label: 'Pendiente Revision', css: 'fase-espera' };
+    return { label: 'Pendiente Revisión', css: 'fase-espera' };
   };
 
   const puedeIrARevision = (persona) => {
