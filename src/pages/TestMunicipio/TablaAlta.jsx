@@ -7,9 +7,9 @@ function TablaAlta({ data, resumen }) {
 
     const estados = {
       pendiente: "Pendiente",
-      en_revision: "En revisión",
+      en_revision: "En validación",
       rechazado: "Rechazado",
-      firmado: "Firmado"
+      firmado: "Aprobado"
     };
 
     return estados[estatus] || estatus;

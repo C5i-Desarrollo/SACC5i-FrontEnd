@@ -46,6 +46,26 @@ function TablaBaja({ data, resumen }) {
       tipo === "baja" &&
       motivo === "baja";
 
+
+
+      console.table(
+        data.map((item, index) => ({
+          index,
+          nombre: `${item.nombre_elemento || ""} ${item.apellido_paterno || ""} ${item.apellido_materno || ""}`,
+          oficio: item.numero_oficio_municipio,
+          municipio: item.municipio_nombre,
+          fecha: item.baja_fecha,
+          tipo: item.baja_tipo,
+          motivo: item.baja_motivo,
+          origen: item.origen_baja,
+          id: item.id,
+          baja_id: item.baja_id,
+        }))
+      );
+
+
+
+
     return esProcesoSistema ? "sistema" : "manual";
   };
 
@@ -207,7 +227,9 @@ function TablaBaja({ data, resumen }) {
               const origen = obtenerTipoOrigenBaja(item);
 
               return (
-                <tr key={obtenerId(item) || i}>
+
+              <tr key={`${item.origen_baja || "sin-origen"}-${obtenerId(item) || "sin-id"}-${item.numero_oficio_municipio || "sin-oficio"}-${i}`} >
+
                   <td>{obtenerNombreCompleto(item)}</td>
                   <td>{item.numero_oficio_municipio}</td>
                   <td>{item.municipio_nombre}</td>
