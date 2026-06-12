@@ -215,74 +215,90 @@ const response = await fetch(url, {
   if (
     tipoTramite === "alta" &&
     Array.isArray(resultados?.data)
-  ) {
-    datosFiltrados = resultados.data.filter((item) => {
-      const coincideMunicipio =
-        !municipioNombre ||
-        municipioNombre === "TODOS" ||
-        item.municipio_nombre?.toLowerCase() ===
-          municipioNombre?.toLowerCase();
+  ) 
+  
+          {
+            datosFiltrados = resultados.data.filter((item) => {
+          const textoBusqueda = terminoBusqueda.trim().toLowerCase();
 
-      const coincideEstatus =
-        !estatus ||
-        item.estatus_descriptivo
-          ?.toLowerCase()
-          .includes(estatus.toLowerCase());
+          const nombreCompleto = String(
+            item.nombre_elemento ||
+            item.nombre_completo ||
+            `${item.nombre || ""} ${item.apellido_paterno || ""} ${item.apellido_materno || ""}`
+          ).toLowerCase();
 
-      const textoBusqueda = terminoBusqueda.toLowerCase();
+          const numeroOficio = String(
+            item.numero_oficio ||
+            item.numero_oficio_c3 ||
+            ""
+          ).toLowerCase();
 
-      const coincideBusqueda =
-        !terminoBusqueda ||
-        item.numero_oficio_c3
-          ?.toLowerCase()
-          .includes(textoBusqueda) ||
-        item.nombre_completo
-          ?.toLowerCase()
-          .includes(textoBusqueda) ||
-        item.municipio_nombre
-          ?.toLowerCase()
-          .includes(textoBusqueda) ||
-        item.numero_solicitud
-          ?.toString()
-          .includes(textoBusqueda);
+          const puesto = String(
+            item.puesto_elemento ||
+            item.puesto_original_nombre ||
+            ""
+          ).toLowerCase();
 
-      const coincideFecha =
-        !fecha ||
-        item.fecha_solicitud?.split("T")[0] === fecha;
+          const estatusReal = String(
+            item.fase1_estado ||
+            item.estatus_descriptivo ||
+            ""
+          ).toLowerCase();
 
-      return (
-        coincideMunicipio &&
-        coincideEstatus &&
-        coincideBusqueda &&
-        coincideFecha
-      );
-    });
+          const estatusVisible = estatusReal
+            .replace("en_revision", "en validacion")
+            .replace("firmado", "aprobado");
 
-    const normalizarTexto = (valor = "") =>
-      String(valor)
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, "")
-        .trim()
-        .toLowerCase();
+          const fechaRegistro = item.fecha_termino || item.fecha_solicitud;
 
-const obtenerTextoEstatus = (item) => {
-  return normalizarTexto(
-    item.fase1_estado ||
-    item.estatus_descriptivo ||
-    ''
-  );
-};
+          const coincideBusqueda =
+            !textoBusqueda ||
+            nombreCompleto.includes(textoBusqueda) ||
+            numeroOficio.includes(textoBusqueda) ||
+            puesto.includes(textoBusqueda) ||
+            estatusReal.includes(textoBusqueda) ||
+            estatusVisible.includes(textoBusqueda);
 
-    const obtenerCategoriaEstatus = (item) => {
-    const estatus = obtenerTextoEstatus(item);
+          const coincideEstatus =
+            !estatus ||
+            estatus === "TODOS" ||
+            estatusVisible.includes(estatus.toLowerCase());
 
-    if (estatus.includes("rechazado")) return "rechazado";
-    if (estatus.includes("firmado")) return "aprobado";
-    if (estatus.includes("revision")) return "revision";
-    if (estatus.includes("pendiente")) return "pendiente";
+          const coincideFecha =
+            !fecha ||
+            fechaRegistro?.split("T")[0] === fecha;
 
-    return "otro";
-  };
+          return coincideBusqueda && coincideEstatus && coincideFecha;
+        });
+
+            const normalizarTexto = (valor = "") =>
+              String(valor)
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, "")
+                .trim()
+                .toLowerCase();
+
+        const obtenerTextoEstatus = (item) => {
+          return normalizarTexto(
+            item.fase1_estado ||
+            item.estatus_descriptivo ||
+            ''
+          );
+        };
+
+
+          const obtenerCategoriaEstatus = (item) => {
+          const estatus = obtenerTextoEstatus(item);
+
+          if (estatus.includes("rechazado")) return "rechazado";
+          if (estatus.includes("firmado")) return "aprobado";
+          if (estatus.includes("revision")) return "revision";
+          if (estatus.includes("pendiente")) return "pendiente";
+
+          return "otro";
+        };
+
+        
 
     const enRevision = datosFiltrados.filter(
       (item) => obtenerCategoriaEstatus(item) === 'revision'
@@ -331,80 +347,137 @@ const obtenerTextoEstatus = (item) => {
 
 
 
+    // ==========================
+   // BAJAS
   // ==========================
-// BAJAS
-// ==========================
 if (
   tipoTramite === "baja" &&
   Array.isArray(resultados?.data?.registros)
 ) {
+  const normalizarTexto = (valor = "") =>
+    String(valor)
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .trim()
+      .toLowerCase();
+
+  const obtenerNombreCompleto = (item) =>
+    normalizarTexto(
+      `${item.nombre_elemento || ""} ${item.apellido_paterno || ""} ${item.apellido_materno || ""}`
+    );
+
+  const obtenerOrigen = (item) => {
+    if (item.origen_baja === "manual") return "manual";
+    if (item.origen_baja === "sistema") return "sistema";
+    return "";
+  };
 
   datosFiltrados = resultados.data.registros.filter((item) => {
+
+
+
+    console.log("BUSCANDO:", terminoBusqueda);
+
+
+    const textoBusqueda = normalizarTexto(terminoBusqueda);
+
+    const nombreCompleto = obtenerNombreCompleto(item);
+    const numeroOficio = normalizarTexto(item.numero_oficio_municipio || "");
+    const municipio = normalizarTexto(item.municipio_nombre || "");
+    const tipo = normalizarTexto(item.baja_tipo || "");
+    const motivo = normalizarTexto(item.baja_motivo || "");
+    const origen = normalizarTexto(obtenerOrigen(item));
+
+    const fechaBajaRaw = item.baja_fecha || "";
+    const fechaBajaISO = normalizarTexto(String(fechaBajaRaw).split("T")[0]);
+    const fechaBajaMX = normalizarTexto(
+      fechaBajaRaw
+        ? new Date(fechaBajaRaw).toLocaleDateString("es-MX")
+        : ""
+    );
 
     const coincideMunicipio =
       !municipioNombre ||
       municipioNombre === "TODOS" ||
-      item.municipio_nombre?.toLowerCase() ===
-        municipioNombre.toLowerCase();
+      municipio === normalizarTexto(municipioNombre);
 
-    const textoBusqueda = terminoBusqueda.toLowerCase();
+    let coincideBusqueda = true;
 
-    const coincideBusqueda =
-      !terminoBusqueda ||
-      item.nombre_elemento
-        ?.toLowerCase()
-        .includes(textoBusqueda) ||
-      item.numero_oficio_municipio
-        ?.toLowerCase()
-        .includes(textoBusqueda) ||
-      item.municipio_nombre
-        ?.toLowerCase()
-        .includes(textoBusqueda) ||
-      item.baja_tipo
-        ?.toLowerCase()
-        .includes(textoBusqueda) ||
-      item.baja_motivo
-        ?.toLowerCase()
-        .includes(textoBusqueda);
+    if (textoBusqueda) {
+      coincideBusqueda =
+        nombreCompleto.includes(textoBusqueda) ||
+        numeroOficio.includes(textoBusqueda) ||
+        municipio.includes(textoBusqueda) ||
+        fechaBajaISO.includes(textoBusqueda) ||
+        fechaBajaMX.includes(textoBusqueda) ||
+        tipo.includes(textoBusqueda) ||
+        motivo.includes(textoBusqueda) ||
+        origen.includes(textoBusqueda);
+    }
 
     const coincideFecha =
       !fecha ||
-      item.baja_fecha?.split("T")[0] === fecha;
+      String(fechaBajaRaw).split("T")[0] === fecha;
 
-    return (
-      coincideMunicipio &&
-      coincideBusqueda &&
-      coincideFecha
-    );
+    return coincideMunicipio && coincideBusqueda && coincideFecha;
   });
 
-const bajasSistema = datosFiltrados.filter(
-  (item) => item.origen_baja === "sistema"
-).length;
 
-const bajasManuales = datosFiltrados.filter(
-  (item) => item.origen_baja === "manual"
-).length;
 
-resumen = [
-  {
-    cantidad: datosFiltrados.length,
-    estado: "Elementos dados de baja",
-    color: "rojo",
-  },
-  {
-    cantidad: bajasSistema,
-    estado: "Bajas desde el sistema",
-    color: "amarillo",
-  },
-  {
-    cantidad: bajasManuales,
-    estado: "Bajas manuales",
-    color: "gris",
-  },
-];
+  datosFiltrados = Array.from(
+  new Map(
+    datosFiltrados.map((item) => [
+      `${item.origen_baja}-${item.numero_oficio_municipio}-${item.nombre_elemento}-${item.apellido_paterno}-${item.apellido_materno}`,
+      item
+    ])
+  ).values()
+);
 
+
+
+  const bajasSistema = datosFiltrados.filter(
+    (item) => item.origen_baja === "sistema"
+  ).length;
+
+  const bajasManuales = datosFiltrados.filter(
+    (item) => item.origen_baja === "manual"
+  ).length;
+
+  resumen = [
+    {
+      cantidad: datosFiltrados.length,
+      estado: "Elementos dados de baja",
+      color: "rojo",
+    },
+    {
+      cantidad: bajasSistema,
+      estado: "Bajas desde el sistema",
+      color: "amarillo",
+    },
+    {
+      cantidad: bajasManuales,
+      estado: "Bajas manuales",
+      color: "gris",
+    },
+  ];
 }
+
+
+
+console.log("RESULTADOS FILTRADOS BAJA:", datosFiltrados.length);
+console.table(
+  datosFiltrados.map((item) => ({
+    nombre: `${item.nombre_elemento || ""} ${item.apellido_paterno || ""} ${item.apellido_materno || ""}`,
+    oficio: item.numero_oficio_municipio,
+    municipio: item.municipio_nombre,
+    fecha: item.baja_fecha,
+    tipo: item.baja_tipo,
+    motivo: item.baja_motivo,
+    origen: item.origen_baja,
+  }))
+);
+
+
 
   // ==========================
   // CONSULTA
