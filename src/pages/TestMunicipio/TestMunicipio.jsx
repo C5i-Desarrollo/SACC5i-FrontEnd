@@ -155,55 +155,99 @@ const response = await fetch(url, {
     }
   };
 
-  const consultarPersonasMunicipio = async (municipio) => {
-    setMunicipioSeleccionado(municipio);
-    setLoading(true);
+const consultarPersonasDeMunicipios = async (municipios = []) => {
+  if (!municipios.length) {
+    setPersonasConsultaDetalle([]);
+    return;
+  }
 
-    try {
-      const rawBaseUrl =
-        import.meta.env.VITE_API_URL || "http://localhost:5000";
+  setLoading(true);
 
-      const baseUrl = rawBaseUrl.replace(/\/api\/?$/, "");
-      const token = localStorage.getItem("token");
+  try {
+    const rawBaseUrl =
+      import.meta.env.VITE_API_URL || "http://localhost:5000";
 
-      const url =
-        `${baseUrl}/api/tramites/alta/consulta/municipios/${municipio.municipio_id}/personas?municipio_nombre=${encodeURIComponent(municipio.municipio_nombre)}`;
+    const baseUrl = rawBaseUrl.replace(/\/api\/?$/, "");
+    const token = localStorage.getItem("token");
 
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
+    const respuestas = await Promise.all(
+      municipios.map(async (municipio) => {
+        const url =
+          `${baseUrl}/api/tramites/alta/consulta/municipios/${municipio.municipio_id}/personas?municipio_nombre=${encodeURIComponent(municipio.municipio_nombre)}`;
 
-      const data = await response.json();
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
 
-      if (!response.ok) {
-        throw new Error(
-          data?.message ||
-            data?.error ||
-            `Error ${response.status}`
-        );
-      }
+        const data = await response.json();
 
-      const registros =
-        Array.isArray(data?.data)
+        return Array.isArray(data?.data)
           ? data.data
           : Array.isArray(data?.data?.registros)
             ? data.data.registros
             : Array.isArray(data?.personas)
               ? data.personas
               : [];
+      })
+    );
 
-      setPersonasConsultaDetalle(registros);
-    } catch (error) {
-      console.error(error);
-      setPersonasConsultaDetalle([]);
-    } finally {
-      setLoading(false);
-    }
-  };
+    setPersonasConsultaDetalle(respuestas.flat());
+  } catch (error) {
+    console.error(error);
+    setPersonasConsultaDetalle([]);
+  } finally {
+    setLoading(false);
+  }
+};
+useEffect(() => {
+  if (tipoTramite !== "consulta") return;
+
+  const registrosConsulta =
+    Array.isArray(resultados?.data)
+      ? resultados.data
+      : Array.isArray(resultados?.data?.registros)
+        ? resultados.data.registros
+        : [];
+
+  if (!registrosConsulta.length) {
+    setPersonasConsultaDetalle([]);
+    return;
+  }
+
+  const normalizarTexto = (valor = "") =>
+    String(valor)
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .trim()
+      .toLowerCase();
+
+  const municipioFiltro = normalizarTexto(municipioNombre);
+  const textoBusqueda = normalizarTexto(terminoBusqueda);
+
+  const municipiosFiltrados = registrosConsulta.filter((item) => {
+    const municipio = normalizarTexto(item.municipio_nombre || "");
+    const totalPersonas = String(item.total_personas ?? "");
+
+    const coincideMunicipio =
+      !municipioFiltro ||
+      municipioFiltro === "todos" ||
+      municipioFiltro.includes("todos los municipios") ||
+      municipio === municipioFiltro;
+
+    const coincideBusqueda =
+      !textoBusqueda ||
+      municipio.includes(textoBusqueda) ||
+      totalPersonas.includes(textoBusqueda);
+
+    return coincideMunicipio && coincideBusqueda;
+  });
+
+  consultarPersonasDeMunicipios(municipiosFiltrados);
+}, [tipoTramite, resultados, municipioNombre, terminoBusqueda]);
 
   let resumen = [];
   let datosFiltrados = [];
@@ -482,32 +526,41 @@ console.table(
   // ==========================
   // CONSULTA
   // ==========================
-  if (tipoTramite === "consulta") {
-    const registrosConsulta =
-      Array.isArray(resultados?.data)
-        ? resultados.data
-        : Array.isArray(resultados?.data?.registros)
-          ? resultados.data.registros
-          : [];
+if (tipoTramite === "consulta") {
+  const registrosConsulta =
+    Array.isArray(resultados?.data)
+      ? resultados.data
+      : Array.isArray(resultados?.data?.registros)
+        ? resultados.data.registros
+        : [];
 
-    consultaResumen = registrosConsulta.filter((item) => {
-      const coincideMunicipio =
-        !municipioNombre ||
-        municipioNombre === "TODOS" ||
-        item.municipio_nombre?.toLowerCase() ===
-          municipioNombre?.toLowerCase();
+  const normalizarTexto = (valor = "") =>
+    String(valor)
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .trim()
+      .toLowerCase();
 
-      const textoBusqueda = terminoBusqueda.toLowerCase();
+  consultaResumen = registrosConsulta.filter((item) => {
+    const textoBusqueda = normalizarTexto(terminoBusqueda);
+    const municipio = normalizarTexto(item.municipio_nombre || "");
+    const totalPersonas = String(item.total_personas ?? "");
+    const municipioFiltro = normalizarTexto(municipioNombre);
 
-      const coincideBusqueda =
-        !terminoBusqueda ||
-        item.municipio_nombre
-          ?.toLowerCase()
-          .includes(textoBusqueda);
+    const coincideMunicipio =
+      !municipioFiltro ||
+      municipioFiltro === "todos" ||
+      municipioFiltro.includes("todos los municipios") ||
+      municipio === municipioFiltro;
 
-      return coincideMunicipio && coincideBusqueda;
-    });
-  }
+    const coincideBusqueda =
+      !textoBusqueda ||
+      municipio.includes(textoBusqueda) ||
+      totalPersonas.includes(textoBusqueda);
+
+    return coincideMunicipio && coincideBusqueda;
+  });
+}
 
   return (
     <div className="filtrado-container">
@@ -559,17 +612,22 @@ console.table(
 
       {tipoTramite === "consulta" && (
         <>
-          <TablaConsultaResumen
-            datos={consultaResumen}
-            municipioSeleccionado={municipioSeleccionado}
-            onConsultarMunicipio={consultarPersonasMunicipio}
-          />
-
-          <TablaConsultaDetalle
-            personas={personasConsultaDetalle}
-          />
+         <TablaConsultaResumen
+  datos={consultaResumen}
+  municipioSeleccionado={municipioSeleccionado}
+  onConsultarMunicipio={consultarPersonasDeMunicipios}
+/>
+          
+<TablaConsultaDetalle
+  personas={personasConsultaDetalle}
+  fecha={fecha}
+/>
+        
         </>
+        
       )}
+      
     </div>
+    
   );
 }
