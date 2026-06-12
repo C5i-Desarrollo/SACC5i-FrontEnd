@@ -6,10 +6,9 @@ import TablaConsultaResumen from "./TablaConsultaResumen";
 import TablaConsultaDetalle from "./TablaConsultaDetalle";
 import "./TestMunicipio.css";
 
-import {
-  obtenerBajasRegistradas,
-  obtenerBajasEditables
-} from "../../services/bajaService";
+import { obtenerAltasRegistradas } from "../../services/altaService";
+
+import { obtenerBajasRegistradas, obtenerBajasEditables } from "../../services/bajaService";
 
 export default function TestMunicipio() {
   const [municipioNombre, setMunicipioNombre] = useState("");
@@ -29,6 +28,31 @@ export default function TestMunicipio() {
   useEffect(() => {
     probarFiltro();
   }, [tipoTramite, municipioNombre, estatus, fecha, terminoBusqueda]);
+
+  useEffect(() => {
+  const actualizarAlVolver = () => {
+    if (!document.hidden && tipoTramite === "alta") {
+      probarFiltro();
+    }
+  };
+
+  document.addEventListener("visibilitychange", actualizarAlVolver);
+
+  return () => {
+    document.removeEventListener("visibilitychange", actualizarAlVolver);
+  };
+}, [tipoTramite]);
+
+  
+  useEffect(() => {
+  const intervalo = setInterval(() => {
+    if (tipoTramite === "alta") {
+      probarFiltro();
+    }
+  }, 5000);
+
+  return () => clearInterval(intervalo);
+}, [tipoTramite]);
 
   const limpiarFiltros = () => {
     setMunicipioNombre("");
@@ -54,6 +78,18 @@ export default function TestMunicipio() {
 
       const baseUrl = rawBaseUrl.replace(/\/api\/?$/, "");
       const token = localStorage.getItem("token");
+
+
+     if (tipoTramite === "alta") {
+  const altasRes = await obtenerAltasRegistradas();
+
+  setResultados({
+    data: altasRes.registros || []
+  });
+
+  setLoading(false);
+  return;
+}
 
       if (tipoTramite === "baja") {
   const [bajasSistemaRes, bajasManualesRes] = await Promise.all([
@@ -231,49 +267,22 @@ const response = await fetch(url, {
 
 const obtenerTextoEstatus = (item) => {
   return normalizarTexto(
+    item.fase1_estado ||
     item.estatus_descriptivo ||
-    item.fase_actual ||
-    item.tramite_fase ||
-    item.accion_disponible ||
     ''
   );
 };
 
     const obtenerCategoriaEstatus = (item) => {
-      const estatus = obtenerTextoEstatus(item);
+    const estatus = obtenerTextoEstatus(item);
 
-      if (
-        estatus.includes('rechazado') ||
-        estatus.includes('no corresponde')
-      ) {
-        return 'rechazado';
-      }
+    if (estatus.includes("rechazado")) return "rechazado";
+    if (estatus.includes("firmado")) return "aprobado";
+    if (estatus.includes("revision")) return "revision";
+    if (estatus.includes("pendiente")) return "pendiente";
 
-      if (
-        estatus.includes('aprobado') ||
-        estatus.includes('validado') ||
-        estatus.includes('alta ok') ||
-        estatus.includes('dictaminado')
-      ) {
-        return 'aprobado';
-      }
-
-      if (
-        estatus.includes('revision') ||
-        estatus.includes('validacion') ||
-        estatus.includes('enviado_c3') ||
-        estatus.includes('persona_en_revision') ||
-        estatus.includes('persona_en_cuip')
-      ) {
-        return 'revision';
-      }
-
-      if (estatus.includes('pendiente')) {
-        return 'pendiente';
-      }
-
-      return 'otro';
-    };
+    return "otro";
+  };
 
     const enRevision = datosFiltrados.filter(
       (item) => obtenerCategoriaEstatus(item) === 'revision'
@@ -310,7 +319,17 @@ const obtenerTextoEstatus = (item) => {
         color: "gris",
       },
     ];
+
+    console.log("RESUMEN ALTAS:", {
+  total: datosFiltrados.length,
+  enRevision,
+  aprobados,
+  rechazados,
+  pendientes
+});
   }
+
+
 
   // ==========================
 // BAJAS
