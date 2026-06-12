@@ -39,10 +39,15 @@ export default function TablaConsultaResumen({
         >
           <thead>
             <tr style={{ backgroundColor: '#8b0028', color: 'white' }}>
-              <th style={{ padding: '14px', textAlign: 'center', width: '80px' }}>No.</th>
-              <th style={{ padding: '14px', textAlign: 'left' }}>Municipio</th>
-              <th style={{ padding: '14px', textAlign: 'center' }}>Personas finalizadas</th>
-              <th style={{ padding: '14px', textAlign: 'center', width: '180px' }}>Acciones</th>
+              <th style={{ padding: '14px', textAlign: 'center', width: '80px' }}>
+                No.
+              </th>
+              <th style={{ padding: '14px', textAlign: 'left' }}>
+                Municipio
+              </th>
+              <th style={{ padding: '14px', textAlign: 'center' }}>
+                Personas finalizadas
+              </th>
             </tr>
           </thead>
 
@@ -50,7 +55,7 @@ export default function TablaConsultaResumen({
             {datos.length === 0 ? (
               <tr>
                 <td
-                  colSpan="4"
+                  colSpan="3"
                   style={{
                     padding: '20px',
                     textAlign: 'center',
@@ -69,7 +74,10 @@ export default function TablaConsultaResumen({
                 return (
                   <tr
                     key={item.municipio_id || index}
+                    onClick={() => onConsultarMunicipio?.(item)}
+                    title="Da clic para consultar personas finalizadas"
                     style={{
+                      cursor: 'pointer',
                       backgroundColor: activo
                         ? '#f5dfe7'
                         : index % 2 === 0
@@ -88,24 +96,6 @@ export default function TablaConsultaResumen({
                     <td style={{ padding: '14px', textAlign: 'center', fontWeight: '600' }}>
                       {item.total_personas ?? 0}
                     </td>
-
-                    <td style={{ padding: '14px', textAlign: 'center' }}>
-                      <button
-                        type="button"
-                        onClick={() => onConsultarMunicipio?.(item)}
-                        style={{
-                          backgroundColor: activo ? '#800020' : 'white',
-                          border: '1px solid #800020',
-                          color: activo ? 'white' : '#800020',
-                          padding: '8px 18px',
-                          borderRadius: '8px',
-                          cursor: 'pointer',
-                          fontWeight: '700'
-                        }}
-                      >
-                        Consulta
-                      </button>
-                    </td>
                   </tr>
                 );
               })
@@ -113,6 +103,10 @@ export default function TablaConsultaResumen({
           </tbody>
         </table>
       </div>
+
+      <p style={{ marginTop: '12px', color: '#777', fontSize: '13px' }}>
+        Selecciona un municipio para visualizar el detalle de personas finalizadas.
+      </p>
     </div>
   );
 }

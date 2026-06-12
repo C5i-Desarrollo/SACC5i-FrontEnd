@@ -1,19 +1,54 @@
 import React, { useState } from 'react';
 
 export default function TablaConsultaDetalle({
-  personas = []
+  personas = [],
+  fecha = ""
 }) {
-  const [busqueda, setBusqueda] = useState('');
+  const [busqueda, setBusqueda] = useState("");
+  const normalizarTexto = (valor = "") =>
+  String(valor)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim()
+    .toLowerCase();
 
-  const personasFiltradas = personas.filter((persona) => {
-    const texto = busqueda.toLowerCase();
+const normalizarFecha = (valor = "") => {
+  if (!valor) return "";
 
-    return (
-      (persona.nombre || '').toLowerCase().includes(texto) ||
-      (persona.apellido_paterno || '').toLowerCase().includes(texto) ||
-      (persona.apellido_materno || '').toLowerCase().includes(texto)
-    );
-  });
+  const fechaObj = new Date(valor);
+  if (Number.isNaN(fechaObj.getTime())) return String(valor).split("T")[0];
+
+  return fechaObj.toISOString().split("T")[0];
+};
+
+const personasFiltradas = personas.filter((persona) => {
+  const texto = normalizarTexto(busqueda);
+
+  const nombre = normalizarTexto(persona.nombre || "");
+  const apellidoPaterno = normalizarTexto(persona.apellido_paterno || "");
+  const apellidoMaterno = normalizarTexto(persona.apellido_materno || "");
+  const fechaNacimiento = normalizarFecha(persona.fecha_nacimiento);
+
+  const coincideBusqueda =
+    !texto ||
+    nombre.includes(texto) ||
+    apellidoPaterno.includes(texto) ||
+    apellidoMaterno.includes(texto);
+const fechaNacimientoISO = normalizarFecha(persona.fecha_nacimiento);
+
+const fechaNacimientoMX = persona.fecha_nacimiento
+  ? new Date(persona.fecha_nacimiento).toLocaleDateString("es-MX")
+  : "";
+
+const fechaFiltro = normalizarTexto(fecha);
+
+const coincideFecha =
+  !fechaFiltro ||
+  normalizarTexto(fechaNacimientoISO).includes(fechaFiltro) ||
+  normalizarTexto(fechaNacimientoMX).includes(fechaFiltro);
+
+  return coincideBusqueda && coincideFecha;
+});
 
   return (
     <div
