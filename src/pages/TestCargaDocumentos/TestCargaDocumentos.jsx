@@ -302,72 +302,74 @@ if (archivos.length > 10) {
           </div>
         </div>
 
-        <table className="tabla-limpia">
-          <thead>
-            <tr>
-              <th>Archivo</th>
-              <th>Fecha de envío</th>
-              <th>Movimiento</th>
-              <th>Estatus</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {loading && documentos.length === 0 ? (
-              <tr><td colSpan="5" style={{textAlign:'center'}}>Cargando documentos...</td></tr>
-            ) : documentosPagina.length === 0 ? (
-              <tr><td colSpan="5" style={{textAlign:'center'}}>No se encontraron documentos en esta bandeja.</td></tr>
-            ) : (
-              documentosPagina.map((doc) => (
-                <tr key={doc.id}>
-                  <td className="tabla-archivo-nombre">{doc.archivo_nombre}</td>
-                  <td>{formatearFecha(doc.fecha_carga)}</td>
-                  <td>{doc.tipo_movimiento}</td>
-                  <td>
-                    <span className={`badge-limpio badge-${doc.estatus ? doc.estatus.toLowerCase().replace(" ", "-") : "pendiente"}`}>
-                      {doc.estatus}
-                    </span>
-                  </td>
-                  <td>
-                    <div className="acciones-limpias">
-                      <button className="btn-accion view" onClick={() => visualizarDocumento(doc.id)} title="Ver PDF">
-                        <Eye size={18} />
-                      </button>
-                      <button className="btn-accion download" onClick={() => descargarDocumento(doc.id, doc.archivo_nombre)} title="Descargar">
-                        <Download size={18} />
-                      </button>
-                      
-                      {vistaActual === "pendientes" ? (
-                        <button
-                          className="btn-accion delete"
-                          onClick={() => {
-                            setDocumentoAEliminar(doc.id);
-                            setModalEliminarOpen(true);
-                          }}
-                          title="Cancelar envío"
-                        >
-                          <Trash2 size={18} />
+        <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+          <table className="tabla-limpia">
+            <thead>
+              <tr>
+                <th>Archivo</th>
+                <th>Fecha de envío</th>
+                <th>Movimiento</th>
+                <th>Estatus</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {loading && documentos.length === 0 ? (
+                <tr><td colSpan="5" style={{textAlign:'center'}}>Cargando documentos...</td></tr>
+              ) : documentosPagina.length === 0 ? (
+                <tr><td colSpan="5" style={{textAlign:'center'}}>No se encontraron documentos en esta bandeja.</td></tr>
+              ) : (
+                documentosPagina.map((doc) => (
+                  <tr key={doc.id}>
+                    <td className="tabla-archivo-nombre">{doc.archivo_nombre}</td>
+                    <td>{formatearFecha(doc.fecha_carga)}</td>
+                    <td>{doc.tipo_movimiento}</td>
+                    <td>
+                      <span className={`badge-limpio badge-${doc.estatus ? doc.estatus.toLowerCase().replace(" ", "-") : "pendiente"}`}>
+                        {doc.estatus}
+                      </span>
+                    </td>
+                    <td>
+                      <div className="acciones-limpias">
+                        <button className="btn-accion view" onClick={() => visualizarDocumento(doc.id)} title="Ver PDF">
+                          <Eye size={18} />
                         </button>
-                      ) : (
-                        <>
-                          {/* 🔥 NUEVO: Botón de Corregir que solo sale si está rechazado */}
-                          {doc.estatus === "Rechazado" && (
-                            <button className="btn-accion update" onClick={() => handleAbrirModalCarga(doc)} title="Corregir documento">
-                              <RefreshCw size={16} style={{ marginRight: '4px' }}/> Corregir
-                            </button>
-                          )}
-                          <button className="btn-accion bitacora" onClick={() => setModalBitacora({ isOpen: true, docId: doc.id })} title="Ver observaciones">
-                            Ver más
+                        <button className="btn-accion download" onClick={() => descargarDocumento(doc.id, doc.archivo_nombre)} title="Descargar">
+                          <Download size={18} />
+                        </button>
+                        
+                        {vistaActual === "pendientes" ? (
+                          <button
+                            className="btn-accion delete"
+                            onClick={() => {
+                              setDocumentoAEliminar(doc.id);
+                              setModalEliminarOpen(true);
+                            }}
+                            title="Cancelar envío"
+                          >
+                            <Trash2 size={18} />
                           </button>
-                        </>
-                      )}
-                    </div>
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+                        ) : (
+                          <>
+                            {/* 🔥 NUEVO: Botón de Corregir que solo sale si está rechazado */}
+                            {doc.estatus === "Rechazado" && (
+                              <button className="btn-accion update" onClick={() => handleAbrirModalCarga(doc)} title="Corregir documento">
+                                <RefreshCw size={16} style={{ marginRight: '4px' }}/> Corregir
+                              </button>
+                            )}
+                            <button className="btn-accion bitacora" onClick={() => setModalBitacora({ isOpen: true, docId: doc.id })} title="Ver observaciones">
+                              Ver más
+                            </button>
+                          </>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
 
         <div className="paginacion-limpia">
           <button disabled={paginaActual === 1} onClick={() => setPaginaActual(paginaActual - 1)}>
