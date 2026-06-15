@@ -31,6 +31,7 @@ function TablaAlta({ data, resumen }) {
               <th>Nombre completo</th>
               <th>No. Oficio</th>
               <th>Puesto</th>
+              <th>Municipio</th>
               <th>Fecha de término</th>
               <th>Estatus</th>
             </tr>
@@ -42,6 +43,7 @@ function TablaAlta({ data, resumen }) {
                 <td>{item.nombre_elemento || item.nombre_completo || "Sin nombre"}</td>
                 <td>{item.numero_oficio || item.numero_oficio_c3 || "-"}</td>
                 <td>{item.puesto_elemento || item.puesto_original_nombre || "-"}</td>
+                <td>{item.municipio_nombre || item.municipio || "Sin municipio"}</td>
                 <td>
                   {item.fecha_termino || item.fecha_solicitud
                     ? new Date(item.fecha_termino || item.fecha_solicitud).toLocaleDateString("es-MX")

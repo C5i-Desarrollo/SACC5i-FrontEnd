@@ -81,11 +81,28 @@ export default function TestMunicipio() {
 
 
      if (tipoTramite === "alta") {
-  const altasRes = await obtenerAltasRegistradas();
+    const altasRes = await obtenerAltasRegistradas();
 
-  setResultados({
-    data: altasRes.registros || []
-  });
+    console.log("PRIMER REGISTRO");
+    console.log(altasRes.registros?.[0]);
+
+    console.log("TODAS LAS LLAVES:");
+    console.log(Object.keys(altasRes.registros?.[0] || {}));
+
+    console.dir(altasRes.registros?.[0]);
+
+      console.table(
+      (altasRes.registros || []).map(item => ({
+        nombre: item.nombre_elemento,
+        municipio_nombre: item.municipio_nombre,
+        municipio: item.municipio,
+        nombre_municipio: item.nombre_municipio,
+        municipio_origen: item.municipio_origen
+      }))
+    );
+    setResultados({
+      data: altasRes.registros || []
+    });
 
   setLoading(false);
   return;
@@ -271,6 +288,19 @@ useEffect(() => {
             `${item.nombre || ""} ${item.apellido_paterno || ""} ${item.apellido_materno || ""}`
           ).toLowerCase();
 
+          const municipio = String(
+            item.municipio_nombre ||
+            item.municipio ||
+            item.nombre_municipio ||
+            item.municipio_origen ||
+            ""
+          ).toLowerCase();
+
+          const coincideMunicipio =
+          !municipioNombre ||
+          municipioNombre === "TODOS" ||
+          municipio === municipioNombre.toLowerCase();
+
           const numeroOficio = String(
             item.numero_oficio ||
             item.numero_oficio_c3 ||
@@ -312,7 +342,12 @@ useEffect(() => {
             !fecha ||
             fechaRegistro?.split("T")[0] === fecha;
 
-          return coincideBusqueda && coincideEstatus && coincideFecha;
+          return (
+            coincideBusqueda &&
+            coincideEstatus &&
+            coincideFecha &&
+            coincideMunicipio
+          );
         });
 
             const normalizarTexto = (valor = "") =>
