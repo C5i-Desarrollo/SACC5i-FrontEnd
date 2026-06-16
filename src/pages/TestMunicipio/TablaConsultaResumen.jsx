@@ -72,19 +72,17 @@ export default function TablaConsultaResumen({
                   municipioSeleccionado?.municipio_id === item.municipio_id;
 
                 return (
-                  <tr
-                    key={item.municipio_id || index}
-                    onClick={() => onConsultarMunicipio?.(item)}
-                    title="Da clic para consultar personas finalizadas"
-                    style={{
-                      cursor: 'pointer',
-                      backgroundColor: activo
-                        ? '#f5dfe7'
-                        : index % 2 === 0
-                          ? '#fff'
-                          : '#fbf4f6'
-                    }}
-                  >
+                 <tr
+              key={item.municipio_id || index}
+                   style={{
+                  backgroundColor: activo
+                              ? '#f5dfe7'
+                       : index % 2 === 0
+                              ? '#fff'
+                              : '#fbf4f6'
+  }}
+>
+                  
                     <td style={{ padding: '14px', textAlign: 'center', fontWeight: '600' }}>
                       {index + 1}
                     </td>
