@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import { Upload, Download, Eye, Trash2, CloudUpload, X, RefreshCw } from "lucide-react";
 import { FiCheckCircle, FiXCircle } from "react-icons/fi";
-import BitacoraModal from "../../../components/layout/Bitacora/BitacoraModal";
+import BitacoraModal from "../../components/layout/Bitacora/BitacoraModal";
 import "./TestCargaDocumentos.css";
 
 const formatearFecha = (fechaString) => {

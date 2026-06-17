@@ -15,7 +15,7 @@ import { ProtectedRouter } from './routes/ProtectedRouter';
 import NotFound from './pages/Errors/components/NotFound';
 import ServerError from './pages/Errors/components/ServerError';
 import TestMunicipio from './pages/TestMunicipio/TestMunicipio';
-import TestCargaDocumentos from "./pages/TestCargaDocumentos/components/TestCargaDocumentos";
+import TestCargaDocumentos from "./pages/TestCargaDocumentos/TestCargaDocumentos";
 //import HistorialDocumentos from "./pages/TestCargaDocumentos/HistorialDocumentos";
 
 import './index.css';

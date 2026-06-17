@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import FiltrosControles from "./FiltrosControles";
-import TablaAlta from "./components/TablaAlta";
-import TablaBaja from "./components/TablaBaja";
+import TablaAlta from "./TablaAlta";
+import TablaBaja from "./TablaBaja";
 import TablaConsultaResumen from "./TablaConsultaResumen";
 import TablaConsultaDetalle from "./TablaConsultaDetalle";
 import "./TestMunicipio.css";

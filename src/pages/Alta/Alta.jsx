@@ -1,4 +1,4 @@
-import TablaAlta from "../TestMunicipio/components/TablaAlta";
+import TablaAlta from "../../pages/TestMunicipio/TablaAlta";
 
 const data = [
   {
