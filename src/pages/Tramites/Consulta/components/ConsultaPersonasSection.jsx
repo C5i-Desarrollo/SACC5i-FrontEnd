@@ -313,6 +313,7 @@ export default function ConsultaPersonasSection({
                   <th>Apellido Paterno</th>
                   <th>Apellido Materno</th>
                   <th>Fecha de nacimiento</th>
+                  <th>No. Oficio</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
@@ -336,6 +337,7 @@ export default function ConsultaPersonasSection({
                       <td>{item.apellido_paterno || '---'}</td>
                       <td>{item.apellido_materno || '---'}</td>
                       <td>{fechaNac}</td>
+                      <td>{item.numero_oficio || '---'}</td>
                       <td>
                         {esRecienAgregado ? (
                           <div className="consulta-row-actions">

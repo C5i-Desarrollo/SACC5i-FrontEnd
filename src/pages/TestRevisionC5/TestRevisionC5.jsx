@@ -56,7 +56,16 @@ export default function TestRevisionC5() {
   const municipios = [
     ...new Set(documentos.map((doc) => doc.municipio_nombre).filter(Boolean)),
   ];
-  const movimientos = ["Alta", "Baja", "Consulta"];
+  const movimientos = [
+    "Alta", 
+    "Baja", 
+    "Consulta",
+    "Reimpresion CUIP/Constancia",
+    "Listado de Personal Activo",
+    "Cambio de Rango / Categoria",
+    "Listado Nominal",
+    "Listado Municipal"
+  ];
   const estatuses = ["Aprobado", "Rechazado"];
 
   const mostrarToast = (tipo, titulo, msj) => {

@@ -102,7 +102,8 @@ const descargarExcelDesdeRegistros = async (
     Nombre: item?.nombre || '---',
     'Apellido Paterno': item?.apellido_paterno || '---',
     'Apellido Materno': item?.apellido_materno || '---',
-    'Fecha de nacimiento': formatearFechaNacimientoExport(item?.fecha_nacimiento)
+    'Fecha de nacimiento': formatearFechaNacimientoExport(item?.fecha_nacimiento),
+    'No. Oficio': item?.numero_oficio || '---'
   }));
 
   const worksheet = XLSX.utils.json_to_sheet(filas);
@@ -112,6 +113,7 @@ const descargarExcelDesdeRegistros = async (
     { wch: 24 },
     { wch: 24 },
     { wch: 24 },
+    { wch: 22 },
     { wch: 20 }
   ];
 

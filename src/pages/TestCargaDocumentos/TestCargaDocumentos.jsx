@@ -39,7 +39,16 @@ export default function TestCargaDocumentos() {
   const [toast, setToast] = useState({ show: false, tipo: "", titulo: "", mensaje: "" });
 
   const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
-  const movimientos = ["Alta", "Baja", "Consulta"];
+  const movimientos = [
+    "Alta", 
+    "Baja", 
+    "Consulta",
+    "Reimpresion CUIP/Constancia",
+    "Listado de Personal Activo",
+    "Cambio de Rango / Categoria",
+    "Listado Nominal",
+    "Listado Municipal"
+  ];
 
   const mostrarToast = (tipo, titulo, msj) => {
     setToast({ show: true, tipo, titulo, mensaje: msj });
