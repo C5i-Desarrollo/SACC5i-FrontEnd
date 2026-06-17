@@ -1,5 +1,5 @@
 import { useState } from "react";
-import TarjetasResumen from "../../components/TarjetasResumen/TarjetasResumen";
+import TarjetasResumen from "../../../components/TarjetasResumen/TarjetasResumen";
 import "./TablaBaja.css";
 
 function TablaBaja({ data, resumen }) {

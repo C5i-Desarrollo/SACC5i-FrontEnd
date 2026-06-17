@@ -1,4 +1,4 @@
-import TarjetasResumen from "../../components/TarjetasResumen/TarjetasResumen";
+import TarjetasResumen from "../../../components/TarjetasResumen/TarjetasResumen";
 import "./TablaAlta.css";
 
 function TablaAlta({ data, resumen }) {

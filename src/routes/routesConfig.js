@@ -24,7 +24,7 @@ const TramitesDependencia = lazy(() => import('../pages/Dependencias/TramitesDep
 
 //test
 const TestMunicipio = lazy(() => import('../pages/TestMunicipio/TestMunicipio'));
-const TestCargaDocumentos = lazy(() => import('../pages/TestCargaDocumentos/TestCargaDocumentos'));
+const TestCargaDocumentos = lazy(() => import('../pages/TestCargaDocumentos/components/TestCargaDocumentos'));
 const TestRevisionC5 = lazy(() => import('../pages/TestRevisionC5/TestRevisionC5'));
 
 /**

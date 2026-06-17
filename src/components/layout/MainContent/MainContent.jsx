@@ -24,7 +24,7 @@ import { getPanelDireccionApi } from '../../../services/api';
 import './MainContent.css';
 import './DireccionSelector.css';
 import TestMunicipio from '../../../pages/TestMunicipio/TestMunicipio';
-import TestCargaDocumentos from '../../../pages/TestCargaDocumentos/TestCargaDocumentos';
+import TestCargaDocumentos from '../../../pages/TestCargaDocumentos/components/TestCargaDocumentos';
 import TestRevisionC5 from '../../../pages/TestRevisionC5/TestRevisionC5';
 
 const normalizarAnalistasDireccion = (lista = []) => {
