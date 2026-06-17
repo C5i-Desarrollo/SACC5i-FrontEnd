@@ -211,6 +211,11 @@ const consultarPersonasDeMunicipios = async (municipios = []) => {
               : [];
       })
     );
+    console.log("PRIMERA PERSONA CONSULTA:");
+console.log(respuestas.flat()[0]);
+
+console.log("LLAVES CONSULTA:");
+console.log(Object.keys(respuestas.flat()[0] || {}));
 
     setPersonasConsultaDetalle(respuestas.flat());
   } catch (error) {
@@ -243,7 +248,7 @@ useEffect(() => {
       .toLowerCase();
 
   const municipioFiltro = normalizarTexto(municipioNombre);
-  const textoBusqueda = normalizarTexto(terminoBusqueda);
+  
 
   const municipiosFiltrados = registrosConsulta.filter((item) => {
     const municipio = normalizarTexto(item.municipio_nombre || "");
@@ -255,12 +260,9 @@ useEffect(() => {
       municipioFiltro.includes("todos los municipios") ||
       municipio === municipioFiltro;
 
-    const coincideBusqueda =
-      !textoBusqueda ||
-      municipio.includes(textoBusqueda) ||
-      totalPersonas.includes(textoBusqueda);
+ 
 
-    return coincideMunicipio && coincideBusqueda;
+    return coincideMunicipio;
   });
 
   consultarPersonasDeMunicipios(municipiosFiltrados);
@@ -656,6 +658,7 @@ if (tipoTramite === "consulta") {
 <TablaConsultaDetalle
   personas={personasConsultaDetalle}
   fecha={fecha}
+  terminoBusqueda={terminoBusqueda}
 />
         
         </>
