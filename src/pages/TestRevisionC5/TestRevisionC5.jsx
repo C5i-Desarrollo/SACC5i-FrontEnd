@@ -64,7 +64,6 @@ export default function TestRevisionC5() {
     "Listado de Personal Activo",
     "Cambio de Rango / Categoria",
     "Listado Nominal",
-    "Listado Municipal"
   ];
   const estatuses = ["Aprobado", "Rechazado"];
 
