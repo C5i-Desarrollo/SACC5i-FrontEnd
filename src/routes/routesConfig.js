@@ -30,6 +30,8 @@ const TestRevisionC5 = lazy(() => import('../pages/TestRevisionC5/TestRevisionC5
 //listados
 const ListadoNominal = lazy(() => import('../pages/ListadoNominal/ListadoNominal'));
 
+const RepositorioMunicipios = lazy(() => import('../pages/RepositorioMunicipios/RepositorioMunicipios'));
+
 /**
  * Configuración de rutas protegidas
  * Cada ruta define:
@@ -133,7 +135,15 @@ export const protectedRoutes = [
     element: ListadoNominal,
     permission: 'VIEW_DASHBOARD',
     title: 'Listado Nominal'
+  },
+
+  {
+    path: 'repositorio-municipios',
+    element: RepositorioMunicipios,
+    permission: 'VIEW_DASHBOARD',
+    title: 'Repositorio de Respaldos'
   }
+
 ];
 
 /**
@@ -166,7 +176,8 @@ export const sectionToRoute = {
   RevisionMunicipios: '/dashboard/revision-municipios',
   TestCargaDocumentos: '/dashboard/municipio/carga-documentos',
   TestRevisionC5: '/dashboard/revision-municipios',
-  ListadoNominal: '/dashboard/listado-nominal'
+  ListadoNominal: '/dashboard/listado-nominal',
+  RepositorioMunicipios: '/dashboard/repositorio-municipios'
 };
 
 /**

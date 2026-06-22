@@ -27,6 +27,7 @@ import TestMunicipio from '../../../pages/TestMunicipio/TestMunicipio';
 import TestCargaDocumentos from '../../../pages/TestCargaDocumentos/TestCargaDocumentos';
 import TestRevisionC5 from '../../../pages/TestRevisionC5/TestRevisionC5';
 import ListadoNominal from '../../../pages/ListadoNominal/ListadoNominal';
+import RepositorioMunicipios from '../../../pages/RepositorioMunicipios/RepositorioMunicipios';
 
 const normalizarAnalistasDireccion = (lista = []) => {
   const analistasMap = new Map();
@@ -283,7 +284,10 @@ const renderContent = () => {
 
     case 'ListadoNominal':
       return can('VIEW_DASHBOARD') ? <ListadoNominal setPageTitle={setPageTitle} /> : <NoPermiso />;
-      
+
+    case 'RepositorioMunicipios': return can('VIEW_DASHBOARD') ? (    <RepositorioMunicipios setPageTitle={setPageTitle} />) : (
+    <NoPermiso />);  
+       
     default:
       if (esVistaDireccion) {
         return renderDireccionSelector({
