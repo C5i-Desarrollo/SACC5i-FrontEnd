@@ -27,6 +27,11 @@ const TestMunicipio = lazy(() => import('../pages/TestMunicipio/TestMunicipio'))
 const TestCargaDocumentos = lazy(() => import('../pages/TestCargaDocumentos/TestCargaDocumentos'));
 const TestRevisionC5 = lazy(() => import('../pages/TestRevisionC5/TestRevisionC5'));
 
+//listados
+const ListadoNominal = lazy(() => import('../pages/ListadoNominal/ListadoNominal'));
+
+const RepositorioMunicipios = lazy(() => import('../pages/RepositorioMunicipios/RepositorioMunicipios'));
+
 /**
  * Configuración de rutas protegidas
  * Cada ruta define:
@@ -54,7 +59,7 @@ export const protectedRoutes = [
     permission: 'VIEW_PERFIL',
     title: 'Mi Perfil'
   },
-  
+
   // Trámites - Alta
   {
     path: 'tramites/alta',
@@ -62,7 +67,7 @@ export const protectedRoutes = [
     permission: 'VIEW_ALTA',
     title: 'Alta de Personal'
   },
-  
+
   // Trámites - Baja
   {
     path: 'tramites/baja',
@@ -70,7 +75,7 @@ export const protectedRoutes = [
     permission: 'VIEW_BAJA',
     title: 'Baja de Personal'
   },
-  
+
   // Trámites - Consulta
   {
     path: 'tramites/consulta',
@@ -78,7 +83,7 @@ export const protectedRoutes = [
     permission: 'VIEW_CONSULTA',
     title: 'Consulta de Trámites'
   },
-  
+
   // C3
   {
     path: 'c3/pendientes',
@@ -86,7 +91,7 @@ export const protectedRoutes = [
     permission: 'VIEW_PENDIENTES_C3',
     title: 'Personas Pendientes C3'
   },
-  
+
   // Dependencias
   {
     path: 'dependencia/tramites',
@@ -94,7 +99,7 @@ export const protectedRoutes = [
     permission: 'VIEW_TRAMITES_DEPENDENCIA',
     title: 'Mis Trámites'
   },
-  
+
   // Ruta de prueba para filtrado por municipio
   {
     path: 'test-municipio', // <-- Cambiado de 'test/municipio' a 'test-municipio'
@@ -104,25 +109,41 @@ export const protectedRoutes = [
   },
 
   // Municipio - carga documentos
-{
-  path: 'municipio/carga-documentos',
-  element: TestCargaDocumentos,
-  permission: 'VIEW_DASHBOARD',
-  title: 'Carga de Documentos'
-},
+  {
+    path: 'municipio/carga-documentos',
+    element: TestCargaDocumentos,
+    permission: 'VIEW_DASHBOARD',
+    title: 'Carga de Documentos'
+  },
   // Municipio - revisión documentos
-{
-  path: 'municipio/revision-documentos',
-  element: TestRevisionC5,
-  permission: 'VIEW_DASHBOARD',
-  title: 'Revisión de Documentos'
-},
+  {
+    path: 'municipio/revision-documentos',
+    element: TestRevisionC5,
+    permission: 'VIEW_DASHBOARD',
+    title: 'Revisión de Documentos'
+  },
 
-  { path: 'revision-municipios', 
-    element: TestRevisionC5, 
-    permission: 'VIEW_DASHBOARD', 
-    title: 'Revisión C5' 
+  {
+    path: 'revision-municipios',
+    element: TestRevisionC5,
+    permission: 'VIEW_DASHBOARD',
+    title: 'Revisión C5'
+  },
+
+  {
+    path: 'listado-nominal',
+    element: ListadoNominal,
+    permission: 'VIEW_DASHBOARD',
+    title: 'Listado Nominal'
+  },
+
+  {
+    path: 'repositorio-municipios',
+    element: RepositorioMunicipios,
+    permission: 'VIEW_DASHBOARD',
+    title: 'Repositorio de Respaldos'
   }
+
 ];
 
 /**
@@ -151,10 +172,12 @@ export const sectionToRoute = {
   TramitesDependencia: '/dashboard/dependencia/tramites',
   ConsultaDependencia: '/dashboard/dependencia/consulta',
   TestMunicipio: '/dashboard/test-municipio',
-CargarDocumentos: '/dashboard/municipio/carga-documentos',
-RevisionMunicipios: '/dashboard/revision-municipios',
-TestCargaDocumentos: '/dashboard/municipio/carga-documentos',
-TestRevisionC5: '/dashboard/revision-municipios'
+  CargarDocumentos: '/dashboard/municipio/carga-documentos',
+  RevisionMunicipios: '/dashboard/revision-municipios',
+  TestCargaDocumentos: '/dashboard/municipio/carga-documentos',
+  TestRevisionC5: '/dashboard/revision-municipios',
+  ListadoNominal: '/dashboard/listado-nominal',
+  RepositorioMunicipios: '/dashboard/repositorio-municipios'
 };
 
 /**

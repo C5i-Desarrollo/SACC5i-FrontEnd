@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 
 export default function TablaConsultaDetalle({
   personas = [],
-  fecha = ""
+  fecha = "",
+  terminoBusqueda = ""
 }) {
   const [busqueda, setBusqueda] = useState("");
   const normalizarTexto = (valor = "") =>
@@ -22,18 +23,20 @@ const normalizarFecha = (valor = "") => {
 };
 
 const personasFiltradas = personas.filter((persona) => {
-  const texto = normalizarTexto(busqueda);
+  const texto = normalizarTexto(terminoBusqueda || busqueda);
 
   const nombre = normalizarTexto(persona.nombre || "");
   const apellidoPaterno = normalizarTexto(persona.apellido_paterno || "");
   const apellidoMaterno = normalizarTexto(persona.apellido_materno || "");
   const fechaNacimiento = normalizarFecha(persona.fecha_nacimiento);
+  const numeroOficio = normalizarTexto(persona.numero_oficio || "");
 
   const coincideBusqueda =
-    !texto ||
-    nombre.includes(texto) ||
-    apellidoPaterno.includes(texto) ||
-    apellidoMaterno.includes(texto);
+  !texto ||
+  nombre.includes(texto) ||
+  apellidoPaterno.includes(texto) ||
+  apellidoMaterno.includes(texto) ||
+  numeroOficio.includes(texto);
 const fechaNacimientoISO = normalizarFecha(persona.fecha_nacimiento);
 
 const fechaNacimientoMX = persona.fecha_nacimiento
@@ -93,6 +96,7 @@ const coincideFecha =
               <th style={{ padding: '14px', textAlign: 'left', width: '24%' }}>Nombre</th>
               <th style={{ padding: '14px', textAlign: 'left', width: '24%' }}>Apellido Paterno</th>
               <th style={{ padding: '14px', textAlign: 'left', width: '24%' }}>Apellido Materno</th>
+              <th style={{ padding: '14px', textAlign: 'center', width: '20%' }}>No. Oficio</th>
               <th style={{ padding: '14px', textAlign: 'center', width: '20%' }}>Fecha de nacimiento</th>
             </tr>
           </thead>
@@ -101,7 +105,7 @@ const coincideFecha =
             {personasFiltradas.length === 0 ? (
               <tr>
                 <td
-                  colSpan="5"
+                  colSpan="6"
                   style={{
                     padding: '20px',
                     textAlign: 'center',
@@ -134,6 +138,10 @@ const coincideFecha =
 
                   <td style={{ padding: '14px' }}>
                     {persona.apellido_materno || 'Sin dato'}
+                  </td>
+
+                  <td style={{ padding: '14px', textAlign: 'center' }}>
+                    {persona.numero_oficio || 'Sin dato'}
                   </td>
 
                   <td style={{ padding: '14px', textAlign: 'center' }}>
