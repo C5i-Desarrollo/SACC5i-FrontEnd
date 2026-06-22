@@ -1,0 +1,310 @@
+.listado-nominal-container {
+    padding: 30px;
+    background: #ffffff;
+    min-height: 100vh;
+    position: relative;
+}
+
+.listado-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+.listado-subtitle {
+    color: #8c1d40;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.listado-header h1 {
+    font-size: 42px;
+    margin: 10px 0;
+    color: #111;
+}
+
+.listado-header p {
+    color: #777;
+    margin-bottom: 0;
+}
+
+.btn-subir-listado {
+    background: #7a1735;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    
+}
+
+.btn-subir-listado:hover {
+    background: #64122b;
+}
+
+.buscador-card {
+    
+    background: white;
+    border-radius: 10px;
+    padding: 18px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    border: 1px solid #eee;
+    width: 1200px;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+    
+}
+
+.buscador-card label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 600;
+
+    
+}
+
+.input-busqueda {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+  
+}
+
+.tabla-card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.tabla-header {
+    margin-bottom: 15px;
+}
+
+.tabla-header h3 {
+    font-size: 18px;
+    margin: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+thead {
+    background: #7a1735;
+}
+
+thead th {
+    color: white;
+    text-align: left;
+    padding: 14px;
+    font-size: 13px;
+}
+
+tbody td {
+    padding: 15px;
+    border-bottom: 1px solid #ececec;
+    font-size: 14px;
+}
+
+tbody tr:hover {
+    background: #fafafa;
+}
+
+.estado-badge {
+    padding: 5px 12px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.estado-badge.vigente {
+    background: #dff3ea;
+    color: #198754;
+}
+
+.estado-badge.anterior {
+    background: #ececec;
+    color: #666;
+}
+
+.acciones-cell {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-ver,
+.btn-descargar {
+    padding: 7px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.btn-ver {
+    background: white;
+    border: 1px solid #7a1735;
+    color: #7a1735;
+}
+
+.btn-descargar {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+}
+
+.btn-ver:hover {
+    background: #7a1735;
+    color: white;
+}
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(3px);
+}
+
+.modal-listado {
+    width: 500px;
+    max-width: 90%;
+    background: white;
+    border-radius: 14px;
+    padding: 25px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.2);
+}
+
+.modal-listado h3 {
+    margin-top: 0;
+    color: #7a1735;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.modal-listado label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #444;
+}
+
+.modal-listado select,
+.modal-listado input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn-cancelar {
+    border: 1px solid #ccc;
+    background: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-subir {
+    background: #7a1735;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-subir:hover {
+    background: #65122b;
+}
+
+.acciones-cell {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.btn-ver,
+.btn-descargar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 500;
+
+    background: #fff;
+    border: 1px solid #7a1838;
+    border-radius: 3px;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-Eliminar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 500;
+
+    background: #fff;
+    border: 1px solid #7a1838;
+    border-radius: 3px;
+
+    cursor: pointer;
+    transition: all 0.2s ease;     
+}
+
+.btn-ver {
+    color: #7a1838;
+}
+
+.btn-descargar {
+    background: #f5f5f5;
+    color: #393939;
+    border: 1px solid #dcdcdc;
+}
+
+.btn-Eliminar {
+    color: #7a1838;
+}
+
+.btn-ver:hover {
+    background: #7a1838;
+    color: #fff;
+}
+.btn-descargar:hover{
+     background: #a4a4a4;
+    color: #fff;
+
+}
+.btn-Eliminar:hover {
+    background: #7a1838;
+    color: #fff;
+}
