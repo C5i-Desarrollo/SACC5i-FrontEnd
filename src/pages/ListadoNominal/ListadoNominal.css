@@ -310,3 +310,50 @@ tbody tr:hover {
     background: #7a1838;
     color: #fff;
 }
+/* ==========================================
+   MODAL ELIMINAR ARCHIVO
+========================================== */
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.btn-cancelar {
+  padding: 10px 20px;
+  border: 1px solid #d8d8d8;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #555;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 110px;
+  transition: all 0.2s ease;
+}
+
+.btn-cancelar:hover {
+  background: #f5f5f5;
+}
+
+.btn-eliminar-modal {
+  background: #800020;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.btn-eliminar-modal:hover {
+  background: #650019;
+  transform: translateY(-1px);
+}
