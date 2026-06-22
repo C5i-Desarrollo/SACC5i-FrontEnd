@@ -29,7 +29,8 @@ export default function ListadoNominal() {
     setLoading(true);
     try {
       const res = await fetch(
-        `${baseUrl}/listados-nominales?busqueda=${busqueda}`,
+        // 🔥 CORRECCIÓN: Agregamos encodeURIComponent para proteger espacios y acentos
+        `${baseUrl}/listados-nominales?busqueda=${encodeURIComponent(busqueda)}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         },
@@ -140,35 +141,32 @@ export default function ListadoNominal() {
     }
   };
 
-  
-const handleEliminar = async (id) => {
-  const confirmar = window.confirm(
-    "¿Deseas eliminar este archivo?"
-  );
 
-  if (!confirmar) return;
-
-  try {
-    await axios.delete(
-      `${baseUrl}/listados-nominales/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+  const handleEliminar = async (id) => {
+    const confirmar = window.confirm(
+      "¿Deseas eliminar este archivo?"
     );
 
-    alert("Archivo eliminado correctamente");
+    if (!confirmar) return;
 
-    cargarListados();
-  } catch (error) {
-    console.error(error);
-    alert("Error al eliminar el archivo");
-  }
-};
+    try {
+      await axios.delete(
+        `${baseUrl}/listados-nominales/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
+      alert("Archivo eliminado correctamente");
 
-
+      cargarListados();
+    } catch (error) {
+      console.error(error);
+      alert("Error al eliminar el archivo");
+    }
+  };
 
   return (
     <div className="listado-nominal-container">
@@ -187,12 +185,12 @@ const handleEliminar = async (id) => {
             <div />
 
             <div className="buscador-card">
-              <label>Buscar municipio</label>
+              <label>Buscar respaldo</label>
 
               <input
                 className="input-busqueda"
                 type="text"
-                placeholder="Escribe el nombre del municipio..."
+                placeholder="Escribe el municipio o el nombre del archivo..."
                 value={busqueda}
                 onChange={(e) => setBusqueda(e.target.value)}
               />
@@ -233,29 +231,29 @@ const handleEliminar = async (id) => {
                 <td className="acciones-cell">
 
                   <button
-  className="btn-ver"
-  onClick={() => handleAccionArchivo(item.id, "ver")}
->
-  <FaRegEye size={10} />
-  Ver
-</button>
+                    className="btn-ver"
+                    onClick={() => handleAccionArchivo(item.id, "ver")}
+                  >
+                    <FaRegEye size={10} />
+                    Ver
+                  </button>
 
-<button
-  className="btn-descargar"
-  onClick={() => handleAccionArchivo(item.id, "descargar")}
->
-  <FiDownload size={10} />
-  Descargar
-</button>
+                  <button
+                    className="btn-descargar"
+                    onClick={() => handleAccionArchivo(item.id, "descargar")}
+                  >
+                    <FiDownload size={10} />
+                    Descargar
+                  </button>
 
-<button
-  className="btn-Eliminar"
-  onClick={() => handleEliminar(item.id)}
->
-    <FiTrash2 size={10} />
-  Eliminar
-</button>
-                  
+                  <button
+                    className="btn-Eliminar"
+                    onClick={() => handleEliminar(item.id)}
+                  >
+                    <FiTrash2 size={10} />
+                    Eliminar
+                  </button>
+
                 </td>
               </tr>
             ))}

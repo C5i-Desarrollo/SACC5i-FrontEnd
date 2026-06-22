@@ -1,8 +1,10 @@
 .listado-nominal-container {
     padding: 30px;
     background: #ffffff;
-    min-height: 100vh;
     position: relative;
+    border-radius: 16px; /* Borde mucho más redondo */
+    margin: 20px; /* Separación del menú lateral y los bordes */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
 }
 
 .listado-header-top {
