@@ -564,6 +564,14 @@ export const descargarRepositorioSeleccionadosZipApi = (folderId, ids = []) =>
 export const eliminarArchivosRepositorioBulkApi = (ids = []) =>
   api.post('/repositorio-digital/files/bulk-delete', { ids });
 
+// ── Repositorio Municipios ───────────────────────────────
+
+export const getRepositorioMunicipiosApi = () =>
+  api.get('/repositorio-municipios');
+
+export const getRepositorioMunicipioDetalleApi = (municipioId) =>
+  api.get(`/repositorio-municipios/${municipioId}`);
+
 // ── Oficios de Respuesta ───────────────────────────────────────
 export const getOficiosRespuestaTreeApi = () =>
   api.get('/oficios-respuesta/tree');
