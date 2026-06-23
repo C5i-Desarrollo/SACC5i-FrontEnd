@@ -1,359 +1,401 @@
 .listado-nominal-container {
-    padding: 30px;
-    background: #ffffff;
-    position: relative;
-    border-radius: 16px; /* Borde mucho más redondo */
-    margin: 20px; /* Separación del menú lateral y los bordes */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+  padding: 30px;
+  background: #ffffff;
+  position: relative;
+  border-radius: 16px;
+  margin: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.04);
 }
 
 .listado-header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 25px;
 }
 
 .listado-subtitle {
-    color: #8c1d40;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
+  color: #8c1d40;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 .listado-header h1 {
-    font-size: 42px;
-    margin: 10px 0;
-    color: #111;
+  font-size: 42px;
+  margin: 10px 0;
+  color: #111;
 }
 
 .listado-header p {
-    color: #777;
-    margin-bottom: 0;
+  color: #777;
+  margin-bottom: 0;
 }
 
 .btn-subir-listado {
-    background: #7a1735;
-    color: white;
-    border: none;
-    padding: 12px 22px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    position: absolute;
-    top: 30px;
-    right: 20px;
-    
+  background: #7a1735;
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  position: absolute;
+  top: 30px;
+  right: 20px;
 }
 
 .btn-subir-listado:hover {
-    background: #64122b;
+  background: #64122b;
 }
 
 .buscador-card {
-    
-    background: white;
-    border-radius: 10px;
-    padding: 18px;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    border: 1px solid #eee;
-    width: 1200px;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-    
+  background: white;
+  border-radius: 10px;
+  padding: 18px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  border: 1px solid #eee;
+  width: 1200px;
+  max-width: 100%;
 }
 
 .buscador-card label {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 14px;
-    font-weight: 600;
-
-    
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .input-busqueda {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    outline: none;
-  
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
 }
 
 .tabla-card {
-    background: white;
-    border-radius: 10px;
-    padding: 15px;
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
 }
 
 .tabla-header {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .tabla-header h3 {
-    font-size: 18px;
-    margin: 0;
+  font-size: 18px;
+  margin: 0;
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    overflow: hidden;
-    border-radius: 8px;
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  overflow: hidden;
+  border-radius: 8px;
 }
 
 thead {
-    background: #7a1735;
+  background: #7a1735;
 }
 
 thead th {
-    color: white;
-    text-align: left;
-    padding: 14px;
-    font-size: 13px;
+  color: white;
+  text-align: left;
+  padding: 14px;
+  font-size: 13px;
+}
+
+thead th:nth-child(1),
+tbody td:nth-child(1) {
+  width: 32%;
+}
+
+thead th:nth-child(2),
+tbody td:nth-child(2) {
+  width: 12%;
+}
+
+thead th:nth-child(3),
+tbody td:nth-child(3) {
+  width: 13%;
+}
+
+thead th:nth-child(4),
+tbody td:nth-child(4) {
+  width: 16%;
+}
+
+thead th:nth-child(5),
+tbody td:nth-child(5) {
+  width: 10%;
+  text-align: center;
+}
+
+thead th:nth-child(6),
+tbody td:nth-child(6) {
+  width: 17%;
+  text-align: center;
 }
 
 tbody td {
-    padding: 15px;
-    border-bottom: 1px solid #ececec;
-    font-size: 14px;
+  padding: 15px;
+  border-bottom: 1px solid #ececec;
+  font-size: 14px;
+  vertical-align: middle;
 }
 
 tbody tr:hover {
-    background: #fafafa;
+  background: #fafafa;
+}
+
+tbody td:first-child {
+  max-width: 420px;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .estado-badge {
-    padding: 5px 12px;
-    border-radius: 30px;
-    font-size: 11px;
-    font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .estado-badge.vigente {
-    background: #dff3ea;
-    color: #198754;
+  background: #dff7e8;
+  color: #15803d;
 }
 
 .estado-badge.anterior {
-    background: #ececec;
-    color: #666;
+  background: #eeeeee;
+  color: #777;
 }
 
+/* =========================
+   COLUMNA ACCIONES
+========================= */
+
+thead th:last-child,
+tbody td:last-child {
+  width: 360px;
+  min-width: 360px;
+  text-align: center;
+}
+
+/* Contenedor de botones */
 .acciones-cell {
-    display: flex;
-    gap: 8px;
-}
-
-.btn-ver,
-.btn-descargar {
-    padding: 7px 12px;
-    border-radius: 6px;
-    font-size: 12px;
-    cursor: pointer;
-}
-
-.btn-ver {
-    background: white;
-    border: 1px solid #7a1735;
-    color: #7a1735;
-}
-
-.btn-descargar {
-    background: #f4f4f4;
-    border: 1px solid #ddd;
-}
-
-.btn-ver:hover {
-    background: #7a1735;
-    color: white;
-}
-
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, .55);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    backdrop-filter: blur(3px);
-}
-
-.modal-listado {
-    width: 500px;
-    max-width: 90%;
-    background: white;
-    border-radius: 14px;
-    padding: 25px;
-    box-shadow: 0 10px 40px rgba(0,0,0,.2);
-}
-
-.modal-listado h3 {
-    margin-top: 0;
-    color: #7a1735;
-    font-size: 22px;
-    margin-bottom: 20px;
-}
-
-.modal-listado label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: #444;
-}
-
-.modal-listado select,
-.modal-listado input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #dcdcdc;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-
-.modal-footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-}
-
-.btn-cancelar {
-    border: 1px solid #ccc;
-    background: white;
-    padding: 10px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.btn-subir {
-    background: #7a1735;
-    color: white;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.btn-subir:hover {
-    background: #65122b;
-}
-
-.acciones-cell {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-
-.btn-ver,
-.btn-descargar {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-
-    padding: 4px 10px;
-    font-size: 11px;
-    font-weight: 500;
-
-    background: #fff;
-    border: 1px solid #7a1838;
-    border-radius: 3px;
-
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.btn-Eliminar {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-
-    padding: 4px 10px;
-    font-size: 11px;
-    font-weight: 500;
-
-    background: #fff;
-    border: 1px solid #7a1838;
-    border-radius: 3px;
-
-    cursor: pointer;
-    transition: all 0.2s ease;     
-}
-
-.btn-ver {
-    color: #7a1838;
-}
-
-.btn-descargar {
-    background: #f5f5f5;
-    color: #393939;
-    border: 1px solid #dcdcdc;
-}
-
-.btn-Eliminar {
-    color: #7a1838;
-}
-
-.btn-ver:hover {
-    background: #7a1838;
-    color: #fff;
-}
-.btn-descargar:hover{
-     background: #a4a4a4;
-    color: #fff;
-
-}
-.btn-Eliminar:hover {
-    background: #7a1838;
-    color: #fff;
-}
-/* ==========================================
-   MODAL ELIMINAR ARCHIVO
-========================================== */
-
-.modal-footer {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  margin-top: 20px;
-}
-
-.btn-cancelar {
-  padding: 10px 20px;
-  border: 1px solid #d8d8d8;
-  border-radius: 10px;
-  background: #ffffff;
-  color: #555;
-  font-weight: 600;
-  cursor: pointer;
-  min-width: 110px;
-  transition: all 0.2s ease;
-}
-
-.btn-cancelar:hover {
-  background: #f5f5f5;
-}
-
-.btn-eliminar-modal {
-  background: #800020;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 20px;
-  font-weight: 600;
-  cursor: pointer;
-  min-width: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+/* Botones */
+.btn-ver,
+.btn-descargar,
+.btn-Eliminar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 105px;
+  min-width: 105px;
+  height: 36px;
+
   gap: 6px;
+
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+/* Iconos */
+.btn-ver svg,
+.btn-descargar svg,
+.btn-Eliminar svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* Corrección visual final de botones de acciones */
+
+thead th:last-child,
+tbody td:last-child {
+  width: 360px;
+  min-width: 360px;
+  text-align: center;
+}
+
+.acciones-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.btn-ver,
+.btn-descargar,
+.btn-Eliminar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  width: 105px;
+  min-width: 105px;
+  height: 36px;
+
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
   transition: all 0.2s ease;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.btn-ver svg,
+.btn-descargar svg,
+.btn-Eliminar svg {
+  width: 14px;
+  height: 14px;
+  min-width: 14px;
+  flex-shrink: 0;
+}
+
+/* Botón Ver */
+.btn-ver {
+  color: #7a1735;
+  background: #ffffff;
+  border: 1.5px solid #7a1735;
+}
+
+.btn-ver:hover {
+  background: #7a1735;
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(122, 23, 53, 0.22);
+}
+
+/* Botón Descargar */
+.btn-descargar {
+  color: #6b5b35;
+  background: #f8f3e7;
+  border: 1.5px solid #d7c79d;
+}
+
+.btn-descargar:hover {
+  background: #d7c79d;
+  color: #3d3218;
+  box-shadow: 0 4px 10px rgba(122, 23, 53, 0.12);
+}
+
+/* Botón Eliminar */
+.btn-Eliminar {
+  color: #b42318;
+  background: #fff7f7;
+  border: 1.5px solid #f0b4ae;
+}
+
+.btn-Eliminar:hover {
+  background: #b42318;
+  color: #ffffff;
+  border-color: #b42318;
+  box-shadow: 0 4px 10px rgba(180, 35, 24, 0.18);
+}
+
+/* RESTAURAR DISEÑO MODAL ELIMINAR */
+
+.modal-overlay {
+  position: fixed ;
+  inset: 0 ;
+  background: rgba(0, 0, 0, 0.55) ;
+  backdropp-filter: blur(3px) ;
+  display: flex ;
+  justify-content: center ;
+  align-items: center ;
+  z-index: 9999 ;
+}
+
+.modal-listado {
+  width: 500px ;
+  max-width: 90% ;
+  background: #ffffff ;
+  border-radius: 14px ;
+  padding: 25px ;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2) ;
+}
+
+.modal-listado h3 {
+  margin-top: 0 ;
+  color: #7a1735 ;
+  font-size: 22px ;
+  margin-bottom: 20px ;
+}
+
+.modal-listado p {
+  color: #333 ;
+  font-size: 14px ;
+  margin: 8px 0 ;
+}
+
+.texto-advertencia {
+  color: #7a1735 ;
+  font-weight: 600 ;
+  margin-top: 12px ;
+}
+
+.modal-footer {
+  display: flex ;
+  justify-content: flex-end ;
+  gap: 12px ;
+  margin-top: 20px ;
+}
+
+.btn-cancelar {
+  padding: 10px 20px ;
+  border: 1px solid #d8d8d8 ;
+  border-radius: 10px ;
+  background: #ffffff ;
+  color: #555 ;
+  font-weight: 600 ;
+  cursor: pointer ;
+  min-width: 110px ;
+}
+
+.btn-eliminar-modal {
+  background: #800020 ;
+  color: #ffffff ;
+  border: none ;
+  border-radius: 10px ;
+  padding: 10px 20px ;
+  font-weight: 600 ;
+  cursor: pointer ;
+  min-width: 120px ;
+  display: flex ;
+  align-items: center ;
+  justify-content: center ;
+  gap: 6px ;
 }
 
 .btn-eliminar-modal:hover {
-  background: #650019;
-  transform: translateY(-1px);
+  background: #650019 ;
 }

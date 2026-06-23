@@ -188,6 +188,14 @@ export default function ListadoNominal() {
     }
   };
 
+  const corregirTexto = (texto = "") => {
+  try {
+    return decodeURIComponent(escape(texto));
+  } catch {
+    return texto;
+  }
+};
+
   return (
     <div className="listado-nominal-container">
       <div className="listado-header">
@@ -241,18 +249,19 @@ export default function ListadoNominal() {
           <tbody>
             {listados.map((item) => (
               <tr key={item.id}>
-                <td>{item.archivo_nombre}</td>
+                <td>{corregirTexto(item.archivo_nombre)}</td>
                 <td>{item.municipio_nombre}</td>
                 <td>{new Date(item.created_at).toLocaleDateString("es-MX")}</td>
                 <td>{item.subido_por}</td>
-                <td>{item.estado}</td>
-
+                <td> <span className={`estado-badge ${item.estado?.toLowerCase()}`}>   {item.estado}
+                </span>
+                </td>
                 <td className="acciones-cell">
                   <button
                     className="btn-ver"
                     onClick={() => handleAccionArchivo(item.id, "ver")}
                   >
-                    <FaRegEye size={10} />
+                    <FaRegEye size={14} />
                     Ver
                   </button>
 
@@ -260,7 +269,7 @@ export default function ListadoNominal() {
                     className="btn-descargar"
                     onClick={() => handleAccionArchivo(item.id, "descargar")}
                   >
-                    <FiDownload size={10} />
+                    <FiDownload size={14} />
                     Descargar
                   </button>
 
@@ -268,7 +277,7 @@ export default function ListadoNominal() {
                     className="btn-Eliminar"
                     onClick={() => handleEliminar(item)}
                   >
-                    <FiTrash2 size={10} />
+                    <FiTrash2 size={14} />
                     Eliminar
                   </button>
                 </td>
