@@ -1,0 +1,840 @@
+/* CONTENEDOR */
+.repo-page {
+  padding: 30px;
+  background: #ffffff;
+  position: relative;
+  border-radius: 16px;
+  margin: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+  color: #2f3437;
+}
+
+.repo-kicker {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  margin-bottom: 4px;
+}
+
+.repo-page {
+  font-family:
+    Inter,
+    "Segoe UI",
+    sans-serif;
+}
+
+.repo-page h1 {
+  font-size: 30px;
+  font-weight: 700;
+  margin: 8px 0;
+}
+
+.repo-subtitle {
+  font-size: 15px;
+  font-weight: 400;
+  margin: 0 0 25px;
+}
+
+/* TOP DETALLE */
+.repo-detail-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.repo-back-btn {
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.repo-upload-btn,
+.repo-submit-btn {
+  background: #7a1735;
+  color: white;
+  border: none;
+  padding: 12px 26px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.repo-upload-btn:hover,
+.repo-submit-btn:hover {
+  background: #64122b;
+}
+
+/* BUSCADOR */
+.repo-search-card {
+  background: white;
+  border-radius: 10px;
+  padding: 18px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  border: 1px solid #eee;
+}
+
+.repo-search-card label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.repo-search-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 46px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0 14px;
+  background: #fff;
+}
+
+.repo-search-input i {
+  color: #6b7280;
+  font-size: 18px;
+}
+
+.repo-search-input input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+}
+
+/* STATS */
+.repo-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 28px 0 34px;
+}
+
+.repo-stat-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fff;
+  border: 1px solid #e6e0da;
+  border-radius: 12px;
+  padding: 16px 18px;
+  min-height: 74px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+
+.repo-stat-card::before {
+  content: "";
+  width: 4px;
+  height: 100%;
+  background: #7a1735;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.repo-stat-card i {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: #7a1735;
+  color: white;
+  font-size: 22px;
+}
+
+.repo-stat-card strong {
+  display: block;
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.repo-stat-card span {
+  display: block;
+  margin-top: 4px;
+  color: #60656b;
+  font-size: 13px;
+}
+
+.repo-stat-pdf::before,
+.repo-stat-pdf i {
+  background: #df2d2d;
+}
+
+.repo-stat-excel::before,
+.repo-stat-excel i {
+  background: #16a05b;
+}
+
+/* TABLA MUNICIPIOS */
+.repo-section-title {
+  margin: 42px 0 22px; /* más separado de la tabla */
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.repo-search-card {
+  margin-top: 25px;
+  margin-bottom: 35px;
+}
+
+.repo-section-title i {
+  color: #7a1735;
+}
+
+.repo-table-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #eee;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+}
+
+.repo-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.repo-table thead {
+  background: #7a1735;
+}
+
+.repo-table th {
+  color: white;
+  text-align: left;
+  padding: 14px;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.repo-table td {
+  padding: 15px;
+  border-bottom: 1px solid #ececec;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.repo-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.repo-table th:nth-child(1),
+.repo-table td:nth-child(1) {
+  width: 34%;
+}
+
+.repo-table th:nth-child(2),
+.repo-table td:nth-child(2) {
+  width: 16%;
+  text-align: center;
+}
+
+.repo-table th:nth-child(3),
+.repo-table td:nth-child(3) {
+  width: 10%;
+  text-align: center;
+}
+
+.repo-table th:nth-child(4),
+.repo-table td:nth-child(4) {
+  width: 20%;
+  text-align: center;
+}
+
+.repo-table th:nth-child(5),
+.repo-table td:nth-child(5) {
+  width: 20%;
+  text-align: center;
+}
+
+.repo-municipio-cell {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.repo-municipio-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #f1e3ea;
+  color: #7a1735;
+}
+
+.repo-municipio-cell strong {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.repo-badges {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.repo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.repo-pdf {
+  background: #fde7e7;
+  color: #df2d2d;
+}
+
+.repo-excel {
+  background: #dff6eb;
+  color: #16a05b;
+}
+
+.repo-action-btn {
+  border: none;
+  background: transparent;
+  color: #7a1735;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.repo-action-btn:hover {
+  text-decoration: underline;
+}
+
+/* PAGINACIÓN */
+.repo-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 24px;
+  border-top: 1px solid #ececec;
+}
+
+.repo-pagination button {
+  border: 1px solid #d9d4cf;
+  background: #fff;
+  border-radius: 8px;
+  padding: 9px 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.repo-pagination button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.repo-pagination span {
+  font-size: 13px;
+  font-weight: 700;
+  color: #60656b;
+}
+
+/* DETALLE POR DÍA */
+.repo-days {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.repo-day-card {
+  background: #fff;
+  border: 1px solid #e6e0da;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+}
+
+.repo-day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee9e5;
+  padding-bottom: 18px;
+  margin-bottom: 20px;
+}
+
+.repo-day-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  color: #1f2937;
+}
+
+.repo-day-header h2 i {
+  color: #7a1735;
+}
+
+.repo-day-header > span {
+  background: #fff3f7;
+  color: #7a1735;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.repo-file-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.repo-file-column {
+  background: #fbfaf8;
+  border: 1px solid #e6e0da;
+  border-radius: 14px;
+  padding: 16px;
+  min-height: 150px;
+}
+
+.repo-tipo-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid #ece7e2;
+}
+
+.repo-tipo-title {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #374151;
+}
+
+.repo-tipo-count {
+  min-width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.repo-file-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 56px;
+  background: #fff;
+  border: 1px solid #e8e2dc;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+}
+
+.repo-file-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+
+.repo-file-info span {
+  font-size: 13px;
+  font-weight: 500;
+  color: #4b5563;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.repo-file-item .bxs-file-pdf {
+  color: #df2d2d;
+}
+
+.repo-file-item .bxs-spreadsheet {
+  color: #16a05b;
+}
+
+.repo-file-actions {
+  display: flex;
+  gap: 7px;
+}
+
+.repo-file-actions button {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all .2s ease;
+}
+
+.repo-file-actions button:nth-child(1) {
+  border: 1px solid #7a1735;
+  color: #7a1735;
+}
+
+.repo-file-actions button:nth-child(1):hover {
+  background: #7a1735;
+  color: white;
+}
+
+.repo-file-actions button:nth-child(2) {
+  border: 1px solid #b9a15d;
+  color: #b9a15d;
+}
+
+.repo-file-actions button:nth-child(2):hover {
+  background: #d7c79d;
+  color: #3d3218;
+}
+
+.repo-file-actions button:nth-child(3) {
+  border: 1px solid #e53935;
+  color: #e53935;
+}
+
+.repo-file-actions button:nth-child(3):hover {
+  background: #e53935;
+  color: white;
+}
+
+.repo-no-files {
+  color: #999;
+  text-align: center;
+  margin-top: 42px;
+  font-size: 13px;
+}
+
+/* MODAL CARGA */
+.repo-modal-overlay,
+.repo-delete-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.repo-modal {
+  width: 100%;
+  max-width: 560px;
+  background: #fff;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,.25);
+  animation: modalFade .25s ease;
+}
+
+.repo-modal-header {
+  background: linear-gradient(135deg, #8b1d4d 0%, #6c173b 100%);
+  min-height: 88px;
+  color: white;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.repo-modal-header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.repo-modal-header p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  opacity: .85;
+}
+
+.repo-modal-close {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.repo-dropzone {
+  margin: 28px;
+  min-height: 160px;
+  border: 2px dashed #d8d8d8;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: .25s;
+  background: #fff;
+  text-align: center;
+}
+
+.repo-dropzone:hover {
+  border-color: #8b1d4d;
+  background: #faf7f8;
+}
+
+.repo-dropzone input {
+  display: none;
+}
+
+.repo-file-icons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.repo-file-icons span {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: inline-grid;
+  place-items: center;
+  color: white;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.repo-file-icons .repo-pdf {
+  background: #df2d2d;
+}
+
+.repo-file-icons .repo-excel {
+  background: #16a05b;
+}
+
+.repo-selected-files {
+  margin: 0 28px 20px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.repo-selected-files p {
+  background: #f5f2ef;
+  padding: 8px 10px;
+  border-radius: 8px;
+  margin: 6px 0;
+}
+
+.repo-modal-actions {
+  padding: 18px 28px;
+  border-top: 1px solid #ececec;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.repo-modal-actions button {
+  padding: 11px 22px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+
+
+/* MODAL ELIMINAR */
+.repo-delete-modal {
+  width: 450px;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,.2);
+  padding: 30px;
+  text-align: center;
+}
+
+.repo-delete-icon {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #ffe8e8;
+  color: #e53935;
+  font-size: 28px;
+}
+
+.repo-delete-modal h2 {
+  margin: 0 0 10px;
+  font-size: 22px;
+  color: #273444;
+}
+
+.repo-delete-modal p {
+  margin: 0;
+  color: #60656b;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.repo-delete-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.repo-delete-actions button {
+  border-radius: 10px;
+  padding: 11px 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.repo-delete-actions button:first-child {
+  background: white;
+  border: 1px solid #d5d5d5;
+  color: #444;
+}
+
+.repo-delete-actions button:last-child {
+  background: #b42318;
+  border: 1px solid #b42318;
+  color: white;
+}
+
+/* TOAST */
+.repo-toast {
+  position: fixed;
+  top: 84px;
+  right: 28px;
+  width: 360px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.18);
+  z-index: 10000;
+  animation: repoToastIn .25s ease;
+  border-left: 5px solid #16a05b;
+}
+
+.repo-toast-error {
+  border-left-color: #e53935;
+}
+
+.repo-toast-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #e7f8ef;
+  color: #16a05b;
+  font-size: 22px;
+}
+
+.repo-toast-error .repo-toast-icon {
+  background: #ffe8e8;
+  color: #e53935;
+}
+
+.repo-toast strong {
+  display: block;
+  color: #273444;
+  font-size: 15px;
+}
+
+.repo-toast p {
+  margin: 3px 0 0;
+  color: #60656b;
+  font-size: 13px;
+}
+
+.repo-toast button {
+  margin-left: auto;
+  border: none;
+  background: transparent;
+  color: #aaa;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+@keyframes repoToastIn {
+  from {
+    opacity: 0;
+    transform: translateX(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes modalFade {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.repo-files-scroll {
+  max-height: 230px; /* aprox. 3 documentos visibles */
+  overflow-y: auto;
+  padding-right: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.repo-files-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.repo-files-scroll::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 20px;
+}
+
+.repo-files-scroll::-webkit-scrollbar-thumb {
+  background: #c7c7c7;
+  border-radius: 20px;
+}
+
+.repo-files-scroll::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}

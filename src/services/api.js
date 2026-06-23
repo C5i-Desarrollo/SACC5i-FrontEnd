@@ -572,6 +572,31 @@ export const getRepositorioMunicipiosApi = () =>
 export const getRepositorioMunicipioDetalleApi = (municipioId) =>
   api.get(`/repositorio-municipios/${municipioId}`);
 
+export const subirDocumentosRepositorioMunicipioApi = (municipioId, archivos) => {
+  const formData = new FormData();
+
+  archivos.forEach((archivo) => {
+    formData.append("archivos", archivo);
+  });
+
+  return api.post(`/repositorio-municipios/${municipioId}/documentos`, formData, {
+    headers: { "Content-Type": "multipart/form-data" }
+  });
+};
+
+export const verDocumentoRepositorioMunicipioApi = (documentoId) =>
+  api.get(`/repositorio-municipios/documentos/${documentoId}/ver`, {
+    responseType: "blob"
+  });
+
+export const descargarDocumentoRepositorioMunicipioApi = (documentoId) =>
+  api.get(`/repositorio-municipios/documentos/${documentoId}/descargar`, {
+    responseType: "blob"
+  });
+
+export const eliminarDocumentoRepositorioMunicipioApi = (documentoId) =>
+  api.delete(`/repositorio-municipios/documentos/${documentoId}`);
+
 // ── Oficios de Respuesta ───────────────────────────────────────
 export const getOficiosRespuestaTreeApi = () =>
   api.get('/oficios-respuesta/tree');
