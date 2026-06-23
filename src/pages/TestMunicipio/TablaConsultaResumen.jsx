@@ -2,8 +2,7 @@ import React from 'react';
 
 export default function TablaConsultaResumen({
   datos = [],
-  municipioSeleccionado,
-  onConsultarMunicipio
+  municipioSeleccionado
 }) {
   return (
     <div
@@ -42,10 +41,23 @@ export default function TablaConsultaResumen({
               <th style={{ padding: '14px', textAlign: 'center', width: '80px' }}>
                 No.
               </th>
-              <th style={{ padding: '14px', textAlign: 'left' }}>
+
+              <th
+                style={{
+                  padding: '14px',
+                  textAlign: 'center'
+                }}
+              >
                 Municipio
               </th>
-              <th style={{ padding: '14px', textAlign: 'center' }}>
+
+              <th
+                style={{
+                  padding: '14px',
+                  textAlign: 'center',
+                  width: '180px'
+                }}
+              >
                 Personas finalizadas
               </th>
             </tr>
@@ -72,27 +84,53 @@ export default function TablaConsultaResumen({
                   municipioSeleccionado?.municipio_id === item.municipio_id;
 
                 return (
-                 <tr
-              key={item.municipio_id || index}
-                   style={{
-                  backgroundColor: activo
-                              ? '#f5dfe7'
-                       : index % 2 === 0
-                              ? '#fff'
-                              : '#fbf4f6'
-  }}
->
-                  
-                    <td style={{ padding: '14px', textAlign: 'center', fontWeight: '600' }}>
+                  <tr
+                    key={item.municipio_id || index}
+                    style={{
+                      backgroundColor: activo
+                        ? '#f5dfe7'
+                        : index % 2 === 0
+                        ? '#fff'
+                        : '#fbf4f6'
+                    }}
+                  >
+                    <td
+                      style={{
+                        padding: '14px',
+                        textAlign: 'center',
+                        fontWeight: '600'
+                      }}
+                    >
                       {index + 1}
                     </td>
 
-                    <td style={{ padding: '14px' }}>
+                    <td
+                      style={{
+                        padding: '14px',
+                        textAlign: 'center'
+                      }}
+                    >
                       {item.municipio_nombre || 'Sin municipio'}
                     </td>
 
-                    <td style={{ padding: '14px', textAlign: 'center', fontWeight: '600' }}>
-                      {item.total_personas ?? 0}
+                    <td
+                      style={{
+                        padding: '14px',
+                        textAlign: 'center',
+                        width: '180px'
+                      }}
+                    >
+                      <span
+                        style={{
+                          backgroundColor: '#e8f5e9',
+                          color: '#2e7d32',
+                          padding: '6px 12px',
+                          borderRadius: '20px',
+                          fontWeight: '600'
+                        }}
+                      >
+                        {item.total_personas ?? 0}
+                      </span>
                     </td>
                   </tr>
                 );
@@ -101,10 +139,6 @@ export default function TablaConsultaResumen({
           </tbody>
         </table>
       </div>
-
-      <p style={{ marginTop: '12px', color: '#777', fontSize: '13px' }}>
-        Selecciona un municipio para visualizar el detalle de personas finalizadas.
-      </p>
     </div>
   );
 }
