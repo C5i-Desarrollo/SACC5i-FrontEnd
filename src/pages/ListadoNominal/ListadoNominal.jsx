@@ -17,6 +17,13 @@ export default function ListadoNominal() {
   const [municipios, setMunicipios] = useState([]);
   const [busqueda, setBusqueda] = useState("");
   const [loading, setLoading] = useState(false);
+  const corregirTexto = (texto = "") => {
+  try {
+    return decodeURIComponent(escape(texto));
+  } catch {
+    return texto;
+  }
+};
 
   const [modalAbierto, setModalAbierto] = useState(false);
   const [archivoSelect, setArchivoSelect] = useState(null);
@@ -54,6 +61,7 @@ export default function ListadoNominal() {
       setLoading(false);
     }
   };
+  
 
   const cargarMunicipios = async () => {
     try {
@@ -156,6 +164,7 @@ export default function ListadoNominal() {
       error("No se pudo obtener el archivo.");
     }
   };
+  
 
   const handleEliminar = (item) => {
     setArchivoEliminar(item);
@@ -187,14 +196,6 @@ export default function ListadoNominal() {
       setEliminando(false);
     }
   };
-
-  const corregirTexto = (texto = "") => {
-  try {
-    return decodeURIComponent(escape(texto));
-  } catch {
-    return texto;
-  }
-};
 
   return (
     <div className="listado-nominal-container">
@@ -341,46 +342,66 @@ export default function ListadoNominal() {
           document.body
         )}
 
-      {archivoEliminar &&
-        createPortal(
-          <div className="modal-overlay">
-            <div className="modal-listado modal-eliminar">
-              <h3>¿Deseas eliminar este archivo?</h3>
+{archivoEliminar &&
+  createPortal(
+    <div className="modal-overlay">
+      <div className="modal-listado modal-eliminar">
+        <div className="modal-eliminar-header">
+          <div className="modal-eliminar-icono">
+            <FiTrash2 />
+          </div>
 
-              <p>
-                Archivo: <strong>{archivoEliminar.archivo_nombre}</strong>
-              </p>
+          <div>
+            <h3>¿Deseas eliminar este archivo?</h3>
+            <p>Esta acción es permanente</p>
+          </div>
+        </div>
 
-              <p>
-                Municipio: <strong>{archivoEliminar.municipio_nombre}</strong>
-              </p>
+        <div className="modal-eliminar-body">
+         <div className="modal-info">
+  <div>
+    Archivo:
+    <strong>
+      {corregirTexto(archivoEliminar?.archivo_nombre) || "Sin archivo"}
+    </strong>
+  </div>
 
-              <p className="texto-advertencia">
-                Esta acción no se puede deshacer.
-              </p>
+  <div>
+    Municipio:
+    <strong>
+      {corregirTexto(archivoEliminar?.municipio_nombre) || "Sin municipio"}
+    </strong>
+  </div>
+</div>
 
-              <div className="modal-footer">
-                <button
-                  className="btn-cancelar"
-                  onClick={cancelarEliminar}
-                  disabled={eliminando}
-                >
-                  Cancelar
-                </button>
+          <div className="modal-warning">
+            <span>⚠️</span>
+            <span>Esta acción no se puede deshacer.</span>
+          </div>
+        </div>
 
-                <button
-                  className="btn-eliminar-modal"
-                  onClick={confirmarEliminar}
-                  disabled={eliminando}
-                >
-                  <FiTrash2 size={14} />
-                  {eliminando ? "Eliminando..." : "Eliminar"}
-                </button>
-              </div>
-            </div>
-          </div>,
-          document.body
-        )}
+        <div className="modal-footer">
+          <button
+            className="btn-cancelar"
+            onClick={cancelarEliminar}
+            disabled={eliminando}
+          >
+            Cancelar
+          </button>
+
+          <button
+            className="btn-eliminar-modal"
+            onClick={confirmarEliminar}
+            disabled={eliminando}
+          >
+            <FiTrash2 size={14} />
+            {eliminando ? "Eliminando..." : "Eliminar"}
+          </button>
+        </div>
+      </div>
+    </div>,
+    document.body
+  )}
     </div>
   );
 }
