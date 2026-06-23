@@ -212,3 +212,246 @@
 .extra-filtros.activo {
   display: flex;
 }
+
+/* RESPONSIVE TEST MUNICIPIO */
+
+.filtrado-container {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Panel de filtros adaptable */
+.filtros-panel {
+  width: 100%;
+  gap: 25px;
+}
+
+.grupo-filtro select {
+  max-width: 100%;
+}
+
+/* Buscador */
+.search-container {
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.search-container input {
+  min-width: 250px;
+}
+
+.mostrar-btn {
+  min-width: 190px;
+}
+
+/* Tablas de Alta, Baja y Consulta */
+.tabla-container,
+.tabla-box {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.tabla-estilizada {
+  min-width: 1100px;
+}
+
+/* Consulta con estilos inline */
+.filtrado-container table {
+  min-width: 900px;
+}
+
+/* Tarjetas resumen */
+.tarjetas-resumen {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.tarjeta-resumen {
+  flex: 1 1 240px;
+}
+
+/* Pantallas medianas */
+@media (max-width: 1024px) {
+  .filtrado-container {
+    padding: 22px;
+  }
+
+  .filtrado-title {
+    font-size: 34px;
+  }
+
+  .filtros-panel {
+    gap: 20px;
+  }
+
+  .grupo-filtro select {
+    width: 100%;
+  }
+
+  .botones-movimiento {
+    flex-wrap: wrap;
+  }
+
+  .mov-btn {
+    min-width: 120px;
+  }
+
+  .extra-filtros {
+    gap: 25px;
+  }
+}
+
+/* Pantallas pequeñas */
+@media (max-width: 768px) {
+  .filtrado-container {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .filtrado-title {
+    font-size: 28px;
+  }
+
+  .filtrado-description {
+    font-size: 13px;
+  }
+
+  .filtros-panel {
+    padding: 18px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .grupo-filtro,
+  .botones-movimiento,
+  .search-container,
+  .extra-filtros,
+  .extra-group,
+  .extra-btn-container {
+    width: 100%;
+  }
+
+  .grupo-filtro select,
+  .extra-group select,
+  .extra-group input,
+  .limpiar-btn,
+  .mostrar-btn {
+    width: 100%;
+  }
+
+  .botones-movimiento {
+    flex-direction: column;
+  }
+
+  .mov-btn {
+    width: 100%;
+  }
+
+  .search-container {
+    flex-direction: column;
+  }
+
+  .search-container input {
+    width: 100%;
+  }
+
+  .tabla-estilizada,
+  .filtrado-container table {
+    min-width: 950px;
+  }
+}
+
+.filtrado-container {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.filtros-panel,
+.search-container,
+.extra-filtros {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.tabla-container {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.tabla-box {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  box-sizing: border-box;
+}
+
+.tabla-estilizada {
+  width: 100%;
+  min-width: 980px;
+  table-layout: fixed;
+}
+
+.tarjetas-resumen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  width: 100%;
+}
+
+.tarjeta-resumen {
+  width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 1400px) {
+  .filtrado-container {
+    padding: 24px;
+  }
+
+  .filtros-panel {
+    gap: 30px;
+  }
+
+  .grupo-filtro select {
+    width: 240px;
+  }
+
+  .mov-btn {
+    min-width: 115px;
+  }
+
+  .tabla-estilizada {
+    min-width: 1050px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .filtros-panel {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+  }
+
+  .botones-movimiento {
+    flex-wrap: wrap;
+  }
+
+  .search-container {
+    flex-wrap: wrap;
+  }
+
+  .mostrar-btn {
+    height: 52px;
+  }
+
+  .tabla-estilizada {
+    min-width: 1100px;
+  }
+}

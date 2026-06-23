@@ -308,7 +308,7 @@
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(2px);
+  backdropp-filter: blur(2px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -532,10 +532,10 @@
 }
 
 .btn-subir {
-  min-width: 180px !important;
-  height: 44px !important;
-  border: none !important;
-  border-radius: 10px !important;
+  min-width: 180px ;
+  height: 44px ;
+  border: none ;
+  border-radius: 10px ;
   background: #d3a6ba;
   color: white;
   font-weight: 600;
@@ -631,4 +631,78 @@
 
 .btn-eliminar-modal:hover {
   background: #650019;
+}
+
+/* =========================
+   RESPONSIVE LISTADO NOMINAL
+========================= */
+
+.listado-nominal-container {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.buscador-card {
+  width: 100%;
+  max-width: 100%;
+}
+
+.listado-nominal-container table {
+  width: 100%;
+  min-width: 900px;
+}
+
+.listado-nominal-container {
+  overflow-x: auto;
+}
+
+/* Pantallas medianas */
+@media (max-width: 1024px) {
+  .listado-nominal-container {
+    padding: 22px;
+    margin: 14px;
+  }
+
+  .listado-header h1 {
+    font-size: 34px;
+  }
+
+  .btn-subir-listado {
+    position: static;
+    margin-top: 18px;
+  }
+
+  .listado-header-top {
+    display: block;
+  }
+}
+
+/* Pantallas pequeñas */
+@media (max-width: 768px) {
+  .listado-nominal-container {
+    padding: 16px;
+    margin: 10px;
+    border-radius: 14px;
+  }
+
+  .listado-header h1 {
+    font-size: 28px;
+  }
+
+  .listado-header p {
+    font-size: 13px;
+  }
+
+  .btn-subir-listado {
+    width: 100%;
+    height: 44px;
+  }
+
+  .buscador-card {
+    padding: 14px;
+  }
+
+  .listado-nominal-container table {
+    min-width: 1000px;
+  }
 }
