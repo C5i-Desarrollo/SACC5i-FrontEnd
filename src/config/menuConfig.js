@@ -14,7 +14,7 @@ export const menuConfig = {
     { icon: 'bx-file', label: 'Copias de Conocimiento', section: 'CopiasConocimiento', permission: PERMISSIONS.VIEW_CCP },
     { icon: 'bx-time', label: 'Historial CCP', section: 'HistorialOperadorCCP', permission: PERMISSIONS.VIEW_HISTORIAL_CCP },
     { icon: 'bx-list-ul', label: 'Listado Nominal', section: 'ListadoNominal', permission: PERMISSIONS.VIEW_DASHBOARD },
-    { icon: 'bx-archive', label: 'Repositorio Municipios', section: 'RepositorioMunicipios', permission: PERMISSIONS.VIEW_DASHBOARD }
+    { icon: 'bx-archive', label: 'Personal Activo', section: 'RepositorioMunicipios', permission: PERMISSIONS.VIEW_DASHBOARD }
   ],
   
   [ROLES.ADMIN]: [
@@ -31,7 +31,7 @@ export const menuConfig = {
     { icon: 'bx-test-tube', label: 'Test Municipio', section: 'TestMunicipio', permission: PERMISSIONS.VIEW_DASHBOARD },
     { icon: 'bx-folder-open', label: 'Revisión Municipios', section: 'TestRevisionC5', permission: PERMISSIONS.VIEW_DASHBOARD },
     { icon: 'bx-list-ul', label: 'Listado Nominal', section: 'ListadoNominal', permission: PERMISSIONS.VIEW_DASHBOARD },
-    { icon: 'bx-archive', label: 'Repositorio Municipios', section: 'RepositorioMunicipios', permission: PERMISSIONS.VIEW_DASHBOARD }
+    { icon: 'bx-archive', label: 'Personal Activo', section: 'RepositorioMunicipios', permission: PERMISSIONS.VIEW_DASHBOARD }
   ],
 
   [ROLES.DIRECCION]: [
@@ -67,7 +67,7 @@ export const menuConfig = {
     // NUEVO APARTADO PARA EL BUZÓN DE MUNICIPIOS
     { icon: 'bx-folder-open', label: 'Revisión Municipios', section: 'TestRevisionC5', permission: PERMISSIONS.VIEW_DASHBOARD },
     { icon: 'bx-list-ul', label: 'Listado Nominal', section: 'ListadoNominal', permission: PERMISSIONS.VIEW_DASHBOARD },
-    { icon: 'bx-archive', label: 'Repositorio Municipios', section: 'RepositorioMunicipios', permission: PERMISSIONS.VIEW_DASHBOARD }
+    { icon: 'bx-archive', label: 'Personal Activo', section: 'RepositorioMunicipios', permission: PERMISSIONS.VIEW_DASHBOARD }
   ],
   
   [ROLES.VALIDADOR_C3]: [
