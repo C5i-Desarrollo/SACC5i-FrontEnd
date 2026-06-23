@@ -324,78 +324,100 @@ tbody td:last-child {
 
 /* RESTAURAR DISEÑO MODAL ELIMINAR */
 
-.modal-overlay {
-  position: fixed ;
-  inset: 0 ;
-  background: rgba(0, 0, 0, 0.55) ;
-  backdropp-filter: blur(3px) ;
-  display: flex ;
-  justify-content: center ;
-  align-items: center ;
-  z-index: 9999 ;
+.modal-eliminar {
+  width: 450px;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
-.modal-listado {
-  width: 500px ;
-  max-width: 90% ;
-  background: #ffffff ;
-  border-radius: 14px ;
-  padding: 25px ;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2) ;
+.modal-eliminar-header {
+  background: linear-gradient(135deg, #800020, #6b183d);
+  color: white;
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
-.modal-listado h3 {
-  margin-top: 0 ;
-  color: #7a1735 ;
-  font-size: 22px ;
-  margin-bottom: 20px ;
+.modal-eliminar-icono {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
 }
 
-.modal-listado p {
-  color: #333 ;
-  font-size: 14px ;
-  margin: 8px 0 ;
+.modal-eliminar-header h3 {
+  margin: 0;
+  font-size: 26px;
 }
 
-.texto-advertencia {
-  color: #7a1735 ;
-  font-weight: 600 ;
-  margin-top: 12px ;
+.modal-eliminar-header p {
+  margin: 4px 0 0;
+  opacity: .9;
+  font-size: 14px;
+}
+
+.modal-eliminar-body {
+  padding: 24px;
+}
+
+.modal-info {
+  margin-bottom: 18px;
+  color: #444;
+  line-height: 1.8;
+}
+
+.modal-warning {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff4f4;
+  border-left: 4px solid #dc3545;
+  color: #8b1e1e;
+  padding: 14px;
+  border-radius: 10px;
 }
 
 .modal-footer {
-  display: flex ;
-  justify-content: flex-end ;
-  gap: 12px ;
-  margin-top: 20px ;
+  border-top: 1px solid #ececec;
+  padding: 18px 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
 }
 
 .btn-cancelar {
-  padding: 10px 20px ;
-  border: 1px solid #d8d8d8 ;
-  border-radius: 10px ;
-  background: #ffffff ;
-  color: #555 ;
-  font-weight: 600 ;
-  cursor: pointer ;
-  min-width: 110px ;
+  background: white;
+  border: 1px solid #d5d5d5;
+  border-radius: 10px;
+  padding: 10px 22px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-cancelar:hover {
+  background: #f7f7f7;
 }
 
 .btn-eliminar-modal {
-  background: #800020 ;
-  color: #ffffff ;
-  border: none ;
-  border-radius: 10px ;
-  padding: 10px 20px ;
-  font-weight: 600 ;
-  cursor: pointer ;
-  min-width: 120px ;
-  display: flex ;
-  align-items: center ;
-  justify-content: center ;
-  gap: 6px ;
+  background: #800020;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 22px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .btn-eliminar-modal:hover {
-  background: #650019 ;
+  background: #650019;
 }
