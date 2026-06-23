@@ -402,13 +402,13 @@
 }
 
 .btn-purge-records {
-  background: #fff7ed;
+  background: #7e7e75;
   color: #b54708;
   border: 1.5px solid #f7cfa8;
 }
 
 .btn-purge-records:hover {
-  background: #ffedd5;
+  background: #ffaf46;
   border-color: #f59e0b;
 }
 
