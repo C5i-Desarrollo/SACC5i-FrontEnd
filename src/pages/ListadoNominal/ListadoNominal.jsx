@@ -18,12 +18,12 @@ export default function ListadoNominal() {
   const [busqueda, setBusqueda] = useState("");
   const [loading, setLoading] = useState(false);
   const corregirTexto = (texto = "") => {
-  try {
-    return decodeURIComponent(escape(texto));
-  } catch {
-    return texto;
-  }
-};
+    try {
+      return decodeURIComponent(escape(texto));
+    } catch {
+      return texto;
+    }
+  };
 
   const [modalAbierto, setModalAbierto] = useState(false);
   const [archivoSelect, setArchivoSelect] = useState(null);
@@ -44,7 +44,7 @@ export default function ListadoNominal() {
         `${baseUrl}/listados-nominales?busqueda=${encodeURIComponent(busqueda)}`,
         {
           headers: { Authorization: `Bearer ${token}` },
-        }
+        },
       );
 
       const data = await res.json();
@@ -61,7 +61,6 @@ export default function ListadoNominal() {
       setLoading(false);
     }
   };
-  
 
   const cargarMunicipios = async () => {
     try {
@@ -164,7 +163,6 @@ export default function ListadoNominal() {
       error("No se pudo obtener el archivo.");
     }
   };
-  
 
   const handleEliminar = (item) => {
     setArchivoEliminar(item);
@@ -180,11 +178,14 @@ export default function ListadoNominal() {
     setEliminando(true);
 
     try {
-      await axios.delete(`${baseUrl}/listados-nominales/${archivoEliminar.id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      await axios.delete(
+        `${baseUrl}/listados-nominales/${archivoEliminar.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
 
       success("Archivo eliminado correctamente.");
       setArchivoEliminar(null);
@@ -203,11 +204,12 @@ export default function ListadoNominal() {
         <div className="listado-header-top">
           <div>
             <span className="listado-subtitle">Repositorio de Respaldos</span>
+
             <h1>Listado Nominal</h1>
 
             <p>
-              Respaldo del personal que trabaja en cada municipio. Se permiten
-              archivos PDF y Excel.
+              Respaldo del personal que trabaja en cada municipio. Se permiten solamente
+              archivos PDF.
             </p>
 
             <div className="buscador-card">
@@ -254,8 +256,14 @@ export default function ListadoNominal() {
                 <td>{item.municipio_nombre}</td>
                 <td>{new Date(item.created_at).toLocaleDateString("es-MX")}</td>
                 <td>{item.subido_por}</td>
-                <td> <span className={`estado-badge ${item.estado?.toLowerCase()}`}>   {item.estado}
-                </span>
+                <td>
+                  {" "}
+                  <span
+                    className={`estado-badge ${item.estado?.toLowerCase()}`}
+                  >
+                    {" "}
+                    {item.estado}
+                  </span>
                 </td>
                 <td className="acciones-cell">
                   <button
@@ -292,33 +300,79 @@ export default function ListadoNominal() {
         createPortal(
           <div className="modal-overlay">
             <div className="modal-listado">
-              <h3>Cargar Listado Nominal</h3>
+              <div className="modal-header-listado">
+                <div className="header-icon">📤</div>
 
-              <label>Municipio</label>
-              <select
-                value={municipioSelect}
-                onChange={(e) => setMunicipioSelect(e.target.value)}
-              >
-                <option value="">Selecciona un municipio...</option>
-                {municipios.map((m) => (
-                  <option key={m.id} value={m.id}>
-                    {m.nombre}
-                  </option>
-                ))}
-              </select>
+                <div>
+                  <div className="header-text">
+                    <h3>Cargar Listado Nominal</h3>
+                  </div>
+                  <div className="header-subtext">
+                    <p>Respaldo en formato PDF</p>
+                  </div>
+                </div>
+              </div>
 
-              <br />
-              <br />
+              <div className="modal-content">
+                <label>Municipio</label>
 
-              <label>Archivo PDF o Excel</label>
-              <input
-                type="file"
-                accept=".pdf,.xls,.xlsx,application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                onChange={(e) => setArchivoSelect(e.target.files[0])}
-              />
+                <select
+                  value={municipioSelect}
+                  onChange={(e) => setMunicipioSelect(e.target.value)}
+                >
+                  <option value="">Selecciona un municipio...</option>
 
-              <br />
-              <br />
+                  {municipios.map((m) => (
+                    <option key={m.id} value={m.id}>
+                      {m.nombre}
+                    </option>
+                  ))}
+                </select>
+
+                <label>Archivo PDF</label>
+
+                <div className="upload-area">
+                  <input
+                    type="file"
+                    id="archivoPdf"
+                    accept=".pdf,application/pdf"
+                    onChange={(e) => setArchivoSelect(e.target.files[0])}
+                    hidden
+                  />
+
+                  {!archivoSelect ? (
+                    <label htmlFor="archivoPdf" className="upload-dropzone">
+                      <div className="pdf-icon">📄</div>
+
+                      <h4>Haz clic para seleccionar</h4>
+
+                      <span>Formato permitido (.pdf)</span>
+                    </label>
+                  ) : (
+                    <div className="archivo-preview">
+                      <div className="archivo-info">
+                        <div className="pdf-icon-small">📄</div>
+
+                        <div>
+                          <strong>{archivoSelect.name}</strong>
+
+                          <span>
+                            {(archivoSelect.size / 1024).toFixed(0)} KB
+                          </span>
+                        </div>
+                      </div>
+
+                      <button
+                        type="button"
+                        className="btn-remove-file"
+                        onClick={() => setArchivoSelect(null)}
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
 
               <div className="modal-footer">
                 <button
@@ -339,69 +393,71 @@ export default function ListadoNominal() {
               </div>
             </div>
           </div>,
-          document.body
+          document.body,
         )}
 
-{archivoEliminar &&
-  createPortal(
-    <div className="modal-overlay">
-      <div className="modal-listado modal-eliminar">
-        <div className="modal-eliminar-header">
-          <div className="modal-eliminar-icono">
-            <FiTrash2 />
-          </div>
+      {archivoEliminar &&
+        createPortal(
+          <div className="modal-overlay">
+            <div className="modal-listado modal-eliminar">
+              <div className="modal-eliminar-header">
+                <div className="modal-eliminar-icono">
+                  <FiTrash2 />
+                </div>
 
-          <div>
-            <h3>¿Deseas eliminar este archivo?</h3>
-            <p>Esta acción es permanente</p>
-          </div>
-        </div>
+                <div>
+                  <h3>¿Deseas eliminar este archivo?</h3>
+                  <p>Esta acción es permanente</p>
+                </div>
+              </div>
 
-        <div className="modal-eliminar-body">
-         <div className="modal-info">
-  <div>
-    Archivo:
-    <strong>
-      {corregirTexto(archivoEliminar?.archivo_nombre) || "Sin archivo"}
-    </strong>
-  </div>
+              <div className="modal-eliminar-body">
+                <div className="modal-info">
+                  <div>
+                    Archivo:
+                    <strong>
+                      {corregirTexto(archivoEliminar?.archivo_nombre) ||
+                        "Sin archivo"}
+                    </strong>
+                  </div>
 
-  <div>
-    Municipio:
-    <strong>
-      {corregirTexto(archivoEliminar?.municipio_nombre) || "Sin municipio"}
-    </strong>
-  </div>
-</div>
+                  <div>
+                    Municipio:
+                    <strong>
+                      {corregirTexto(archivoEliminar?.municipio_nombre) ||
+                        "Sin municipio"}
+                    </strong>
+                  </div>
+                </div>
 
-          <div className="modal-warning">
-            <span>⚠️</span>
-            <span>Esta acción no se puede deshacer.</span>
-          </div>
-        </div>
+                <div className="modal-warning">
+                  <span>⚠️</span>
+                  <span>Esta acción no se puede deshacer.</span>
+                </div>
+              </div>
 
-        <div className="modal-footer">
-          <button
-            className="btn-cancelar"
-            onClick={cancelarEliminar}
-            disabled={eliminando}
-          >
-            Cancelar
-          </button>
+              <div className="modal-footer">
+                <button
+                  className="btn-cancelar"
+                  onClick={cancelarEliminar}
+                  disabled={eliminando}
+                >
+                  Cancelar
+                </button>
 
-          <button
-            className="btn-eliminar-modal"
-            onClick={confirmarEliminar}
-            disabled={eliminando}
-          >
-            <FiTrash2 size={14} />
-            {eliminando ? "Eliminando..." : "Eliminar"}
-          </button>
-        </div>
-      </div>
-    </div>,
-    document.body
-  )}
+                <button
+                  className="btn-eliminar-modal"
+                  onClick={confirmarEliminar}
+                  disabled={eliminando}
+                >
+                  <FiTrash2 size={14} />
+                  {eliminando ? "Eliminando..." : "Eliminar"}
+                </button>
+              </div>
+            </div>
+          </div>,
+          document.body,
+        )}
     </div>
   );
 }
