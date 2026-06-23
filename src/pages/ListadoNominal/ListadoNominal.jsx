@@ -17,6 +17,11 @@ export default function ListadoNominal() {
   const [municipios, setMunicipios] = useState([]);
   const [busqueda, setBusqueda] = useState("");
   const [loading, setLoading] = useState(false);
+  
+  // ESTADOS PARA PAGINACIÓN
+  const [paginaActual, setPaginaActual] = useState(1);
+  const itemsPorPagina = 7; // Mostrar 7 registros por página
+
   const corregirTexto = (texto = "") => {
     try {
       return decodeURIComponent(escape(texto));
@@ -90,6 +95,7 @@ export default function ListadoNominal() {
   useEffect(() => {
     const timer = setTimeout(() => {
       cargarListados();
+      setPaginaActual(1); // Regresar a la página 1 cuando se busca algo nuevo
     }, 300);
 
     return () => clearTimeout(timer);
@@ -153,7 +159,7 @@ export default function ListadoNominal() {
       } else {
         const link = document.createElement("a");
         link.href = url;
-        link.download = `listado_${id}`;
+        link.download = `listado_${id}.pdf`;
         document.body.appendChild(link);
         link.click();
         link.remove();
@@ -198,6 +204,12 @@ export default function ListadoNominal() {
     }
   };
 
+  // LÓGICA DE PAGINACIÓN MATEMÁTICA
+  const indiceUltimoItem = paginaActual * itemsPorPagina;
+  const indicePrimerItem = indiceUltimoItem - itemsPorPagina;
+  const listadosPaginados = listados.slice(indicePrimerItem, indiceUltimoItem);
+  const totalPaginas = Math.ceil(listados.length / itemsPorPagina) || 1;
+
   return (
     <div className="listado-nominal-container">
       <div className="listado-header">
@@ -237,65 +249,95 @@ export default function ListadoNominal() {
       {loading ? (
         <p>Cargando...</p>
       ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>Archivo</th>
-              <th>Municipio</th>
-              <th>Fecha de carga</th>
-              <th>Subido por</th>
-              <th>Estado</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {listados.map((item) => (
-              <tr key={item.id}>
-                <td>{corregirTexto(item.archivo_nombre)}</td>
-                <td>{item.municipio_nombre}</td>
-                <td>{new Date(item.created_at).toLocaleDateString("es-MX")}</td>
-                <td>{item.subido_por}</td>
-                <td>
-                  {" "}
-                  <span
-                    className={`estado-badge ${item.estado?.toLowerCase()}`}
-                  >
-                    {" "}
-                    {item.estado}
-                  </span>
-                </td>
-                <td className="acciones-cell">
-                  <button
-                    className="btn-ver"
-                    onClick={() => handleAccionArchivo(item.id, "ver")}
-                  >
-                    <FaRegEye size={14} />
-                    Ver
-                  </button>
-
-                  <button
-                    className="btn-descargar"
-                    onClick={() => handleAccionArchivo(item.id, "descargar")}
-                  >
-                    <FiDownload size={14} />
-                    Descargar
-                  </button>
-
-                  <button
-                    className="btn-Eliminar"
-                    onClick={() => handleEliminar(item)}
-                  >
-                    <FiTrash2 size={14} />
-                    Eliminar
-                  </button>
-                </td>
+        <>
+          <table>
+            <thead>
+              <tr>
+                <th>Archivo</th>
+                <th>Municipio</th>
+                <th>Fecha de carga</th>
+                <th>Subido por</th>
+                <th>Estado</th>
+                <th>Acciones</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              {/* Aquí usamos listadosPaginados en vez de listados */}
+              {listadosPaginados.map((item) => (
+                <tr key={item.id}>
+                  <td>{corregirTexto(item.archivo_nombre)}</td>
+                  <td>{item.municipio_nombre}</td>
+                  <td>{new Date(item.created_at).toLocaleDateString("es-MX")}</td>
+                  <td>{item.subido_por}</td>
+                  <td>
+                    <span
+                      className={`estado-badge ${item.estado?.toLowerCase()}`}
+                    >
+                      {item.estado}
+                    </span>
+                  </td>
+                  <td className="acciones-cell">
+                    <button
+                      className="btn-ver"
+                      onClick={() => handleAccionArchivo(item.id, "ver")}
+                    >
+                      <FaRegEye size={14} />
+                      Ver
+                    </button>
+
+                    <button
+                      className="btn-descargar"
+                      onClick={() => handleAccionArchivo(item.id, "descargar")}
+                    >
+                      <FiDownload size={14} />
+                      Descargar
+                    </button>
+
+                    <button
+                      className="btn-Eliminar"
+                      onClick={() => handleEliminar(item)}
+                    >
+                      <FiTrash2 size={14} />
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              ))}
+              {listadosPaginados.length === 0 && (
+                <tr>
+                  <td colSpan="6" style={{ textAlign: "center", padding: "20px" }}>
+                    No se encontraron registros.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+
+          {/* CONTROLES DE PAGINACIÓN */}
+          {listados.length > 0 && (
+            <div className="listado-paginacion">
+              <button
+                onClick={() => setPaginaActual(paginaActual - 1)}
+                disabled={paginaActual === 1}
+              >
+                Anterior
+              </button>
+              <span>
+                Página {paginaActual} de {totalPaginas}
+              </span>
+              <button
+                onClick={() => setPaginaActual(paginaActual + 1)}
+                disabled={paginaActual === totalPaginas}
+              >
+                Siguiente
+              </button>
+            </div>
+          )}
+        </>
       )}
 
+      {/* MODALES MANTENIDOS IGUAL */}
       {modalAbierto &&
         createPortal(
           <div className="modal-overlay">

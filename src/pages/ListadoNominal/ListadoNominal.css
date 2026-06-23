@@ -1,3 +1,6 @@
+/* ==========================================================================
+   CONTENEDOR PRINCIPAL
+========================================================================== */
 .listado-nominal-container {
   padding: 30px;
   background: #ffffff;
@@ -5,16 +8,13 @@
   border-radius: 16px;
   margin: 20px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-  
 }
 
-
 .listado-header-top {
-  display: flex;
+  display: block;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 25px;
-  
 }
 
 .listado-subtitle {
@@ -24,11 +24,14 @@
   text-transform: uppercase;
   margin-bottom: 4px;
 }
+
 .listado-header h1 {
   color: #333;
   margin-bottom: 8px;
   margin-top: 10px;
+  font-size: 42px;
 }
+
 .listado-header p {
   color: #777;
   margin-bottom: 0;
@@ -44,13 +47,16 @@
   font-weight: 600;
   position: absolute;
   top: 30px;
-  right: 20px;
+  right: 30px;
 }
 
 .btn-subir-listado:hover {
   background: #64122b;
 }
 
+/* ==========================================================================
+   BUSCADOR
+========================================================================== */
 .buscador-card {
   background: white;
   border-radius: 10px;
@@ -58,8 +64,8 @@
   margin-top: 25px;
   margin-bottom: 25px;
   border: 1px solid #eee;
-  width: 1200px;
-  max-width: 100%;
+  width: 100%; /* 🔥 Reemplazamos los 1200px por 100% */
+  box-sizing: border-box;
 }
 
 .buscador-card label {
@@ -77,22 +83,10 @@
   outline: none;
 }
 
-.tabla-card {
-  background: white;
-  border-radius: 10px;
-  padding: 15px;
-}
-
-.tabla-header {
-  margin-bottom: 15px;
-}
-
-.tabla-header h3 {
-  font-size: 18px;
-  margin: 0;
-}
-
-table {
+/* ==========================================================================
+   TABLA (ESTILOS ENCAPSULADOS PARA NO AFECTAR OTROS MÓDULOS)
+========================================================================== */
+.listado-nominal-container table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
@@ -100,67 +94,70 @@ table {
   border-radius: 8px;
 }
 
-thead {
+.listado-nominal-container thead {
   background: #7a1735;
 }
 
-thead th {
+.listado-nominal-container thead th {
   color: white;
   text-align: left;
   padding: 14px;
   font-size: 13px;
 }
 
-thead th:nth-child(1),
-tbody td:nth-child(1) {
+.listado-nominal-container thead th:nth-child(1),
+.listado-nominal-container tbody td:nth-child(1) {
   width: 32%;
 }
 
-thead th:nth-child(2),
-tbody td:nth-child(2) {
+.listado-nominal-container thead th:nth-child(2),
+.listado-nominal-container tbody td:nth-child(2) {
   width: 12%;
 }
 
-thead th:nth-child(3),
-tbody td:nth-child(3) {
+.listado-nominal-container thead th:nth-child(3),
+.listado-nominal-container tbody td:nth-child(3) {
   width: 13%;
 }
 
-thead th:nth-child(4),
-tbody td:nth-child(4) {
+.listado-nominal-container thead th:nth-child(4),
+.listado-nominal-container tbody td:nth-child(4) {
   width: 16%;
 }
 
-thead th:nth-child(5),
-tbody td:nth-child(5) {
+.listado-nominal-container thead th:nth-child(5),
+.listado-nominal-container tbody td:nth-child(5) {
   width: 10%;
   text-align: center;
 }
 
-thead th:nth-child(6),
-tbody td:nth-child(6) {
+.listado-nominal-container thead th:nth-child(6),
+.listado-nominal-container tbody td:nth-child(6) {
   width: 17%;
   text-align: center;
 }
 
-tbody td {
+.listado-nominal-container tbody td {
   padding: 15px;
   border-bottom: 1px solid #ececec;
   font-size: 14px;
   vertical-align: middle;
 }
 
-tbody tr:hover {
+.listado-nominal-container tbody tr:hover {
   background: #fafafa;
 }
 
-tbody td:first-child {
+.listado-nominal-container tbody td:first-child {
   max-width: 420px;
   white-space: normal;
   word-break: break-word;
   overflow-wrap: anywhere;
 }
 
+/* ==========================================================================
+   ESTADOS Y BOTONES DE ACCIÓN EN TABLA
+========================================================================== */
 .estado-badge {
   display: inline-flex;
   align-items: center;
@@ -183,62 +180,8 @@ tbody td:first-child {
   color: #777;
 }
 
-/* =========================
-   COLUMNA ACCIONES
-========================= */
-
-thead th:last-child,
-tbody td:last-child {
-  width: 360px;
-  min-width: 360px;
-  text-align: center;
-}
-
-/* Contenedor de botones */
-.acciones-cell {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: nowrap;
-  width: 100%;
-}
-
-/* Botones */
-.btn-ver,
-.btn-descargar,
-.btn-Eliminar {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 105px;
-  min-width: 105px;
-  height: 36px;
-
-  gap: 6px;
-
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 600;
-
-  cursor: pointer;
-  transition: all .2s ease;
-}
-
-/* Iconos */
-.btn-ver svg,
-.btn-descargar svg,
-.btn-Eliminar svg {
-  width: 14px;
-  height: 14px;
-  flex-shrink: 0;
-}
-
-/* Corrección visual final de botones de acciones */
-
-thead th:last-child,
-tbody td:last-child {
+.listado-nominal-container thead th:last-child,
+.listado-nominal-container tbody td:last-child {
   width: 360px;
   min-width: 360px;
   text-align: center;
@@ -260,11 +203,9 @@ tbody td:last-child {
   align-items: center;
   justify-content: center;
   gap: 6px;
-
   width: 105px;
   min-width: 105px;
   height: 36px;
-
   border-radius: 7px;
   font-size: 12px;
   font-weight: 700;
@@ -284,7 +225,6 @@ tbody td:last-child {
   flex-shrink: 0;
 }
 
-/* Botón Ver */
 .btn-ver {
   color: #7a1735;
   background: #ffffff;
@@ -297,7 +237,6 @@ tbody td:last-child {
   box-shadow: 0 4px 10px rgba(122, 23, 53, 0.22);
 }
 
-/* Botón Descargar */
 .btn-descargar {
   color: #6b5b35;
   background: #f8f3e7;
@@ -310,7 +249,6 @@ tbody td:last-child {
   box-shadow: 0 4px 10px rgba(122, 23, 53, 0.12);
 }
 
-/* Botón Eliminar */
 .btn-Eliminar {
   color: #b42318;
   background: #fff7f7;
@@ -324,9 +262,48 @@ tbody td:last-child {
   box-shadow: 0 4px 10px rgba(180, 35, 24, 0.18);
 }
 
-/* RESTAURAR DISEÑO MODAL ELIMINAR */
+/* ==========================================================================
+   PAGINACIÓN
+========================================================================== */
+.listado-paginacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
 
-/* FONDO OSCURO */
+.listado-paginacion button {
+  padding: 8px 16px;
+  border: 1px solid #d5d5d5;
+  background-color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #444;
+  transition: all 0.2s ease;
+}
+
+.listado-paginacion button:hover:not(:disabled) {
+  background-color: #f0f0f0;
+}
+
+.listado-paginacion button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.listado-paginacion span {
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   MODALES (OVERLAY COMÚN)
+========================================================================== */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -338,7 +315,9 @@ tbody td:last-child {
   z-index: 9999;
 }
 
-/* MODAL */
+/* ==========================================================================
+   MODAL: CARGAR LISTADO
+========================================================================== */
 .modal-listado {
   width: 100%;
   max-width: 560px;
@@ -346,111 +325,70 @@ tbody td:last-child {
   border-radius: 22px;
   overflow: hidden;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  padding: 0;
   animation: modalFade .25s ease;
 }
 
-/* CABECERA */
+@keyframes modalFade {
+  from { opacity: 0; transform: translateY(-15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .modal-header-listado {
   background: linear-gradient(135deg, #8b1d4d 0%, #6c173b 100%);
   height: 88px;
-
   display: flex;
   align-items: center;
   gap: 14px;
-
   padding: 0 24px;
-
   color: white;
   border-top-left-radius: 22px;
   border-top-right-radius: 22px;
-  font-size: 16px;
-  
 }
 
-.header-text {
+.header-icon {
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.15);
+  border-radius: 12px;
+  font-size: 22px;
+}
+
+.header-text h3 {
   display: flex;
   flex-direction: column;
   gap: 4px;
   font-size: 20px;
+  font-weight: 700;
+  margin: 0;
 }
-.header-subtext {
+
+.header-subtext p {
   font-size: 14px;
   opacity: 0.85;
-}
-
-.header-icon {
-  width: 46px;
-  height: 46px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: rgba(255,255,255,0.15);
-  border-radius: 12px;
-
-  font-size: 22px;
-}
-/* ICONO */
-.header-icon {
-  width: 46px;
-  height: 46px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255,255,255,0.15);
-  border-radius: 12px;
-  font-size: 22px;
-}
-
-/* TEXTO DEL HEADER */
-.modal-header-text {
-  display: flex;
-  flex-direction: column;
-}
-
-/* TÍTULO */
-.modal-header-text h3 {
   margin: 0;
-  font-size: 20px;
-  font-weight: 700;
 }
 
-/* SUBTÍTULO */
-.modal-header-text p {
-  margin: 0;
-  font-size: 12px;
-  opacity: 0.85;
+.modal-content {
+  padding: 30px 40px;
 }
 
-
-/* CONTENIDO */
-.modal-listado {
-  width: 100%;
-  max-width: 560px;
-  background: #fff;
-  border-radius: 22px;
-  overflow: hidden; /* importante */
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
-}
-
-.modal-listado > *:not(h3) {
-  padding-left: 24px;
-  padding-right: 24px;
-}
-
-/* CONTENEDOR INTERNO */
-.modal-listado label {
+.modal-content label {
   display: block;
-  margin-bottom: 8px;
-  margin-top: 18px;
-  font-size: 15px;
+  margin-bottom: 10px;
   font-weight: 600;
   color: #444;
+  font-size: 15px;
 }
 
-/* SELECT */
-.modal-listado select {
+.modal-content label:not(:first-child) {
+  margin-top: 24px;
+}
+
+.modal-content select {
   width: 100%;
   height: 48px;
   border: 1px solid #d7d7d7;
@@ -461,11 +399,11 @@ tbody td:last-child {
   transition: .2s;
 }
 
-.modal-listado select:focus {
+.modal-content select:focus {
   border-color: #8b1d4d;
 }
 
-/* ZONA DE CARGA */
+/* ZONA DE CARGA DE ARCHIVO */
 .upload-area {
   margin-top: 10px;
 }
@@ -475,13 +413,11 @@ tbody td:last-child {
   min-height: 160px;
   border: 2px dashed #d8d8d8;
   border-radius: 14px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  text-align: center; /* clave */
+  text-align: center;
   cursor: pointer;
   transition: .25s;
   background: #fff;
@@ -493,8 +429,17 @@ tbody td:last-child {
 }
 
 .pdf-icon {
-  font-size: 40px;
+  font-size: 44px;
   margin-bottom: 10px;
+  color: #8b1d4d;
+  background: rgba(139, 29, 77, 0.08);
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
 }
 
 .upload-dropzone h4 {
@@ -510,7 +455,6 @@ tbody td:last-child {
   margin-top: 6px;
 }
 
-/* ARCHIVO SELECCIONADO */
 .archivo-preview {
   border: 1px solid #e4e4e4;
   border-radius: 12px;
@@ -549,7 +493,6 @@ tbody td:last-child {
   font-size: 13px;
 }
 
-/* ELIMINAR PDF */
 .btn-remove-file {
   border: none;
   background: transparent;
@@ -563,7 +506,7 @@ tbody td:last-child {
   color: #d32f2f;
 }
 
-/* FOOTER */
+/* FOOTER DE MODALES */
 .modal-footer {
   margin-top: 28px;
   padding: 18px 24px;
@@ -573,7 +516,6 @@ tbody td:last-child {
   gap: 12px;
 }
 
-/* BOTÓN CANCELAR */
 .btn-cancelar {
   min-width: 120px;
   height: 44px;
@@ -585,117 +527,35 @@ tbody td:last-child {
   cursor: pointer;
 }
 
-/* BOTÓN SUBIR */
-.btn-subir {
-  min-width: 180px;
-  height: 44px;
-  border: none;
-  border-radius: 10px;
-  background: linear-gradient(
-    135deg,
-    #d3a6ba,
-    #c698ac
-  );
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
+.btn-cancelar:hover {
+  background: #f7f7f7;
 }
-
-.btn-subir:hover {
-  opacity: .9;
-}
-
-.btn-subir:disabled {
-  opacity: .6;
-  cursor: not-allowed;
-}
-
-.btn-subir.activo {
-  background: linear-gradient(135deg, #8b1d4d, #6c173b);
-  color: #fff;
-  box-shadow: 0 6px 18px rgba(139, 29, 77, 0.25);
-  transform: translateY(-1px);
-}
-
 
 .btn-subir {
+  min-width: 180px !important;
+  height: 44px !important;
+  border: none !important;
+  border-radius: 10px !important;
   background: #d3a6ba;
   color: white;
-  cursor: not-allowed;
+  font-weight: 600;
   opacity: 0.6;
+  cursor: not-allowed;
 }
 
-/* habilitado */
 .btn-subir:not(:disabled) {
   background: linear-gradient(135deg, #8b1d4d, #6c173b);
   cursor: pointer;
   opacity: 1;
 }
 
-/* ANIMACIÓN */
-@keyframes modalFade {
-  from {
-    opacity: 0;
-    transform: translateY(-15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.modal-listado {
-  width: 100%;
-  max-width: 560px;
-  background: #fff;
-  border-radius: 22px;
-  overflow: hidden;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
-  padding: 0;
+.btn-subir:not(:disabled):hover {
+  opacity: .9;
 }
 
-.modal-content {
-  padding: 24px 32px 28px;
-}
-.modal-content {
-  padding: 30px 40px;
-}
-
-.modal-content label {
-  display: block;
-  margin-bottom: 10px;
-  font-weight: 600;
-}
-
-.modal-content label:not(:first-child) {
-  margin-top: 24px;
-}
-.btn-subir {
-  min-width: 180px !important;
-  height: 44px !important;
-  border: none !important;
-  border-radius: 10px !important;
-
-}
-
-.pdf-icon {
-  font-size: 44px;
-  margin-bottom: 10px;
-
-  color: #8b1d4d; /* color principal */
-  background: rgba(139, 29, 77, 0.08);
-
-  width: 60px;
-  height: 60px;
-  border-radius: 14px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  display: inline-flex;
-  margin-top: 12px;
-}
-/* RESTAURAR DISEÑO MODAL ELIMINAR */
-
+/* ==========================================================================
+   MODAL: ELIMINAR ARCHIVO
+========================================================================== */
 .modal-eliminar {
   width: 450px;
   background: #fff;
@@ -754,27 +614,6 @@ tbody td:last-child {
   color: #8b1e1e;
   padding: 14px;
   border-radius: 10px;
-}
-
-.modal-footer {
-  border-top: 1px solid #ececec;
-  padding: 18px 24px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-}
-
-.btn-cancelar {
-  background: white;
-  border: 1px solid #d5d5d5;
-  border-radius: 10px;
-  padding: 10px 22px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.btn-cancelar:hover {
-  background: #f7f7f7;
 }
 
 .btn-eliminar-modal {
