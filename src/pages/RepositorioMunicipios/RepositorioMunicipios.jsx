@@ -5,7 +5,7 @@ import {
   subirDocumentosRepositorioMunicipioApi,
   verDocumentoRepositorioMunicipioApi,
   descargarDocumentoRepositorioMunicipioApi,
-  eliminarDocumentoRepositorioMunicipioApi
+  eliminarDocumentoRepositorioMunicipioApi,
 } from "../../services/api";
 import "./RepositorioMunicipios.css";
 
@@ -37,18 +37,18 @@ const RepositorioMunicipios = () => {
   };
 
   const mostrarToast = (tipo, titulo, mensaje) => {
-  setToast({ tipo, titulo, mensaje });
+    setToast({ tipo, titulo, mensaje });
 
-  setTimeout(() => {
-    setToast(null);
-  }, 3000);
-};
+    setTimeout(() => {
+      setToast(null);
+    }, 3000);
+  };
 
   const refrescarDetalleYTabla = async () => {
     if (!municipioSeleccionado) return;
 
     const detalleResponse = await getRepositorioMunicipioDetalleApi(
-      municipioSeleccionado.municipio_id
+      municipioSeleccionado.municipio_id,
     );
 
     setDetalle(detalleResponse.data.data);
@@ -59,7 +59,7 @@ const RepositorioMunicipios = () => {
   const verDetalleMunicipio = async (municipio) => {
     try {
       const response = await getRepositorioMunicipioDetalleApi(
-        municipio.municipio_id
+        municipio.municipio_id,
       );
 
       setDetalle(response.data.data);
@@ -73,7 +73,7 @@ const RepositorioMunicipios = () => {
     const permitidos = [
       "application/pdf",
       "application/vnd.ms-excel",
-      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     ];
 
     const seleccionados = Array.from(files || []);
@@ -82,13 +82,13 @@ const RepositorioMunicipios = () => {
       mostrarToast(
         "error",
         "Límite excedido",
-        "Solo puedes seleccionar máximo 5 archivos a la vez."
+        "Solo puedes seleccionar máximo 5 archivos a la vez.",
       );
       return;
     }
 
     const validos = seleccionados.filter((file) =>
-      permitidos.includes(file.type)
+      permitidos.includes(file.type),
     );
 
     setArchivosSeleccionados(validos);
@@ -101,7 +101,11 @@ const RepositorioMunicipios = () => {
 
   const subirArchivos = async () => {
     if (!municipioSeleccionado || archivosSeleccionados.length === 0) {
-      mostrarToast("error", "Archivo requerido", "Selecciona al menos un archivo.");
+      mostrarToast(
+        "error",
+        "Archivo requerido",
+        "Selecciona al menos un archivo.",
+      );
       return;
     }
 
@@ -110,7 +114,7 @@ const RepositorioMunicipios = () => {
 
       await subirDocumentosRepositorioMunicipioApi(
         municipioSeleccionado.municipio_id,
-        archivosSeleccionados
+        archivosSeleccionados,
       );
 
       await refrescarDetalleYTabla();
@@ -167,7 +171,7 @@ const RepositorioMunicipios = () => {
       await eliminarDocumentoRepositorioMunicipioApi(documentoAEliminar.id);
 
       const response = await getRepositorioMunicipioDetalleApi(
-        municipioSeleccionado.municipio_id
+        municipioSeleccionado.municipio_id,
       );
 
       setDetalle(response.data.data);
@@ -178,15 +182,11 @@ const RepositorioMunicipios = () => {
       mostrarToast(
         "success",
         "Eliminado",
-        "Documento eliminado correctamente."
+        "Documento eliminado correctamente.",
       );
     } catch (error) {
       console.error("Error al eliminar documento:", error);
-      mostrarToast(
-        "error",
-        "Error",
-        "No se pudo eliminar el documento."
-      );
+      mostrarToast("error", "Error", "No se pudo eliminar el documento.");
     }
   };
 
@@ -196,14 +196,18 @@ const RepositorioMunicipios = () => {
     if (!texto) return municipios;
 
     return municipios.filter((m) =>
-      String(m.municipio_nombre || "").toLowerCase().includes(texto)
+      String(m.municipio_nombre || "")
+        .toLowerCase()
+        .includes(texto),
     );
   }, [municipios, busqueda]);
 
-  const totalPaginas = Math.ceil(municipiosFiltrados.length / municipiosPorPagina);
+  const totalPaginas = Math.ceil(
+    municipiosFiltrados.length / municipiosPorPagina,
+  );
   const municipiosPaginados = municipiosFiltrados.slice(
     (paginaActual - 1) * municipiosPorPagina,
-    paginaActual * municipiosPorPagina
+    paginaActual * municipiosPorPagina,
   );
 
   const documentosPorFecha = useMemo(() => {
@@ -218,7 +222,7 @@ const RepositorioMunicipios = () => {
         grupos[fechaKey] = {
           fecha: fechaKey,
           pdf: [],
-          excel: []
+          excel: [],
         };
       }
 
@@ -226,7 +230,7 @@ const RepositorioMunicipios = () => {
     });
 
     return Object.values(grupos).sort(
-      (a, b) => new Date(b.fecha) - new Date(a.fecha)
+      (a, b) => new Date(b.fecha) - new Date(a.fecha),
     );
   }, [detalle]);
 
@@ -244,7 +248,11 @@ const RepositorioMunicipios = () => {
             ← Volver a municipios
           </button>
 
-          <button type="button" className="repo-upload-btn" onClick={() => setModalAbierto(true)}>
+          <button
+            type="button"
+            className="repo-upload-btn"
+            onClick={() => setModalAbierto(true)}
+          >
             <i className="bx bx-upload"></i>
             Cargar archivos
           </button>
@@ -296,7 +304,7 @@ const RepositorioMunicipios = () => {
                     {new Date(grupo.fecha).toLocaleDateString("es-MX", {
                       day: "numeric",
                       month: "long",
-                      year: "numeric"
+                      year: "numeric",
                     })}
                   </h2>
 
@@ -330,7 +338,17 @@ const RepositorioMunicipios = () => {
                             </div>
 
                             <div className="repo-file-actions">
-                              <button type="button" onClick={() => descargarDocumento(doc)}>
+                              <button
+                                type="button"
+                                onClick={() => verDocumento(doc)}
+                              >
+                                <i className="bx bx-show"></i>
+                              </button>
+
+                              <button
+                                type="button"
+                                onClick={() => descargarDocumento(doc)}
+                              >
                                 <i className="bx bx-download"></i>
                               </button>
 
@@ -374,7 +392,10 @@ const RepositorioMunicipios = () => {
                             </div>
 
                             <div className="repo-file-actions">
-                              <button type="button" onClick={() => descargarDocumento(doc)}>
+                              <button
+                                type="button"
+                                onClick={() => descargarDocumento(doc)}
+                              >
                                 <i className="bx bx-download"></i>
                               </button>
 
@@ -394,75 +415,80 @@ const RepositorioMunicipios = () => {
                     )}
                   </div>
                 </div>
-
               </div>
             ))
           )}
         </section>
 
         {modalAbierto && (
-  <div className="repo-modal-overlay">
-    <div className="repo-modal">
-      <div className="repo-modal-header">
-        <div>
-          <h2>Cargar archivos</h2>
-          <p>Municipio: {detalle.municipio.municipio_nombre}</p>
-        </div>
+          <div className="repo-modal-overlay">
+            <div className="repo-modal">
+              <div className="repo-modal-header">
+                <div>
+                  <h2>Cargar archivos</h2>
+                  <p>Municipio: {detalle.municipio.municipio_nombre}</p>
+                </div>
 
-        <button
-          type="button"
-          className="repo-modal-close"
-          onClick={() => setModalAbierto(false)}
-        >
-          ×
-        </button>
-      </div>
+                <button
+                  type="button"
+                  className="repo-modal-close"
+                  onClick={() => setModalAbierto(false)}
+                >
+                  ×
+                </button>
+              </div>
 
-      <label className="repo-dropzone" onDragOver={(e) => e.preventDefault()}onDrop={manejarDrop}>
-        <div className="repo-file-icons">
-          <span className="repo-pdf">PDF</span>
-          <span className="repo-excel">Excel</span>
-        </div>
+              <label
+                className="repo-dropzone"
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={manejarDrop}
+              >
+                <div className="repo-file-icons">
+                  <span className="repo-pdf">PDF</span>
+                  <span className="repo-excel">Excel</span>
+                </div>
 
-        <strong>Arrastra los archivos o haz clic para seleccionar</strong>
-        <p>PDF y Excel (.xlsx) - puedes subir varios</p>
+                <strong>
+                  Arrastra los archivos o haz clic para seleccionar
+                </strong>
+                <p>PDF y Excel (.xlsx) - puedes subir varios</p>
 
-        <input
-          type="file"
-          multiple
-          accept=".pdf,.xls,.xlsx"
-          onChange={(e) => manejarArchivos(e.target.files)}
-        />
-      </label>
+                <input
+                  type="file"
+                  multiple
+                  accept=".pdf,.xls,.xlsx"
+                  onChange={(e) => manejarArchivos(e.target.files)}
+                />
+              </label>
 
-      {archivosSeleccionados.length > 0 && (
-        <div className="repo-selected-files">
-          {archivosSeleccionados.map((archivo, index) => (
-            <p key={index}>{archivo.name}</p>
-          ))}
-        </div>
-      )}
+              {archivosSeleccionados.length > 0 && (
+                <div className="repo-selected-files">
+                  {archivosSeleccionados.map((archivo, index) => (
+                    <p key={index}>{archivo.name}</p>
+                  ))}
+                </div>
+              )}
 
-      <div className="repo-modal-actions">
-        <button
-          type="button"
-          onClick={() => setModalAbierto(false)}
-          disabled={subiendo}
-        >
-          Cancelar
-        </button>
+              <div className="repo-modal-actions">
+                <button
+                  type="button"
+                  onClick={() => setModalAbierto(false)}
+                  disabled={subiendo}
+                >
+                  Cancelar
+                </button>
 
-        <button
-          type="button"
-          className="repo-submit-btn"
-          onClick={subirArchivos}
-          disabled={subiendo}
-        >
-          {subiendo ? "Subiendo..." : "Subir"}
-        </button>
-      </div>
-    </div>
-  </div>
+                <button
+                  type="button"
+                  className="repo-submit-btn"
+                  onClick={subirArchivos}
+                  disabled={subiendo}
+                >
+                  {subiendo ? "Subiendo..." : "Subir"}
+                </button>
+              </div>
+            </div>
+          </div>
         )}
 
         {modalEliminar && (
@@ -501,7 +527,9 @@ const RepositorioMunicipios = () => {
         {toast && (
           <div className={`repo-toast repo-toast-${toast.tipo}`}>
             <div className="repo-toast-icon">
-              <i className={toast.tipo === "success" ? "bx bx-check" : "bx bx-x"}></i>
+              <i
+                className={toast.tipo === "success" ? "bx bx-check" : "bx bx-x"}
+              ></i>
             </div>
 
             <div>
@@ -514,7 +542,6 @@ const RepositorioMunicipios = () => {
             </button>
           </div>
         )}
-
       </div>
     );
   }
@@ -539,8 +566,9 @@ const RepositorioMunicipios = () => {
             type="text"
             placeholder="Escribe el nombre del municipio..."
             value={busqueda}
-            onChange={(e) => {setBusqueda(e.target.value);
-            setPaginaActual(1);
+            onChange={(e) => {
+              setBusqueda(e.target.value);
+              setPaginaActual(1);
             }}
           />
         </div>
@@ -598,7 +626,7 @@ const RepositorioMunicipios = () => {
                     ? new Date(m.ultima_carga).toLocaleDateString("es-MX", {
                         day: "numeric",
                         month: "long",
-                        year: "numeric"
+                        year: "numeric",
                       })
                     : "Sin carga"}
                 </td>
