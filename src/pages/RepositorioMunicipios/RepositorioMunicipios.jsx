@@ -23,6 +23,14 @@ const RepositorioMunicipios = () => {
   const [documentoAEliminar, setDocumentoAEliminar] = useState(null);
   const [toast, setToast] = useState(null);
 
+  const corregirTexto = (texto = "") => {
+  try {
+    return decodeURIComponent(escape(texto));
+  } catch {
+    return texto;
+  }
+};
+
   useEffect(() => {
     cargarMunicipios();
   }, []);
@@ -154,7 +162,7 @@ const RepositorioMunicipios = () => {
       const link = document.createElement("a");
 
       link.href = url;
-      link.download = doc.nombre_original;
+      link.download = corregirTexto(doc.nombre_original);
       link.click();
 
       window.URL.revokeObjectURL(url);
@@ -259,7 +267,7 @@ const RepositorioMunicipios = () => {
         </div>
 
         <p className="repo-kicker">RESPALDOS DE</p>
-        <h1>{detalle.municipio.municipio_nombre}</h1>
+        <h1>{corregirTexto(detalle.municipio.municipio_nombre)}</h1>
 
         <div className="repo-stats">
           <div className="repo-stat-card repo-stat-total">
@@ -334,7 +342,7 @@ const RepositorioMunicipios = () => {
                           <div className="repo-file-item" key={doc.id}>
                             <div className="repo-file-info">
                               <i className="bx bxs-file-pdf"></i>
-                              <span>{doc.nombre_original}</span>
+                              <span>{corregirTexto(doc.nombre_original)}</span>
                             </div>
 
                             <div className="repo-file-actions">
@@ -388,7 +396,7 @@ const RepositorioMunicipios = () => {
                           <div className="repo-file-item" key={doc.id}>
                             <div className="repo-file-info">
                               <i className="bx bxs-spreadsheet"></i>
-                              <span>{doc.nombre_original}</span>
+                              <span>{corregirTexto(doc.nombre_original)}</span>
                             </div>
 
                             <div className="repo-file-actions">
@@ -464,7 +472,7 @@ const RepositorioMunicipios = () => {
               {archivosSeleccionados.length > 0 && (
                 <div className="repo-selected-files">
                   {archivosSeleccionados.map((archivo, index) => (
-                    <p key={index}>{archivo.name}</p>
+                    <p key={index}>{corregirTexto(archivo.name)}</p>
                   ))}
                 </div>
               )}
@@ -502,7 +510,7 @@ const RepositorioMunicipios = () => {
 
               <p>
                 ¿Seguro que deseas eliminar{" "}
-                <strong>{documentoAEliminar?.nombre_original}</strong>?
+                <strong> {corregirTexto(documentoAEliminar?.nombre_original)} </strong>
               </p>
 
               <div className="repo-delete-actions">
@@ -599,7 +607,7 @@ const RepositorioMunicipios = () => {
                     <span className="repo-municipio-icon">
                       <i className="bx bx-building"></i>
                     </span>
-                    <strong>{m.municipio_nombre}</strong>
+                    <strong>{corregirTexto(m.municipio_nombre)}</strong>
                   </div>
                 </td>
 
