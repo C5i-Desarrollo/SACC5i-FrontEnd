@@ -8,8 +8,9 @@ import {
   eliminarDocumentoRepositorioMunicipioApi,
 } from "../../services/api";
 import "./RepositorioMunicipios.css";
+import { FiArchive } from "react-icons/fi";
 
-const RepositorioMunicipios = () => {
+const RepositorioMunicipios = ({ setPageTitle }) => {
   const [municipios, setMunicipios] = useState([]);
   const [busqueda, setBusqueda] = useState("");
   const [municipioSeleccionado, setMunicipioSeleccionado] = useState(null);
@@ -22,6 +23,16 @@ const RepositorioMunicipios = () => {
   const [modalEliminar, setModalEliminar] = useState(false);
   const [documentoAEliminar, setDocumentoAEliminar] = useState(null);
   const [toast, setToast] = useState(null);
+
+  useEffect(() => {
+    if (setPageTitle) {
+      setPageTitle({
+        titulo: "Personal Activo",
+        subtitulo: "Respaldos diarios del personal activo por municipio",
+        icon: <FiArchive className="nav-icon-highlight" />
+      });
+    }
+  }, [setPageTitle]);
 
   const corregirTexto = (texto = "") => {
   try {
@@ -556,14 +567,32 @@ const RepositorioMunicipios = () => {
 
   return (
     <div className="repo-page">
-      <p className="repo-kicker">REPOSITORIO DE RESPALDOS</p>
-      <h1>Listado de Personal Activo</h1>
+      
+      {/* NUEVO BANNER ESTILO VINO */}
+      <div className="repo-header-banner">
+        <div className="banner-content-left">
+          <span className="banner-subtitle">REPOSITORIO DE RESPALDOS</span>
+          <h1 className="banner-title">Listado de Personal Activo</h1>
+          <p className="banner-description">
+            <i className="bx bx-info-circle" style={{ marginRight: "6px", color: "#c4a173", fontSize: "18px" }}></i>
+            Selecciona un municipio para ver y cargar los respaldos diarios del personal activo.
+          </p>
+        </div>
 
-      <p className="repo-subtitle">
-        <i className="bx bx-info-circle"></i>
-        Selecciona un municipio para ver y cargar los respaldos diarios del
-        personal activo.
-      </p>
+        <div className="banner-content-right">
+          <div className="banner-stat-box">
+            <div className="stat-icon">
+              <i className="bx bx-building-house"></i>
+            </div>
+            <div className="stat-info">
+              <span className="stat-label">MUNICIPIOS ENCONTRADOS</span>
+              <span className="stat-value">
+                {municipiosFiltrados.length}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <section className="repo-search-card">
         <label>Buscar municipio</label>

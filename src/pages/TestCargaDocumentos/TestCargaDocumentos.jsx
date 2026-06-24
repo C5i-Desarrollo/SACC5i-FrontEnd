@@ -5,6 +5,8 @@ import { Upload, Download, Eye, Trash2, CloudUpload, X, RefreshCw } from "lucide
 import { FiCheckCircle, FiXCircle } from "react-icons/fi";
 import BitacoraModal from "../../components/layout/Bitacora/BitacoraModal";
 import "./TestCargaDocumentos.css";
+// Borra FiCloudUpload y pon FiUploadCloud
+import { FiUploadCloud } from "react-icons/fi";
 
 const formatearFecha = (fechaString) => {
   if (!fechaString) return "Sin fecha";
@@ -15,7 +17,7 @@ const formatearFecha = (fechaString) => {
   return new Date(fechaString).toLocaleDateString("es-MX", opciones);
 };
 
-export default function TestCargaDocumentos() {
+export default function TestCargaDocumentos({ setPageTitle }) {
   const [modalEliminarOpen, setModalEliminarOpen] = useState(false);
   const [documentoAEliminar, setDocumentoAEliminar] = useState(null);
   const [documentos, setDocumentos] = useState([]);
@@ -69,6 +71,16 @@ export default function TestCargaDocumentos() {
       if (!silent) setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (setPageTitle) {
+      setPageTitle({
+        titulo: "Carga de Documentos",
+        subtitulo: "Sube tus documentos o revisa el estado de los que ya enviaste a C5.",
+        icon: <FiUploadCloud className="nav-icon-highlight" />
+      });
+    }
+  }, [setPageTitle]);
 
   useEffect(() => {
     cargarMisDocumentos();
@@ -279,13 +291,27 @@ if (archivos.length > 10) {
     <div className="carga-page-container">
       <div className="carga-page-card">
         
-        <div className="carga-page-header">
-          <h1>
-            {/* Le damos el color vino y un tamaño más grande solo al ícono */}
-            <CloudUpload size={34} color="#7D2447" style={{ marginRight: '12px' }} />
-            Carga de Documentos
-          </h1>
-          <p>Sube tus documentos o revisa el estado de los que ya enviaste a C5.</p>
+        {/* NUEVO BANNER ESTILO VINO */}
+        <div className="carga-header-banner">
+          <div className="banner-content-left">
+            <span className="banner-subtitle">GESTIÓN DE DOCUMENTOS</span>
+            <h1 className="banner-title">
+                <FiUploadCloud size={28} />
+                Carga de Documentos
+            </h1>
+            <p className="banner-description">
+                Sube tus documentos o revisa el estado de los que ya enviaste a C5.
+            </p>
+          </div>
+
+          <div className="banner-content-right">
+            <div className="banner-stat-box">
+                <div className="stat-info" style={{alignItems: 'flex-end'}}>
+                    <span className="stat-label">TOTAL DOCUMENTOS</span>
+                    <span className="stat-value">{documentos.length}</span>
+                </div>
+            </div>
+          </div>
         </div>
 
         <div className="carga-controls">

@@ -7,33 +7,111 @@
   margin: 20px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.04);
   color: #2f3437;
-}
-
-.repo-kicker {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0;
-  margin-bottom: 4px;
-}
-
-.repo-page {
+  animation: aparecerPantalla 0.4s ease-out forwards;
   font-family:
     Inter,
     "Segoe UI",
     sans-serif;
 }
 
-.repo-page h1 {
-  font-size: 30px;
-  font-weight: 700;
-  margin: 8px 0;
+/* ==========================================================================
+   BANNER DE CABECERA (DISEÑO VINO)
+========================================================================== */
+.repo-header-banner {
+  background: linear-gradient(135deg, #7a1735 0%, #5a1025 100%);
+  border-radius: 12px;
+  padding: 24px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  border-bottom: 4px solid #c4a173; /* Borde dorado institucional */
+  margin-bottom: 25px;
 }
 
-.repo-subtitle {
-  font-size: 15px;
-  font-weight: 400;
-  margin: 0 0 25px;
+.banner-content-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
+
+.banner-subtitle {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.banner-title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.banner-description {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+}
+
+/* CAJA DE CONTEO A LA DERECHA */
+.banner-content-right {
+  display: flex;
+  align-items: center;
+}
+
+.banner-stat-box {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.stat-icon {
+  font-size: 32px;
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  opacity: 0.85;
+  text-transform: uppercase;
+}
+
+.stat-value {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+@media (max-width: 768px) {
+  .repo-header-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+  }
+}
+
 
 /* TOP DETALLE */
 .repo-detail-top {
@@ -837,4 +915,18 @@
 
 .repo-files-scroll::-webkit-scrollbar-thumb:hover {
   background: #9ca3af;
+}
+
+/* ==========================================================================
+   ANIMACIÓN DE ENTRADA SUAVE PARA TODA LA PANTALLA
+========================================================================== */
+@keyframes aparecerPantalla {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -6,8 +6,9 @@ import "./ListadoNominal.css";
 import { FaRegEye } from "react-icons/fa";
 import { FiDownload, FiTrash2 } from "react-icons/fi";
 import axios from "axios";
+import { FiList } from "react-icons/fi";
 
-export default function ListadoNominal() {
+export default function ListadoNominal({ setPageTitle }) {
   const { success, error, warning } = useNotification();
   const { user } = useAuth();
 
@@ -87,6 +88,16 @@ export default function ListadoNominal() {
       error("Error al cargar municipios.");
     }
   };
+
+  useEffect(() => {
+    if (setPageTitle) {
+      setPageTitle({
+        titulo: "Listado Nominal",
+        subtitulo: "Repositorio de respaldos documentales PDF",
+        icon: <FiList className="nav-icon-highlight" />
+      });
+    }
+  }, [setPageTitle]);
 
   useEffect(() => {
     cargarMunicipios();
@@ -212,36 +223,51 @@ export default function ListadoNominal() {
 
   return (
     <div className="listado-nominal-container">
-      <div className="listado-header">
-        <div className="listado-header-top">
-          <div>
-            <span className="listado-subtitle">Repositorio de Respaldos</span>
+      
+      {/* NUEVO BANNER ESTILO VINO */}
+      <div className="listado-header-banner">
+        <div className="banner-content-left">
+          <span className="banner-subtitle">REPOSITORIO DE RESPALDOS</span>
+          <h1 className="banner-title">Listado Nominal</h1>
+          <p className="banner-description">
+            <i className="bx bx-info-circle" style={{ marginRight: "6px", color: "#c4a173", fontSize: "18px" }}></i>
+            Respaldo del personal que trabaja en cada municipio. Se permiten solamente archivos PDF.
+          </p>
+        </div>
 
-            <h1>Listado Nominal</h1>
-
-            <p>
-              Respaldo del personal que trabaja en cada municipio. Se permiten solamente
-              archivos PDF.
-            </p>
-
-            <div className="buscador-card">
-              <label>Buscar respaldo</label>
-
-              <input
-                className="input-busqueda"
-                type="text"
-                placeholder="Escribe el municipio o el nombre del archivo..."
-                value={busqueda}
-                onChange={(e) => setBusqueda(e.target.value)}
-              />
+        <div className="banner-content-right">
+          <div className="banner-stat-box">
+            <div className="stat-icon">
+              <i className="bx bxs-file-pdf"></i>
+            </div>
+            <div className="stat-info">
+              <span className="stat-label">ARCHIVOS TOTALES</span>
+              <span className="stat-value">
+                {listados.length}
+              </span>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* CONTROLES: BUSCADOR Y BOTÓN */}
+      <div className="controles-accion">
+        <div className="buscador-card">
+          <label>Buscar respaldo</label>
+          <input
+            className="input-busqueda"
+            type="text"
+            placeholder="Escribe el municipio o el nombre del archivo..."
+            value={busqueda}
+            onChange={(e) => setBusqueda(e.target.value)}
+          />
         </div>
 
         <button
           className="btn-subir-listado"
           onClick={() => setModalAbierto(true)}
         >
+          <i className="bx bx-upload" style={{ fontSize: "18px" }}></i>
           Subir Listado Nominal
         </button>
       </div>

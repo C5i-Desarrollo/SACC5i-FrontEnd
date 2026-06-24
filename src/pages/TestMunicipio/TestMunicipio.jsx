@@ -5,12 +5,22 @@ import TablaBaja from "./TablaBaja";
 import TablaConsultaResumen from "./TablaConsultaResumen";
 import TablaConsultaDetalle from "./TablaConsultaDetalle";
 import "./TestMunicipio.css";
+import { FiFilter } from "react-icons/fi";
 
 import { obtenerAltasRegistradas } from "../../services/altaService";
 
 import { obtenerBajasRegistradas, obtenerBajasEditables } from "../../services/bajaService";
 
-export default function TestMunicipio() {
+export default function TestMunicipio({ setPageTitle }) {
+  useEffect(() => {
+    if (setPageTitle) {
+      setPageTitle({
+        titulo: "Filtrado por Municipio",
+        subtitulo: "Selecciona un municipio y tipo de movimiento para revisar los trámites registrados",
+        icon: <FiFilter className="nav-icon-highlight" />
+      });
+    }
+  }, [setPageTitle]);
   const [municipioNombre, setMunicipioNombre] = useState("");
   const [tipoTramite, setTipoTramite] = useState("alta");
   const [terminoBusqueda, setTerminoBusqueda] = useState("");
@@ -35,6 +45,7 @@ export default function TestMunicipio() {
       probarFiltro();
     }
   };
+
 
   document.addEventListener("visibilitychange", actualizarAlVolver);
 
@@ -601,18 +612,32 @@ if (tipoTramite === "consulta") {
 
   return (
     <div className="filtrado-container">
-      <span className="filtrado-subtitle">
-        REVISIÓN DE MOVIMIENTOS
-      </span>
+      
+      {/* NUEVO BANNER ESTILO VINO */}
+      <div className="filtrado-header-banner">
+        <div className="banner-content-left">
+          <span className="banner-subtitle">REVISIÓN DE MOVIMIENTOS</span>
+          <h1 className="banner-title">Filtrado por Municipio</h1>
+          <p className="banner-description">
+            Selecciona un municipio y tipo de movimiento para revisar los trámites registrados.
+          </p>
+        </div>
 
-      <h1 className="filtrado-title">
-        Filtrado por Municipio
-      </h1>
-
-      <p className="filtrado-description">
-        Selecciona un municipio y tipo de movimiento para revisar
-        los trámites registrados
-      </p>
+        <div className="banner-content-right">
+          <div className="banner-stat-box">
+            <div className="stat-icon">
+              <i className="bx bx-folder-open"></i>
+            </div>
+            <div className="stat-info">
+              <span className="stat-label">TRÁMITES ENCONTRADOS</span>
+              <span className="stat-value">
+                {/* Matemáticas simples para mostrar el total en el cuadrito */}
+                {tipoTramite === "consulta" ? consultaResumen.length : datosFiltrados.length}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <FiltrosControles
         municipioNombre={municipioNombre}

@@ -105,7 +105,7 @@ export const protectedRoutes = [
     path: 'test-municipio', // <-- Cambiado de 'test/municipio' a 'test-municipio'
     element: TestMunicipio,
     permission: 'VIEW_DASHBOARD', // <-- Cambiado a 'VIEW_DASHBOARD' para que el Admin/Dirección puedan entrar sin problemas de permisos
-    title: 'Test Municipio'
+    title: 'Filtrado Municipio'
   },
 
   // Municipio - carga documentos

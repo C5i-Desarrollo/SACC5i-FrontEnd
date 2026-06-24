@@ -274,13 +274,13 @@ const renderContent = () => {
       return <NoPermiso />;
 
     case 'TestMunicipio':
-     return can('VIEW_TEST_MUNICIPIO') ? <TestMunicipio /> : <NoPermiso />;
+     return can('VIEW_TEST_MUNICIPIO') ? <TestMunicipio setPageTitle={setPageTitle} /> : <NoPermiso />;
 
     case 'TestCargaDocumentos':
-      return <TestCargaDocumentos />;
+      return <TestCargaDocumentos setPageTitle={setPageTitle}/>;
 
     case 'TestRevisionC5':
-      return <TestRevisionC5 />;
+      return <TestRevisionC5 setPageTitle={setPageTitle} />;
 
     case 'ListadoNominal':
       return can('VIEW_DASHBOARD') ? <ListadoNominal setPageTitle={setPageTitle} /> : <NoPermiso />;

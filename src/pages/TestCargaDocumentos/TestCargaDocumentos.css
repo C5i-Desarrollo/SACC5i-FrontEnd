@@ -5,6 +5,7 @@
     padding: 20px;
     box-sizing: border-box;
     width: 100%;
+    animation: aparecerPantalla 0.4s ease-out forwards;
 }
 
 .carga-page-card {
@@ -15,22 +16,74 @@
     box-sizing: border-box;
 }
 
-.carga-page-header h1 {
-    color: #212529; /* Color oscuro/negro como en la otra pantalla */
-    margin: 0 0 8px 0;
+/* ==========================================================================
+   BANNER DE CABECERA (DISEÑO VINO)
+========================================================================== */
+.carga-header-banner {
+    background: linear-gradient(135deg, #7a1735 0%, #5a1025 100%);
+    border-radius: 12px;
+    padding: 24px 32px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    font-size: 32px; /* Tamaño más grande */
-    font-weight: 700;
-    line-height: 1.2;
-    word-break: break-word;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border-bottom: 4px solid #c4a173;
+    margin-bottom: 25px;
 }
 
-.carga-page-header p {
-    color: #666;
-    margin: 0 0 24px 0;
-    font-size: 15px; /* Un pelito más grande para que empate mejor */
-    line-height: 1.4;
+.banner-content-left {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.banner-subtitle {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.85;
+}
+
+.banner-title {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 700;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.banner-description {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* ESTADÍSTICA DERECHA */
+.banner-stat-box {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    opacity: 0.85;
 }
 
 /* =========================================
@@ -681,5 +734,19 @@
   .toast {
     min-width: auto;
     max-width: 100%;
+  }
+}
+
+/* ==========================================================================
+   ANIMACIÓN DE ENTRADA SUAVE PARA TODA LA PANTALLA
+========================================================================== */
+@keyframes aparecerPantalla {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

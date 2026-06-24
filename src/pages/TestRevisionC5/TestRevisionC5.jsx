@@ -4,6 +4,7 @@ import BitacoraModal from "../../components/layout/Bitacora/BitacoraModal";
 import { FiCheckCircle, FiXCircle, FiInfo, FiX } from "react-icons/fi";
 import "./TestRevisionC5.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { FaRegFolderOpen } from "react-icons/fa";
 
 const formatearFecha = (fechaString) => {
   if (!fechaString) return "Sin fecha";
@@ -18,7 +19,7 @@ const formatearFecha = (fechaString) => {
   return new Date(fechaString).toLocaleDateString("es-MX", opciones);
 };
 
-export default function TestRevisionC5() {
+export default function TestRevisionC5({ setPageTitle }) {
   const [documentos, setDocumentos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [mensaje, setMensaje] = useState("");
@@ -39,6 +40,17 @@ export default function TestRevisionC5() {
     isOpen: false,
     docId: null,
   });
+
+  // useEffect
+  useEffect(() => {
+    if (setPageTitle) {
+      setPageTitle({
+        titulo: "Revisión Municipios",
+        subtitulo: "Administración y revisión de documentos",
+        icon: <FaRegFolderOpen className="nav-icon-highlight" />
+      });
+    }
+  }, [setPageTitle]);
 
   const [modalEvaluarOpen, setModalEvaluarOpen] = useState(false);
   const [docAEvaluar, setDocAEvaluar] = useState(null);
@@ -221,16 +233,31 @@ export default function TestRevisionC5() {
   return (
     <div className="revision-container">
       <div className="revision-card">
-        <h1>
-          <i
-            className="fas fa-file-alt"
-            style={{ color: "#7D2447", marginLeft: "10px" }}
-          ></i>
-          Revisión de Documentos por Municipio
-        </h1>
+        
+        {/* NUEVO BANNER ESTILO VINO */}
+        <div className="revision-header-banner">
+          <div className="banner-content-left">
+            <span className="banner-subtitle">GESTIÓN DE DOCUMENTOS</span>
+            <h1 className="banner-title">Revisión por Municipio</h1>
+            <p className="banner-description">
+              <i className="bx bx-info-circle" style={{ marginRight: "6px", color: "#c4a173", fontSize: "18px" }}></i>
+              Administra y revisa los documentos enviados por los municipios.
+            </p>
+          </div>
 
-        <div className="descripcion">
-          <p>Administra y revisa los documentos enviados por los municipios</p>
+          <div className="banner-content-right">
+            <div className="banner-stat-box">
+              <div className="stat-icon">
+                <i className="bx bx-file"></i>
+              </div>
+              <div className="stat-info">
+                <span className="stat-label">DOCUMENTOS EN ESTA VISTA</span>
+                <span className="stat-value">
+                  {documentosFiltrados.length}
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* PESTAÑAS PARA CAMBIAR DE VISTA */}
