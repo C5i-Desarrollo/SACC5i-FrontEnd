@@ -35,7 +35,7 @@ function Paginacion({ pagina, totalPaginas, onCambiar }) {
 export default function TablaFinalizados({
   registros,
   loading,
-  readOnly = false,
+  readOnly,
   busquedaInput,
   onBusquedaChange,
   paginacion,
@@ -43,8 +43,6 @@ export default function TablaFinalizados({
   updatingId,
   uploadingConstanciaId,
   uploadingAcusePersonaId,
-  viewingConstanciaId,
-  viewingAcusePersonaId,
   deletingConstanciaId,
   deletingAcusePersonaId,
   onActualizarFase1,
@@ -53,30 +51,36 @@ export default function TablaFinalizados({
   onEliminarConstancia,
   onEliminarAcusePersona,
   onVerConstancia,
-  onVerAcusePersona
+  onVerAcusePersona,
+  viewingConstanciaId,
+  viewingAcusePersonaId
 }) {
   const fileInputConstanciaRef = useRef({});
   const fileInputAcuseRef = useRef({});
 
-  return (
-    <section className="fz-wrapper">
-      <div className="fz-header">
-        <div>
-          <h3>Gestión de Expedientes Concluidos</h3>
-          <p>Control de emision, carga de constancia y carga de acuse de persona por expediente.</p>
-        </div>
-        <div className="fz-search">
-          <i className="bx bx-search" />
-          <input
-            type="text"
-            value={busquedaInput}
-            onChange={(e) => onBusquedaChange(e.target.value)}
-            placeholder="Buscar por nombre, oficio o CUIP"
-          />
-        </div>
+return (
+  <section className="fz-wrapper">
+    <div className="fz-header">
+      <div>
+        <h3>Gestión de Expedientes Concluidos</h3>
+        <p>
+          Control de emisión, carga de constancia y carga de acuse de persona por expediente.
+        </p>
       </div>
 
-      <div className="fz-table-wrap">
+      <div className="fz-search-modern">
+        <i className="bx bx-search"></i>
+
+        <input
+          type="text"
+          value={busquedaInput}
+          onChange={(e) => onBusquedaChange(e.target.value)}
+          placeholder="Buscar por nombre, oficio o CUIP..."
+        />
+      </div>
+    </div>
+
+    <div className="fz-table-wrap">
         {loading ? (
           <div className="fz-state"><i className="bx bx-loader-alt bx-spin" /> Cargando finalizados...</div>
         ) : registros.length === 0 ? (
