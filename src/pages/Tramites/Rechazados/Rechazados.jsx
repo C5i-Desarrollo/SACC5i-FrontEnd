@@ -2,8 +2,8 @@
  * Histórico de Trámites No Procedentes
  * Tabla general de personas rechazadas en cualquier etapa del proceso
  */
-import { useState } from 'react';
-import { useEffect } from 'react';
+
+import { useEffect, useState } from 'react';
 import { useRechazados } from '../../../hooks/rechazados';
 import RechazadoRow from './components/RechazadoRow';
 import Paginacion from './components/Paginacion';
@@ -63,13 +63,27 @@ export default function Rechazados({
     if (data) setOficioData(data);
   };
 
-  const handleBusqueda = (e) => {
-    actualizarFiltro('busqueda', e.target.value);
-  };
+ const handleBusqueda = (e) => {
+  actualizarFiltro('busqueda', e.target.value);
+};
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') aplicarFiltros();
-  };
+useEffect(() => {
+  const timer = setTimeout(() => {
+    aplicarFiltros();
+  }, 300);
+
+  return () => clearTimeout(timer);
+}, [filtros.busqueda]);
+
+
+
+useEffect(() => {
+  const timer = setTimeout(() => {
+    aplicarFiltros();
+  }, 300);
+
+  return () => clearTimeout(timer);
+}, [filtros.busqueda]);
 
   return (
     <main className="rechazados-container">
@@ -92,13 +106,14 @@ export default function Rechazados({
 
         <div className="rechazados-search">
           <i className='bx bx-search'></i>
-          <input
-            type="text"
-            placeholder="Buscar por ..."
-            value={filtros.busqueda}
-            onChange={handleBusqueda}
-            onKeyDown={handleKeyDown}
+
+         <input
+          type="text"
+          placeholder="Buscar por nombre o etapa de rechazo..."
+          value={filtros.busqueda}
+          onChange={handleBusqueda}
           />
+          
         </div>
       </div>
 
