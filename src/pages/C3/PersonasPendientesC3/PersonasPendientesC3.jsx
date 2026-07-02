@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { MdFactCheck } from 'react-icons/md';
 import { useNotification } from '../../../context/NotificationContext';
 import api from '../../../services/api';
+import { buildSearchableText, matchesSearchQuery } from '../utils/searchUtils.js';
 import '../../Tramites/Alta/styles/RecibidosC3.css';
 import './styles/PersonasPendientesC3.css';
 
@@ -229,14 +230,20 @@ export default function PersonasPendientesC3({ setPageTitle }) {
   const personasFiltradas = useMemo(() => {
     let resultado = [...personas];
 
-    // Busqueda por texto
     if (busqueda.trim()) {
-      const term = busqueda.toLowerCase().trim();
-      resultado = resultado.filter(p =>
-        (p.nombre_completo || '').toLowerCase().includes(term) ||
-        (p.numero_solicitud || '').toLowerCase().includes(term) ||
-        (p.municipio_nombre || '').toLowerCase().includes(term)
-      );
+      resultado = resultado.filter((persona) => {
+        const textoBuscable = buildSearchableText(
+          persona.nombre_completo,
+          persona.numero_solicitud,
+          persona.numero_oficio_c3,
+          persona.municipio_nombre,
+          persona.puesto_nombre,
+          persona.region_nombre,
+          persona.proceso_movimiento
+        );
+
+        return matchesSearchQuery(textoBuscable, busqueda);
+      });
     }
 
     // Filtro por dictamen
@@ -425,7 +432,7 @@ export default function PersonasPendientesC3({ setPageTitle }) {
             <i className='bx bx-search'></i>
             <input
               type="text"
-              placeholder="Buscar por nombre, solicitud o municipio"
+              placeholder="Buscar por nombre, oficio o municipio"
               value={busqueda}
               onChange={(e) => setBusqueda(e.target.value)}
             />
