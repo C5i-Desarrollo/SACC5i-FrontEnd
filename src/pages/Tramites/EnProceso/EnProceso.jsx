@@ -49,22 +49,24 @@ export default function EnProceso({
   }, [setPageTitle]);
 
   // Cargar ambos procesos
-  const cargar = useCallback(() => {
-    if (requireAnalista && !hasAnalistaFilter) return;
+const cargar = useCallback(() => {
+  if (requireAnalista && !hasAnalistaFilter) return;
 
-    const filtrosConsulta = { busqueda };
-    if (hasAnalistaFilter) filtrosConsulta.analista_id = analistaNumerico;
+  const filtrosConsulta = {};
 
-    cargarEnProcesoRevision(filtrosConsulta);
-    cargarEnProcesoCuip(filtrosConsulta);
-  }, [
-    busqueda,
-    cargarEnProcesoRevision,
-    cargarEnProcesoCuip,
-    requireAnalista,
-    hasAnalistaFilter,
-    analistaNumerico
-  ]);
+  if (hasAnalistaFilter) {
+    filtrosConsulta.analista_id = analistaNumerico;
+  }
+
+  cargarEnProcesoRevision(filtrosConsulta);
+  cargarEnProcesoCuip(filtrosConsulta);
+}, [
+  cargarEnProcesoRevision,
+  cargarEnProcesoCuip,
+  requireAnalista,
+  hasAnalistaFilter,
+  analistaNumerico
+]);
 
   useEffect(() => {
     cargar();
@@ -101,18 +103,21 @@ export default function EnProceso({
   }, [enProcesoRevision, enProcesoCuip, requireAnalista, hasAnalistaFilter]);
 
   // Filtros y búsqueda
-  const personasFiltradas = useMemo(() => {
-    let resultado = [...personasUnificadas];
-    if (busqueda.trim()) {
-      const term = busqueda.toLowerCase().trim();
-      resultado = resultado.filter(p =>
-        (p.nombre_completo || '').toLowerCase().includes(term) ||
-        (p.puesto_nombre || '').toLowerCase().includes(term)
-      );
-    }
-    // Filtros adicionales si se requieren
-    return resultado;
-  }, [personasUnificadas, busqueda]);
+ const personasFiltradas = useMemo(() => {
+  let resultado = [...personasUnificadas];
+
+  if (busqueda.trim()) {
+    const term = busqueda.toLowerCase().trim();
+
+    resultado = resultado.filter((p) =>
+      (p.nombre_completo || '').toLowerCase().includes(term) ||
+      (p.municipio_nombre || '').toLowerCase().includes(term) ||
+      (p.numero_oficio_c3 || '').toLowerCase().includes(term)
+    );
+  }
+
+  return resultado;
+}, [personasUnificadas, busqueda]);
 
   const handleFiltrar = (nuevosFiltros) => {
     setFiltros(nuevosFiltros);
