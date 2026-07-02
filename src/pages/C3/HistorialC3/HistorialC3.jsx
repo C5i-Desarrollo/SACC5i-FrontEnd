@@ -3,9 +3,10 @@
  * Muestra todos los trámites que el validador C3 ha dictaminado
  * con filtros, estadísticas y tabla detallada :).
  */
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { MdHistory } from 'react-icons/md';
 import { useHistorialC3 } from '../../../hooks/historial';
+import { buildPersonSearchableText, matchesSearchQuery, isSolicitudSearchQuery, matchesSolicitudQuery } from '../utils/searchUtils.js';
 import HistorialStats from './components/HistorialStats';
 import HistorialFiltros from './components/HistorialFiltros';
 import './styles/HistorialC3.css';
@@ -43,6 +44,32 @@ export default function HistorialC3({ setPageTitle }) {
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') aplicarFiltros();
   };
+
+  const filasFiltradas = useMemo(() => {
+    const query = (filtros?.busqueda || '').trim();
+
+    if (!query) {
+      return tramites.flatMap((tramite) => {
+        const personas = Array.isArray(tramite.personas) ? tramite.personas : [];
+        return personas.map((persona) => ({ tramite, persona }));
+      });
+    }
+
+    return tramites.flatMap((tramite) => {
+      const personas = Array.isArray(tramite.personas) ? tramite.personas : [];
+
+      return personas
+        .map((persona) => ({ tramite, persona }))
+        .filter(({ tramite: tramiteActual, persona }) => {
+          if (isSolicitudSearchQuery(query)) {
+            return matchesSolicitudQuery(tramiteActual, persona, query);
+          }
+
+          const textoBuscable = buildPersonSearchableText(persona, tramiteActual);
+          return matchesSearchQuery(textoBuscable, query);
+        });
+    });
+  }, [tramites, filtros?.busqueda]);
 
   return (
     <div className="hist-container">
@@ -91,54 +118,52 @@ export default function HistorialC3({ setPageTitle }) {
               </tr>
             </thead>
             <tbody>
-              {tramites.flatMap(tramite =>
-                (tramite.personas || []).map(persona => (
-                  <tr key={tramite.id + '-' + persona.id} className="hist-row">
-                    <td>
-                      <div className="hist-solicitud-cell">
-                        <strong>{tramite.numero_solicitud || '—'}</strong>
-                        <small>{tramite.tipo_oficio_nombre || ''}</small>
-                      </div>
-                    </td>
-                    <td>{tramite.municipio_nombre || '—'}</td>
-                    <td>{tramite.region_nombre || '—'}</td>
-                    <td>
-                      <span className={`hist-badge ${
-                        persona.fase_c3 === 'rechazado_c3' || persona.rechazado ? 'hist-badge-rechazado' :
-                        persona.fase_c3 === 'validado_c3' || persona.validado ? 'hist-badge-validado' :
-                        persona.fase_c3 === 'dictaminado_c3' ? 'hist-badge-dictaminado' :
-                        'hist-badge-pendiente'
-                      }`}>
-                        {persona.fase_c3 === 'rechazado_c3' || persona.rechazado ? 'Rechazado C3' :
-                          persona.fase_c3 === 'validado_c3' || persona.validado ? 'Validado C3' :
-                          persona.fase_c3 === 'dictaminado_c3' ? 'Dictaminado' :
-                          persona.fase_c3 || (persona.validado ? 'Validado C3' : persona.rechazado ? 'Rechazado C3' : '—')}
-                      </span>
-                    </td>
-                    <td>{
-                      persona.nombre_completo
-                        || [persona.nombre, persona.apellido_paterno, persona.apellido_materno].filter(Boolean).join(' ')
-                        || '—'
-                    }</td>
-                    <td>{persona.puesto_nombre || '—'}</td>
-                    <td>
-                      <div className="hist-analista-cell">
-                        <span>{tramite.analista_nombre || '—'}</span>
-                        {tramite.analista_extension && (
-                          <small>Ext. {tramite.analista_extension}</small>
-                        )}
-                      </div>
-                    </td>
-                    <td>{tramite.validador_c3_nombre || '—'}</td>
-                    <td>
-                      <div className="hist-fecha-cell">
-                        <span>{persona.updated_at ? new Date(persona.updated_at).toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: 'numeric' }) : '—'}</span>
-                        <small>{persona.updated_at ? new Date(persona.updated_at).toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' }) : ''}</small>
-                      </div>
-                    </td>
-                  </tr>
-                ))
-              )}
+              {filasFiltradas.map(({ tramite, persona }) => (
+                <tr key={tramite.id + '-' + persona.id} className="hist-row">
+                  <td>
+                    <div className="hist-solicitud-cell">
+                      <strong>{tramite.numero_solicitud || '—'}</strong>
+                      <small>{tramite.tipo_oficio_nombre || ''}</small>
+                    </div>
+                  </td>
+                  <td>{tramite.municipio_nombre || '—'}</td>
+                  <td>{tramite.region_nombre || '—'}</td>
+                  <td>
+                    <span className={`hist-badge ${
+                      persona.fase_c3 === 'rechazado_c3' || persona.rechazado ? 'hist-badge-rechazado' :
+                      persona.fase_c3 === 'validado_c3' || persona.validado ? 'hist-badge-validado' :
+                      persona.fase_c3 === 'dictaminado_c3' ? 'hist-badge-dictaminado' :
+                      'hist-badge-pendiente'
+                    }`}>
+                      {persona.fase_c3 === 'rechazado_c3' || persona.rechazado ? 'Rechazado C3' :
+                        persona.fase_c3 === 'validado_c3' || persona.validado ? 'Validado C3' :
+                        persona.fase_c3 === 'dictaminado_c3' ? 'Dictaminado' :
+                        persona.fase_c3 || (persona.validado ? 'Validado C3' : persona.rechazado ? 'Rechazado C3' : '—')}
+                    </span>
+                  </td>
+                  <td>{
+                    persona.nombre_completo
+                      || [persona.nombre, persona.apellido_paterno, persona.apellido_materno].filter(Boolean).join(' ')
+                      || '—'
+                  }</td>
+                  <td>{persona.puesto_nombre || '—'}</td>
+                  <td>
+                    <div className="hist-analista-cell">
+                      <span>{tramite.analista_nombre || '—'}</span>
+                      {tramite.analista_extension && (
+                        <small>Ext. {tramite.analista_extension}</small>
+                      )}
+                    </div>
+                  </td>
+                  <td>{tramite.validador_c3_nombre || '—'}</td>
+                  <td>
+                    <div className="hist-fecha-cell">
+                      <span>{persona.updated_at ? new Date(persona.updated_at).toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: 'numeric' }) : '—'}</span>
+                      <small>{persona.updated_at ? new Date(persona.updated_at).toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' }) : ''}</small>
+                    </div>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
