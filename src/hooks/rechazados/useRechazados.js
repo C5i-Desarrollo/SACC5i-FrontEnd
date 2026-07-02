@@ -2,7 +2,11 @@
  * Hook para gestion del historial de personas rechazadas
  */
 import { useState, useCallback, useEffect } from 'react';
-import { obtenerPersonasRechazadas, actualizarMotivoRechazo, generarOficioRechazo } from '../../services/api';
+import {
+  obtenerPersonasRechazadas,
+  actualizarMotivoRechazo,
+  generarOficioRechazo
+} from '../../services/api';
 import { handleError } from '../../utils/errorHandler';
 
 const INITIAL_FILTERS = {
@@ -16,19 +20,61 @@ const INITIAL_FILTERS = {
 
 const EMPTY_PAGINACION = { total: 0, pagina: 1, limite: 15, total_paginas: 0 };
 
+const normalizarTexto = (valor = '') =>
+  String(valor)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim()
+    .toLowerCase();
+
 export const useRechazados = ({ analistaId = null, enabled = true } = {}) => {
   const analistaNumerico = Number(analistaId);
   const hasAnalistaFilter = Number.isFinite(analistaNumerico) && analistaNumerico > 0;
 
   const [personas, setPersonas] = useState([]);
+  const [personasOriginales, setPersonasOriginales] = useState([]);
   const [paginacion, setPaginacion] = useState(EMPTY_PAGINACION);
   const [filtros, setFiltros] = useState(INITIAL_FILTERS);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const filtrarLocalmente = useCallback((lista, filtrosAplicados) => {
+    const texto = normalizarTexto(filtrosAplicados.busqueda);
+    const etapaFiltro = normalizarTexto(filtrosAplicados.etapa_rechazo);
+
+    return lista.filter((persona) => {
+      const nombre = normalizarTexto(persona.nombre_completo);
+      const etapa = normalizarTexto(persona.etapa_rechazo);
+
+      const coincideBusqueda =
+        !texto ||
+        nombre.includes(texto) ||
+        etapa.includes(texto);
+
+      const coincideEtapa =
+        !etapaFiltro ||
+        etapa.includes(etapaFiltro);
+
+      return coincideBusqueda && coincideEtapa;
+    });
+  }, []);
+
+  const aplicarResultadoLocal = useCallback((lista, filtrosAplicados) => {
+    const listaFiltrada = filtrarLocalmente(lista, filtrosAplicados);
+
+    setPersonas(listaFiltrada);
+    setPaginacion({
+      total: listaFiltrada.length,
+      pagina: 1,
+      limite: filtrosAplicados.limit || 15,
+      total_paginas: 1
+    });
+  }, [filtrarLocalmente]);
+
   const cargarPersonas = useCallback(async (filtrosOverride = null) => {
     if (!enabled) {
       setPersonas([]);
+      setPersonasOriginales([]);
       setPaginacion(EMPTY_PAGINACION);
       setLoading(false);
       return;
@@ -39,60 +85,85 @@ export const useRechazados = ({ analistaId = null, enabled = true } = {}) => {
       setError(null);
 
       const paramsBase = filtrosOverride || filtros;
-      const params = { ...paramsBase };
+
+      const params = {
+        page: 1,
+        limit: 1000
+      };
+
       if (hasAnalistaFilter) params.analista_id = analistaNumerico;
 
-      // Solo enviar params no vacios
-      const cleanParams = {};
-      Object.entries(params).forEach(([key, value]) => {
-        if (value !== '' && value !== null && value !== undefined) {
-          cleanParams[key] = value;
-        }
-      });
+      if (paramsBase.fecha_inicio) params.fecha_inicio = paramsBase.fecha_inicio;
+      if (paramsBase.fecha_fin) params.fecha_fin = paramsBase.fecha_fin;
 
-      const response = await obtenerPersonasRechazadas(cleanParams);
+      const response = await obtenerPersonasRechazadas(params);
       const data = response.data;
+      const registros = data.data || [];
 
-      setPersonas(data.data || []);
-      setPaginacion(data.paginacion || EMPTY_PAGINACION);
+      setPersonasOriginales(registros);
+      aplicarResultadoLocal(registros, paramsBase);
     } catch (err) {
       handleError(err, { showNotification: true });
       setError(err);
       setPersonas([]);
+      setPersonasOriginales([]);
       setPaginacion(EMPTY_PAGINACION);
     } finally {
       setLoading(false);
     }
-  }, [filtros, enabled, hasAnalistaFilter, analistaNumerico]);
+  }, [
+    filtros,
+    enabled,
+    hasAnalistaFilter,
+    analistaNumerico,
+    aplicarResultadoLocal
+  ]);
 
   useEffect(() => {
     if (!enabled) {
       setPersonas([]);
+      setPersonasOriginales([]);
       setPaginacion(EMPTY_PAGINACION);
       setLoading(false);
       return;
     }
 
     cargarPersonas();
-  }, [filtros.page, analistaNumerico, enabled]);
+  }, [analistaNumerico, enabled]);
 
   const aplicarFiltros = useCallback(() => {
     const nuevosFiltros = { ...filtros, page: 1 };
-    setFiltros(nuevosFiltros);
+
+    if (personasOriginales.length > 0) {
+      aplicarResultadoLocal(personasOriginales, nuevosFiltros);
+      return;
+    }
+
     cargarPersonas(nuevosFiltros);
-  }, [filtros, cargarPersonas]);
+  }, [
+    filtros,
+    personasOriginales,
+    aplicarResultadoLocal,
+    cargarPersonas
+  ]);
 
   const limpiarFiltros = useCallback(() => {
     setFiltros(INITIAL_FILTERS);
+
+    if (personasOriginales.length > 0) {
+      aplicarResultadoLocal(personasOriginales, INITIAL_FILTERS);
+      return;
+    }
+
     cargarPersonas(INITIAL_FILTERS);
-  }, [cargarPersonas]);
+  }, [personasOriginales, aplicarResultadoLocal, cargarPersonas]);
 
   const cambiarPagina = useCallback((page) => {
     setFiltros((prev) => ({ ...prev, page }));
   }, []);
 
   const actualizarFiltro = useCallback((campo, valor) => {
-    setFiltros((prev) => ({ ...prev, [campo]: valor }));
+    setFiltros((prev) => ({ ...prev, [campo]: valor, page: 1 }));
   }, []);
 
   const editarMotivo = useCallback(async (personaId, nuevoMotivo) => {
@@ -100,9 +171,11 @@ export const useRechazados = ({ analistaId = null, enabled = true } = {}) => {
 
     try {
       await actualizarMotivoRechazo(personaId, { motivo_rechazo: nuevoMotivo });
+
       if (window.showNotification) {
         window.showNotification('Motivo actualizado correctamente', 'success');
       }
+
       cargarPersonas();
       return true;
     } catch (err) {

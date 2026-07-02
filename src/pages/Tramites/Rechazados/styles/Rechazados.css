@@ -76,7 +76,8 @@ body.dark .rechazados-header h1 {
   border: 1px solid #ddd;
   border-radius: 25px;
   background: white;
-  min-width: 280px;
+  width: 430px;
+  max-width: 100%;
 }
 
 .rechazados-search i {
