@@ -269,3 +269,164 @@
         max-width: 100%;
     }
 }
+
+/* ==========================================
+   DARK MODE - CONSULTA
+   ========================================== */
+
+body.dark .consulta-container {
+  --consulta-guinda: #a32958;
+  --consulta-guinda-oscuro: #761638;
+  --consulta-guinda-claro: #38232d;
+
+  --consulta-dorado: #c4aa6a;
+  --consulta-dorado-suave: #4b4129;
+
+  --consulta-texto: #f7f2f4;
+  --consulta-borde: #493840;
+  --consulta-superficie: #211c20;
+
+  color: var(--consulta-texto);
+}
+
+
+/* TARJETAS */
+
+body.dark .consulta-card {
+  background: var(--consulta-superficie);
+  border-color: var(--consulta-borde);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+
+/* HEADER */
+
+body.dark .consulta-card-header {
+  background: linear-gradient(
+    135deg,
+    #761638 0%,
+    #92264f 100%
+  );
+
+  border-color: #665437;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28);
+}
+
+
+/* BUSCADOR E INPUTS */
+
+body.dark .consulta-container .input-field {
+  background: #1b171a;
+  border-color: #493840;
+  color: var(--consulta-texto);
+}
+
+body.dark .consulta-container .input-field::placeholder {
+  color: #91858c;
+}
+
+body.dark .consulta-container .input-field:focus {
+  border-color: var(--consulta-guinda);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .consulta-search-icon {
+  color: #d16b92;
+}
+
+
+/* TABLA */
+
+body.dark .consulta-table-wrap {
+  background: #211c20;
+  border-color: var(--consulta-borde);
+}
+
+body.dark .consulta-table {
+  background: #211c20;
+}
+
+body.dark .consulta-table thead th {
+  background: #751638;
+  color: #ffffff;
+  border-bottom-color: #862047;
+}
+
+body.dark .consulta-table tbody tr {
+  background: #282126;
+}
+
+body.dark .consulta-table tbody tr:nth-child(even) {
+  background: #241e22;
+}
+
+body.dark .consulta-table tbody tr:hover {
+  background: var(--consulta-guinda-claro);
+}
+
+body.dark .consulta-table tbody td {
+  color: var(--consulta-texto);
+  border-bottom-color: #382c32;
+}
+
+
+/* PAGINACIÓN */
+
+body.dark .consulta-pagination button {
+  background: #282126;
+  border-color: #493840;
+  color: #c4b9bf;
+}
+
+body.dark .consulta-pagination button:hover:not(:disabled) {
+  background: #382d34;
+  border-color: #a32958;
+  color: #f7f2f4;
+}
+
+body.dark .consulta-pagination button:disabled {
+  background: #211c20;
+  color: #776c72;
+}
+
+body.dark .consulta-pagination span {
+  color: #c4b9bf;
+}
+
+
+/* ESTADOS */
+
+body.dark .consulta-state {
+  color: #a99da4;
+}
+
+/* ==========================================
+   DARK MODE - BOTÓN CONSULTA
+   ========================================== */
+
+body.dark .consulta-table tbody button {
+  background: #282126;
+  border: 1px solid #493840;
+  color: #f7f2f4;
+}
+
+body.dark .consulta-table tbody button:hover {
+  background: #a32958;
+  border-color: #a32958;
+  color: #ffffff;
+}
+
+/* ==========================================
+   DARK MODE - REGISTRO BASE
+   ========================================== */
+
+body.dark .consulta-container .consulta-table tbody td:last-child > span {
+  background: #282126 !important;
+  border: 1px solid #493840 !important;
+  color: #c4b9bf !important;
+}
+
+body.dark .consulta-container .consulta-table tbody td:last-child > span:hover {
+  background: #382d34 !important;
+  color: #f7f2f4 !important;
+}
