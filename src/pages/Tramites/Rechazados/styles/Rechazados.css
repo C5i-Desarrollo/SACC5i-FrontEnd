@@ -22,8 +22,213 @@
   font-weight: 700;
 }
 
+/* ==========================================
+   DARK MODE - RECHAZADOS
+   ========================================== */
+
+/* CONTENEDOR */
+
+body.dark .rechazados-container {
+  color: var(--text-primary);
+}
+
+
+/* ==========================================
+   HEADER
+   ========================================== */
+
+body.dark .rechazados-header {
+  border-bottom-color: var(--border);
+}
+
 body.dark .rechazados-header h1 {
-  color: #ffffff !important;
+  color: var(--text-primary);
+}
+
+body.dark .rechazados-header p {
+  color: var(--text-secondary);
+}
+
+
+/* ==========================================
+   BOTÓN FILTROS
+   ========================================== */
+
+body.dark .rechazados-filtros-btn {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .rechazados-filtros-btn:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: #e185a7;
+}
+
+body.dark .rechazados-filtros-btn.active,
+body.dark .rechazados-filtros-btn.active:hover {
+  background: var(--wine);
+  border-color: var(--wine-hover);
+  color: #ffffff;
+}
+
+
+/* ==========================================
+   BUSCADOR
+   ========================================== */
+
+body.dark .rechazados-search {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+}
+
+body.dark .rechazados-search i {
+  color: var(--text-muted);
+}
+
+body.dark .rechazados-search input {
+  background: transparent;
+  color: var(--text-primary);
+}
+
+body.dark .rechazados-search input::placeholder {
+  color: var(--text-muted);
+}
+
+body.dark .rechazados-search:focus-within {
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .rechazados-search:focus-within i {
+  color: #d16b92;
+}
+
+
+/* ==========================================
+   PANEL DE FILTROS
+   ========================================== */
+
+body.dark .rechazados-filtros-panel {
+  background: var(--surface-card);
+  border-color: var(--border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.24);
+}
+
+body.dark .rechazados-filtro-group label {
+  color: var(--text-secondary);
+}
+
+body.dark .rechazados-filtro-group input,
+body.dark .rechazados-filtro-group select {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+  color-scheme: dark;
+}
+
+body.dark .rechazados-filtro-group input:focus,
+body.dark .rechazados-filtro-group select:focus {
+  outline: none;
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .rechazados-filtro-group select option {
+  background: var(--surface-card);
+  color: var(--text-primary);
+}
+
+
+/* ==========================================
+   BOTONES DE FILTROS
+   ========================================== */
+
+body.dark .rechazados-btn-aplicar {
+  background: var(--wine);
+  color: #ffffff;
+}
+
+body.dark .rechazados-btn-aplicar:hover {
+  background: var(--wine-hover);
+}
+
+body.dark .rechazados-btn-limpiar {
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .rechazados-btn-limpiar:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+
+/* ==========================================
+   TARJETA DE TABLA
+   ========================================== */
+
+body.dark .rechazados-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+}
+
+body.dark .rechazados-table-scroll {
+  background: var(--surface);
+}
+
+
+/* ==========================================
+   TABLA
+   ========================================== */
+
+body.dark .rechazados-table {
+  background: var(--surface);
+}
+
+body.dark .rechazados-table thead {
+  background: #751638;
+  color: #ffffff;
+}
+
+body.dark .rechazados-table tbody tr {
+  background: var(--surface-card);
+  border-bottom-color: var(--border-soft);
+}
+
+body.dark .rechazados-table tbody tr:nth-child(even) {
+  background: #241e22;
+}
+
+body.dark .rechazados-table tbody tr:hover {
+  background: var(--surface-hover);
+}
+
+body.dark .rechazados-table tbody td {
+  color: var(--text-secondary);
+}
+
+
+/* ==========================================
+   CARGANDO / VACÍO
+   ========================================== */
+
+body.dark .rechazados-loading,
+body.dark .rechazados-empty {
+  color: var(--text-secondary);
+}
+
+body.dark .rechazados-loading p,
+body.dark .rechazados-empty p {
+  color: var(--text-secondary);
+}
+
+body.dark .rechazados-empty i {
+  color: var(--text-muted);
 }
 
 .rechazados-header p {
@@ -260,4 +465,74 @@ body.dark .rechazados-header h1 {
   .rechazados-filtros-panel {
     grid-template-columns: 1fr;
   }
+}
+
+/* ==========================================
+   DARK MODE - MOTIVO ESPECÍFICO
+   ========================================== */
+
+/* Contenedor principal de la celda */
+body.dark
+  .rechazados-table
+  tbody
+  td:nth-child(3)
+  > div {
+  background: transparent !important;
+  border: none !important;
+}
+
+
+/* Solo el div que tiene DIRECTAMENTE el botón del lápiz */
+body.dark
+  .rechazados-table
+  tbody
+  td:nth-child(3)
+  div:has(> button) {
+  width: fit-content;
+  max-width: 100%;
+  background: var(--surface-soft) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-secondary) !important;
+  border-radius: 6px;
+}
+
+
+/* Texto del motivo */
+body.dark
+  .rechazados-table
+  tbody
+  td:nth-child(3)
+  div:has(> button)
+  span,
+body.dark
+  .rechazados-table
+  tbody
+  td:nth-child(3)
+  div:has(> button)
+  p {
+  color: var(--text-secondary) !important;
+}
+
+
+/* Botón del lápiz */
+body.dark
+  .rechazados-table
+  tbody
+  td:nth-child(3)
+  div:has(> button)
+  > button {
+  background: transparent !important;
+  border: none !important;
+  color: #d16b92 !important;
+}
+
+
+/* Hover del lápiz */
+body.dark
+  .rechazados-table
+  tbody
+  td:nth-child(3)
+  div:has(> button)
+  > button:hover {
+  color: #f0a0bd !important;
 }

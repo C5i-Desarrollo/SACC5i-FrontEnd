@@ -736,18 +736,275 @@
 }
 
 /* ==========================================
-   DARK MODE - Solo titulo
+   DARK MODE - ALTA
    ========================================== */
-body.dark .alta-header h1 {
+
+/* Toolbar y pestañas */
+
+body.dark .alta-gmail-tabs {
+  border-bottom-color: var(--border-soft);
+}
+
+body.dark .alta-gmail-refresh-icon {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: #d16b92;
+}
+
+body.dark .alta-gmail-refresh-icon:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+}
+
+body.dark .alta-gmail-tab {
+  color: var(--text-secondary);
+}
+
+body.dark .alta-gmail-tab:hover {
+  color: #e185a7;
+  background: var(--wine-soft);
+}
+
+body.dark .alta-gmail-tab-active,
+body.dark .alta-gmail-tab-active:hover {
+  color: #f0a0bd;
+  border-bottom-color: #b6406d;
+  background: var(--wine-soft);
+}
+
+
+/* Buscador */
+
+body.dark .alta-gmail-search {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+}
+
+body.dark .alta-gmail-search:focus-within {
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .alta-gmail-search i {
+  color: var(--text-muted);
+}
+
+body.dark .alta-gmail-search input {
+  color: var(--text-primary);
+}
+
+body.dark .alta-gmail-search input::placeholder {
+  color: var(--text-muted);
+}
+
+body.dark .alta-gmail-search-clear,
+body.dark .alta-gmail-search-action {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: #d16b92;
+}
+
+body.dark .alta-gmail-search-action:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+}
+
+
+/* Tarjeta principal */
+
+body.dark .alta-card {
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+body.dark .alta-card.fondo-transparente {
+  background: transparent;
+}
+
+
+/* Pasos */
+
+body.dark .pasos-indicador {
+  background: var(--surface);
+  border-bottom-color: var(--border-soft);
+}
+
+body.dark .paso-numero {
+  background: var(--surface-soft);
+  color: var(--text-muted);
+}
+
+body.dark .paso-texto {
+  color: var(--text-muted);
+}
+
+body.dark .paso-activo .paso-numero {
+  background: var(--wine);
   color: #ffffff;
 }
 
+body.dark .paso-activo .paso-texto {
+  color: #e185a7;
+}
+
+body.dark .paso-completado .paso-numero {
+  background: #806f43;
+  color: #ffffff;
+}
+
+body.dark .paso-completado .paso-texto {
+  color: #cdbd81;
+}
+
+
+/* Formularios */
+
+body.dark .alta-form-group label {
+  color: var(--text-secondary);
+}
+
+body.dark .alta-form-group input,
+body.dark .alta-form-group select,
+body.dark .alta-form-group textarea {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+body.dark .alta-form-group input::placeholder,
+body.dark .alta-form-group textarea::placeholder {
+  color: var(--text-muted);
+}
+
+body.dark .alta-form-group input:focus,
+body.dark .alta-form-group select:focus,
+body.dark .alta-form-group textarea:focus {
+  background: var(--input-bg);
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .alta-field-filled {
+  background: var(--input-bg) !important;
+  border-color: #806f43 !important;
+}
+
+body.dark .alta-form-group input:-webkit-autofill,
+body.dark .alta-form-group input:-webkit-autofill:hover,
+body.dark .alta-form-group input:-webkit-autofill:focus,
+body.dark .alta-form-group textarea:-webkit-autofill,
+body.dark .alta-form-group textarea:-webkit-autofill:hover,
+body.dark .alta-form-group textarea:-webkit-autofill:focus,
+body.dark .alta-form-group select:-webkit-autofill,
+body.dark .alta-form-group select:-webkit-autofill:hover,
+body.dark .alta-form-group select:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text-primary);
+  box-shadow: 0 0 0 1000px var(--input-bg) inset;
+}
+
+
+/* Tabla */
+
+body.dark .alta-table {
+  background: var(--surface);
+}
+
+body.dark .alta-table th {
+  background: #751638;
+  color: #ffffff;
+}
+
+body.dark .alta-table td {
+  color: var(--text-secondary);
+  border-bottom-color: var(--border-soft);
+}
+
+body.dark .alta-table tbody tr {
+  background: var(--surface);
+}
+
+body.dark .alta-table tbody tr:hover {
+  background: var(--surface-hover);
+}
+
+
+/* Botones */
+
+body.dark .alta-container .btn-secondary {
+  background: var(--surface-card);
+  color: var(--text-secondary);
+  border-color: var(--border);
+}
+
+body.dark .alta-container .btn-secondary:hover:not(:disabled) {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+body.dark .btn-group {
+  background: var(--surface);
+  border-top-color: var(--border-soft);
+}
+
+
+/* Mensajes */
+
+body.dark .mensaje-success {
+  background: #15281f;
+  color: #7dd3a6;
+  border-color: #285a40;
+}
+
+body.dark .mensaje-error {
+  background: #30191d;
+  color: #f29b9b;
+  border-color: #653039;
+}
+
+
+/* Estados */
+
+body.dark .loading-state,
+body.dark .empty-state,
+body.dark .empty-state p {
+  color: var(--text-muted);
+}
+
+body.dark .empty-state i {
+  color: #665860;
+}
+
+
+/* Información */
+
+body.dark .info-box {
+  background: #29231c;
+  border-left-color: #9c8750;
+}
+
+body.dark .info-box h4 {
+  color: #dda5b9;
+}
+
+body.dark .info-box p,
+body.dark .info-box li {
+  color: #c8bbb0;
+}
+
+
+/* Header */
+
+body.dark .alta-header h1 {
+  color: var(--text-primary);
+}
+
 body.dark .alta-header p {
-  color: #a0a0b8;
+  color: var(--text-secondary);
 }
 
 body.dark .alta-header {
-  border-bottom-color: #e8e5df;
+  border-bottom-color: var(--border-soft);
 }
 
 /* ==========================================

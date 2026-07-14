@@ -546,3 +546,281 @@
     flex: 1;
   }
 }
+
+/* ==========================================
+   DARK MODE - ALTA LISTADO
+   ========================================== */
+
+/* CONTENEDOR */
+
+body.dark .al-container {
+  color: var(--text-primary);
+}
+
+
+/* ==========================================
+   TARJETAS KPI
+   ========================================== */
+
+body.dark .al-kpi-card {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+body.dark .al-kpi-body span {
+  color: var(--text-muted);
+}
+
+body.dark .al-kpi-body strong {
+  color: var(--text-primary);
+}
+
+
+/* Región */
+
+body.dark .al-kpi-region {
+  background: #29231f;
+}
+
+body.dark .al-kpi-region .al-kpi-icon {
+  background: #40342b;
+  color: #d4aa73;
+}
+
+
+/* Solicitudes */
+
+body.dark .al-kpi-municipios {
+  background: #1d252e;
+}
+
+body.dark .al-kpi-municipios .al-kpi-icon {
+  background: #27384b;
+  color: #85b7eb;
+}
+
+
+/* En validación */
+
+body.dark .al-kpi-validacion {
+  background: #192820;
+}
+
+body.dark .al-kpi-validacion .al-kpi-icon {
+  background: #264333;
+  color: #76d0a0;
+}
+
+
+/* Recibidas C3 */
+
+body.dark .al-kpi-c3 {
+  background: #2b1c24;
+}
+
+body.dark .al-kpi-c3 .al-kpi-icon {
+  background: #492337;
+  color: #df7ca2;
+}
+
+
+/* ==========================================
+   TOOLBAR LOCAL
+   ========================================== */
+
+body.dark .al-toolbar {
+  background: var(--surface);
+  border-color: var(--border-soft);
+}
+
+body.dark .al-search-box {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+}
+
+body.dark .al-search-box i {
+  color: var(--text-muted);
+}
+
+body.dark .al-search-box input {
+  background: transparent;
+  color: var(--text-primary);
+}
+
+body.dark .al-search-box input::placeholder {
+  color: var(--text-muted);
+}
+
+body.dark .al-search-clear {
+  background: var(--surface-soft);
+  color: #d16b92;
+}
+
+
+/* ==========================================
+   FILTROS
+   ========================================== */
+
+body.dark .al-filtros-panel {
+  background: var(--surface-card);
+  border-color: var(--border);
+}
+
+body.dark .al-filtro-group label {
+  color: var(--text-secondary);
+}
+
+body.dark .al-filtro-group select {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+body.dark .al-filtro-group select:focus {
+  border-color: var(--wine-hover);
+}
+
+body.dark .al-filtro-group select option {
+  background: var(--surface-card);
+  color: var(--text-primary);
+}
+
+body.dark .al-filtro-limpiar {
+  background: var(--surface-soft);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .al-filtro-limpiar:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+
+/* ==========================================
+   TABLA
+   ========================================== */
+
+body.dark .al-table-wrapper {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+body.dark .al-table {
+  background: var(--surface);
+}
+
+body.dark .al-table thead {
+  background: #751638;
+}
+
+body.dark .al-table th {
+  background: #751638;
+  color: #ffffff;
+  border-color: #862047;
+}
+
+body.dark .al-table tbody {
+  background: var(--surface);
+}
+
+body.dark .al-table tbody tr {
+  background: var(--surface-card);
+}
+
+body.dark .al-table tbody tr:nth-child(even) {
+  background: #241e22;
+}
+
+body.dark .al-table tbody tr:hover {
+  background: var(--surface-hover);
+}
+
+body.dark .al-table td {
+  color: var(--text-secondary);
+  border-bottom-color: var(--border-soft);
+}
+
+
+/* ==========================================
+   BADGES
+   ========================================== */
+
+body.dark .al-badge-municipio {
+  background: #1c3040;
+  color: #83c6f4;
+}
+
+body.dark .al-badge-dependencia {
+  background: #33243b;
+  color: #d9a1e7;
+}
+
+
+/* ==========================================
+   BOTÓN DETALLE
+   ========================================== */
+
+body.dark .al-btn-detalle {
+  background: var(--wine);
+  color: #ffffff;
+}
+
+body.dark .al-btn-detalle:hover {
+  background: var(--wine-hover);
+}
+
+
+/* ==========================================
+   PAGINACIÓN
+   ========================================== */
+
+body.dark .al-paginacion {
+  color: var(--text-secondary);
+}
+
+body.dark .al-pag-btn {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .al-pag-btn:hover:not(:disabled) {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+body.dark .al-pag-btn.al-pag-active {
+  background: var(--wine);
+  border-color: var(--wine);
+  color: #ffffff;
+}
+
+body.dark .al-pag-btn:disabled {
+  background: var(--surface);
+  color: var(--text-muted);
+}
+
+body.dark .al-pag-dots {
+  color: var(--text-muted);
+}
+
+
+/* ==========================================
+   ESTADO VACÍO
+   ========================================== */
+
+body.dark .al-empty-state {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .al-empty-state i {
+  color: var(--text-muted);
+}
+
+body.dark .al-empty-state p {
+  color: var(--text-secondary);
+}

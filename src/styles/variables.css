@@ -22,12 +22,40 @@
   
 }
 
-/* Modo oscuro */
-body.dark {
-  --light: #0C0C1E;
-  --grey: #060714;
-  --dark: #FBFBFB;
+/* =========================
+   MODO OSCURO RPSP
+========================= */
 
-  /* */
-  
+body.dark {
+  /* Fondos principales */
+  --light: #1c181b;
+  --grey: #100e11;
+  --dark: #f7f2f4;
+
+  /* Superficies */
+  --surface: #211c20;
+  --surface-card: #282126;
+  --surface-soft: #30272d;
+  --surface-hover: #382d34;
+
+  /* Bordes */
+  --border: #493840;
+  --border-soft: #382c32;
+
+  /* Texto */
+  --text-primary: #f7f2f4;
+  --text-secondary: #c4b9bf;
+  --text-muted: #91858c;
+
+  /* Identidad */
+  --wine: #8a1742;
+  --wine-hover: #a32958;
+  --wine-soft: #4a1e31;
+
+  /* Inputs */
+  --input-bg: #1b171a;
+  --input-border: #493840;
+
+  /* Sombra */
+  --shadow-dark: rgba(0, 0, 0, 0.38);
 }

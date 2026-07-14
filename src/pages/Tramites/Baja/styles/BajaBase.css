@@ -290,3 +290,348 @@
         align-items: stretch;
     }
 }
+
+/* ==========================================
+   DARK MODE - BAJA
+   ========================================== */
+
+/* CONTENEDOR */
+
+body.dark .baja-container {
+  color: var(--text-primary);
+}
+
+
+/* ==========================================
+   TARJETAS
+   ========================================== */
+
+body.dark .baja-card {
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
+}
+
+
+/* ==========================================
+   PESTAÑAS
+   ========================================== */
+
+body.dark .baja-tab-btn {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .baja-tab-btn:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: #e185a7;
+}
+
+body.dark .baja-tab-btn.active {
+  background: linear-gradient(
+    135deg,
+    #761638 0%,
+    #9a2853 100%
+  );
+  border-color: #a32958;
+  color: #ffffff;
+}
+
+
+/* ==========================================
+   HEADER
+   ========================================== */
+
+body.dark .baja-card-header {
+  background: linear-gradient(
+    135deg,
+    #761638 0%,
+    #92264f 100%
+  );
+
+  border-color: #665437;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28);
+}
+
+
+/* ==========================================
+   BUSCADOR E INPUTS
+   ========================================== */
+
+body.dark .baja-container .input-field {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+body.dark .baja-container .input-field::placeholder {
+  color: var(--text-muted);
+}
+
+body.dark .baja-container .input-field:focus {
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .baja-search-icon {
+  color: #d16b92;
+}
+
+
+/* ==========================================
+   TABLA
+   ========================================== */
+
+body.dark .baja-table-wrap {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+body.dark .baja-table {
+  background: var(--surface);
+}
+
+body.dark .baja-table thead th {
+  background: #751638;
+  color: #ffffff;
+  border-bottom-color: #862047;
+}
+
+body.dark .baja-table tbody tr {
+  background: var(--surface-card);
+}
+
+body.dark .baja-table tbody tr:nth-child(even) {
+  background: #241e22;
+}
+
+body.dark .baja-table tbody tr:hover {
+  background: var(--surface-hover);
+}
+
+body.dark .baja-table tbody td {
+  color: var(--text-secondary);
+  border-bottom-color: var(--border-soft);
+}
+
+
+/* ==========================================
+   BOTONES DE TABLA
+   ========================================== */
+
+body.dark .baja-container .baja-table tbody button {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+body.dark .baja-container .baja-table tbody button:hover:not(:disabled) {
+  background: var(--wine-hover);
+  border-color: var(--wine-hover);
+  color: #ffffff;
+}
+
+
+/* ==========================================
+   PAGINACIÓN
+   ========================================== */
+
+body.dark .baja-pagination button {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .baja-pagination button:hover:not(:disabled) {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+body.dark .baja-pagination button:disabled {
+  background: var(--surface);
+  color: var(--text-muted);
+}
+
+body.dark .baja-pagination span {
+  color: var(--text-secondary);
+}
+
+
+/* ==========================================
+   ESTADOS
+   ========================================== */
+
+body.dark .baja-state {
+  color: var(--text-muted);
+}
+
+/* ==========================================
+   DARK MODE - AJUSTES INTERNOS DE BAJA
+   ========================================== */
+
+/* PANELES DE FILTROS */
+
+body.dark .baja-container [class*="filtros-panel"],
+body.dark .baja-container [class*="filters-panel"],
+body.dark .baja-container [class*="filter-panel"] {
+  background: var(--surface-card) !important;
+  border-color: var(--border) !important;
+  color: var(--text-primary) !important;
+}
+
+
+/* INPUTS, SELECTS Y TEXTAREA DE COMPONENTES INTERNOS */
+
+body.dark .baja-container input,
+body.dark .baja-container select,
+body.dark .baja-container textarea {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+body.dark .baja-container input::placeholder,
+body.dark .baja-container textarea::placeholder {
+  color: var(--text-muted);
+}
+
+body.dark .baja-container select option {
+  background: var(--surface-card);
+  color: var(--text-primary);
+}
+
+body.dark .baja-container label {
+  color: var(--text-secondary);
+}
+
+
+/* BOTONES DE FILTROS */
+
+body.dark .baja-container button[class*="filtro"],
+body.dark .baja-container button[class*="filter"] {
+  background: var(--surface-card) !important;
+  border-color: var(--border) !important;
+  color: var(--text-secondary) !important;
+}
+
+body.dark .baja-container button[class*="filtro"]:hover:not(:disabled),
+body.dark .baja-container button[class*="filter"]:hover:not(:disabled) {
+  background: var(--surface-hover) !important;
+  border-color: var(--wine-hover) !important;
+  color: var(--text-primary) !important;
+}
+
+
+/* ESTATUS "DADO DE BAJA" */
+
+body.dark .baja-container .baja-table tbody td:last-child > span {
+  background: var(--surface-soft) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-secondary) !important;
+}
+
+
+/* AVISOS Y MENSAJES INTERNOS */
+
+body.dark .baja-container [class*="info"],
+body.dark .baja-container [class*="aviso"],
+body.dark .baja-container [class*="alert"] {
+  border-color: var(--border) !important;
+}
+
+
+/* AVISO INFORMATIVO CREMA */
+
+body.dark .baja-container [class*="info"] {
+  background: #29231c !important;
+  color: #cdbd9c !important;
+}
+
+
+/* MENSAJE DE PERSONA NO SELECCIONADA */
+
+body.dark .baja-container [class*="selected"],
+body.dark .baja-container [class*="seleccion"] {
+  border-color: var(--border) !important;
+}
+
+/* ==========================================
+   DARK MODE - CORRECCIONES BAJA
+   ========================================== */
+
+
+/* BOTÓN LIMPIAR FILTROS */
+
+body.dark .baja-container .baja-card button[class*="limpiar"] {
+  background: var(--surface-card) !important;
+  border-color: var(--border) !important;
+  color: var(--text-secondary) !important;
+}
+
+body.dark .baja-container .baja-card button[class*="limpiar"]:hover {
+  background: var(--surface-hover) !important;
+  border-color: var(--wine-hover) !important;
+  color: var(--text-primary) !important;
+}
+
+
+/* MENSAJE DE PERSONA NO SELECCIONADA */
+
+body.dark .baja-container [class*="seleccionado"],
+body.dark .baja-container [class*="seleccionada"],
+body.dark .baja-container [class*="selection"] {
+  background: var(--surface-soft) !important;
+  border-color: var(--border) !important;
+  color: var(--text-secondary) !important;
+}
+
+
+/* MENSAJES CLAROS DENTRO DEL FORMULARIO DE BAJA */
+
+body.dark .baja-container .baja-card > div[class*="mensaje"],
+body.dark .baja-container .baja-card > div[class*="message"] {
+  background: var(--surface-soft) !important;
+  border-color: var(--border) !important;
+  color: var(--text-secondary) !important;
+}
+
+
+/* BADGES DE ESTATUS */
+
+body.dark .baja-container .baja-table [class*="badge"],
+body.dark .baja-container .baja-table [class*="estatus"],
+body.dark .baja-container .baja-table [class*="status"] {
+  background: var(--surface-soft) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-secondary) !important;
+}
+
+
+/* DADO DE BAJA - RESPALDO POR POSICIÓN EN TABLA */
+
+body.dark .baja-container .baja-table td:last-child span,
+body.dark .baja-container .baja-table td:nth-last-child(2) span {
+  background: var(--surface-soft) !important;
+  border-color: var(--border) !important;
+  color: var(--text-secondary) !important;
+}
+
+
+/* BOTONES CLAROS DENTRO DEL PANEL DE FILTROS */
+
+body.dark .baja-container [class*="filtro"] button:not(.baja-tab-btn),
+body.dark .baja-container [class*="filter"] button:not(.baja-tab-btn) {
+  background: var(--surface-card) !important;
+  border-color: var(--border) !important;
+  color: var(--text-secondary) !important;
+}
+
+body.dark .baja-container [class*="filtro"] button:not(.baja-tab-btn):hover,
+body.dark .baja-container [class*="filter"] button:not(.baja-tab-btn):hover {
+  background: var(--surface-hover) !important;
+  border-color: var(--wine-hover) !important;
+  color: var(--text-primary) !important;
+} 
