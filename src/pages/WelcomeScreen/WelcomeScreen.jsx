@@ -15,18 +15,46 @@ const WelcomeScreen = () => {
     return 'Buenas noches';
   };
 
-  const getDisplayName = () => {
-    // 1. Jalamos 'nombre_completo' que es como aparece en tu DB
-    // Si no existe, intentamos con 'nombre' o finalmente 'usuario'
-    const name = user?.nombre_completo || user?.nombre || user?.usuario || 'Usuario';
-    
-    // 2. Extraemos solo la primera palabra
-    const firstWord = name.trim().split(' ')[0];
-    
-    // 3. Formateamos estéticamente (Mayúscula inicial, resto minúsculas)
-    // Esto arregla casos como "ORLISSSS" -> "Orlissss" o "belén" -> "Belén"
-    return firstWord.charAt(0).toUpperCase() + firstWord.slice(1).toLowerCase();
+const getDisplayName = () => {
+  const formatName = (text) => {
+    if (!text) return 'Usuario';
+
+    return text
+      .trim()
+      .toLowerCase()
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   };
+
+  const rol = user?.rol?.toLowerCase();
+
+  // Si es usuario municipio, mostramos el nombre del municipio
+  if (rol === 'municipio') {
+    const municipio =
+      user?.municipio_nombre ||
+      user?.nombre_municipio ||
+      user?.municipio ||
+      user?.municipioNombre;
+
+    if (municipio) {
+      return formatName(municipio);
+    }
+
+    // Fallback por si en la BD viene como "Enlace Atzala"
+    const nombreCompleto = user?.nombre_completo || user?.nombre || '';
+
+    if (nombreCompleto.toLowerCase().startsWith('enlace ')) {
+      return formatName(nombreCompleto.replace(/^enlace\s+/i, ''));
+    }
+  }
+
+  // Para analistas/admin/etc. mostramos solo el primer nombre
+  const name = user?.nombre_completo || user?.nombre || user?.usuario || 'Usuario';
+  const firstWord = name.trim().split(' ')[0];
+
+  return formatName(firstWord);
+};
 
   useEffect(() => {
     if (!loading && user && welcomePending) {
