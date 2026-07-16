@@ -22,7 +22,7 @@ export default function CitaModal({ persona, onConfirmar, onCancelar, submitting
   const [errores, setErrores] = useState({});
   const [copying, setCopying] = useState(false);
 
-  const correoPausado = true;
+  const correoPausado = false;
 
   const nombreCompleto = persona?.nombre_completo ||
     `${persona?.nombre || ''} ${persona?.apellido_paterno || ''}`.trim();
@@ -89,7 +89,7 @@ export default function CitaModal({ persona, onConfirmar, onCancelar, submitting
         lugar: lugar.trim(),
         notas: notas.trim() || undefined,
         email_override: emailOverride.trim() || undefined,
-        enviar_notificacion: false
+        enviar_notificacion: true
       });
     } finally {
       setCopying(false);
