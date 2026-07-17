@@ -8,7 +8,8 @@ const FORM_INICIAL = {
   nombre: '',
   apellido_paterno: '',
   apellido_materno: '',
-  fecha_nacimiento: ''
+  fecha_nacimiento: '',
+  numero_oficio: ''
 };
 
 const normalizarMayusculas = (value = '') =>
@@ -91,11 +92,12 @@ export default function ConsultaPersonasSection({
     setModoModal('editar');
     setRegistroEditandoId(persona.finalizado_id);
     setNuevaPersona({
-      nombre: normalizarMayusculas(persona?.nombre || ''),
-      apellido_paterno: normalizarMayusculas(persona?.apellido_paterno || ''),
-      apellido_materno: normalizarMayusculas(persona?.apellido_materno || ''),
-      fecha_nacimiento: String(persona?.fecha_nacimiento || '').slice(0, 10)
-    });
+  nombre: normalizarMayusculas(persona?.nombre || ''),
+  apellido_paterno: normalizarMayusculas(persona?.apellido_paterno || ''),
+  apellido_materno: normalizarMayusculas(persona?.apellido_materno || ''),
+  fecha_nacimiento: String(persona?.fecha_nacimiento || '').slice(0, 10),
+  numero_oficio: persona?.numero_oficio || ''
+});
     setModalAbierto(true);
   };
 
@@ -110,11 +112,12 @@ export default function ConsultaPersonasSection({
     event.preventDefault();
 
     const registro = {
-      nombre: normalizarMayusculas(nuevaPersona.nombre),
-      apellido_paterno: normalizarMayusculas(nuevaPersona.apellido_paterno),
-      apellido_materno: normalizarMayusculas(nuevaPersona.apellido_materno),
-      fecha_nacimiento: nuevaPersona.fecha_nacimiento
-    };
+  nombre: normalizarMayusculas(nuevaPersona.nombre),
+  apellido_paterno: normalizarMayusculas(nuevaPersona.apellido_paterno),
+  apellido_materno: normalizarMayusculas(nuevaPersona.apellido_materno),
+  fecha_nacimiento: nuevaPersona.fecha_nacimiento,
+  numero_oficio: nuevaPersona.numero_oficio.trim().toUpperCase()
+};
 
     const esEdicion = modoModal === 'editar';
     const resultado = esEdicion
@@ -130,10 +133,11 @@ export default function ConsultaPersonasSection({
     }
   };
 
-  const submitDeshabilitado =
-    !nuevaPersona.nombre.trim() ||
-    !nuevaPersona.apellido_paterno.trim() ||
-    !nuevaPersona.fecha_nacimiento;
+ const submitDeshabilitado =
+  !nuevaPersona.nombre.trim() ||
+  !nuevaPersona.apellido_paterno.trim() ||
+  !nuevaPersona.fecha_nacimiento ||
+  !nuevaPersona.numero_oficio.trim();
 
   const mostrarEstadoSinMunicipio = !municipioActivo && personas.length === 0;
 
@@ -209,6 +213,25 @@ export default function ConsultaPersonasSection({
                   required
                 />
               </div>
+              <div className="form-field">
+  <label className="form-label">
+    Número de oficio: <span className="requerido">*</span>
+  </label>
+
+  <input
+    type="text"
+    className="form-input"
+    value={nuevaPersona.numero_oficio}
+    onChange={(e) =>
+      setNuevaPersona((prev) => ({
+        ...prev,
+        numero_oficio: e.target.value.toUpperCase()
+      }))
+    }
+    maxLength={100}
+    required
+  />
+</div>
             </div>
           </div>
 
