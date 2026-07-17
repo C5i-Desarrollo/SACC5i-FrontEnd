@@ -268,13 +268,20 @@ export default function AltaPaso2({
       return;
     }
 
+    const numeroOficioC3 = String(formData.numero_oficio_c3 || '').trim();
+
+    const personaPayload = {
+      ...formData,
+      numero_oficio_c3: numeroOficioC3 || null
+    };
+
     setSubmitting(true);
     try {
       if (editandoPersonaId) {
-        await editarPersonaAlta(editandoPersonaId, formData);
+        await editarPersonaAlta(editandoPersonaId, personaPayload);
         showNotification('Persona actualizada exitosamente', 'success');
       } else {
-        await agregarPersona(solicitud.id, formData);
+        await agregarPersona(solicitud.id, personaPayload);
         showNotification('Persona agregada exitosamente', 'success');
       }
       await cargarPersonas();
