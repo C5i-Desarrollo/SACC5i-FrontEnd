@@ -540,10 +540,6 @@
   padding: 0;
 }
 .cm-email-content li { margin-bottom: 3px; }
-.cm-email-lugar {
-  font-size: 14px;
-  color: #666;
-}
 
 /* ── Attachment section ── */
 .cm-attachment-section {
