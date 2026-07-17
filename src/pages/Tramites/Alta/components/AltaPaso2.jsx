@@ -239,21 +239,21 @@ export default function AltaPaso2({
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.nombre || !formData.apellido_paterno) {
-      showNotification('Nombre y apellido paterno son requeridos', 'error');
+      showNotification('Nombre y apellido paterno son requeridos.', 'error');
       return;
     }
     if (!formData.fecha_nacimiento) {
-      showNotification('La fecha de nacimiento es requerida', 'error');
+      showNotification('La fecha de nacimiento es requerida.', 'error');
       return;
     }
 
     if (!isValidIsoDate(formData.fecha_nacimiento)) {
-      showNotification('La fecha de nacimiento no es valida', 'error');
+      showNotification('La fecha de nacimiento no es valida.', 'error');
       return;
     }
 
     if (isFutureIsoDate(formData.fecha_nacimiento, todayIso)) {
-      showNotification('La fecha de nacimiento no puede ser futura', 'error');
+      showNotification('La fecha de nacimiento no puede ser futura.', 'error');
       return;
     }
 
