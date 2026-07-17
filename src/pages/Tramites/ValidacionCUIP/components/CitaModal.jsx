@@ -281,7 +281,7 @@ export default function CitaModal({ persona, onConfirmar, onCancelar, submitting
                 <p>
                   Por medio de la presente se le notifica que su cita ha sido programada para el día{' '}
                   <strong>{fechaFormateada}</strong> a las <strong>{horaFormateada}</strong>.{' '}
-                  Le solicitamos presentarse en las instalaciones del Centro de Control de Confianza C5 con los siguientes documentos:
+                  Le solicitamos presentarse en las instalaciones del <strong>{lugar}</strong> con los siguientes documentos:
                 </p>
                 <ul>
                   <li>Identificación oficial vigente</li>
@@ -290,7 +290,6 @@ export default function CitaModal({ persona, onConfirmar, onCancelar, submitting
                 </ul>
                 <p>Atentamente,</p>
                 <p><strong>{analistaNombre} — Analista</strong></p>
-                <p className="cm-email-lugar">{lugar}</p>
               </div>
             </div>
 
