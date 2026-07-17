@@ -29,7 +29,7 @@ const getDisplayName = () => {
 
   const rol = user?.rol?.toLowerCase();
 
-  // Si es usuario municipio, mostramos el nombre del municipio
+  // Si es usuario municipio, mostramos el nombre del municipio.
   if (rol === 'municipio') {
     const municipio =
       user?.municipio_nombre ||
