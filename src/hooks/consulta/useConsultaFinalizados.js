@@ -103,7 +103,7 @@ const descargarExcelDesdeRegistros = async (
     'Apellido Paterno': item?.apellido_paterno || '---',
     'Apellido Materno': item?.apellido_materno || '---',
     'Fecha de nacimiento': formatearFechaNacimientoExport(item?.fecha_nacimiento),
-    'No. Oficio': item?.numero_oficio || '---'
+    'No. Oficio': item?.numero_oficio || item?.numero_oficio_c3 || '---'
   }));
 
   const worksheet = XLSX.utils.json_to_sheet(filas);
@@ -332,6 +332,11 @@ export const useConsultaFinalizados = () => {
     const apellidoPaterno = normalizarMayusculas(persona?.apellido_paterno || '');
     const apellidoMaterno = normalizarMayusculas(persona?.apellido_materno || '');
     const fechaNacimiento = persona?.fecha_nacimiento || '';
+    const numeroOficio = String(
+      persona?.numero_oficio ||
+      persona?.numero_oficio_c3 ||
+      ''
+    ).trim().toUpperCase();
 
     if (!nombre || !apellidoPaterno || !fechaNacimiento) {
       showNotification('Complete nombre, apellido paterno y fecha de nacimiento', 'warning');
@@ -350,6 +355,8 @@ export const useConsultaFinalizados = () => {
       apellido_materno: apellidoMaterno,
       fecha_nacimiento: fechaNacimiento,
       municipio_id: municipioId,
+      numero_oficio: numeroOficio || null,
+      numero_oficio_c3: numeroOficio || null,
       es_local: true
     };
 
@@ -375,6 +382,11 @@ export const useConsultaFinalizados = () => {
     const apellidoPaterno = normalizarMayusculas(persona?.apellido_paterno || '');
     const apellidoMaterno = normalizarMayusculas(persona?.apellido_materno || '');
     const fechaNacimiento = persona?.fecha_nacimiento || '';
+    const numeroOficio = String(
+      persona?.numero_oficio ||
+      persona?.numero_oficio_c3 ||
+      ''
+    ).trim().toUpperCase();
 
     if (!nombre || !apellidoPaterno || !fechaNacimiento) {
       showNotification('Complete nombre, apellido paterno y fecha de nacimiento', 'warning');
@@ -382,6 +394,7 @@ export const useConsultaFinalizados = () => {
     }
 
     let encontrado = false;
+
     setPersonasLocalesByMunicipio((prev) => {
       let huboCambios = false;
       const next = {};
@@ -392,12 +405,15 @@ export const useConsultaFinalizados = () => {
 
           encontrado = true;
           huboCambios = true;
+
           return {
             ...item,
             nombre,
             apellido_paterno: apellidoPaterno,
             apellido_materno: apellidoMaterno,
-            fecha_nacimiento: fechaNacimiento
+            fecha_nacimiento: fechaNacimiento,
+            numero_oficio: numeroOficio || null,
+            numero_oficio_c3: numeroOficio || null
           };
         });
 

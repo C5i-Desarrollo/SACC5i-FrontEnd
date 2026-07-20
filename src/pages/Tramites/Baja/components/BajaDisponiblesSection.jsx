@@ -124,7 +124,7 @@ export default function BajaDisponiblesSection({
                     <td>{item.apellido_materno || '---'}</td>
                     <td>{item.municipio_nombre || '---'}</td>
                     <td>{item.cuip || '---'}</td>
-                    <td>{item.numero_oficio || '---'}</td>
+                    <td>{item.numero_oficio || item.numero_oficio_c3 || '---'}</td>
                     <td>{formatDate(item.fecha_termino)}</td>
                     <td>
                       <button
