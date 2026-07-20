@@ -92,12 +92,12 @@ export default function ConsultaPersonasSection({
     setModoModal('editar');
     setRegistroEditandoId(persona.finalizado_id);
     setNuevaPersona({
-  nombre: normalizarMayusculas(persona?.nombre || ''),
-  apellido_paterno: normalizarMayusculas(persona?.apellido_paterno || ''),
-  apellido_materno: normalizarMayusculas(persona?.apellido_materno || ''),
-  fecha_nacimiento: String(persona?.fecha_nacimiento || '').slice(0, 10),
-  numero_oficio: persona?.numero_oficio || ''
-});
+      nombre: normalizarMayusculas(persona?.nombre || ''),
+      apellido_paterno: normalizarMayusculas(persona?.apellido_paterno || ''),
+      apellido_materno: normalizarMayusculas(persona?.apellido_materno || ''),
+      fecha_nacimiento: String(persona?.fecha_nacimiento || '').slice(0, 10),
+      numero_oficio: persona?.numero_oficio || persona?.numero_oficio_c3 || ''
+    });
     setModalAbierto(true);
   };
 
@@ -111,13 +111,16 @@ export default function ConsultaPersonasSection({
   const handleGuardarPersona = (event) => {
     event.preventDefault();
 
+    const numeroOficio = String(nuevaPersona.numero_oficio || '').trim().toUpperCase();
+
     const registro = {
-  nombre: normalizarMayusculas(nuevaPersona.nombre),
-  apellido_paterno: normalizarMayusculas(nuevaPersona.apellido_paterno),
-  apellido_materno: normalizarMayusculas(nuevaPersona.apellido_materno),
-  fecha_nacimiento: nuevaPersona.fecha_nacimiento,
-  numero_oficio: nuevaPersona.numero_oficio.trim().toUpperCase()
-};
+      nombre: normalizarMayusculas(nuevaPersona.nombre),
+      apellido_paterno: normalizarMayusculas(nuevaPersona.apellido_paterno),
+      apellido_materno: normalizarMayusculas(nuevaPersona.apellido_materno),
+      fecha_nacimiento: nuevaPersona.fecha_nacimiento,
+      numero_oficio: numeroOficio || null,
+      numero_oficio_c3: numeroOficio || null
+    };
 
     const esEdicion = modoModal === 'editar';
     const resultado = esEdicion
@@ -133,11 +136,10 @@ export default function ConsultaPersonasSection({
     }
   };
 
- const submitDeshabilitado =
-  !nuevaPersona.nombre.trim() ||
-  !nuevaPersona.apellido_paterno.trim() ||
-  !nuevaPersona.fecha_nacimiento ||
-  !nuevaPersona.numero_oficio.trim();
+  const submitDeshabilitado =
+    !nuevaPersona.nombre.trim() ||
+    !nuevaPersona.apellido_paterno.trim() ||
+    !nuevaPersona.fecha_nacimiento;
 
   const mostrarEstadoSinMunicipio = !municipioActivo && personas.length === 0;
 
@@ -213,25 +215,27 @@ export default function ConsultaPersonasSection({
                   required
                 />
               </div>
-              <div className="form-field">
-  <label className="form-label">
-    Número de oficio: <span className="requerido">*</span>
-  </label>
 
-  <input
-    type="text"
-    className="form-input"
-    value={nuevaPersona.numero_oficio}
-    onChange={(e) =>
-      setNuevaPersona((prev) => ({
-        ...prev,
-        numero_oficio: e.target.value.toUpperCase()
-      }))
-    }
-    maxLength={100}
-    required
-  />
-</div>
+              <div className="form-field">
+                <label className="form-label">
+                  Número de oficio:
+                </label>
+
+                <input
+                  type="text"
+                  className="form-input"
+                  value={nuevaPersona.numero_oficio}
+                  onChange={(e) =>
+                    setNuevaPersona((prev) => ({
+                      ...prev,
+                      numero_oficio: e.target.value.toUpperCase()
+                    }))
+                  }
+                  maxLength={100}
+                  placeholder="Opcional"
+                />
+              </div>
+
             </div>
           </div>
 
@@ -360,7 +364,7 @@ export default function ConsultaPersonasSection({
                       <td>{item.apellido_paterno || '---'}</td>
                       <td>{item.apellido_materno || '---'}</td>
                       <td>{fechaNac}</td>
-                      <td>{item.numero_oficio || '---'}</td>
+                      <td>{item.numero_oficio || item.numero_oficio_c3 || 'Sin oficio'}</td>
                       <td>
                         {esRecienAgregado ? (
                           <div className="consulta-row-actions">

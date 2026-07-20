@@ -239,21 +239,21 @@ export default function AltaPaso2({
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.nombre || !formData.apellido_paterno) {
-      showNotification('Nombre y apellido paterno son requeridos', 'error');
+      showNotification('Nombre y apellido paterno son requeridos.', 'error');
       return;
     }
     if (!formData.fecha_nacimiento) {
-      showNotification('La fecha de nacimiento es requerida', 'error');
+      showNotification('La fecha de nacimiento es requerida.', 'error');
       return;
     }
 
     if (!isValidIsoDate(formData.fecha_nacimiento)) {
-      showNotification('La fecha de nacimiento no es valida', 'error');
+      showNotification('La fecha de nacimiento no es valida.', 'error');
       return;
     }
 
     if (isFutureIsoDate(formData.fecha_nacimiento, todayIso)) {
-      showNotification('La fecha de nacimiento no puede ser futura', 'error');
+      showNotification('La fecha de nacimiento no puede ser futura.', 'error');
       return;
     }
 
@@ -268,13 +268,20 @@ export default function AltaPaso2({
       return;
     }
 
+    const numeroOficioC3 = String(formData.numero_oficio_c3 || '').trim();
+
+    const personaPayload = {
+      ...formData,
+      numero_oficio_c3: numeroOficioC3 || null
+    };
+
     setSubmitting(true);
     try {
       if (editandoPersonaId) {
-        await editarPersonaAlta(editandoPersonaId, formData);
+        await editarPersonaAlta(editandoPersonaId, personaPayload);
         showNotification('Persona actualizada exitosamente', 'success');
       } else {
-        await agregarPersona(solicitud.id, formData);
+        await agregarPersona(solicitud.id, personaPayload);
         showNotification('Persona agregada exitosamente', 'success');
       }
       await cargarPersonas();
