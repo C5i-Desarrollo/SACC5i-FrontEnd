@@ -7,7 +7,7 @@ import ReprogramarCitaModal from './components/ReprogramarCitaModal';
 import BitacoraCitaModal from './components/BitacoraCitaModal';
 import ContinuarProcesoCita from './components/ContinuarProcesoCita';
 import './styles/HistorialCitas.css';
-//import api from '../../../config/api'; // 👈 Asegúrate de que la ruta apunte a tu archivo de configuración de axios/api
+import api from '../../../services/api'; // 👈 Asegúrate de que la ruta apunte a tu archivo de configuración de axios/api
 
 /* ── Helpers ──────────────────────────────────────────────────── */
 function formatFecha(isoString) {
@@ -194,39 +194,35 @@ export default function HistorialCitas({
     }
   }, [modalReagenda, reprogramarCita, showNotification]);
 
+  
   // ── HANDLER PARA REENVIAR NOTIFICACIÓN ──
   // ── HANDLER PARA REENVIAR NOTIFICACIÓN ──
   const handleReenviarCorreo = useCallback(async (nuevoCorreo) => {
     if (!modalReenviar) return;
     setUpdatingId(modalReenviar.id);
     try {
-      // 1. Obtenemos el token de autenticación de donde lo guardes en tu app (localStorage, sessionStorage, etc.)
-      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-
-      // 2. Hacemos la petición directa a tu backend
-      const response = await fetch(`/api/tramites/alta/citas/${modalReenviar.id}/reenviar-notificacion`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          ...(token ? { 'Authorization': `Bearer ${token}` } : {})
-        },
-        body: JSON.stringify({ nuevo_correo: nuevoCorreo })
+      const response = await api.patch(`/tramites/alta/citas/${modalReenviar.id}/reenviar-notificacion`, {
+        nuevo_correo: nuevoCorreo
       });
 
-      const data = await response.json();
+      const data = response.data;
 
-      if (!response.ok || !data.success) {
+      if (!data.success) {
         throw new Error(data.message || 'Error al reenviar el correo');
       }
 
-      // 3. Cerramos el modal y avisamos del éxito
+      // 1. Cerramos el modal y mostramos la alerta verde
       setModalReenviar(null);
       showNotification('Correo actualizado y notificación reenviada con éxito', 'success');
-      
-      // 4. Opcional: Si quieres recargar la tabla para ver el cambio de correo reflejado de inmediato:
-      // window.location.reload(); 
+
+      // 2. 👇 RECARGA AUTOMÁTICA: Esperamos 1.5 segundos (1500 ms) para que leas la alerta y recargamos la página solos
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+
     } catch (err) {
-      showNotification(err.message || 'Error al reenviar el correo', 'error');
+      const mensaje = err.response?.data?.message || err.message || 'Error al reenviar el correo';
+      showNotification(mensaje, 'error');
     } finally {
       setUpdatingId(null);
     }
@@ -490,6 +486,7 @@ export default function HistorialCitas({
         {/* ── MODAL REENVIAR RÁPIDO ── */}
         {modalReenviar && (
           <ReenviarCorreoModal
+          key={modalReenviar.id + modalReenviar.correo_destinatario}
             cita={modalReenviar}
             onClose={() => setModalReenviar(null)}
             onConfirm={handleReenviarCorreo}
