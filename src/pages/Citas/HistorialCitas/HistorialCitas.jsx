@@ -1,8 +1,5 @@
-/**
- * HistorialCitas — Gestión de citas biométricas programadas
- * Sección: "Citas" accesible desde el sidebar
- */
 import { useState, useCallback, useEffect, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import { MdEventNote } from 'react-icons/md';
 import { useCitas } from '../../../hooks/citas/useCitas';
 import { useNotification } from '../../../context/NotificationContext';
@@ -10,9 +7,9 @@ import ReprogramarCitaModal from './components/ReprogramarCitaModal';
 import BitacoraCitaModal from './components/BitacoraCitaModal';
 import ContinuarProcesoCita from './components/ContinuarProcesoCita';
 import './styles/HistorialCitas.css';
+//import api from '../../../config/api'; // 👈 Asegúrate de que la ruta apunte a tu archivo de configuración de axios/api
 
 /* ── Helpers ──────────────────────────────────────────────────── */
-
 function formatFecha(isoString) {
   if (!isoString) return '—';
   const fechaBase = String(isoString).includes('T') ? isoString : `${isoString}T12:00:00`;
@@ -56,8 +53,60 @@ const VISTAS_FECHA_BASE = [
   { key: 'fecha', label: 'Por día' }
 ];
 
-/* ── Main component ───────────────────────────────────────────── */
+/* ── NUEVO MINI-MODAL PARA REENVIAR CORREO RAPIDÍSIMO ─────────── */
+function ReenviarCorreoModal({ cita, onClose, onConfirm, loading }) {
+  const [correo, setCorreo] = useState(cita?.correo_destinatario || '');
+  const [error, setError] = useState('');
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!correo || !correo.includes('@')) {
+      setError('Por favor ingresa un correo electrónico válido');
+      return;
+    }
+    onConfirm(correo.trim());
+  };
+
+  return createPortal(
+    <div className="hc-modal-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
+      <div className="hc-modal" style={{ maxWidth: '420px' }} role="dialog" aria-modal="true">
+        <div className="hc-modal-header hc-modal-header-guinda">
+          <h3>Reenviar Notificación</h3>
+          <button type="button" className="hc-modal-close" onClick={onClose}>×</button>
+        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="hc-modal-body">
+            <p style={{ fontSize: '14px', marginBottom: '15px', color: '#444' }}>
+              Se reenviará el PDF con los detalles de la cita para <strong>{cita?.nombre_completo}</strong> sin cambiar la fecha ni hora programada.
+            </p>
+            <div className="hc-field">
+              <label>Correo electrónico de destino *</label>
+              <input 
+                type="email" 
+                value={correo} 
+                onChange={(e) => setCorreo(e.target.value)}
+                placeholder="ejemplo@correo.com"
+                required
+                autoFocus
+              />
+              <small>Verifica que esté escrito correctamente para evitar rebotes.</small>
+            </div>
+            {error && <p className="hc-form-error">{error}</p>}
+          </div>
+          <div className="hc-modal-footer">
+            <button type="button" className="hc-btn hc-btn-gray" onClick={onClose} disabled={loading}>Cancelar</button>
+            <button type="submit" className="hc-btn hc-btn-guinda" disabled={loading}>
+              {loading ? 'Enviando...' : 'Actualizar y Reenviar'}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>,
+    document.body
+  );
+}
+
+/* ── Main component ───────────────────────────────────────────── */
 export default function HistorialCitas({
   setPageTitle,
   analistaId = null,
@@ -75,6 +124,7 @@ export default function HistorialCitas({
     reprogramarCita,
     cancelarCita,
     finalizarFlujo,
+    reenviarNotificacion, // 👈 Asegúrate de exponer esto en tu hook useCitas
     cambiarTab,
     cambiarBusqueda,
     cambiarVistaFecha,
@@ -90,37 +140,26 @@ export default function HistorialCitas({
   const [bitacoraCita, setBitacoraCita] = useState(null);
   const [bitacoraEventos, setBitacoraEventos] = useState([]);
   const [citaProceso, setCitaProceso] = useState(null);
+  // ── ESTADO PARA MODAL DE REENVÍO RÁPIDO ──
+  const [modalReenviar, setModalReenviar] = useState(null);
 
   const [updatingId, setUpdatingId] = useState(null);
   const [busquedaLocal, setBusquedaLocal] = useState('');
 
   const vistaFechaOptions = useMemo(() => {
-    if (filtros.tab === 'reagendadas') {
-      return [{ key: 'todas', label: 'Todas las fechas' }];
-    }
-
-    if (filtros.tab === 'asistencias') {
-      return VISTAS_FECHA_BASE.filter((v) => v.key !== 'proximas');
-    }
-
-    if (filtros.tab === 'vencidas') {
-      return [
-        { key: 'vencidas', label: 'Vencidas' }
-      ];
-    }
-
+    if (filtros.tab === 'reagendadas') return [{ key: 'todas', label: 'Todas las fechas' }];
+    if (filtros.tab === 'asistencias') return VISTAS_FECHA_BASE.filter((v) => v.key !== 'proximas');
+    if (filtros.tab === 'vencidas') return [{ key: 'vencidas', label: 'Vencidas' }];
     return VISTAS_FECHA_BASE;
   }, [filtros.tab]);
 
   useEffect(() => {
     if (!setPageTitle) return undefined;
-
     setPageTitle({
       titulo: 'Citas',
       subtitulo: 'Gestión y seguimiento de citas biométricas',
       icon: <MdEventNote className="nav-icon-highlight" />
     });
-
     return () => setPageTitle(null);
   }, [setPageTitle]);
 
@@ -154,6 +193,44 @@ export default function HistorialCitas({
       setUpdatingId(null);
     }
   }, [modalReagenda, reprogramarCita, showNotification]);
+
+  // ── HANDLER PARA REENVIAR NOTIFICACIÓN ──
+  // ── HANDLER PARA REENVIAR NOTIFICACIÓN ──
+  const handleReenviarCorreo = useCallback(async (nuevoCorreo) => {
+    if (!modalReenviar) return;
+    setUpdatingId(modalReenviar.id);
+    try {
+      // 1. Obtenemos el token de autenticación de donde lo guardes en tu app (localStorage, sessionStorage, etc.)
+      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+
+      // 2. Hacemos la petición directa a tu backend
+      const response = await fetch(`/api/tramites/alta/citas/${modalReenviar.id}/reenviar-notificacion`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+        },
+        body: JSON.stringify({ nuevo_correo: nuevoCorreo })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || 'Error al reenviar el correo');
+      }
+
+      // 3. Cerramos el modal y avisamos del éxito
+      setModalReenviar(null);
+      showNotification('Correo actualizado y notificación reenviada con éxito', 'success');
+      
+      // 4. Opcional: Si quieres recargar la tabla para ver el cambio de correo reflejado de inmediato:
+      // window.location.reload(); 
+    } catch (err) {
+      showNotification(err.message || 'Error al reenviar el correo', 'error');
+    } finally {
+      setUpdatingId(null);
+    }
+  }, [modalReenviar, showNotification]);
 
   const handleCancelarDefinitivo = useCallback(async (motivo) => {
     if (!modalReagenda) return;
@@ -208,7 +285,6 @@ export default function HistorialCitas({
     const timer = setTimeout(() => {
       cambiarBusqueda(busquedaLocal.trim());
     }, 280);
-
     return () => clearTimeout(timer);
   }, [busquedaLocal, cambiarBusqueda]);
 
@@ -216,231 +292,242 @@ export default function HistorialCitas({
   return (
     <main className="hc-container">
       <div className="hc-surface">
+        {/* ── Stats cards ─────────────────────────────────────── */}
+        <div className="hc-stats-grid">
+          <div className="hc-stat-card hc-stat-hoy">
+            <div className="hc-stat-icon"><i className="bx bx-calendar"></i></div>
+            <div className="hc-stat-body">
+              <span className="hc-stat-num">{stats.citas_hoy ?? 0}</span>
+              <span className="hc-stat-lbl">CITAS DE HOY</span>
+            </div>
+          </div>
 
-      {/* ── Stats cards ─────────────────────────────────────── */}
-      <div className="hc-stats-grid">
-        <div className="hc-stat-card hc-stat-hoy">
-          <div className="hc-stat-icon"><i className="bx bx-calendar"></i></div>
-          <div className="hc-stat-body">
-            <span className="hc-stat-num">{stats.citas_hoy ?? 0}</span>
-            <span className="hc-stat-lbl">CITAS DE HOY</span>
+          <div className="hc-stat-card hc-stat-asistencias">
+            <div className="hc-stat-icon"><i className="bx bx-check-circle"></i></div>
+            <div className="hc-stat-body">
+              <span className="hc-stat-num">{stats.asistencias ?? 0}</span>
+              <span className="hc-stat-lbl">ASISTENCIAS CONFIRMADAS</span>
+            </div>
+          </div>
+
+          <div className="hc-stat-card hc-stat-inasistencias">
+            <div className="hc-stat-icon"><i className="bx bx-x-circle"></i></div>
+            <div className="hc-stat-body">
+              <span className="hc-stat-num">{stats.inasistencias ?? 0}</span>
+              <span className="hc-stat-lbl">INASISTENCIAS</span>
+            </div>
+          </div>
+
+          <div className="hc-stat-card hc-stat-disponibles">
+            <div className="hc-stat-icon"><i className="bx bx-calendar-plus"></i></div>
+            <div className="hc-stat-body">
+              <span className="hc-stat-num">{stats.proximas_citas ?? 0}</span>
+              <span className="hc-stat-lbl">PRÓXIMAS CITAS</span>
+            </div>
           </div>
         </div>
 
-        <div className="hc-stat-card hc-stat-asistencias">
-          <div className="hc-stat-icon"><i className="bx bx-check-circle"></i></div>
-          <div className="hc-stat-body">
-            <span className="hc-stat-num">{stats.asistencias ?? 0}</span>
-            <span className="hc-stat-lbl">ASISTENCIAS CONFIRMADAS</span>
-          </div>
-        </div>
-
-        <div className="hc-stat-card hc-stat-inasistencias">
-          <div className="hc-stat-icon"><i className="bx bx-x-circle"></i></div>
-          <div className="hc-stat-body">
-            <span className="hc-stat-num">{stats.inasistencias ?? 0}</span>
-            <span className="hc-stat-lbl">INASISTENCIAS</span>
-          </div>
-        </div>
-
-        <div className="hc-stat-card hc-stat-disponibles">
-          <div className="hc-stat-icon"><i className="bx bx-calendar-plus"></i></div>
-          <div className="hc-stat-body">
-            <span className="hc-stat-num">{stats.proximas_citas ?? 0}</span>
-            <span className="hc-stat-lbl">PRÓXIMAS CITAS</span>
-          </div>
-        </div>
-      </div>
-
-      {/* ── Toolbar: búsqueda ─────────────────────────────────── */}
-      <div className="hc-toolbar">
-        <div className="hc-search">
-          <i className="bx bx-search"></i>
-          <input
-            type="text"
-            placeholder="Buscar por nombre, fecha..."
-            value={busquedaLocal}
-            onChange={e => setBusquedaLocal(e.target.value)}
-          />
-        </div>
-      </div>
-
-      <div className="hc-filter-panel">
-        <div className="hc-filter-title">
-          <i className="bx bx-filter-alt"></i>
-          <span>Filtrar por agenda</span>
-        </div>
-
-        <div className="hc-advanced-filters-row">
-          <div className="hc-advanced-filter-field">
-            <label htmlFor="estadoFiltro">Estado del proceso</label>
-            <select
-              id="estadoFiltro"
-              value={filtros.tab}
-              onChange={(e) => cambiarTab(e.target.value)}
-            >
-              {ESTADOS_FILTRO.map((estado) => (
-                <option key={estado.key} value={estado.key}>{estado.label}</option>
-              ))}
-            </select>
-          </div>
-
-          <div className="hc-date-chips">
-            {vistaFechaOptions.map((v) => (
-              <button
-                key={v.key}
-                type="button"
-                className={`hc-chip${filtros.fechaVista === v.key ? ' hc-chip-active' : ''}`}
-                onClick={() => cambiarVistaFecha(v.key)}
-              >
-                {v.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {filtros.fechaVista === 'fecha' && (
-          <div className="hc-date-picker-inline">
-            <label htmlFor="fechaObjetivo">Selecciona una fecha específica</label>
+        {/* ── Toolbar: búsqueda ─────────────────────────────────── */}
+        <div className="hc-toolbar">
+          <div className="hc-search">
+            <i className="bx bx-search"></i>
             <input
-              id="fechaObjetivo"
-              type="date"
-              value={filtros.fechaObjetivo || ''}
-              onChange={(e) => cambiarFechaObjetivo(e.target.value)}
+              type="text"
+              placeholder="Buscar por nombre, fecha..."
+              value={busquedaLocal}
+              onChange={e => setBusquedaLocal(e.target.value)}
             />
           </div>
-        )}
-      </div>
+        </div>
 
-      {/* ── Table ───────────────────────────────────────────── */}
-      <div className="hc-table-wrap">
-        {loading ? (
-          <div className="hc-loading">
-            <i className="bx bx-loader-alt bx-spin"></i> Cargando citas...
+        <div className="hc-filter-panel">
+          <div className="hc-filter-title">
+            <i className="bx bx-filter-alt"></i>
+            <span>Filtrar por agenda</span>
           </div>
-        ) : citas.length === 0 ? (
-          <div className="hc-empty">
-            <i className="bx bx-calendar-x"></i>
-            <p>No hay citas registradas</p>
+
+          <div className="hc-advanced-filters-row">
+            <div className="hc-advanced-filter-field">
+              <label htmlFor="estadoFiltro">Estado del proceso</label>
+              <select id="estadoFiltro" value={filtros.tab} onChange={(e) => cambiarTab(e.target.value)}>
+                {ESTADOS_FILTRO.map((estado) => (
+                  <option key={estado.key} value={estado.key}>{estado.label}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="hc-date-chips">
+              {vistaFechaOptions.map((v) => (
+                <button
+                  key={v.key}
+                  type="button"
+                  className={`hc-chip${filtros.fechaVista === v.key ? ' hc-chip-active' : ''}`}
+                  onClick={() => cambiarVistaFecha(v.key)}
+                >
+                  {v.label}
+                </button>
+              ))}
+            </div>
           </div>
-        ) : (
-          <table className="hc-table">
-            <thead>
-              <tr>
-                <th>Solicitante</th>
-                <th>Fecha programada</th>
-                <th>Hora</th>
-                <th>Estatus del proceso</th>
-                <th>Documentación</th>
-                <th>Bitácora</th>
-              </tr>
-            </thead>
-            <tbody>
-              {citas.map(cita => {
-                const est = ESTADOS_CONFIG[cita.estado] || ESTADOS_CONFIG.programada;
-                const isUpdating = updatingId === cita.id;
-                return (
-                  <tr key={cita.id}>
-                    <td>
-                      <span className="hc-nombre">{cita.nombre_completo}</span>
-                      {cita.puesto_nombre && (
-                        <span className="hc-subtxt">{cita.puesto_nombre}</span>
-                      )}
-                    </td>
-                    <td>
-                      <span className="hc-fecha-cell">
-                        <i className="bx bx-calendar"></i> {formatFecha(cita.fecha_cita_local || cita.fecha_cita)}
-                      </span>
-                    </td>
-                    <td>
-                      <span className="hc-hora-cell">
-                        <i className="bx bx-time-five"></i> {formatHora(cita.hora_cita_local)}
-                      </span>
-                    </td>
-                    <td>
-                      <span className={`hc-badge ${est.cls}`}>{est.label}</span>
-                    </td>
-                    <td>
-                      <AccionCita
-                        cita={cita}
-                        readOnly={readOnly}
-                        isUpdating={isUpdating}
-                        onAbrirReagenda={(modo) => {
-                          setModeReagenda(modo);
-                          setModalReagenda(cita);
-                        }}
-                        onContinuarProceso={() => setCitaProceso(cita)}
-                      />
-                    </td>
-                    <td>
-                      <button
-                        type="button"
-                        className="hc-btn hc-btn-bitacora"
-                        onClick={() => handleAbrirBitacora(cita)}
-                      >
-                        <i className="bx bx-history"></i> VER BITÁCORA
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+
+          {filtros.fechaVista === 'fecha' && (
+            <div className="hc-date-picker-inline">
+              <label htmlFor="fechaObjetivo">Selecciona una fecha específica</label>
+              <input
+                id="fechaObjetivo"
+                type="date"
+                value={filtros.fechaObjetivo || ''}
+                onChange={(e) => cambiarFechaObjetivo(e.target.value)}
+              />
+            </div>
+          )}
+        </div>
+
+        {/* ── Table ───────────────────────────────────────────── */}
+        <div className="hc-table-wrap">
+          {loading ? (
+            <div className="hc-loading"><i className="bx bx-loader-alt bx-spin"></i> Cargando citas...</div>
+          ) : citas.length === 0 ? (
+            <div className="hc-empty"><i className="bx bx-calendar-x"></i><p>No hay citas registradas</p></div>
+          ) : (
+            <table className="hc-table">
+              <thead>
+                <tr>
+                  <th>Solicitante</th>
+                  <th>Fecha programada</th>
+                  <th>Hora</th>
+                  <th>Estatus del proceso</th>
+                  <th>Documentación</th>
+                  <th>Bitácora</th>
+                </tr>
+              </thead>
+              <tbody>
+                {citas.map(cita => {
+                  const est = ESTADOS_CONFIG[cita.estado] || ESTADOS_CONFIG.programada;
+                  const isUpdating = updatingId === cita.id;
+                  return (
+                    <tr key={cita.id}>
+                      <td>
+                        <span className="hc-nombre">{cita.nombre_completo}</span>
+                        {cita.puesto_nombre && <span className="hc-subtxt">{cita.puesto_nombre}</span>}
+                      </td>
+                      <td>
+                        <span className="hc-fecha-cell">
+                          <i className="bx bx-calendar"></i> {formatFecha(cita.fecha_cita_local || cita.fecha_cita)}
+                        </span>
+                      </td>
+                      <td>
+                        <span className="hc-hora-cell">
+                          <i className="bx bx-time-five"></i> {formatHora(cita.hora_cita_local)}
+                        </span>
+                      </td>
+                      <td>
+                        <span className={`hc-badge ${est.cls}`}>{est.label}</span>
+                      </td>
+                      <td>
+                        <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                          <AccionCita
+                            cita={cita}
+                            readOnly={readOnly}
+                            isUpdating={isUpdating}
+                            onAbrirReagenda={(modo) => {
+                              setModeReagenda(modo);
+                              setModalReagenda(cita);
+                            }}
+                            onContinuarProceso={() => setCitaProceso(cita)}
+                          />
+                          {/* ── BOTÓN PRO: REENVIAR CORREO DIRECTO ── */}
+                          {!readOnly && !isUpdating && cita.estado !== 'cancelada' && (
+                            <button
+                              type="button"
+                              className="hc-btn hc-btn-gray"
+                              style={{ padding: '6px 10px' }}
+                              title={`Reenviar correo (Actual: ${cita.correo_destinatario || 'ninguno'})`}
+                              onClick={() => setModalReenviar(cita)}
+                            >
+                              <i className="bx bx-envelope" style={{ fontSize: '16px' }}></i>
+                            </button>
+                          )}
+                        </div>
+                      </td>
+                      <td>
+                        <button
+                          type="button"
+                          className="hc-btn hc-btn-bitacora"
+                          onClick={() => handleAbrirBitacora(cita)}
+                        >
+                          <i className="bx bx-history"></i> VER BITÁCORA
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          )}
+        </div>
+
+        {/* ── Paginación ──────────────────────────────────────── */}
+        {paginacion.totalPaginas > 1 && (
+          <Paginacion
+            pagina={filtros.pagina}
+            totalPaginas={paginacion.totalPaginas}
+            onCambiar={cambiarPagina}
+          />
         )}
-      </div>
 
-      {/* ── Paginación ──────────────────────────────────────── */}
-      {paginacion.totalPaginas > 1 && (
-        <Paginacion
-          pagina={filtros.pagina}
-          totalPaginas={paginacion.totalPaginas}
-          onCambiar={cambiarPagina}
-        />
-      )}
+        {modalReagenda && (
+          <ReprogramarCitaModal
+            cita={modalReagenda}
+            mode={modeReagenda}
+            onClose={() => setModalReagenda(null)}
+            onReprogramar={handleReprogramar}
+            onCancelarDefinitivo={handleCancelarDefinitivo}
+            loading={updatingId === modalReagenda.id}
+          />
+        )}
 
-      {modalReagenda && (
-        <ReprogramarCitaModal
-          cita={modalReagenda}
-          mode={modeReagenda}
-          onClose={() => setModalReagenda(null)}
-          onReprogramar={handleReprogramar}
-          onCancelarDefinitivo={handleCancelarDefinitivo}
-          loading={updatingId === modalReagenda.id}
-        />
-      )}
+        {/* ── MODAL REENVIAR RÁPIDO ── */}
+        {modalReenviar && (
+          <ReenviarCorreoModal
+            cita={modalReenviar}
+            onClose={() => setModalReenviar(null)}
+            onConfirm={handleReenviarCorreo}
+            loading={updatingId === modalReenviar.id}
+          />
+        )}
 
-      {bitacoraCita && (
-        <BitacoraCitaModal
-          cita={bitacoraCita}
-          eventos={bitacoraEventos}
-          onClose={() => {
-            setBitacoraCita(null);
-            setBitacoraEventos([]);
-          }}
-        />
-      )}
+        {bitacoraCita && (
+          <BitacoraCitaModal
+            cita={bitacoraCita}
+            eventos={bitacoraEventos}
+            onClose={() => {
+              setBitacoraCita(null);
+              setBitacoraEventos([]);
+            }}
+          />
+        )}
 
-      {citaProceso && (
-        <ContinuarProcesoCita
-          cita={citaProceso}
-          onClose={() => setCitaProceso(null)}
-          onFinalizar={handleFinalizarProceso}
-          onCancelarNoAsistio={handleCancelarPorInasistencia}
-          onAbrirReagenda={() => {
-            setModeReagenda('reagendar');
-            setModalReagenda(citaProceso);
-            setCitaProceso(null);
-          }}
-          loading={updatingId === citaProceso.id}
-        />
-      )}
+        {citaProceso && (
+          <ContinuarProcesoCita
+            cita={citaProceso}
+            onClose={() => setCitaProceso(null)}
+            onFinalizar={handleFinalizarProceso}
+            onCancelarNoAsistio={handleCancelarPorInasistencia}
+            onAbrirReagenda={() => {
+              setModeReagenda('reagendar');
+              setModalReagenda(citaProceso);
+              setCitaProceso(null);
+            }}
+            loading={updatingId === citaProceso.id}
+          />
+        )}
       </div>
     </main>
   );
 }
 
 /* ── Sub-components ───────────────────────────────────────────── */
-
 function AccionCita({ cita, readOnly, isUpdating, onAbrirReagenda, onContinuarProceso }) {
   const esMismoDia = Number(cita?.es_dia_cita) === 1;
 
@@ -486,20 +573,14 @@ function AccionCita({ cita, readOnly, isUpdating, onAbrirReagenda, onContinuarPr
 
     case 'cancelada':
       return (
-        <button
-          className="hc-btn hc-btn-reagendar"
-          onClick={() => onAbrirReagenda('reagendar')}
-        >
+        <button className="hc-btn hc-btn-reagendar" onClick={() => onAbrirReagenda('reagendar')}>
           <i className="bx bx-refresh"></i> REAGENDAR CITA
         </button>
       );
 
     case 'reprogramada':
       return (
-        <button
-          className="hc-btn hc-btn-guinda"
-          onClick={() => onAbrirReagenda('reagendar')}
-        >
+        <button className="hc-btn hc-btn-guinda" onClick={() => onAbrirReagenda('reagendar')}>
           <i className="bx bx-calendar-check"></i> CONFIRMAR NUEVA FECHA
         </button>
       );
@@ -530,35 +611,15 @@ function Paginacion({ pagina, totalPaginas, onCambiar }) {
 
   return (
     <div className="hc-pagination">
-      <button
-        className="hc-pag-btn"
-        disabled={pagina === 1}
-        onClick={() => onCambiar(pagina - 1)}
-      >
-        ← Anterior
-      </button>
-
+      <button className="hc-pag-btn" disabled={pagina === 1} onClick={() => onCambiar(pagina - 1)}>← Anterior</button>
       {pages.map((p, i) =>
         p === '...' ? (
           <span key={`dots-${i}`} className="hc-pag-dots">...</span>
         ) : (
-          <button
-            key={p}
-            className={`hc-pag-btn${p === pagina ? ' hc-pag-active' : ''}`}
-            onClick={() => onCambiar(p)}
-          >
-            {p}
-          </button>
+          <button key={p} className={`hc-pag-btn${p === pagina ? ' hc-pag-active' : ''}`} onClick={() => onCambiar(p)}>{p}</button>
         )
       )}
-
-      <button
-        className="hc-pag-btn"
-        disabled={pagina === totalPaginas}
-        onClick={() => onCambiar(pagina + 1)}
-      >
-        Siguiente →
-      </button>
+      <button className="hc-pag-btn" disabled={pagina === totalPaginas} onClick={() => onCambiar(pagina + 1)}>Siguiente →</button>
     </div>
   );
 }

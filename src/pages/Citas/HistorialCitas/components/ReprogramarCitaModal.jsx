@@ -33,6 +33,8 @@ export default function ReprogramarCitaModal({
   const [fecha, setFecha] = useState(fechaInicial);
   const [hora, setHora] = useState(horaInicial || '09:00');
   const [justificacion, setJustificacion] = useState('');
+  // ── NUEVO ESTADO PARA EL CORREO ──
+  const [correo, setCorreo] = useState(cita?.correo_destinatario || '');
   const [error, setError] = useState('');
 
   const title = mode === 'cancelar' ? 'Cancelar / Reagendar cita' : 'Reagendar cita';
@@ -58,9 +60,16 @@ export default function ReprogramarCitaModal({
       return;
     }
 
+    if (correo && !correo.includes('@')) {
+      setError('Por favor ingresa un correo electrónico válido');
+      return;
+    }
+
     onReprogramar({
       fecha_cita: `${fecha}T${hora}:00`,
-      justificacion: justificacion.trim()
+      justificacion: justificacion.trim(),
+      // ── ENVIAMOS EL CORREO SI LO MODIFICARON ──
+      nuevo_correo: correo.trim()
     });
   };
 
@@ -99,20 +108,32 @@ export default function ReprogramarCitaModal({
             </div>
           </div>
 
+          {/* ── NUEVO CAMPO DE CORREO ── */}
+          <div className="hc-field">
+            <label>Correo de notificación (opcional)</label>
+            <input 
+              type="email" 
+              value={correo} 
+              onChange={(e) => setCorreo(e.target.value)} 
+              placeholder="anótalo aquí si necesitas corregirlo..." 
+            />
+            <small>Si cambió o rebotó el anterior, ingresa el correo correcto aquí para reenviar el acuse.</small>
+          </div>
+
           <div className="hc-field">
             <label>Justificación del cambio *</label>
             <textarea
               rows={3}
               value={justificacion}
               onChange={(e) => setJustificacion(e.target.value)}
-              placeholder="Ejemplo: Se reagenda por incidencia de asistencia"
+              placeholder="Ejemplo: Se reagenda por incidencia de asistencia o error en correo"
             />
             <small>Mínimo 10 caracteres</small>
           </div>
 
           <div className="hc-preview-mini">
             <strong>Vista previa de nueva programación</strong>
-            <p>Fecha: {fecha || '—'} · Hora: {hora || '—'}</p>
+            <p>Fecha: {fecha || '—'} · Hora: {hora || '—'} {correo ? `· Correo: ${correo}` : ''}</p>
           </div>
 
           {error && <p className="hc-form-error">{error}</p>}
