@@ -9,6 +9,7 @@ import {
 const PAGINACION_DEFAULT = { total: 0, totalPaginas: 1, pagina: 1, limit: 10 };
 const LOCAL_PERSONAS_GLOBAL_KEY = '__global__';
 const EXPORT_PAGE_LIMIT = 100;
+const STORAGE_KEY = 'consulta_personas_recientes';
 const esRegistroLocal = (id) => String(id || '').startsWith('local-');
 
 const normalizarTexto = (value = '') =>
@@ -142,7 +143,17 @@ export const useConsultaFinalizados = () => {
   const [paginacionPersonas, setPaginacionPersonas] = useState(PAGINACION_DEFAULT);
   const [loadingPersonas, setLoadingPersonas] = useState(false);
   const [exportingExcel, setExportingExcel] = useState(false);
-  const [personasLocalesByMunicipio, setPersonasLocalesByMunicipio] = useState({});
+
+
+const [personasLocalesByMunicipio, setPersonasLocalesByMunicipio] = useState(() => {
+  try {
+    const guardadas = localStorage.getItem(STORAGE_KEY);
+    return guardadas ? JSON.parse(guardadas) : {};
+  } catch (error) {
+    console.error('No se pudieron recuperar las personas recientes:', error);
+    return {};
+  }
+});
 
   const [selectedRows, setSelectedRows] = useState([]);
   const municipioActivoId = municipioActivo?.municipio_id;
@@ -303,6 +314,18 @@ export const useConsultaFinalizados = () => {
   useEffect(() => {
     cargarPersonasMunicipio();
   }, [cargarPersonasMunicipio]);
+  useEffect(() => {
+  try {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(personasLocalesByMunicipio)
+    );
+  } catch (error) {
+    console.error('No se pudieron guardar las personas recientes:', error);
+  }
+}, [personasLocalesByMunicipio]);
+
+  
 
   useEffect(() => {
     setSelectedRows([]);
@@ -359,17 +382,18 @@ export const useConsultaFinalizados = () => {
       numero_oficio_c3: numeroOficio || null,
       es_local: true
     };
+setPersonasLocalesByMunicipio((prev) => {
+  const actuales = prev[municipioKey] || [];
 
-    setPersonasLocalesByMunicipio((prev) => {
-      const actuales = prev[municipioKey] || [];
-      return {
-        ...prev,
-        [municipioKey]: [registroLocal, ...actuales]
-      };
-    });
+  return {
+    ...prev,
+    [municipioKey]: [registroLocal, ...actuales]
+  };
+});
 
-    showNotification('Persona agregada correctamente a la tabla', 'success');
-    return true;
+showNotification('Persona agregada correctamente a la tabla', 'success');
+return true;
+
   }, [municipioActivo, showNotification]);
 
   const editarPersonaLocal = useCallback((finalizadoId, persona) => {
