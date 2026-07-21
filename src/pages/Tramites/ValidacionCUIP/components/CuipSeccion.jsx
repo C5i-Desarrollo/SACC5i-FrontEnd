@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import '../styles/CuipSeccion.css';
+
 /**
  * CuipSeccion — Sección colapsable del checklist CUIP
  * Muestra una sección con sus campos y controles de validación
@@ -15,6 +16,7 @@ export default function CuipSeccion({
   esExcepcion,
   camposValidados,
   totalCampos,
+  esCampoOpcional,
   disabled
 }) {
   const handleCampoClick = useCallback((campoNum, validado) => {
@@ -32,7 +34,6 @@ export default function CuipSeccion({
 
   return (
     <div className={`cuip-seccion ${statusClass} ${abierta ? 'abierta' : ''}`}>
-      {/* Header */}
       <div className="cuip-seccion-header" onClick={onToggle}>
         <div className="cuip-sec-left">
           <i className={`bx ${abierta ? 'bx-chevron-down' : 'bx-chevron-right'} cuip-sec-chevron`}></i>
@@ -41,16 +42,17 @@ export default function CuipSeccion({
             <span className="cuip-sec-excepcion-badge">NINGUNO</span>
           )}
         </div>
+
         <div className="cuip-sec-right">
           <span className="cuip-sec-progreso">{camposValidados}/{totalCampos}</span>
-          <span className={`cuip-sec-status ${esCompleta ? 'validado' : 'pendiente'}`}>{statusLabel}</span>
+          <span className={`cuip-sec-status ${esCompleta ? 'validado' : 'pendiente'}`}>
+            {statusLabel}
+          </span>
         </div>
       </div>
 
-      {/* Body */}
       {abierta && (
         <div className="cuip-seccion-body">
-          {/* Toolbar sección */}
           <div className="cuip-sec-toolbar">
             {seccion.tiene_excepcion && (
               <label className="cuip-sec-excepcion">
@@ -63,6 +65,7 @@ export default function CuipSeccion({
                 <span>NINGUNO / NINGUNA</span>
               </label>
             )}
+
             <button
               className={`cuip-sec-btn-validar ${esCompleta && totalCampos > 0 ? 'deseleccionar' : ''}`}
               onClick={() => onValidarSeccion(seccion.clave)}
@@ -75,35 +78,66 @@ export default function CuipSeccion({
             </button>
           </div>
 
-          {/* Campos */}
           <div className="cuip-campos-grid">
-            {seccion.campos.map(campo => (
-              <div
-                key={campo.num}
-                className={`cuip-campo ${campo.validado === true ? 'validado' : campo.validado === false ? 'rechazado' : 'sin-revisar'}`}
-              >
-                <span className="cuip-campo-num">({campo.num})</span>
-                <span className="cuip-campo-nombre">{campo.nombre}</span>
-                <div className="cuip-campo-acciones">
-                  <button
-                    className={`cuip-campo-btn validar ${campo.validado === true ? 'activo' : ''}`}
-                    onClick={() => handleCampoClick(campo.num, campo.validado === true ? null : true)}
-                    disabled={disabled}
-                    title={campo.validado === true ? 'Quitar validación' : 'Validar'}
-                  >
-                    <i className='bx bx-check'></i>
-                  </button>
-                  <button
-                    className={`cuip-campo-btn rechazar ${campo.validado === false ? 'activo' : ''}`}
-                    onClick={() => handleCampoClick(campo.num, campo.validado === false ? null : false)}
-                    disabled={disabled}
-                    title={campo.validado === false ? 'Quitar rechazo' : 'Rechazar'}
-                  >
-                    <i className='bx bx-x'></i>
-                  </button>
+            {seccion.campos.map((campo) => {
+              const campoOpcional = esCampoOpcional?.(seccion, campo) || false;
+              const campoNoAplica = campoOpcional && campo.validado !== true && campo.validado !== false;
+
+              return (
+                <div
+                  key={campo.num}
+                  className={`cuip-campo ${
+                    campo.validado === true
+                      ? 'validado'
+                      : campo.validado === false
+                        ? 'rechazado'
+                        : campoNoAplica
+                          ? 'opcional'
+                          : 'sin-revisar'
+                  }`}
+                >
+                  <span className="cuip-campo-num">({campo.num})</span>
+
+                  <span className="cuip-campo-nombre">
+                    {campo.nombre}
+                    {campoOpcional && (
+                      <small className="cuip-campo-opcional-label">Opcional</small>
+                    )}
+                  </span>
+
+                  <div className="cuip-campo-acciones">
+                    <button
+                      className={`cuip-campo-btn validar ${campo.validado === true ? 'activo' : ''}`}
+                      onClick={() => handleCampoClick(campo.num, campo.validado === true ? null : true)}
+                      disabled={disabled}
+                      title={campo.validado === true ? 'Quitar validación' : 'Validar'}
+                    >
+                      <i className='bx bx-check'></i>
+                    </button>
+
+                    {campoOpcional && (
+                      <button
+                        className={`cuip-campo-btn opcional ${campoNoAplica ? 'activo' : ''}`}
+                        onClick={() => handleCampoClick(campo.num, null)}
+                        disabled={disabled}
+                        title="Marcar como opcional / no aplica"
+                      >
+                        <i className='bx bx-minus'></i>
+                      </button>
+                    )}
+
+                    <button
+                      className={`cuip-campo-btn rechazar ${campo.validado === false ? 'activo' : ''}`}
+                      onClick={() => handleCampoClick(campo.num, campo.validado === false ? null : false)}
+                      disabled={disabled}
+                      title={campo.validado === false ? 'Quitar rechazo' : 'Rechazar'}
+                    >
+                      <i className='bx bx-x'></i>
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}

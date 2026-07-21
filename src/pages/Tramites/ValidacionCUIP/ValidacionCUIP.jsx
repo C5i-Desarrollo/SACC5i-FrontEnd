@@ -18,6 +18,33 @@ const normalizarBusqueda = (value = '') =>
     .replace(/[\u0300-\u036f]/g, '')
     .trim();
 
+const esSeccionEncabezadoRegistro = (seccion = {}) => {
+  const clave = normalizarBusqueda(seccion?.clave || '');
+  const nombre = normalizarBusqueda(seccion?.nombre || '');
+
+  return (
+    clave.includes('encabezado') ||
+    clave.includes('registro') ||
+    nombre.includes('encabezado') ||
+    nombre.includes('registro')
+  );
+};
+
+const esCampoCuipOpcional = (seccion = {}, campo = {}) => {
+  const campoNum = Number(campo?.num);
+  const campoNombre = normalizarBusqueda(campo?.nombre || '');
+
+  return (
+    esSeccionEncabezadoRegistro(seccion) &&
+    (
+      campoNum === 3 ||
+      campoNum === 4 ||
+      campoNombre === 'cuip' ||
+      campoNombre.includes('folio')
+    )
+  );
+};
+
 const calcularResumenCuip = (cuipValidacion = []) => {
   let total = 0;
   let validados = 0;
@@ -25,7 +52,15 @@ const calcularResumenCuip = (cuipValidacion = []) => {
 
   cuipValidacion.forEach((seccion) => {
     (seccion?.campos || []).forEach((campo) => {
+      const campoOpcional = esCampoCuipOpcional(seccion, campo);
+
+      // CUIP y Folio opcionales no cuentan como pendientes si están vacíos
+      if (campoOpcional && campo.validado !== true && campo.validado !== false) {
+        return;
+      }
+
       total++;
+
       if (campo.validado === true) validados++;
       else if (campo.validado === false) rechazados++;
     });
@@ -129,23 +164,23 @@ export default function ValidacionCUIP({ setPageTitle }) {
 
   // ── Establecer el título dinámico en el Navbar ──
   // ValidacionCUIP.jsx
-useEffect(() => {
-  if (setPageTitle) {
-    // Quitamos el !personaActual para que el título sea permanente en esta sección
-    setPageTitle({
-      titulo: "Validación CUIP",
-      subtitulo: personaActual 
-        ? `Validando a: ${personaActual.nombre} ${personaActual.primer_apellido}` 
-        : "Cédula Única de Identificación Personal",
-      icon: <MdVerifiedUser className="nav-icon-highlight" />
-    });
-  }
+  useEffect(() => {
+    if (setPageTitle) {
+      // Quitamos el !personaActual para que el título sea permanente en esta sección
+      setPageTitle({
+        titulo: "Validación CUIP",
+        subtitulo: personaActual
+          ? `Validando a: ${personaActual.nombre} ${personaActual.primer_apellido}`
+          : "Cédula Única de Identificación Personal",
+        icon: <MdVerifiedUser className="nav-icon-highlight" />
+      });
+    }
 
-  // IMPORTANTE: Limpiar solo cuando el componente se desmonte (al salir de la sección)
-  return () => {
-    if (setPageTitle) setPageTitle(null);
-  };
-}, [setPageTitle, personaActual]); // Agregamos personaActual para que el subtítulo cambie dinámicamente
+    // IMPORTANTE: Limpiar solo cuando el componente se desmonte (al salir de la sección)
+    return () => {
+      if (setPageTitle) setPageTitle(null);
+    };
+  }, [setPageTitle, personaActual]); // Agregamos personaActual para que el subtítulo cambie dinámicamente
 
   // Cargar persona desde sessionStorage o lista de pendientes
   useEffect(() => {
@@ -711,28 +746,28 @@ useEffect(() => {
               </button>
 
               {!faseCuipCompletada && (
-              <button
-                type="button"
-                className="cuip-acciones-item aprobar"
-                onClick={abrirAccionAprobar}
-                disabled={submitting || !puedeAprobarCuip}
-                title={!puedeAprobarCuip ? 'Debe validar todos los campos y no tener requisitos rechazados para aprobar' : 'Aprobar y generar cita'}
-              >
-                <i className='bx bx-calendar-plus'></i>
-                Aprobar y generar cita
-              </button>
+                <button
+                  type="button"
+                  className="cuip-acciones-item aprobar"
+                  onClick={abrirAccionAprobar}
+                  disabled={submitting || !puedeAprobarCuip}
+                  title={!puedeAprobarCuip ? 'Debe validar todos los campos y no tener requisitos rechazados para aprobar' : 'Aprobar y generar cita'}
+                >
+                  <i className='bx bx-calendar-plus'></i>
+                  Aprobar y generar cita
+                </button>
               )}
 
               {!faseCuipCompletada && (
-              <button
-                type="button"
-                className="cuip-acciones-item rechazar"
-                onClick={abrirAccionRechazar}
-                disabled={submitting}
-              >
-                <i className='bx bx-x-circle'></i>
-                Rechazar solicitud
-              </button>
+                <button
+                  type="button"
+                  className="cuip-acciones-item rechazar"
+                  onClick={abrirAccionRechazar}
+                  disabled={submitting}
+                >
+                  <i className='bx bx-x-circle'></i>
+                  Rechazar solicitud
+                </button>
               )}
             </div>
           )}
@@ -812,9 +847,16 @@ useEffect(() => {
 
       <div className="cuip-secciones">
         {seccionesPagina.map(seccion => {
-          const camposValidados = seccion.campos.filter(c => c.validado === true).length;
-          const totalCampos = seccion.campos.length;
-          const esCompleta = camposValidados === totalCampos;
+          const camposContables = seccion.campos.filter((campo) => {
+            const campoOpcional = esCampoCuipOpcional(seccion, campo);
+
+            // Si es CUIP/Folio opcional y no está marcado, no cuenta como pendiente
+            return !(campoOpcional && campo.validado !== true && campo.validado !== false);
+          });
+
+          const camposValidados = camposContables.filter(c => c.validado === true).length;
+          const totalCampos = camposContables.length;
+          const esCompleta = totalCampos > 0 && camposValidados === totalCampos;
           const esExcepcion = excepciones.includes(seccion.clave);
           const seccionEsCoincidencia = seccionEncontradaClave === seccion.clave;
 
@@ -842,6 +884,7 @@ useEffect(() => {
                 esExcepcion={esExcepcion}
                 camposValidados={camposValidados}
                 totalCampos={totalCampos}
+                esCampoOpcional={esCampoCuipOpcional}
                 disabled={submitting}
               />
             </div>
