@@ -245,3 +245,27 @@
   opacity: 0.4;
   cursor: not-allowed;
 }
+
+.cuip-campo-btn.opcional {
+  color: #8a6d3b;
+}
+
+.cuip-campo-btn.opcional.activo {
+  background: #fff3cd;
+  border-color: #d6b656;
+  color: #8a6d3b;
+}
+
+.cuip-campo.opcional {
+  background: #fffdf4;
+}
+
+.cuip-campo-opcional-label {
+  margin-left: 8px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: #fff3cd;
+  color: #8a6d3b;
+  font-size: 11px;
+  font-weight: 700;
+}
