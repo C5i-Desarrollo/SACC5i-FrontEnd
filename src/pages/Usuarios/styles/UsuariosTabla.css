@@ -521,3 +521,285 @@
   justify-content: center !important;
   gap: 6px !important;
 }
+
+/* ==========================================
+   DARK MODE - USUARIOS LISTA / TARJETAS
+   ========================================== */
+
+/* Secciones */
+
+body.dark .usuarios-lista {
+  color: var(--text-primary);
+}
+
+body.dark .usuarios-seccion {
+  background: linear-gradient(180deg, var(--surface) 0%, var(--surface-card) 100%);
+  border-color: var(--border);
+  box-shadow: 0 10px 24px var(--shadow-dark);
+}
+
+body.dark .seccion-header {
+  border-bottom-color: var(--border-soft);
+}
+
+body.dark .seccion-titulo {
+  color: #f0a0bd;
+}
+
+body.dark .seccion-total {
+  background: var(--surface-soft);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .seccion-region.requerida {
+  background: #15281f;
+  color: #7dd3a6;
+  border-color: #285a40;
+}
+
+body.dark .seccion-region.informativa {
+  background: #182235;
+  color: #8fb8ff;
+  border-color: #304869;
+}
+
+
+/* Tarjetas */
+
+body.dark .usuario-card {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+body.dark .usuario-card:hover {
+  border-color: var(--wine-hover);
+  box-shadow: 0 10px 24px var(--shadow-dark);
+}
+
+body.dark .usuario-card.card-inactivo {
+  background: var(--surface);
+  opacity: 0.72;
+}
+
+body.dark .card-id {
+  color: #f0a0bd;
+}
+
+body.dark .info-nombre {
+  color: var(--text-primary);
+}
+
+body.dark .info-usuario {
+  background: var(--surface-soft);
+  color: #f0a0bd;
+  border-color: var(--border);
+}
+
+body.dark .detalle {
+  color: var(--text-secondary);
+}
+
+body.dark .detalle svg {
+  color: #cdbd81;
+}
+
+body.dark .card-rol {
+  color: var(--text-secondary);
+}
+
+body.dark .card-rol svg {
+  color: #cdbd81;
+}
+
+body.dark .card-acciones {
+  border-top-color: var(--border-soft);
+}
+
+
+/* Badges de estado */
+
+body.dark .estado-badge.activo,
+body.dark .online-badge.online {
+  background: #15281f;
+  color: #7dd3a6;
+  border-color: #285a40;
+}
+
+body.dark .estado-badge.inactivo {
+  background: #30191d;
+  color: #f29b9b;
+  border-color: #653039;
+}
+
+body.dark .online-badge.offline {
+  background: var(--surface-soft);
+  color: var(--text-muted);
+  border-color: var(--border);
+}
+
+
+/* Región */
+
+body.dark .region-status.ok {
+  background: #15281f;
+  border-color: #285a40;
+  color: #7dd3a6;
+}
+
+body.dark .region-status.pendiente {
+  background: #29231c;
+  border-color: #806f43;
+  color: #cdbd81;
+}
+
+body.dark .region-status.no-aplica {
+  background: var(--surface-soft);
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+
+
+/* Roles */
+
+body.dark .rol-badge.rol-super_admin {
+  background: linear-gradient(135deg, #a32958, #751638);
+}
+
+body.dark .rol-badge.rol-admin {
+  background: linear-gradient(135deg, #806f43, #5c4d2b);
+}
+
+body.dark .rol-badge.rol-direccion {
+  background: linear-gradient(135deg, #1f6377, #174657);
+}
+
+body.dark .rol-badge.rol-analista {
+  background: linear-gradient(135deg, #3167c7, #244c96);
+}
+
+body.dark .rol-badge.rol-validador_c3 {
+  background: linear-gradient(135deg, #22a447, #176f32);
+}
+
+body.dark .rol-badge.rol-dependencia {
+  background: linear-gradient(135deg, #665860, #493840);
+}
+
+body.dark .rol-badge.rol-operador_ccp {
+  background: linear-gradient(135deg, #0f766e, #164e63);
+}
+
+
+/* Botones generales */
+
+body.dark .btn-accion {
+  border-color: var(--border);
+}
+
+body.dark .btn-editar {
+  background: #29231c;
+  color: #cdbd81;
+  border: 1.5px solid #806f43;
+  box-shadow: none;
+}
+
+body.dark .btn-editar:hover {
+  background: #352c21;
+  border-color: #9c8750;
+}
+
+body.dark .btn-eliminar {
+  background: #30191d;
+  color: #f29b9b;
+  border-color: #653039;
+  box-shadow: none;
+}
+
+body.dark .btn-eliminar:hover {
+  background: #4a2027;
+  border-color: #ef6464;
+  color: #ffc3c3;
+}
+
+body.dark .btn-activar {
+  background: #15281f;
+  color: #7dd3a6;
+  border: 1.5px solid #285a40;
+  box-shadow: none;
+}
+
+body.dark .btn-activar:hover {
+  background: #1f4731;
+  border-color: #3bc263;
+}
+
+
+/* Estos llevan !important porque tu CSS base también los tiene con !important */
+
+body.dark .btn-temporal {
+  color: #8fb8ff !important;
+  background: #182235 !important;
+  border: 1.5px solid #304869 !important;
+}
+
+body.dark .btn-temporal:hover {
+  background: #21385c !important;
+  border-color: #4c8dff !important;
+}
+
+body.dark .btn-desactivar {
+  color: #f29b9b !important;
+  background: #30191d !important;
+  border: 1.5px solid #653039 !important;
+}
+
+body.dark .btn-desactivar:hover {
+  background: #4a2027 !important;
+  border-color: #ef6464 !important;
+}
+
+body.dark .btn-reset {
+  color: #f0a0bd !important;
+  background: var(--surface-soft) !important;
+  border: 1.5px solid var(--border) !important;
+}
+
+body.dark .btn-reset:hover {
+  background: var(--wine-soft) !important;
+  border-color: var(--wine-hover) !important;
+}
+
+body.dark .btn-purge-records {
+  background: #29231c;
+  color: #cdbd81;
+  border-color: #806f43;
+}
+
+body.dark .btn-purge-records:hover {
+  background: #352c21;
+  border-color: #9c8750;
+}
+
+
+/* Estado vacío / carga */
+
+body.dark .lista-estado {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+
+body.dark .lista-estado .spinner {
+  border-color: var(--border);
+  border-top-color: var(--wine-hover);
+}
+
+body.dark .lista-estado svg {
+  color: #cdbd81;
+}
+
+body.dark .estado-titulo {
+  color: var(--text-primary);
+}

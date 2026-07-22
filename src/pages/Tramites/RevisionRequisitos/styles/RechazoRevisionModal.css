@@ -155,3 +155,126 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+/* ============================================
+   DARK MODE - RECHAZO REVISION MODAL
+   ============================================ */
+
+body.dark .rechazo-modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  box-shadow: 0 20px 60px var(--shadow-dark);
+}
+
+body.dark .rechazo-modal-close {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .rechazo-modal-close:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+}
+
+body.dark .rechazo-modal-close i {
+  color: var(--text-secondary);
+}
+
+body.dark .rechazo-modal-close:hover i {
+  color: var(--text-primary);
+}
+
+
+/* Ícono principal */
+
+body.dark .rechazo-modal-icono {
+  background: var(--wine-soft);
+  border: 1px solid var(--wine-hover);
+}
+
+body.dark .rechazo-modal-icono i {
+  color: #f0a0bd;
+}
+
+
+/* Textos */
+
+body.dark .rechazo-modal-titulo {
+  color: var(--text-primary);
+}
+
+body.dark .rechazo-modal-descripcion {
+  color: var(--text-secondary);
+}
+
+
+/* Caja de motivos */
+
+body.dark .rechazo-modal-motivos {
+  background: #30191d;
+  border-color: #653039;
+}
+
+body.dark .rechazo-modal-motivos-header {
+  color: #f29b9b;
+}
+
+body.dark .rechazo-modal-motivos-header i {
+  color: #ef6464;
+}
+
+body.dark .rechazo-modal-motivos-lista li {
+  color: var(--text-secondary);
+}
+
+body.dark .rechazo-modal-motivos-lista li strong {
+  color: #f29b9b;
+}
+
+
+/* Textarea */
+
+body.dark .rechazo-modal-textarea {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+body.dark .rechazo-modal-textarea::placeholder {
+  color: var(--text-muted);
+}
+
+body.dark .rechazo-modal-textarea:focus {
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .rechazo-modal-textarea:disabled {
+  background: var(--surface-soft);
+  color: var(--text-muted);
+  border-color: var(--border);
+}
+
+
+/* Botón */
+
+body.dark .rechazo-modal-btn {
+  background: var(--surface-card);
+  color: var(--text-secondary);
+  border-color: var(--border);
+}
+
+body.dark .rechazo-modal-btn:hover:not(:disabled) {
+  background: var(--wine);
+  border-color: var(--wine-hover);
+  color: #ffffff;
+}
+
+body.dark .rechazo-modal-btn:disabled {
+  background: var(--surface-soft);
+  color: var(--text-muted);
+  border-color: var(--border);
+  opacity: 0.55;
+}

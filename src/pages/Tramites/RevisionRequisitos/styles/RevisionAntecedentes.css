@@ -371,3 +371,271 @@
     margin-left: 0;
   }
 }
+
+/* ============================================
+   DARK MODE - REVISION ANTECEDENTES
+   ============================================ */
+
+/* Contenedor */
+
+body.dark .rev-antecedentes {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  box-shadow: 0 10px 24px var(--shadow-dark);
+}
+
+
+/* Header */
+
+body.dark .rev-antecedentes-header {
+  background: linear-gradient(135deg, #751638 0%, #4a0f25 100%);
+  color: #ffffff;
+  border-bottom: 1px solid #806f43;
+}
+
+body.dark .rev-antecedentes-header h3,
+body.dark .rev-antecedentes-header i {
+  color: #ffffff;
+}
+
+
+/* Cards de consulta */
+
+body.dark .rev-consulta-card {
+  background: var(--surface-card);
+  border-color: var(--border);
+}
+
+body.dark .rev-consulta-card.rev-resultado-ok {
+  border-color: #285a40;
+}
+
+body.dark .rev-consulta-card.rev-resultado-alerta {
+  border-color: #806f43;
+}
+
+body.dark .rev-consulta-icon {
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+}
+
+body.dark .rev-consulta-icon i {
+  color: var(--text-secondary);
+}
+
+body.dark .rev-consulta-info h4 {
+  color: var(--text-primary);
+}
+
+body.dark .rev-consulta-info p {
+  color: var(--text-muted);
+}
+
+
+/* Toggle */
+
+body.dark .rev-toggle-slider {
+  background-color: var(--surface-soft);
+  border: 1px solid var(--border);
+}
+
+body.dark .rev-toggle-slider::before {
+  background-color: var(--text-secondary);
+}
+
+body.dark .rev-toggle input:checked + .rev-toggle-slider {
+  background-color: #1f4731;
+  border-color: #3bc263;
+}
+
+body.dark .rev-toggle input:checked + .rev-toggle-slider::before {
+  background-color: #7dd3a6;
+}
+
+
+/* Resultado badges */
+
+body.dark .rev-consulta-resultado.rev-resultado-ok {
+  background: #15281f;
+  color: #7dd3a6;
+  border: 1px solid #285a40;
+}
+
+body.dark .rev-consulta-resultado.rev-resultado-alerta {
+  background: #29231c;
+  color: #cdbd81;
+  border: 1px solid #806f43;
+}
+
+body.dark .rev-consulta-resultado.rev-resultado-pendiente {
+  background: var(--surface-soft);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+
+/* Justificación previa */
+
+body.dark .rev-justificacion-previa {
+  background: #29231c;
+  border-left-color: #806f43;
+  border-top: 1px solid #806f43;
+  border-right: 1px solid #806f43;
+  border-bottom: 1px solid #806f43;
+}
+
+body.dark .rev-justificacion-previa i {
+  color: #cdbd81;
+}
+
+body.dark .rev-justificacion-previa strong {
+  color: var(--text-primary);
+}
+
+body.dark .rev-justificacion-previa p {
+  color: var(--text-secondary);
+}
+
+
+/* Botón guardar antecedentes */
+
+body.dark .rev-btn-guardar-antecedentes {
+  background: var(--wine);
+  color: #ffffff;
+}
+
+body.dark .rev-btn-guardar-antecedentes:hover:not(:disabled) {
+  background: var(--wine-hover);
+  box-shadow: 0 4px 10px rgba(163, 41, 88, 0.28);
+}
+
+body.dark .rev-btn-guardar-antecedentes:disabled {
+  background: var(--surface-soft);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  opacity: 0.6;
+}
+
+
+/* Acciones */
+
+body.dark .rev-acciones {
+  background: var(--surface);
+}
+
+body.dark .rev-btn-rechazar {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .rev-btn-rechazar:hover {
+  background: #30191d;
+  border-color: #653039;
+  color: #f29b9b;
+}
+
+body.dark .rev-btn-siguiente {
+  background: var(--wine);
+  color: #ffffff;
+}
+
+body.dark .rev-btn-siguiente:hover:not(:disabled) {
+  background: var(--wine-hover);
+  box-shadow: 0 4px 10px rgba(163, 41, 88, 0.28);
+}
+
+body.dark .rev-btn-siguiente:disabled {
+  background: var(--surface-soft);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  opacity: 0.6;
+}
+
+
+/* Sugerencia de rechazo */
+
+body.dark .rev-sugerencia-rechazo {
+  background: #30191d;
+  border-color: #653039;
+  color: #f29b9b;
+}
+
+body.dark .rev-sugerencia-rechazo i {
+  color: #ef6464;
+}
+
+body.dark .rev-sugerencia-rechazo-lista {
+  color: #ffc3c3;
+}
+
+
+/* Rechazo inline */
+
+body.dark .rev-rechazo-form textarea {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+body.dark .rev-rechazo-form textarea::placeholder {
+  color: var(--text-muted);
+}
+
+body.dark .rev-rechazo-form textarea:focus {
+  outline: none;
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .rev-btn-cancelar {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .rev-btn-cancelar:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+body.dark .rev-btn-confirmar-rechazo {
+  background: #30191d;
+  color: #f29b9b;
+  border: 1px solid #653039;
+}
+
+body.dark .rev-btn-confirmar-rechazo:hover:not(:disabled) {
+  background: #4a2027;
+  border-color: #ef6464;
+  color: #ffc3c3;
+}
+
+body.dark .rev-btn-confirmar-rechazo:disabled {
+  background: var(--surface-soft);
+  color: var(--text-muted);
+  border-color: var(--border);
+  opacity: 0.55;
+}
+
+
+/* Nota CUIP */
+
+body.dark .rev-nota-cuip {
+  background: #29231c;
+  border-color: #806f43;
+}
+
+body.dark .rev-nota-cuip i {
+  color: #cdbd81;
+}
+
+body.dark .rev-nota-cuip div {
+  color: var(--text-secondary);
+}
+
+body.dark .rev-nota-cuip strong {
+  color: #cdbd81;
+}

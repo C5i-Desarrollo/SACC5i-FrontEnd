@@ -236,3 +236,143 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================
+   DARK MODE - REVISION REQUISITOS
+   ============================================ */
+
+/* Contenedor principal */
+
+body.dark .revision-main {
+  background: var(--grey);
+  color: var(--text-primary);
+}
+
+
+/* Header card */
+
+body.dark .rev-header-card {
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: 0 10px 24px var(--shadow-dark);
+}
+
+body.dark .rev-header-top {
+  background: linear-gradient(135deg, #751638 0%, #4a0f25 100%);
+  border-bottom-color: #806f43;
+}
+
+
+/* Empty / Loading */
+
+body.dark .revision-empty {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+body.dark .revision-empty i {
+  color: var(--text-muted);
+}
+
+body.dark .revision-empty h2 {
+  color: var(--text-primary);
+}
+
+body.dark .revision-empty p {
+  color: var(--text-secondary);
+}
+
+body.dark .revision-loading {
+  color: var(--text-secondary);
+}
+
+body.dark .revision-loading i {
+  color: #d16b92;
+}
+
+
+/* Header bar */
+
+body.dark .revision-header-bar {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 20px var(--shadow-dark);
+}
+
+body.dark .rev-persona-nombre {
+  color: var(--text-primary);
+}
+
+
+/* Botón volver */
+
+body.dark .rev-btn-volver {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.24);
+  color: #ffffff;
+}
+
+body.dark .rev-btn-volver:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.38);
+  color: #ffffff;
+}
+
+
+/* Chip */
+
+body.dark .rev-persona-chip {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+}
+
+body.dark .rev-persona-chip i {
+  color: #cdbd81;
+}
+
+
+/* Credencial */
+
+body.dark .rev-persona-credencial {
+  background: var(--surface-card);
+  border-color: var(--border);
+}
+
+body.dark .rev-persona-avatar {
+  background: var(--surface-soft);
+  border-color: var(--border);
+  color: #f0a0bd;
+}
+
+body.dark .rev-persona-identidad h2 {
+  color: var(--text-primary);
+}
+
+body.dark .rev-persona-identidad p {
+  color: var(--text-secondary);
+}
+
+
+/* Datos de persona */
+
+body.dark .rev-persona-dato-item {
+  background: var(--surface-soft);
+  border-color: var(--border);
+}
+
+body.dark .rev-persona-dato-item span {
+  color: var(--text-muted);
+}
+
+body.dark .rev-persona-dato-item strong {
+  color: var(--text-primary);
+}
+
+
+/* Grid */
+
+body.dark .revision-grid {
+  color: var(--text-primary);
+}

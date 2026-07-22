@@ -22,3 +22,20 @@
   margin-top: 2px;
   margin-bottom: 16px;
 }
+
+/* ============================================
+   DARK MODE - EN PROCESO MAIN LAYOUT
+   ============================================ */
+
+body.dark .en-proceso-main {
+  background: var(--grey);
+  color: var(--text-primary);
+}
+
+body.dark .en-proceso-main .head-title h1 {
+  color: #f0a0bd;
+}
+
+body.dark .en-proceso-descripcion {
+  color: var(--text-secondary);
+}

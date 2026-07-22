@@ -180,3 +180,134 @@
     justify-content: center;
   }
 }
+
+/* ==========================================
+   DARK MODE - MODAL CONFIRMAR / REVOCAR
+   ========================================== */
+
+/* Overlay y modal */
+
+body.dark .parm-overlay {
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(3px);
+}
+
+body.dark .parm-modal {
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: 0 26px 60px var(--shadow-dark);
+  color: var(--text-primary);
+}
+
+
+/* Header */
+
+body.dark .parm-header {
+  background: linear-gradient(120deg, #29231c 0%, #3a2630 100%);
+  border-bottom-color: var(--border-soft);
+}
+
+body.dark .parm-header h3 {
+  color: #f0a0bd;
+}
+
+body.dark .parm-header p {
+  color: var(--text-secondary);
+}
+
+body.dark .parm-close {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: #d16b92;
+}
+
+body.dark .parm-close:hover:not(:disabled) {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: #f0a0bd;
+}
+
+
+/* Body */
+
+body.dark .parm-body {
+  background: var(--surface);
+}
+
+body.dark .parm-user {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .parm-user strong {
+  color: var(--text-primary);
+}
+
+body.dark .parm-user span {
+  color: #f0a0bd;
+}
+
+body.dark .parm-list {
+  color: var(--text-secondary);
+}
+
+body.dark .parm-label {
+  color: var(--text-secondary);
+}
+
+body.dark .parm-label strong {
+  color: #f0a0bd;
+}
+
+
+/* Input */
+
+body.dark .parm-body input {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+body.dark .parm-body input::placeholder {
+  color: var(--text-muted);
+}
+
+body.dark .parm-body input:focus {
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+
+/* Footer */
+
+body.dark .parm-footer {
+  background: var(--surface);
+  border-top-color: var(--border-soft);
+}
+
+
+/* Botones */
+
+body.dark .parm-btn-secondary {
+  background: var(--surface-card);
+  color: var(--text-secondary);
+  border-color: var(--border);
+}
+
+body.dark .parm-btn-secondary:hover:not(:disabled) {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+body.dark .parm-btn-danger {
+  background: #8a1742;
+  color: #ffffff;
+  border-color: #a32958;
+}
+
+body.dark .parm-btn-danger:hover:not(:disabled) {
+  background: #a32958;
+  border-color: #d16b92;
+}

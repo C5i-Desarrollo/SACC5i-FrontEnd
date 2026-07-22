@@ -269,3 +269,222 @@
   font-size: 11px;
   font-weight: 700;
 }
+/* ============================================
+   DARK MODE - CUIP SECCION
+   ============================================ */
+
+/* Contenedor */
+
+body.dark .cuip-seccion {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-primary);
+  box-shadow: 0 8px 20px var(--shadow-dark);
+}
+
+body.dark .cuip-seccion.cuip-sec-completa {
+  border-color: #285a40;
+}
+
+body.dark .cuip-seccion.cuip-sec-completa .cuip-seccion-header {
+  background: #15281f;
+}
+
+
+/* Header */
+
+body.dark .cuip-seccion-header {
+  background: var(--surface);
+}
+
+body.dark .cuip-seccion-header:hover {
+  background: var(--surface-hover);
+}
+
+body.dark .cuip-sec-chevron {
+  color: var(--text-muted);
+}
+
+body.dark .cuip-sec-nombre {
+  color: var(--text-primary);
+}
+
+body.dark .cuip-sec-progreso {
+  color: var(--text-muted);
+}
+
+
+/* Badge excepción */
+
+body.dark .cuip-sec-excepcion-badge {
+  background: #29231c;
+  color: #cdbd81;
+  border: 1px solid #806f43;
+}
+
+
+/* Status */
+
+body.dark .cuip-sec-status.validado {
+  background: #15281f;
+  color: #7dd3a6;
+  border: 1px solid #285a40;
+}
+
+body.dark .cuip-sec-status.pendiente {
+  background: #29231c;
+  color: #cdbd81;
+  border: 1px solid #806f43;
+}
+
+
+/* Body */
+
+body.dark .cuip-seccion-body {
+  background: var(--surface);
+  border-top-color: var(--border-soft);
+}
+
+body.dark .cuip-sec-excepcion {
+  color: var(--text-secondary);
+}
+
+body.dark .cuip-sec-excepcion input[type="checkbox"] {
+  accent-color: var(--wine-hover);
+}
+
+body.dark .cuip-sec-excepcion span {
+  color: var(--text-secondary);
+}
+
+
+/* Botón validar sección */
+
+body.dark .cuip-sec-btn-validar {
+  background: var(--surface-card);
+  border-color: #285a40;
+  color: #7dd3a6;
+}
+
+body.dark .cuip-sec-btn-validar:hover:not(:disabled) {
+  background: #15281f;
+  border-color: #3bc263;
+  color: #9ff0bf;
+}
+
+body.dark .cuip-sec-btn-validar.deseleccionar {
+  background: var(--surface-card);
+  border-color: var(--wine-hover);
+  color: #f0a0bd;
+}
+
+body.dark .cuip-sec-btn-validar.deseleccionar:hover:not(:disabled) {
+  background: var(--wine);
+  border-color: var(--wine-hover);
+  color: #ffffff;
+}
+
+body.dark .cuip-sec-btn-validar:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+
+/* Campos */
+
+body.dark .cuip-campo {
+  color: var(--text-secondary);
+}
+
+body.dark .cuip-campo:hover {
+  background: var(--surface-hover);
+}
+
+body.dark .cuip-campo.validado {
+  background: #15281f;
+}
+
+body.dark .cuip-campo.rechazado {
+  background: #30191d;
+}
+
+body.dark .cuip-campo.sin-revisar {
+  background: transparent;
+}
+
+body.dark .cuip-campo.opcional {
+  background: #29231c;
+}
+
+body.dark .cuip-campo-num {
+  color: var(--text-muted);
+}
+
+body.dark .cuip-campo-nombre {
+  color: var(--text-secondary);
+}
+
+body.dark .cuip-campo.validado .cuip-campo-nombre {
+  color: #7dd3a6;
+}
+
+body.dark .cuip-campo.rechazado .cuip-campo-nombre {
+  color: #f29b9b;
+}
+
+body.dark .cuip-campo.opcional .cuip-campo-nombre {
+  color: #cdbd81;
+}
+
+
+/* Botones de campo */
+
+body.dark .cuip-campo-btn {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+
+body.dark .cuip-campo-btn:hover:not(:disabled) {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+body.dark .cuip-campo-btn.validar:hover,
+body.dark .cuip-campo-btn.validar.activo {
+  background: #15281f;
+  border-color: #285a40;
+  color: #7dd3a6;
+}
+
+body.dark .cuip-campo-btn.rechazar:hover,
+body.dark .cuip-campo-btn.rechazar.activo {
+  background: #30191d;
+  border-color: #653039;
+  color: #f29b9b;
+}
+
+body.dark .cuip-campo-btn.opcional {
+  color: #cdbd81;
+}
+
+body.dark .cuip-campo-btn.opcional.activo {
+  background: #29231c;
+  border-color: #806f43;
+  color: #cdbd81;
+}
+
+body.dark .cuip-campo-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+
+/* Label opcional */
+
+body.dark .cuip-campo-opcional-label {
+  background: #29231c;
+  border: 1px solid #806f43;
+  color: #cdbd81;
+}

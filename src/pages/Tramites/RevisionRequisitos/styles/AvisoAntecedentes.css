@@ -152,3 +152,104 @@
 .aviso-btn-confirmar i {
   font-size: 18px;
 }
+
+/* ============================================
+   DARK MODE - AVISO ANTECEDENTES
+   ============================================ */
+
+body.dark .aviso-overlay {
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+body.dark .aviso-modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  box-shadow: 0 20px 60px var(--shadow-dark);
+}
+
+body.dark .aviso-icono {
+  background: #29231c;
+  border: 1px solid #806f43;
+}
+
+body.dark .aviso-icono i {
+  color: #cdbd81;
+}
+
+body.dark .aviso-titulo {
+  color: var(--text-primary);
+}
+
+body.dark .aviso-descripcion {
+  color: var(--text-secondary);
+}
+
+
+/* Justificación */
+
+body.dark .aviso-justificacion {
+  background: var(--surface-card);
+  border-color: var(--border);
+}
+
+body.dark .aviso-justificacion h4 {
+  color: var(--text-primary);
+}
+
+body.dark .aviso-justificacion textarea {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+body.dark .aviso-justificacion textarea::placeholder {
+  color: var(--text-muted);
+}
+
+body.dark .aviso-justificacion textarea:focus {
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .aviso-nota {
+  color: var(--text-muted);
+}
+
+body.dark .aviso-nota i {
+  color: #cdbd81;
+}
+
+
+/* Botones */
+
+body.dark .aviso-btn-cancelar {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .aviso-btn-cancelar:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+body.dark .aviso-btn-confirmar {
+  background: var(--wine);
+  color: #ffffff;
+}
+
+body.dark .aviso-btn-confirmar:hover:not(:disabled) {
+  background: var(--wine-hover);
+  box-shadow: 0 4px 10px rgba(163, 41, 88, 0.28);
+}
+
+body.dark .aviso-btn-confirmar:disabled {
+  background: var(--surface-soft);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  opacity: 0.6;
+}

@@ -406,3 +406,235 @@
     max-height: 70vh;
   }
 }
+
+/* ==========================================
+   DARK MODE - FORMULARIOS DE USUARIO
+   ========================================== */
+
+/* Base del formulario */
+
+body.dark .usuario-form,
+body.dark .usuario-form.form-crear,
+body.dark .usuario-form.form-editar {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-primary);
+  box-shadow: 0 10px 24px var(--shadow-dark);
+}
+
+body.dark .usuario-form.modal-form {
+  box-shadow:
+    0 20px 50px var(--shadow-dark),
+    0 8px 20px rgba(0, 0, 0, 0.28);
+}
+
+
+/* Header */
+
+body.dark .crear-header,
+body.dark .form-header.modal-header {
+  background: linear-gradient(135deg, #751638 0%, #4a0f25 100%);
+  border-bottom-color: #806f43;
+}
+
+body.dark .form-titulo.crear,
+body.dark .form-titulo.editar {
+  color: #ffffff;
+}
+
+body.dark .form-titulo.crear svg {
+  color: #cdbd81;
+}
+
+body.dark .form-titulo.editar strong {
+  color: #cdbd81;
+}
+
+
+/* Botón cerrar */
+
+body.dark .usuario-form .btn-cerrar {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+}
+
+body.dark .usuario-form .btn-cerrar:hover {
+  background: rgba(255, 255, 255, 0.26);
+  border-color: rgba(255, 255, 255, 0.38);
+}
+
+
+/* Grid y textos */
+
+body.dark .form-grid {
+  background: var(--surface);
+}
+
+body.dark .form-label {
+  color: var(--text-secondary);
+}
+
+body.dark .requerido {
+  color: #f0a0bd;
+}
+
+body.dark .form-hint {
+  color: var(--text-muted);
+}
+
+
+/* Inputs y selects */
+
+body.dark .form-input,
+body.dark .form-select {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+body.dark .form-input::placeholder {
+  color: var(--text-muted);
+}
+
+body.dark .form-input:focus,
+body.dark .form-select:focus {
+  background: var(--input-bg);
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .form-input:read-only,
+body.dark .form-input:disabled {
+  background: var(--surface-soft);
+  color: var(--text-muted);
+  border-color: var(--border);
+}
+
+body.dark .form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23f0a0bd' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+}
+
+body.dark .form-select option {
+  background: var(--surface-card);
+  color: var(--text-primary);
+}
+
+
+/* Autofill */
+
+body.dark .form-input:-webkit-autofill,
+body.dark .form-input:-webkit-autofill:hover,
+body.dark .form-input:-webkit-autofill:focus,
+body.dark .form-select:-webkit-autofill,
+body.dark .form-select:-webkit-autofill:hover,
+body.dark .form-select:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text-primary);
+  box-shadow: 0 0 0 1000px var(--input-bg) inset;
+}
+
+
+/* Footers */
+
+body.dark .crear-footer,
+body.dark .form-acciones.modal-footer {
+  background: var(--surface);
+  border-top-color: var(--border-soft);
+}
+
+
+/* Botones */
+
+body.dark .btn-submit.crear,
+body.dark .btn-submit.editar {
+  background: linear-gradient(135deg, var(--wine-hover), var(--wine));
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(163, 41, 88, 0.26);
+}
+
+body.dark .btn-submit.crear:hover,
+body.dark .btn-submit.editar:hover {
+  background: linear-gradient(135deg, #b6406d, #8a1742);
+  box-shadow: 0 6px 18px rgba(163, 41, 88, 0.34);
+}
+
+body.dark .usuario-form .btn-cancelar {
+  background: var(--surface-card);
+  color: var(--text-secondary);
+  border-color: var(--border);
+}
+
+body.dark .usuario-form .btn-cancelar:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+
+/* Modal overlay */
+
+body.dark .modal-overlay {
+  background: rgba(0, 0, 0, 0.68);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+body.dark .modal-container {
+  color: var(--text-primary);
+}
+
+body.dark .modal-container .modal-body {
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+
+/* Scroll del modal */
+
+body.dark .modal-container .modal-body::-webkit-scrollbar-thumb {
+  background: var(--border);
+}
+
+body.dark .modal-container .modal-body::-webkit-scrollbar-thumb:hover {
+  background: var(--wine-hover);
+}
+
+body.dark .modal-container .modal-body::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+/* ==========================================
+   FIX DARK MODE - SELECT EDITAR USUARIO
+   Evita que la flecha del select se repita
+   ========================================== */
+
+body.dark .usuario-form .form-select,
+body.dark .modal-container .form-select {
+  background-color: var(--input-bg) !important;
+  border-color: var(--input-border) !important;
+  color: var(--text-primary) !important;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23f0a0bd' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  background-size: 12px 12px !important;
+
+  padding-right: 36px !important;
+}
+
+body.dark .usuario-form .form-select:focus,
+body.dark .modal-container .form-select:focus {
+  background-color: var(--input-bg) !important;
+  border-color: var(--wine-hover) !important;
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16) !important;
+
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  background-size: 12px 12px !important;
+}
+
+body.dark .usuario-form .form-select option,
+body.dark .modal-container .form-select option {
+  background: var(--surface-card);
+  color: var(--text-primary);
+}

@@ -452,16 +452,6 @@
 }
 
 .cm-preview-card {
-  .cm-footer-actions {
-    width: 100%;
-    justify-content: stretch;
-  }
-
-  .cm-btn-copy-generate,
-  .cm-btn-send {
-    width: 100%;
-    justify-content: center;
-  }
   border: 1px solid #e8e0e4;
   border-radius: 10px;
   overflow: hidden;
@@ -654,4 +644,333 @@
     width: 100%;
     justify-content: stretch;
   }
+}
+
+/* ============================================
+   DARK MODE - CITA MODAL
+   ============================================ */
+
+body.dark .cm-overlay {
+  background: rgba(0, 0, 0, 0.74);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+body.dark .cm-modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  box-shadow: 0 24px 70px var(--shadow-dark);
+}
+
+body.dark .cm-header {
+  background: linear-gradient(135deg, #751638 0%, #4a0f25 100%);
+}
+
+body.dark .cm-header::after {
+  background: #806f43;
+}
+
+body.dark .cm-header-icon,
+body.dark .cm-header-icon-send {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+body.dark .cm-header-icon i {
+  color: #cdbd81;
+}
+
+body.dark .cm-title {
+  color: #ffffff;
+}
+
+body.dark .cm-subtitle {
+  color: #f1d8e2;
+}
+
+body.dark .cm-close {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+}
+
+body.dark .cm-close:hover {
+  background: rgba(255, 255, 255, 0.26);
+}
+
+
+/* Persona */
+
+body.dark .cm-persona-card {
+  background: var(--surface-card);
+  border-color: var(--border);
+}
+
+body.dark .cm-persona-icon {
+  color: #f0a0bd;
+}
+
+body.dark .cm-persona-nombre {
+  color: var(--text-primary);
+}
+
+body.dark .cm-persona-sub {
+  color: var(--text-secondary);
+}
+
+
+/* Body / campos */
+
+body.dark .cm-body {
+  background: var(--surface);
+}
+
+body.dark .cm-label {
+  color: var(--text-secondary);
+}
+
+body.dark .cm-label i {
+  color: #f0a0bd;
+}
+
+body.dark .cm-input,
+body.dark .cm-textarea {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+body.dark .cm-input::placeholder,
+body.dark .cm-textarea::placeholder {
+  color: var(--text-muted);
+}
+
+body.dark .cm-input:focus,
+body.dark .cm-textarea:focus {
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .cm-input-error {
+  border-color: #ef6464;
+}
+
+body.dark .cm-input-error:focus {
+  box-shadow: 0 0 0 3px rgba(239, 100, 100, 0.16);
+}
+
+body.dark .cm-error-msg {
+  color: #f29b9b;
+}
+
+
+/* Campo de prueba */
+
+body.dark .cm-field-test {
+  background: var(--surface-card);
+  border-color: var(--border);
+}
+
+body.dark .cm-badge-test {
+  background: var(--wine-soft);
+  color: #f0a0bd;
+  border: 1px solid var(--wine-hover);
+}
+
+body.dark .cm-hint {
+  color: var(--text-muted);
+}
+
+
+/* Info notificación */
+
+body.dark .cm-info-notif {
+  background: #182235;
+  border-color: #304869;
+}
+
+body.dark .cm-info-notif i {
+  color: #8fb8ff;
+}
+
+body.dark .cm-info-notif p {
+  color: #c8dcff;
+}
+
+
+/* Footer */
+
+body.dark .cm-footer {
+  background: var(--surface);
+  border-top-color: var(--border-soft);
+}
+
+body.dark .cm-btn-cancelar,
+body.dark .cm-btn-back {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .cm-btn-cancelar:hover:not(:disabled),
+body.dark .cm-btn-back:hover:not(:disabled) {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+body.dark .cm-btn-confirmar,
+body.dark .cm-btn-preview,
+body.dark .cm-btn-send {
+  background: linear-gradient(135deg, var(--wine-hover), var(--wine));
+  color: #ffffff;
+}
+
+body.dark .cm-btn-confirmar:hover:not(:disabled),
+body.dark .cm-btn-preview:hover,
+body.dark .cm-btn-send:hover:not(:disabled) {
+  background: linear-gradient(135deg, #b6406d, #8a1742);
+  box-shadow: 0 4px 14px rgba(163, 41, 88, 0.32);
+}
+
+body.dark .cm-btn-copy-generate {
+  background: #15281f;
+  color: #7dd3a6;
+  border: 1px solid #285a40;
+  box-shadow: 0 2px 8px rgba(40, 136, 68, 0.2);
+}
+
+body.dark .cm-btn-copy-generate:hover:not(:disabled) {
+  background: #1f4731;
+  border-color: #3bc263;
+  color: #9ff0bf;
+}
+
+body.dark .cm-btn-confirmar:disabled,
+body.dark .cm-btn-cancelar:disabled,
+body.dark .cm-btn-send:disabled,
+body.dark .cm-btn-back:disabled,
+body.dark .cm-btn-copy-generate:disabled {
+  background: var(--surface-soft);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  opacity: 0.6;
+}
+
+
+/* Preview */
+
+body.dark .cm-preview-wrap {
+  background: var(--surface);
+}
+
+body.dark .cm-preview-card {
+  background: var(--surface-card);
+  border-color: var(--border);
+}
+
+body.dark .cm-preview-titulo {
+  background: var(--surface-soft);
+  border-bottom-color: var(--border-soft);
+  color: var(--text-primary);
+}
+
+body.dark .cm-meta-table tr {
+  border-bottom-color: var(--border-soft);
+}
+
+body.dark .cm-meta-lbl {
+  background: var(--surface-soft);
+  color: var(--text-muted);
+}
+
+body.dark .cm-meta-val {
+  color: var(--text-primary);
+}
+
+body.dark .cm-email-box {
+  border-top-color: var(--border-soft);
+}
+
+body.dark .cm-email-gov {
+  background: #751638;
+}
+
+body.dark .cm-email-gov-brand strong {
+  color: #ffffff;
+}
+
+body.dark .cm-email-gov-brand small {
+  color: #cdbd81;
+}
+
+body.dark .cm-email-content {
+  background: var(--surface-card);
+  color: var(--text-secondary);
+}
+
+body.dark .cm-email-content strong {
+  color: var(--text-primary);
+}
+
+
+/* Adjuntos */
+
+body.dark .cm-attachment-section {
+  background: var(--surface-soft);
+  border-top-color: var(--border-soft);
+}
+
+body.dark .cm-attachment-title {
+  color: var(--text-muted);
+}
+
+body.dark .cm-attachment-item {
+  background: var(--surface-card);
+  border-color: var(--border);
+}
+
+body.dark .cm-att-icon i {
+  color: #f29b9b;
+}
+
+body.dark .cm-att-name {
+  color: var(--text-primary);
+}
+
+body.dark .cm-att-size {
+  color: var(--text-muted);
+}
+
+body.dark .cm-att-check i {
+  color: #7dd3a6;
+}
+
+
+/* Autofill */
+
+body.dark .cm-input:-webkit-autofill,
+body.dark .cm-input:-webkit-autofill:hover,
+body.dark .cm-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text-primary);
+  box-shadow: 0 0 0 1000px var(--input-bg) inset;
+}
+
+
+/* Scroll */
+
+body.dark .cm-modal::-webkit-scrollbar {
+  width: 10px;
+}
+
+body.dark .cm-modal::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+body.dark .cm-modal::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+body.dark .cm-modal::-webkit-scrollbar-thumb:hover {
+  background: var(--wine-hover);
 }

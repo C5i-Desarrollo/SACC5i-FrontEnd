@@ -86,3 +86,62 @@
     width: 40px;
   }
 }
+
+/* ============================================
+   DARK MODE - REVISION PASOS
+   ============================================ */
+
+body.dark .rev-pasos {
+  color: var(--text-primary);
+}
+
+
+/* Líneas */
+
+body.dark .rev-paso-linea {
+  background: var(--border);
+}
+
+body.dark .rev-paso-linea.completada {
+  background: var(--wine-hover);
+}
+
+
+/* Círculos */
+
+body.dark .rev-paso-circulo {
+  background: var(--surface-soft);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+body.dark .rev-paso-circulo.activo {
+  background: var(--wine);
+  color: #ffffff;
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 4px rgba(163, 41, 88, 0.2);
+}
+
+body.dark .rev-paso-circulo.completado {
+  background: var(--wine);
+  color: #ffffff;
+  border-color: var(--wine-hover);
+}
+
+
+/* Labels */
+
+body.dark .rev-paso-label {
+  color: var(--text-muted);
+}
+
+body.dark .rev-paso-label.activo {
+  color: #f0a0bd;
+  font-weight: 700;
+}
+
+body.dark .rev-paso-label.completado-label {
+  color: #f0a0bd;
+  font-weight: 600;
+  opacity: 0.82;
+}

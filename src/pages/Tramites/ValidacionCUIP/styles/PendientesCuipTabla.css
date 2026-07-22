@@ -236,3 +236,218 @@
   font-size: 13px;
   color: #888;
 }
+
+/* ============================================
+   DARK MODE - PENDIENTES CUIP TABLA
+   ============================================ */
+
+/* Contenedor */
+
+body.dark .cuip-pend-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  box-shadow: 0 10px 24px var(--shadow-dark);
+}
+
+
+/* Tabs */
+
+body.dark .cuip-pend-tabs {
+  border-bottom-color: var(--border-soft);
+}
+
+body.dark .cuip-pend-tab {
+  background: var(--surface-card);
+  color: var(--text-muted);
+  border-bottom-color: transparent;
+}
+
+body.dark .cuip-pend-tab:hover:not(.activo) {
+  background: var(--surface-hover);
+  color: var(--text-secondary);
+}
+
+body.dark .cuip-pend-tab.activo {
+  background: var(--surface);
+  color: var(--text-primary);
+  border-bottom-color: var(--wine-hover);
+}
+
+body.dark .cuip-pend-count {
+  background: var(--surface-soft);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+body.dark .cuip-pend-tab.activo .cuip-pend-count {
+  background: var(--wine);
+  color: #ffffff;
+  border-color: var(--wine-hover);
+}
+
+
+/* Toolbar */
+
+body.dark .cuip-pend-toolbar {
+  background: var(--surface);
+  border-bottom-color: var(--border-soft);
+}
+
+body.dark .cuip-pend-search {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+body.dark .cuip-pend-search::placeholder {
+  color: var(--text-muted);
+}
+
+body.dark .cuip-pend-search:focus {
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .cuip-pend-refresh {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: #d16b92;
+}
+
+body.dark .cuip-pend-refresh:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: #f0a0bd;
+}
+
+body.dark .cuip-pend-total {
+  color: var(--text-muted);
+}
+
+
+/* Loading / Empty */
+
+body.dark .cuip-pend-loading,
+body.dark .cuip-pend-empty {
+  background: var(--surface);
+  color: var(--text-muted);
+}
+
+body.dark .cuip-pend-loading i,
+body.dark .cuip-pend-empty i {
+  color: #665860;
+}
+
+
+/* Tabla */
+
+body.dark .cuip-pend-table-wrap {
+  background: var(--surface);
+}
+
+body.dark .cuip-pend-table {
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+body.dark .cuip-pend-table thead {
+  background: #751638;
+  color: #ffffff;
+}
+
+body.dark .cuip-pend-table th {
+  color: #ffffff;
+}
+
+body.dark .cuip-pend-table td {
+  background: var(--surface);
+  border-top-color: var(--border-soft);
+  color: var(--text-secondary);
+}
+
+body.dark .cuip-pend-table tbody tr:hover td {
+  background: var(--surface-hover);
+}
+
+body.dark .cuip-pend-nombre strong {
+  color: var(--text-primary);
+}
+
+body.dark .cuip-pend-nombre small {
+  color: var(--text-muted);
+}
+
+
+/* Botón acción */
+
+body.dark .cuip-pend-btn-accion {
+  background: var(--surface-card);
+  border-color: var(--wine-hover);
+  color: #f0a0bd;
+}
+
+body.dark .cuip-pend-btn-accion:hover {
+  background: var(--wine);
+  border-color: var(--wine-hover);
+  color: #ffffff;
+}
+
+
+/* Paginación */
+
+body.dark .cuip-pend-paginacion {
+  background: var(--surface);
+  border-top-color: var(--border-soft);
+}
+
+body.dark .cuip-pend-pag-btn {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .cuip-pend-pag-btn:hover:not(:disabled) {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+body.dark .cuip-pend-pag-btn:disabled {
+  opacity: 0.45;
+  color: var(--text-muted);
+}
+
+body.dark .cuip-pend-pag-info {
+  color: var(--text-muted);
+}
+
+
+/* Scroll horizontal */
+
+body.dark .cuip-pend-table-wrap::-webkit-scrollbar {
+  height: 10px;
+}
+
+body.dark .cuip-pend-table-wrap::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+body.dark .cuip-pend-table-wrap::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+body.dark .cuip-pend-table-wrap::-webkit-scrollbar-thumb:hover {
+  background: var(--wine-hover);
+}
+
+
+/* Autofill */
+
+body.dark .cuip-pend-search:-webkit-autofill,
+body.dark .cuip-pend-search:-webkit-autofill:hover,
+body.dark .cuip-pend-search:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text-primary);
+  box-shadow: 0 0 0 1000px var(--input-bg) inset;
+}

@@ -536,3 +536,52 @@ body.dark
   > button:hover {
   color: #f0a0bd !important;
 }
+
+/* ==========================================
+   DARK MODE EXTRA - RECHAZADOS
+   Ajustes finales
+   ========================================== */
+
+body.dark .rechazados-container {
+  background: var(--grey);
+  color: var(--text-primary);
+}
+
+body.dark .rechazados-toolbar {
+  color: var(--text-primary);
+}
+
+body.dark .rechazados-table thead th {
+  color: #ffffff;
+}
+
+body.dark .rechazados-loading i {
+  color: #d16b92;
+}
+
+body.dark .rechazados-table-scroll::-webkit-scrollbar {
+  height: 10px;
+}
+
+body.dark .rechazados-table-scroll::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+body.dark .rechazados-table-scroll::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+body.dark .rechazados-table-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--wine-hover);
+}
+
+body.dark .rechazados-search input:-webkit-autofill,
+body.dark .rechazados-search input:-webkit-autofill:hover,
+body.dark .rechazados-search input:-webkit-autofill:focus,
+body.dark .rechazados-filtro-group input:-webkit-autofill,
+body.dark .rechazados-filtro-group input:-webkit-autofill:hover,
+body.dark .rechazados-filtro-group input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text-primary);
+  box-shadow: 0 0 0 1000px var(--input-bg) inset;
+}
