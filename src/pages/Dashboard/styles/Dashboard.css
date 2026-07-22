@@ -182,3 +182,79 @@
     flex-direction: column;
   }
 }
+
+/* ==========================================
+   DASHBOARD — MODO OSCURO
+========================================== */
+
+body.dark .db-page {
+  --db-nube: #0f0d10;
+  --db-borde: #403742;
+  --db-txt: #f5f2f5;
+  --db-txt-soft: #aaa1ab;
+
+  color: var(--db-txt);
+  background: transparent;
+}
+
+/* Efectos decorativos adaptados al fondo oscuro */
+body.dark .db-page::before {
+  opacity: 0.16;
+  background-image:
+    radial-gradient(
+      28px 28px at 84% 14%,
+      rgba(125, 36, 71, 0.2),
+      rgba(125, 36, 71, 0)
+    ),
+    radial-gradient(
+      20px 20px at 73% 23%,
+      rgba(184, 170, 125, 0.12),
+      rgba(184, 170, 125, 0)
+    ),
+    radial-gradient(
+      18px 18px at 63% 14%,
+      rgba(79, 111, 157, 0.12),
+      rgba(79, 111, 157, 0)
+    ),
+    radial-gradient(
+      22px 22px at 14% 82%,
+      rgba(77, 127, 114, 0.12),
+      rgba(77, 127, 114, 0)
+    );
+}
+
+body.dark .db-page::after {
+  opacity: 0.12;
+}
+
+/* Banner de error */
+
+body.dark .db-error-banner {
+  background: linear-gradient(
+    135deg,
+    rgba(93, 24, 53, 0.32),
+    rgba(38, 29, 35, 0.96)
+  );
+  border-color: #6d3a4e;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
+}
+
+body.dark .db-error-main {
+  color: #f0bdcf;
+}
+
+body.dark .db-error-retry {
+  background: #2a2229;
+  color: #f0bdcf;
+  border-color: #8c4561;
+}
+
+body.dark .db-error-retry:hover {
+  background: #7d2447;
+  border-color: #7d2447;
+  color: #ffffff;
+}
+
+/* =====================================================
+  cambio en el color de mi filtro
+===================================================== */ 

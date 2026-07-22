@@ -739,3 +739,263 @@ button.dbs-line:hover {
     align-items: flex-start;
   }
 }
+
+/* ==========================================
+   DASHBOARD ESTADÍSTICAS — MODO OSCURO
+========================================== */
+
+/* Paneles principales */
+
+body.dark .dbs-c3-panel,
+body.dark .dbs-ccp-panel,
+body.dark .dbs-admin-panel,
+body.dark .dbs-analista-panel,
+body.dark .dbs-lines-panel,
+body.dark .dbs-insight-panel {
+  background: linear-gradient(160deg, #1d1a20, #211d23);
+  border-color: #443a46;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.26);
+}
+
+/* Encabezados */
+
+body.dark .dbs-ccp-head h3,
+body.dark .dbs-admin-head h3 {
+  color: #e2b3c6;
+}
+
+body.dark .dbs-ccp-head span,
+body.dark .dbs-admin-head span,
+body.dark .dbs-panel-title {
+  color: #aaa1ab;
+}
+
+/* Tarjetas de estadísticas */
+
+body.dark .dbs-ccp-card,
+body.dark .dbs-admin-card {
+  background: #27222a;
+  border-color: #4a414c;
+  color: #f5f2f5;
+}
+
+body.dark .dbs-ccp-card-guinda,
+body.dark .dbs-admin-card-guinda {
+  background: linear-gradient(
+    160deg,
+    #27222a,
+    rgba(125, 36, 71, 0.18)
+  );
+}
+
+body.dark .dbs-ccp-card-dorado,
+body.dark .dbs-admin-card-dorado {
+  background: linear-gradient(
+    160deg,
+    #27222a,
+    rgba(184, 170, 125, 0.12)
+  );
+}
+
+body.dark .dbs-ccp-card-pizarra,
+body.dark .dbs-admin-card-pizarra {
+  background: linear-gradient(
+    160deg,
+    #27222a,
+    rgba(47, 101, 112, 0.14)
+  );
+}
+
+body.dark .dbs-ccp-card-gris,
+body.dark .dbs-admin-card-gris {
+  background: linear-gradient(
+    160deg,
+    #27222a,
+    rgba(95, 111, 131, 0.14)
+  );
+}
+
+body.dark button.dbs-ccp-card:hover,
+body.dark button.dbs-admin-card:hover {
+  background: #302a32;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.32);
+}
+
+/* Valores y textos */
+
+body.dark .dbs-ccp-value,
+body.dark .dbs-admin-card-value {
+  color: #ffffff;
+}
+
+body.dark .dbs-ccp-label,
+body.dark .dbs-admin-card-label {
+  color: #f2eef3;
+}
+
+body.dark .dbs-ccp-desc,
+body.dark .dbs-admin-card-desc {
+  color: #aaa1ab;
+}
+
+/* Tarjeta destacada de pendientes */
+
+body.dark .dbs-ccp-focus,
+body.dark .dbs-c3-focus,
+body.dark .dbs-analista-focus {
+  background:
+    radial-gradient(
+      120% 140% at 0% 0%,
+      rgba(125, 36, 71, 0.2),
+      transparent 58%
+    ),
+    linear-gradient(160deg, #1d1a20, #27222a);
+  border-color: #58414d;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28);
+}
+
+body.dark .dbs-ccp-focus-label {
+  color: #aaa1ab;
+}
+
+body.dark .dbs-ccp-focus-value,
+body.dark .dbs-c3-focus .dbs-ccp-focus-value,
+body.dark .dbs-analista-focus .dbs-ccp-focus-value {
+  color: #f5f2f5;
+}
+
+body.dark .dbs-ccp-focus-sub {
+  color: #aaa1ab;
+}
+
+body.dark .dbs-ccp-focus-btn,
+body.dark .dbs-c3-focus .dbs-ccp-focus-btn,
+body.dark .dbs-analista-focus .dbs-ccp-focus-btn {
+  background: transparent;
+  border-color: #a6637e;
+  color: #e5b3c7;
+}
+
+body.dark .dbs-ccp-focus-btn:hover,
+body.dark .dbs-c3-focus .dbs-ccp-focus-btn:hover,
+body.dark .dbs-analista-focus .dbs-ccp-focus-btn:hover {
+  background: #7d2447;
+  border-color: #7d2447;
+  color: #ffffff;
+}
+
+/* Tarjeta total de administrador */
+
+body.dark .dbs-admin-total {
+  background:
+    radial-gradient(
+      120% 120% at 0% 0%,
+      rgba(125, 36, 71, 0.2),
+      transparent 60%
+    ),
+    linear-gradient(150deg, #1d1a20, #27222a);
+  border-color: #58414d;
+}
+
+body.dark .dbs-admin-total-label,
+body.dark .dbs-admin-total-sub {
+  color: #aaa1ab;
+}
+
+body.dark .dbs-admin-total-value {
+  color: #f5f2f5;
+}
+
+body.dark .dbs-admin-chip {
+  background: rgba(125, 36, 71, 0.24);
+  border-color: rgba(196, 92, 133, 0.34);
+  color: #e5b3c7;
+}
+
+body.dark .dbs-admin-chip-alert {
+  background: rgba(184, 170, 125, 0.16);
+  border-color: rgba(184, 170, 125, 0.35);
+  color: #ddd09e;
+}
+
+/* Filas de métricas */
+
+body.dark .dbs-line {
+  background: #27222a;
+  border-color: #4a414c;
+}
+
+body.dark button.dbs-line:hover {
+  background: #302a32;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
+}
+
+body.dark .dbs-line-copy strong,
+body.dark .dbs-line-value {
+  color: #f5f2f5;
+}
+
+body.dark .dbs-line-copy small {
+  color: #aaa1ab;
+}
+
+body.dark .dbs-meter-track {
+  background: #403842;
+}
+
+/* Panel de información adicional */
+
+body.dark .dbs-insight-orbit {
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(125, 36, 71, 0.2),
+      transparent 55%
+    ),
+    linear-gradient(145deg, #27222a, #211d23);
+  border-color: #4a414c;
+}
+
+body.dark .dbs-insight-label,
+body.dark .dbs-insight-orbit small,
+body.dark .dbs-top-title {
+  color: #aaa1ab;
+}
+
+body.dark .dbs-insight-orbit strong {
+  color: #e5b3c7;
+}
+
+body.dark .dbs-top-list {
+  background: #27222a;
+  border-color: #554b57;
+}
+
+body.dark .dbs-top-text,
+body.dark .dbs-top-value {
+  color: #f2eef3;
+}
+
+/* Carga y estado vacío */
+
+body.dark .dbs-loading-board,
+body.dark .dbs-empty {
+  background: #1d1a20;
+  border-color: #443a46;
+  color: #aaa1ab;
+}
+
+body.dark .dbs-loading-pill,
+body.dark .dbs-loading-line {
+  background: linear-gradient(
+    90deg,
+    #302a32 20%,
+    #443b46 50%,
+    #302a32 80%
+  );
+  background-size: 200% 100%;
+}
+
+/* =====================================================
+  cambio en el color de mi filtro
+===================================================== */ 

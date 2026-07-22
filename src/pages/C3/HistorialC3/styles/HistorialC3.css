@@ -1,33 +1,40 @@
 /* ================================
-   HISTORIAL C3 — Contenedor Principal y Tabla
-   ================================ */
+   HISTORIAL C3
+   Contenedor principal y tabla
+================================ */
 
 .hist-container {
   width: 100%;
   padding: 18px 18px 24px;
-  /* Sin padding lateral si tu layout principal ya lo tiene */
   background: transparent;
-  /* CORRECCIÓN: Sin fondo blanco para no romper el modo oscuro */
 }
 
-/* CONTENEDOR DE LA TABLA */
+/* ================================
+   CONTENEDOR DE TABLA
+================================ */
+
 .hist-card {
+  width: 100%;
   background: #ffffff;
+  border: 1px solid #e5e7eb;
   border-radius: 12px;
   overflow-x: auto;
   overflow-y: visible;
-  /* CORRECCIÓN: No hay overflow-y, esto elimina la doble barra de scroll */
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
 }
 
 .hist-table {
   width: 100%;
+  min-width: 1200px;
   border-collapse: collapse;
   font-size: 0.85rem;
+  color: #1f2937;
 }
+
+/* Encabezado */
 
 .hist-table thead {
   background: #6c1d45;
-  /* Cabecera Guinda */
   color: #ffffff;
 }
 
@@ -35,22 +42,77 @@
   padding: 14px 16px;
   text-align: left;
   font-weight: 600;
+  white-space: nowrap;
+  color: #ffffff;
+  border-bottom: 1px solid #7f2853;
 }
 
+/* Filas */
+
 .hist-table tbody tr {
+  background: #ffffff;
   border-bottom: 1px solid #e5e7eb;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.hist-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.hist-table tbody tr:hover {
+  background: #f8fafc;
 }
 
 .hist-table tbody td {
   padding: 14px 16px;
   vertical-align: middle;
+  color: #1f2937;
 }
 
-/* ESTADOS */
+/* ================================
+   TEXTOS DE CELDAS
+================================ */
+
+.hist-solicitud-cell,
+.hist-analista-cell,
+.hist-fecha-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hist-solicitud-cell strong {
+  color: #111827;
+  font-weight: 700;
+}
+
+.hist-analista-cell span,
+.hist-fecha-cell span {
+  color: #374151;
+  font-weight: 500;
+}
+
+.hist-solicitud-cell small,
+.hist-analista-cell small,
+.hist-fecha-cell small {
+  color: #6b7280;
+  font-size: 0.75rem;
+}
+
+/* ================================
+   ESTADOS VACÍO Y CARGANDO
+================================ */
+
 .hist-loading,
 .hist-empty {
   text-align: center;
   padding: 64px 20px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  color: #374151;
 }
 
 .hist-loading i {
@@ -60,5 +122,189 @@
 
 .hist-empty i {
   font-size: 3rem;
-  color: #d1d5db;
+  color: #9ca3af;
 }
+
+.hist-empty p,
+.hist-loading p {
+  margin: 12px 0 4px;
+  font-weight: 600;
+}
+
+.hist-empty small {
+  color: #6b7280;
+}
+
+/* ================================
+   SCROLL HORIZONTAL
+================================ */
+
+.hist-card {
+  scrollbar-width: thin;
+  scrollbar-color: #9ca3af #f1f5f9;
+}
+
+.hist-card::-webkit-scrollbar {
+  height: 9px;
+}
+
+.hist-card::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 999px;
+}
+
+.hist-card::-webkit-scrollbar-thumb {
+  background: #9ca3af;
+  border-radius: 999px;
+  border: 2px solid #f1f5f9;
+}
+
+.hist-card::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* =====================================================
+   HISTORIAL C3 — MODO OSCURO
+   Paleta Panel de Validación C3
+===================================================== */
+
+body.dark .hist-container {
+  --hist-bg: #111013;
+  --hist-surface: #1d1b22;
+  --hist-surface-soft: #26212a;
+  --hist-highlight: #4a4761;
+  --hist-highlight-hover: #56526d;
+  --hist-border: #403742;
+  --hist-border-strong: #4a4761;
+  --hist-guinda: #7b1842;
+  --hist-guinda-light: #953057;
+  --hist-text: #f4f1f5;
+  --hist-text-soft: #a99faa;
+
+  background: transparent;
+  color: var(--hist-text);
+}
+
+/* Contenedor principal de tabla */
+
+body.dark .hist-card {
+  background: var(--hist-surface);
+  border-color: var(--hist-border-strong);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3);
+  scrollbar-color: #716d87 #17151a;
+}
+
+/* Tabla */
+
+body.dark .hist-table {
+  color: var(--hist-text);
+}
+
+/* Encabezado */
+
+body.dark .hist-table thead {
+  background: var(--hist-guinda);
+  color: #ffffff;
+}
+
+body.dark .hist-table thead th {
+  color: #ffffff;
+  border-bottom-color: #96335c;
+}
+
+/* Filas */
+
+body.dark .hist-table tbody tr {
+  background: var(--hist-surface);
+  border-bottom-color: var(--hist-border);
+}
+
+body.dark .hist-table tbody tr:nth-child(even) {
+  background: var(--hist-surface-soft);
+}
+
+body.dark .hist-table tbody tr:hover {
+  background: var(--hist-highlight);
+}
+
+body.dark .hist-table tbody td {
+  color: var(--hist-text);
+}
+
+/* Textos principales y secundarios */
+
+body.dark .hist-solicitud-cell strong {
+  color: #ffffff;
+}
+
+body.dark .hist-analista-cell span,
+body.dark .hist-fecha-cell span {
+  color: var(--hist-text);
+}
+
+body.dark .hist-solicitud-cell small,
+body.dark .hist-analista-cell small,
+body.dark .hist-fecha-cell small {
+  color: var(--hist-text-soft);
+}
+
+/* Estados vacío y cargando */
+
+body.dark .hist-loading,
+body.dark .hist-empty {
+  background: var(--hist-surface);
+  border-color: var(--hist-highlight);
+  color: var(--hist-text);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.26);
+}
+
+body.dark .hist-loading i {
+  color: #dfa0bb;
+}
+
+body.dark .hist-empty i {
+  color: #817d96;
+}
+
+body.dark .hist-empty p,
+body.dark .hist-loading p {
+  color: var(--hist-text);
+}
+
+body.dark .hist-empty small {
+  color: var(--hist-text-soft);
+}
+
+/* Scroll horizontal */
+
+body.dark .hist-card::-webkit-scrollbar-track {
+  background: #17151a;
+}
+
+body.dark .hist-card::-webkit-scrollbar-thumb {
+  background: #716d87;
+  border-color: #17151a;
+}
+
+body.dark .hist-card::-webkit-scrollbar-thumb:hover {
+  background: #85809d;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+  .hist-container {
+    padding: 12px;
+  }
+
+  .hist-table thead th,
+  .hist-table tbody td {
+    padding: 12px;
+  }
+}
+
+/* =====================================================
+  cambio en el color de mi filtro
+===================================================== */ 

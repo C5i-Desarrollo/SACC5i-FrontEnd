@@ -247,3 +247,105 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================
+   DASHBOARD ACCIONES — MODO OSCURO
+========================================== */
+
+body.dark .dba-section-title {
+  color: #aaa1ab;
+}
+
+body.dark .dba-headline-tag {
+  color: #e4a9c1;
+  border-color: rgba(196, 92, 133, 0.35);
+  background: rgba(125, 36, 71, 0.22);
+}
+
+/* Tarjetas de accesos */
+
+body.dark .dba-card {
+  background: #1d1a20;
+  border-color: #443a46;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+}
+
+body.dark .dba-card:hover {
+  background: #27222a;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.32);
+}
+
+body.dark .dba-card-title {
+  color: #f5f2f5;
+}
+
+body.dark .dba-card-desc {
+  color: #aaa1ab;
+}
+
+body.dark .dba-arrow {
+  background: #302a32;
+  color: #d8d1d8;
+}
+
+body.dark .dba-card:hover .dba-arrow {
+  background: #3a323c;
+  color: #ffffff;
+}
+
+body.dark .dba-card-pill {
+  background: #302a32;
+  color: #d8d1d8;
+}
+
+/* Iconos */
+
+body.dark .dba-icon-guinda {
+  background: rgba(173, 63, 108, 0.2);
+  color: #e5a3c0;
+}
+
+body.dark .dba-icon-dorado {
+  background: rgba(184, 170, 125, 0.18);
+  color: #d9ca98;
+}
+
+body.dark .dba-icon-pizarra {
+  background: rgba(79, 130, 137, 0.18);
+  color: #91c1c5;
+}
+
+body.dark .dba-icon-gris {
+  background: rgba(156, 148, 160, 0.16);
+  color: #c7c0ca;
+}
+
+/* Panel lateral de avisos */
+
+body.dark .dba-note-board {
+  background: linear-gradient(160deg, #1d1a20, #211d23);
+  border-color: #443a46;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.22);
+}
+
+body.dark .dba-note-item {
+  background: #27222a;
+  border-color: #4a414c;
+}
+
+body.dark .dba-note-title {
+  color: #aaa1ab;
+}
+
+body.dark .dba-note-item p {
+  color: #f0edf1;
+}
+
+body.dark .dba-note-item-alt {
+  background: rgba(125, 36, 71, 0.2);
+  border-color: rgba(196, 92, 133, 0.35);
+}
+
+/* =====================================================
+  cambio en el color de mi filtro
+===================================================== */ 

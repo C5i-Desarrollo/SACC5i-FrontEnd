@@ -279,3 +279,25 @@
     gap: 10px;
   }
 }
+
+/* ==========================================
+   DASHBOARD BIENVENIDA — MODO OSCURO
+========================================== */
+
+body.dark .dbw-card {
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.38);
+}
+
+body.dark .dbw-date-card,
+body.dark .dbw-refresh-btn,
+body.dark .dbw-tip-box {
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+body.dark .dbw-refresh-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* =====================================================
+  cambio en el color de mi filtro
+===================================================== */ 
