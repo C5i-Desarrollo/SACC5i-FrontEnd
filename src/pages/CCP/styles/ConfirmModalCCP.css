@@ -103,3 +103,82 @@
 }
 
 .ccp-modal-btn-confirm:hover { background: var(--ccp-primary-dark); }
+
+
+/* ============================================
+   DARK MODE - MODAL CONFIRMACION CCP
+   ============================================ */
+
+body.dark .ccp-modal-overlay {
+  background: rgba(0, 0, 0, 0.74);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+body.dark .ccp-modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  box-shadow: 0 20px 60px var(--shadow-dark);
+}
+
+
+/* Icono */
+
+body.dark .ccp-modal-icon {
+  background: var(--wine-soft);
+  border: 1px solid var(--wine-hover);
+}
+
+body.dark .ccp-modal-icon i {
+  color: #f0a0bd;
+}
+
+
+/* Textos */
+
+body.dark .ccp-modal-title {
+  color: var(--text-primary);
+}
+
+body.dark .ccp-modal-text {
+  color: var(--text-secondary);
+}
+
+
+/* Botones */
+
+body.dark .ccp-modal-btn-cancel {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .ccp-modal-btn-cancel:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+body.dark .ccp-modal-btn-confirm {
+  background: var(--wine);
+  color: #ffffff;
+}
+
+body.dark .ccp-modal-btn-confirm:hover {
+  background: var(--wine-hover);
+  box-shadow: 0 4px 12px rgba(163, 41, 88, 0.28);
+}
+
+
+/* Disabled */
+
+body.dark .ccp-modal-btn-cancel:disabled,
+body.dark .ccp-modal-btn-confirm:disabled {
+  background: var(--surface-soft);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
