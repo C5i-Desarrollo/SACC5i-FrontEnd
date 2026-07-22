@@ -291,6 +291,80 @@ body.dark .hist-card::-webkit-scrollbar-thumb:hover {
 }
 
 /* ================================
+   PAGINACIÓN
+================================ */
+
+.hist-paginacion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: 100%;
+  padding: 20px 16px;
+  border-top: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.hist-pag-btn {
+  min-height: 34px;
+  padding: 0 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #374151;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.hist-pag-btn:hover:not(:disabled) {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.hist-pag-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.hist-pag-info {
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+body.dark .hist-paginacion {
+  background: var(--hist-surface);
+  border-top-color: var(--hist-border);
+}
+
+body.dark .hist-pag-btn {
+  background: var(--hist-surface-soft);
+  border-color: var(--hist-border);
+  color: var(--hist-text);
+}
+
+body.dark .hist-pag-btn:hover:not(:disabled) {
+  background: #352d37;
+  border-color: #665569;
+}
+
+body.dark .hist-pag-btn:disabled {
+  background: var(--hist-surface);
+  color: #817884;
+  opacity: 0.55;
+}
+
+body.dark .hist-pag-info {
+  color: var(--hist-text-soft);
+}
+
+/* ================================
    RESPONSIVE
 ================================ */
 
