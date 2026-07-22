@@ -1,4 +1,118 @@
 import React from "react";
+import Select from "react-select";
+
+const estilosMunicipio = {
+  control: (base, state) => ({
+    ...base,
+    minHeight: "45px",
+    backgroundColor: "#ffffff",
+    borderColor: state.isFocused ? "#7a1735" : "#d6d6d6",
+    borderRadius: "8px",
+    boxShadow: state.isFocused ? "0 0 0 2px rgba(122, 23, 53, 0.12)" : "none",
+    cursor: "text",
+
+    "&:hover": {
+      borderColor: "#7a1735",
+    },
+  }),
+
+  menu: (base) => ({
+    ...base,
+    backgroundColor: "#ffffff",
+    borderRadius: "8px",
+    overflow: "hidden",
+    zIndex: 99999,
+  }),
+
+  menuPortal: (base) => ({
+    ...base,
+    zIndex: 99999,
+  }),
+
+  menuList: (base) => ({
+    ...base,
+    maxHeight: "300px",
+    backgroundColor: "#ffffff",
+    padding: "4px 0",
+  }),
+
+  option: (base, state) => ({
+    ...base,
+    backgroundColor: state.isSelected
+      ? "#7a1735"
+      : state.isFocused
+        ? "#f4e6eb"
+        : "#ffffff",
+
+    color: state.isSelected ? "#ffffff" : "#222222",
+    cursor: "pointer",
+    fontSize: "14px",
+
+    "&:active": {
+      backgroundColor: "#ead1db",
+    },
+  }),
+
+  singleValue: (base) => ({
+    ...base,
+    color: "#222222",
+  }),
+
+  input: (base) => ({
+    ...base,
+    color: "#222222",
+  }),
+
+  placeholder: (base) => ({
+    ...base,
+    color: "#777777",
+  }),
+
+  dropdownIndicator: (base) => ({
+    ...base,
+    color: "#7a1735",
+
+    "&:hover": {
+      color: "#5d1028",
+    },
+  }),
+};
+
+function SelectMunicipioBuscable({ value, onChange, children }) {
+  const opciones = React.Children.toArray(children)
+    .filter((opcion) => React.isValidElement(opcion) && opcion.props.value)
+    .map((opcion) => ({
+      value: opcion.props.value,
+      label: React.Children.toArray(opcion.props.children).join("").trim(),
+    }));
+
+  const opcionSeleccionada =
+    opciones.find((opcion) => opcion.value === value) || null;
+
+  return (
+    <Select
+      classNamePrefix="municipio-select"
+      options={opciones}
+      value={opcionSeleccionada}
+      onChange={(opcion) =>
+        onChange({
+          target: {
+            value: opcion?.value || "",
+          },
+        })
+      }
+      placeholder="Buscar o seleccionar municipio..."
+      noOptionsMessage={() => "Municipio no encontrado"}
+      isSearchable
+      isClearable
+      styles={estilosMunicipio}
+      menuPosition="fixed"
+      menuPortalTarget={
+        typeof document !== "undefined" ? document.body : undefined
+      }
+    />
+  );
+}
 
 export default function FiltrosControles({
   municipioNombre,
@@ -29,13 +143,14 @@ export default function FiltrosControles({
       <div className="filtros-panel">
         <div className="grupo-filtro">
           <label>Municipio</label>
-          
-          <select
+
+          <SelectMunicipioBuscable
             value={municipioNombre}
             onChange={(e) => setMunicipioNombre(e.target.value)}
-           
           >
-            <option value="" disabled>Seleccionar municipio...</option> 
+            <option value="" disabled>
+              Seleccionar municipio...
+            </option>
 
             <option value="ACAJETE">ACAJETE</option>
             <option value="ACATLÁN">ACATLÁN</option>
@@ -56,6 +171,7 @@ export default function FiltrosControles({
             <option value="ATEMPAN">ATEMPAN</option>
             <option value="ATEXCAL">ATEXCAL</option>
             <option value="ATLIXCO">ATLIXCO</option>
+            <option value="ATLEQUIZAYAN">ATLEQUIZAYAN</option>
             <option value="ATOYATEMPAN">ATOYATEMPAN</option>
             <option value="ATZALA">ATZALA</option>
             <option value="ATZITZIHUACÁN">ATZITZIHUACÁN</option>
@@ -79,9 +195,13 @@ export default function FiltrosControles({
             <option value="CUAUTINCHÁN">CUAUTINCHÁN</option>
             <option value="CUAUTLANCINGO">CUAUTLANCINGO</option>
             <option value="CUAYUCA DE ANDRADE">CUAYUCA DE ANDRADE</option>
-            <option value="CUETZALAN DEL PROGRESO">CUETZALAN DEL PROGRESO</option>
+            <option value="CUETZALAN DEL PROGRESO">
+              CUETZALAN DEL PROGRESO
+            </option>
             <option value="CUYOACO">CUYOACO</option>
-            <option value="CHALCHICOMULA DE SESMA">CHALCHICOMULA DE SESMA</option>
+            <option value="CHALCHICOMULA DE SESMA">
+              CHALCHICOMULA DE SESMA
+            </option>
             <option value="CHAPULCO">CHAPULCO</option>
             <option value="CHIAUTLA">CHIAUTLA</option>
             <option value="CHIAUTZINGO">CHIAUTZINGO</option>
@@ -100,7 +220,9 @@ export default function FiltrosControles({
             <option value="EPATLÁN">EPATLÁN</option>
             <option value="ESPERANZA">ESPERANZA</option>
             <option value="FRANCISCO Z. MENA">FRANCISCO Z. MENA</option>
-            <option value="GENERAL FELIPE ÁNGELES">GENERAL FELIPE ÁNGELES</option>
+            <option value="GENERAL FELIPE ÁNGELES">
+              GENERAL FELIPE ÁNGELES
+            </option>
             <option value="GUADALUPE">GUADALUPE</option>
             <option value="GUADALUPE VICTORIA">GUADALUPE VICTORIA</option>
             <option value="HERMENEGILDO GALEANA">HERMENEGILDO GALEANA</option>
@@ -132,8 +254,13 @@ export default function FiltrosControles({
             <option value="JUAN N. MÉNDEZ">JUAN N. MÉNDEZ</option>
             <option value="LAFRAGUA">LAFRAGUA</option>
             <option value="LIBRES">LIBRES</option>
-            <option value="LA MAGDALENA TLATLAUQUITEPEC"> LA MAGDALENA TLATLAUQUITEPEC </option>
-            <option value="MAZAPILTEPEC DE JUÁREZ">MAZAPILTEPEC DE JUÁREZ </option>
+            <option value="LA MAGDALENA TLATLAUQUITEPEC">
+              {" "}
+              LA MAGDALENA TLATLAUQUITEPEC
+            </option>
+            <option value="MAZAPILTEPEC DE JUÁREZ">
+              MAZAPILTEPEC DE JUÁREZ
+            </option>
             <option value="MIXTLA">MIXTLA</option>
             <option value="MOLCAXAC">MOLCAXAC</option>
             <option value="CAÑADA MORELOS">CAÑADA MORELOS</option>
@@ -158,36 +285,63 @@ export default function FiltrosControles({
             <option value="LOS REYES DE JUÁREZ">LOS REYES DE JUÁREZ</option>
             <option value="SAN ANDRÉS CHOLULA">SAN ANDRÉS CHOLULA</option>
             <option value="SAN ANTONIO CAÑADA">SAN ANTONIO CAÑADA</option>
-            <option value="SAN DIEGO LA MESA TOCHIMILTZINGO">SAN DIEGO LA MESA TOCHIMILTZINGO</option>
-            <option value="SAN FELIPE TEOTLALCINGO">SAN FELIPE TEOTLALCINGO</option>
+            <option value="SAN DIEGO LA MESA TOCHIMILTZINGO">
+              SAN DIEGO LA MESA TOCHIMILTZINGO
+            </option>
+            <option value="SAN FELIPE TEOTLALCINGO">
+              SAN FELIPE TEOTLALCINGO
+            </option>
             <option value="SAN FELIPE TEPATLÁN">SAN FELIPE TEPATLÁN</option>
             <option value="SAN GABRIEL CHILAC">SAN GABRIEL CHILAC</option>
             <option value="SAN GREGORIO ATZOMPA">SAN GREGORIO ATZOMPA</option>
-            <option value="SAN JERÓNIMO TECUANIPAN"> SAN JERÓNIMO TECUANIPAN</option>
-            <option value="SAN JERÓNIMO XAYACATLÁN"> SAN JERÓNIMO XAYACATLÁN</option>
+            <option value="SAN JERÓNIMO TECUANIPAN">
+              SAN JERÓNIMO TECUANIPAN
+            </option>
+            <option value="SAN JERÓNIMO XAYACATLÁN">
+              SAN JERÓNIMO XAYACATLÁN
+            </option>
             <option value="SAN JOSÉ CHIAPA">SAN JOSÉ CHIAPA</option>
             <option value="SAN JOSÉ MIAHUATLÁN">SAN JOSÉ MIAHUATLÁN</option>
             <option value="SAN JUAN ATENCO">SAN JUAN ATENCO</option>
             <option value="SAN JUAN ATZOMPA">SAN JUAN ATZOMPA</option>
             <option value="SAN MARTÍN TEXMELUCAN">SAN MARTÍN TEXMELUCAN</option>
             <option value="SAN MARTÍN TOTOLTEPEC">SAN MARTÍN TOTOLTEPEC</option>
-            <option value="SAN MATÍAS TLALANCALECA">SAN MATÍAS TLALANCALECA</option>
+            <option value="SAN MATÍAS TLALANCALECA">
+              SAN MATÍAS TLALANCALECA
+            </option>
             <option value="SAN MIGUEL IXITLÁN">SAN MIGUEL IXITLÁN</option>
             <option value="SAN MIGUEL XOXTLA">SAN MIGUEL XOXTLA</option>
-            <option value="SAN NICOLÁS BUENOS AIRES">SAN NICOLÁS BUENOS AIRES</option>
-            <option value="SAN NICOLÁS DE LOS RANCHOS"> SAN NICOLÁS DE LOS RANCHOS </option>
+            <option value="SAN NICOLÁS BUENOS AIRES">
+              SAN NICOLÁS BUENOS AIRES
+            </option>
+            <option value="SAN NICOLÁS DE LOS RANCHOS">
+              SAN NICOLÁS DE LOS RANCHOS
+            </option>
             <option value="SAN PABLO ANICANO">SAN PABLO ANICANO</option>
             <option value="SAN PEDRO CHOLULA">SAN PEDRO CHOLULA</option>
-            <option value="SAN PEDRO YELOIXTLAHUACA"> SAN PEDRO YELOIXTLAHUACA </option>
+            <option value="SAN PEDRO YELOIXTLAHUACA">
+              {" "}
+              SAN PEDRO YELOIXTLAHUACA{" "}
+            </option>
             <option value="SAN SALVADOR EL SECO">SAN SALVADOR EL SECO</option>
             <option value="SAN SALVADOR EL VERDE">SAN SALVADOR EL VERDE</option>
-            <option value="SAN SALVADOR HUIXCOLOTLA">SAN SALVADOR HUIXCOLOTLA </option>
-            <option value="SAN SEBASTIÁN TLACOTEPEC"> SAN SEBASTIÁN TLACOTEPEC</option>
-            <option value="SANTA CATARINA TLALTEMPAN">SANTA CATARINA TLALTEMPAN</option>
+            <option value="SAN SALVADOR HUIXCOLOTLA">
+              SAN SALVADOR HUIXCOLOTLA{" "}
+            </option>
+            <option value="SAN SEBASTIÁN TLACOTEPEC">
+              {" "}
+              SAN SEBASTIÁN TLACOTEPEC
+            </option>
+            <option value="SANTA CATARINA TLALTEMPAN">
+              SANTA CATARINA TLALTEMPAN
+            </option>
             <option value="SANTA INÉS AHUATEMPAN">SANTA INÉS AHUATEMPAN</option>
             <option value="SANTA ISABEL CHOLULA">SANTA ISABEL CHOLULA</option>
             <option value="SANTIAGO MIAHUATLÁN">SANTIAGO MIAHUATLÁN</option>
-            <option value="SANTO TOMÁS HUEYOTLIPAN"> SANTO TOMÁS HUEYOTLIPAN</option>
+            <option value="SANTO TOMÁS HUEYOTLIPAN">
+              {" "}
+              SANTO TOMÁS HUEYOTLIPAN
+            </option>
             <option value="SOLTEPEC">SOLTEPEC</option>
             <option value="TECALI DE HERRERA">TECALI DE HERRERA</option>
             <option value="TECAMACHALCO">TECAMACHALCO</option>
@@ -207,13 +361,19 @@ export default function FiltrosControles({
             <option value="TEPEXCO">TEPEXCO</option>
             <option value="TEPEXI DE RODRÍGUEZ">TEPEXI DE RODRÍGUEZ</option>
             <option value="TEPEYAHUALCO">TEPEYAHUALCO</option>
-            <option value="TEPEYAHUALCO DE CUAUHTÉMOC">TEPEYAHUALCO DE CUAUHTÉMOC</option>
+            <option value="TEPEYAHUALCO DE CUAUHTÉMOC">
+              TEPEYAHUALCO DE CUAUHTÉMOC
+            </option>
             <option value="TETELA DE OCAMPO">TETELA DE OCAMPO</option>
-            <option value="TETELES DE ÁVILA CASTILLO">TETELES DE ÁVILA CASTILLO </option>
+            <option value="TETELES DE ÁVILA CASTILLO">
+              TETELES DE ÁVILA CASTILLO{" "}
+            </option>
             <option value="TEZIUTLÁN">TEZIUTLÁN</option>
             <option value="TIANGUISMANALCO">TIANGUISMANALCO</option>
             <option value="TILAPA">TILAPA</option>
-            <option value="TLACOTEPEC DE BENITO JUÁREZ">TLACOTEPEC DE BENITO JUÁREZ</option>
+            <option value="TLACOTEPEC DE BENITO JUÁREZ">
+              TLACOTEPEC DE BENITO JUÁREZ
+            </option>
             <option value="TLACUILOTEPEC">TLACUILOTEPEC</option>
             <option value="TLACHICHUCA">TLACHICHUCA</option>
             <option value="TLAHUAPAN">TLAHUAPAN</option>
@@ -226,7 +386,9 @@ export default function FiltrosControles({
             <option value="TLAXCO">TLAXCO</option>
             <option value="TOCHIMILCO">TOCHIMILCO</option>
             <option value="TOCHTEPEC">TOCHTEPEC</option>
-            <option value="TOTOLTEPEC DE GUERRERO">TOTOLTEPEC DE GUERRERO</option>
+            <option value="TOTOLTEPEC DE GUERRERO">
+              TOTOLTEPEC DE GUERRERO
+            </option>
             <option value="TULCINGO">TULCINGO</option>
             <option value="TUZAMAPAN DE GALEANA">TUZAMAPAN DE GALEANA</option>
             <option value="TZICATLACOYAN">TZICATLACOYAN</option>
@@ -238,8 +400,12 @@ export default function FiltrosControles({
             <option value="XIUTETELCO">XIUTETELCO</option>
             <option value="XOCHIAPULCO">XOCHIAPULCO</option>
             <option value="XOCHILTEPEC">XOCHILTEPEC</option>
-            <option value="XOCHITLÁN DE VICENTE SUÁREZ">XOCHITLÁN DE VICENTE SUÁREZ</option>
-            <option value="XOCHITLÁN TODOS SANTOS">XOCHITLÁN TODOS SANTOS</option>
+            <option value="XOCHITLÁN DE VICENTE SUÁREZ">
+              XOCHITLÁN DE VICENTE SUÁREZ
+            </option>
+            <option value="XOCHITLÁN TODOS SANTOS">
+              XOCHITLÁN TODOS SANTOS
+            </option>
             <option value="YAONÁHUAC">YAONÁHUAC</option>
             <option value="YEHUALTEPEC">YEHUALTEPEC</option>
             <option value="ZACAPALA">ZACAPALA</option>
@@ -255,19 +421,16 @@ export default function FiltrosControles({
             <option value="ZOQUIAPAN">ZOQUIAPAN</option>
 
             <option value="TODOS">SELECCIONAR TODOS LOS MUNICIPIOS...</option>
-         
-          </select>
+          </SelectMunicipioBuscable>
         </div>
 
         <div className="grupo-filtro">
           <label>Tipo de movimiento</label>
-          
 
           <div className="botones-movimiento">
             <button
               className={`mov-btn ${tipoTramite === "alta" ? "activo-alta" : ""}`}
               onClick={() => setTipoTramite("alta")}
-              
             >
               ALTA
             </button>
@@ -292,11 +455,11 @@ export default function FiltrosControles({
       {/* BUSCADOR + MOSTRAR */}
       <div className="search-container">
         <input
-  type="text"
-  placeholder="Buscar por número de oficio..."
-  value={terminoBusqueda}
-  onChange={(e) => setTerminoBusqueda(e.target.value)}
-/>
+          type="text"
+          placeholder="Buscar por número de oficio..."
+          value={terminoBusqueda}
+          onChange={(e) => setTerminoBusqueda(e.target.value)}
+        />
 
         <button
           className="mostrar-btn"

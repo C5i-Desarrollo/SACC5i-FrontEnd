@@ -547,3 +547,370 @@
     transform: translateY(0);
   }
 }
+
+/* ==========================================
+   DARK MODE - FILTRADO POR MUNICIPIO
+   ========================================== */
+
+/* Contenedor principal */
+
+body.dark .filtrado-container {
+  background: var(--grey);
+  color: var(--text-primary);
+}
+
+
+/* Banner principal */
+
+body.dark .filtrado-header-banner {
+  background: linear-gradient(135deg, #751638 0%, #4a0f25 100%);
+  border-bottom-color: #806f43;
+  box-shadow: 0 10px 24px var(--shadow-dark);
+}
+
+body.dark .banner-subtitle,
+body.dark .banner-description {
+  color: #f1d8e2;
+}
+
+body.dark .banner-title {
+  color: #ffffff;
+}
+
+body.dark .banner-stat-box {
+  background: rgba(0, 0, 0, 0.24);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+body.dark .stat-icon,
+body.dark .stat-label,
+body.dark .stat-value {
+  color: #ffffff;
+}
+
+
+/* Resumen general de movimientos */
+
+body.dark .resumen-general-movimientos {
+  background: var(--surface);
+  border-color: var(--border-soft);
+  box-shadow: 0 10px 24px var(--shadow-dark);
+}
+
+body.dark .resumen-general-header span {
+  color: #f0a0bd;
+}
+
+body.dark .resumen-general-header p {
+  color: var(--text-secondary);
+}
+
+body.dark .resumen-general-card {
+  background: var(--surface-card);
+  border-color: var(--border);
+}
+
+body.dark .resumen-general-card strong {
+  color: var(--text-primary);
+}
+
+body.dark .resumen-general-card span {
+  color: var(--text-secondary);
+}
+
+body.dark .resumen-general-card.total {
+  background: #2d1d26;
+  border-color: #6b2a46;
+}
+
+body.dark .resumen-general-card.total .resumen-general-icon {
+  background: #4a1e31;
+  color: #f0a0bd;
+}
+
+body.dark .resumen-general-card.altas {
+  background: #16281f;
+  border-color: #285a40;
+}
+
+body.dark .resumen-general-card.altas .resumen-general-icon {
+  background: #1f4731;
+  color: #7dd3a6;
+}
+
+body.dark .resumen-general-card.bajas {
+  background: #30191d;
+  border-color: #653039;
+}
+
+body.dark .resumen-general-card.bajas .resumen-general-icon {
+  background: #4a2027;
+  color: #f29b9b;
+}
+
+body.dark .resumen-general-card.consultas {
+  background: #182235;
+  border-color: #304869;
+}
+
+body.dark .resumen-general-card.consultas .resumen-general-icon {
+  background: #21385c;
+  color: #8fb8ff;
+}
+
+
+/* Panel de filtros */
+
+body.dark .filtros-panel {
+  background: var(--surface);
+  border-color: var(--border-soft);
+}
+
+body.dark .grupo-filtro label {
+  color: var(--text-secondary);
+}
+
+body.dark .grupo-filtro select,
+body.dark .extra-group select,
+body.dark .extra-group input,
+body.dark .search-container input {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+body.dark .grupo-filtro select:focus,
+body.dark .extra-group select:focus,
+body.dark .extra-group input:focus,
+body.dark .search-container input:focus {
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .grupo-filtro select option {
+  background: var(--surface-card);
+  color: var(--text-primary);
+}
+
+body.dark .search-container input::placeholder,
+body.dark .extra-group input::placeholder {
+  color: var(--text-muted);
+}
+
+
+/* Botones de tipo de movimiento */
+
+body.dark .mov-btn {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .mov-btn:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+body.dark .activo-alta {
+  background: #16281f;
+  border-color: #3bc263;
+  color: #7dd3a6;
+}
+
+body.dark .activo-baja {
+  background: #30191d;
+  border-color: #ef6464;
+  color: #f29b9b;
+}
+
+body.dark .activo-consulta {
+  background: #182235;
+  border-color: #4c8dff;
+  color: #8fb8ff;
+}
+
+
+/* Botones de filtros */
+
+body.dark .mostrar-btn,
+body.dark .limpiar-btn {
+  background: #29231c;
+  border-color: #806f43;
+  color: #cdbd81;
+}
+
+body.dark .mostrar-btn:hover,
+body.dark .limpiar-btn:hover {
+  background: #352c21;
+  border-color: #9c8750;
+}
+
+
+/* Filtros extra */
+
+body.dark .extra-filtros {
+  background: transparent;
+}
+
+body.dark .extra-group label {
+  color: var(--text-secondary);
+}
+
+
+/* Sección de resultados / tablas */
+
+body.dark .tabla-container,
+body.dark .tabla-box {
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+body.dark .tabla-container h1,
+body.dark .tabla-container h2,
+body.dark .tabla-box h1,
+body.dark .tabla-box h2 {
+  color: var(--text-primary);
+}
+
+body.dark .tabla-container p,
+body.dark .tabla-box p {
+  color: var(--text-secondary);
+}
+
+body.dark .filtrado-container table {
+  background: var(--surface);
+  color: var(--text-secondary);
+}
+
+body.dark .filtrado-container table thead th,
+body.dark .tabla-estilizada th {
+  background: #751638;
+  color: #ffffff;
+  border-color: var(--border-soft);
+}
+
+body.dark .filtrado-container table tbody tr,
+body.dark .tabla-estilizada tbody tr {
+  background: var(--surface);
+}
+
+body.dark .filtrado-container table tbody tr:hover,
+body.dark .tabla-estilizada tbody tr:hover {
+  background: var(--surface-hover);
+}
+
+body.dark .filtrado-container table td,
+body.dark .tabla-estilizada td {
+  color: var(--text-secondary);
+  border-color: var(--border-soft);
+}
+
+
+/* Tarjetas resumen de Alta/Baja */
+
+body.dark .tarjeta-resumen {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+body.dark .tarjeta-resumen span,
+body.dark .tarjeta-resumen p {
+  color: var(--text-secondary);
+}
+
+
+/* Estados vacíos o textos auxiliares */
+
+body.dark .loading-state,
+body.dark .empty-state,
+body.dark .empty-state p {
+  color: var(--text-muted);
+}
+
+body.dark .empty-state i {
+  color: #665860;
+}
+
+
+/* Scroll horizontal */
+
+body.dark .tabla-box::-webkit-scrollbar,
+body.dark .filtrado-container::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+body.dark .tabla-box::-webkit-scrollbar-track,
+body.dark .filtrado-container::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+body.dark .tabla-box::-webkit-scrollbar-thumb,
+body.dark .filtrado-container::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+body.dark .tabla-box::-webkit-scrollbar-thumb:hover,
+body.dark .filtrado-container::-webkit-scrollbar-thumb:hover {
+  background: var(--wine-hover);
+}
+
+
+
+body.dark .municipio-select__control {
+  background: var(--input-bg) !important;
+  border-color: var(--input-border) !important;
+}
+
+body.dark .municipio-select__single-value,
+body.dark .municipio-select__input-container {
+  color: var(--text-primary) !important;
+}
+
+body.dark .municipio-select__placeholder {
+  color: var(--text-muted) !important;
+}
+
+body.dark .municipio-select__menu,
+body.dark .municipio-select__menu-list,
+body.dark .municipio-select__option {
+  background: var(--surface-card) !important;
+  color: var(--text-primary) !important;
+}
+
+body.dark .municipio-select__option--is-focused {
+  background: #442c37 !important;
+  color: #ffffff !important;
+}
+
+body.dark .municipio-select__option--is-selected {
+  background: #751638 !important;
+  color: #ffffff !important;
+}
+
+/* Barra desplazadora del select de municipio en modo oscuro */
+body.dark .municipio-select__menu-list {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #7a5564 #241c2a; /* thumb | track */
+}
+
+body.dark .municipio-select__menu-list::-webkit-scrollbar {
+  width: 10px;
+}
+
+body.dark .municipio-select__menu-list::-webkit-scrollbar-track {
+  background: #241c2a;
+  border-radius: 10px;
+}
+
+body.dark .municipio-select__menu-list::-webkit-scrollbar-thumb {
+  background: #7a5564;
+  border-radius: 10px;
+  border: 2px solid #241c2a;
+}
+
+body.dark .municipio-select__menu-list::-webkit-scrollbar-thumb:hover {
+  background: #9a6a7d;
+}

@@ -467,7 +467,7 @@ if (archivos.length > 10) {
                   value={movimientoCarga} 
                   onChange={(e) => setMovimientoCarga(e.target.value)}
                   disabled={!!docAActualizar} // Lo bloqueamos si estamos corrigiendo
-                  style={{ backgroundColor: docAActualizar ? '#f0f0f0' : 'white' }}
+                  
                 >
                   {movimientos.map(m => <option key={m} value={m}>{m}</option>)}
                 </select>
