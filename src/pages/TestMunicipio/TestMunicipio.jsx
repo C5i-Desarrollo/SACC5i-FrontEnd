@@ -19,7 +19,7 @@ export default function TestMunicipio({ setPageTitle }) {
   useEffect(() => {
     if (setPageTitle) {
       setPageTitle({
-        titulo: "Filtrado por Municipio",
+        titulo: "Dashboard",
         subtitulo: "Selecciona un municipio y tipo de movimiento para revisar los trámites registrados",
         icon: <FiFilter className="nav-icon-highlight" />
       });
