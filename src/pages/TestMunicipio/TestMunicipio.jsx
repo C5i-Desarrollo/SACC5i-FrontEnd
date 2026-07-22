@@ -42,7 +42,7 @@ export default function TestMunicipio({ setPageTitle }) {
     consultas: 0
   });
 
-  // ESTADOS SOLO PARA CONSULTA
+  // ESTADOS SOLO PARA CONSULTA.
   const [municipioSeleccionado, setMunicipioSeleccionado] = useState(null);
   const [personasConsultaDetalle, setPersonasConsultaDetalle] = useState([]);
 
