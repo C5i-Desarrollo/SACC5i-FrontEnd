@@ -293,3 +293,219 @@
     font-size: 11px;
   }
 }
+
+/* ============================================
+   DARK MODE - EN PROCESO TABLA
+   ============================================ */
+
+/* Wrapper y tabla */
+
+body.dark .ep-table-wrapper {
+  background: var(--surface);
+  box-shadow: 0 10px 24px var(--shadow-dark);
+  border: 1px solid var(--border-soft);
+}
+
+body.dark .ep-table {
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+body.dark .ep-table thead {
+  background: #751638;
+  color: #ffffff;
+}
+
+body.dark .ep-table thead th {
+  color: #ffffff;
+  border-color: var(--border-soft);
+}
+
+body.dark .ep-table tbody tr {
+  background: var(--surface);
+  border-bottom-color: var(--border-soft);
+}
+
+body.dark .ep-table tbody tr:hover {
+  background: var(--surface-hover);
+}
+
+body.dark .ep-table tbody td {
+  color: var(--text-secondary);
+}
+
+
+/* Nombre y puesto */
+
+body.dark .ep-nombre {
+  color: var(--text-primary);
+}
+
+body.dark .ep-puesto {
+  color: var(--text-muted);
+}
+
+
+/* Motivo badges */
+
+body.dark .ep-motivo-rnpsp,
+body.dark .ep-motivo-default {
+  background: var(--surface-soft);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+body.dark .ep-motivo-suic {
+  background: #15281f;
+  color: #7dd3a6;
+  border: 1px solid #285a40;
+}
+
+body.dark .ep-motivo-sim {
+  background: #182235;
+  color: #8fb8ff;
+  border: 1px solid #304869;
+}
+
+body.dark .ep-motivo-cuip {
+  background: #2d1d35;
+  color: #d8a7ff;
+  border: 1px solid #5a3a70;
+}
+
+body.dark .ep-motivo-none {
+  color: var(--text-muted);
+}
+
+
+/* Origen */
+
+body.dark .ep-origen-municipio {
+  background: #182235;
+  color: #8fb8ff;
+  border-color: #304869;
+}
+
+body.dark .ep-origen-dependencia {
+  background: #15281f;
+  color: #7dd3a6;
+  border-color: #285a40;
+}
+
+
+/* Municipio / Dependencia */
+
+body.dark .ep-municipio {
+  color: var(--text-primary);
+}
+
+body.dark .ep-dependencia {
+  color: var(--text-secondary);
+}
+
+
+/* Oficio C3 */
+
+body.dark .ep-oficio-c3 {
+  background: var(--surface-soft);
+  color: #cdbd81;
+  border-color: var(--border);
+}
+
+body.dark .ep-oficio-vacio {
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+}
+
+
+/* Tiempo */
+
+body.dark .ep-tiempo-verde {
+  color: #7dd3a6;
+}
+
+body.dark .ep-tiempo-amarillo {
+  color: #cdbd81;
+}
+
+body.dark .ep-tiempo-rojo {
+  color: #f29b9b;
+}
+
+body.dark .ep-tiempo-critico {
+  color: #ffb4b4;
+}
+
+
+/* Fase actual */
+
+body.dark .ep-fase-revision {
+  background: var(--wine-soft);
+  color: #f0a0bd;
+  border-color: var(--wine-hover);
+}
+
+body.dark .ep-fase-cuip {
+  background: #2d1d35;
+  color: #d8a7ff;
+  border-color: #5a3a70;
+}
+
+body.dark .ep-estado-pendiente {
+  color: var(--text-muted);
+}
+
+body.dark .ep-estado-revision {
+  color: #cdbd81;
+}
+
+body.dark .ep-estado-alerta {
+  color: #f29b9b;
+}
+
+
+/* Botón continuar */
+
+body.dark .ep-btn-continuar {
+  background: var(--wine);
+  color: #ffffff;
+}
+
+body.dark .ep-btn-continuar:hover {
+  background: var(--wine-hover);
+  box-shadow: 0 4px 10px rgba(163, 41, 88, 0.32);
+}
+
+
+/* Empty / Loading */
+
+body.dark .ep-empty,
+body.dark .ep-loading {
+  color: var(--text-muted);
+  background: var(--surface);
+}
+
+body.dark .ep-empty i {
+  color: #665860;
+}
+
+
+/* Scroll horizontal si la tabla desborda */
+
+body.dark .ep-table-wrapper::-webkit-scrollbar {
+  height: 10px;
+}
+
+body.dark .ep-table-wrapper::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+body.dark .ep-table-wrapper::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+body.dark .ep-table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: var(--wine-hover);
+}

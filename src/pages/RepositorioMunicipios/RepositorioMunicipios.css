@@ -930,3 +930,514 @@
     transform: translateY(0);
   }
 }
+
+/* ==========================================
+   DARK MODE - REPOSITORIO
+   ========================================== */
+
+/* Contenedor */
+
+body.dark .repo-page {
+  background: var(--grey);
+  color: var(--text-primary);
+  box-shadow: 0 10px 24px var(--shadow-dark);
+}
+
+
+/* Banner */
+
+body.dark .repo-header-banner {
+  background: linear-gradient(135deg, #751638 0%, #4a0f25 100%);
+  border-bottom-color: #806f43;
+  box-shadow: 0 10px 24px var(--shadow-dark);
+}
+
+body.dark .banner-title,
+body.dark .banner-subtitle,
+body.dark .banner-description {
+  color: #ffffff;
+}
+
+body.dark .banner-stat-box {
+  background: rgba(0, 0, 0, 0.24);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+
+/* Top detalle / botones */
+
+body.dark .repo-back-btn {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .repo-back-btn:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+body.dark .repo-upload-btn,
+body.dark .repo-submit-btn {
+  background: var(--wine);
+  color: #ffffff;
+}
+
+body.dark .repo-upload-btn:hover,
+body.dark .repo-submit-btn:hover {
+  background: var(--wine-hover);
+}
+
+
+/* Buscador */
+
+body.dark .repo-search-card {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+body.dark .repo-search-card label {
+  color: var(--text-secondary);
+}
+
+body.dark .repo-search-input {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+}
+
+body.dark .repo-search-input i {
+  color: var(--text-muted);
+}
+
+body.dark .repo-search-input input {
+  color: var(--text-primary);
+}
+
+body.dark .repo-search-input input::placeholder {
+  color: var(--text-muted);
+}
+
+body.dark .repo-search-input:focus-within {
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+
+/* Stats */
+
+body.dark .repo-stat-card {
+  background: var(--surface-card);
+  border-color: var(--border);
+  box-shadow: 0 8px 20px var(--shadow-dark);
+}
+
+body.dark .repo-stat-card strong {
+  color: var(--text-primary);
+}
+
+body.dark .repo-stat-card span {
+  color: var(--text-secondary);
+}
+
+body.dark .repo-stat-card::before,
+body.dark .repo-stat-card i {
+  background: var(--wine);
+}
+
+body.dark .repo-stat-pdf::before,
+body.dark .repo-stat-pdf i {
+  background: #c94545;
+}
+
+body.dark .repo-stat-excel::before,
+body.dark .repo-stat-excel i {
+  background: #22a447;
+}
+
+
+/* Títulos */
+
+body.dark .repo-section-title {
+  color: var(--text-primary);
+}
+
+body.dark .repo-section-title i {
+  color: #f0a0bd;
+}
+
+
+/* Tabla municipios */
+
+body.dark .repo-table-card {
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: 0 8px 20px var(--shadow-dark);
+}
+
+body.dark .repo-table {
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+body.dark .repo-table thead {
+  background: #751638;
+}
+
+body.dark .repo-table th {
+  color: #ffffff;
+}
+
+body.dark .repo-table td {
+  background: var(--surface);
+  border-bottom-color: var(--border-soft);
+  color: var(--text-secondary);
+}
+
+body.dark .repo-table tbody tr:hover td {
+  background: var(--surface-hover);
+}
+
+body.dark .repo-municipio-icon {
+  background: var(--wine-soft);
+  color: #f0a0bd;
+}
+
+body.dark .repo-municipio-cell strong {
+  color: var(--text-primary);
+}
+
+body.dark .repo-pdf {
+  background: #30191d;
+  color: #f29b9b;
+  border: 1px solid #653039;
+}
+
+body.dark .repo-excel {
+  background: #15281f;
+  color: #7dd3a6;
+  border: 1px solid #285a40;
+}
+
+body.dark .repo-action-btn {
+  color: #f0a0bd;
+}
+
+body.dark .repo-action-btn:hover {
+  color: #ffffff;
+}
+
+
+/* Paginación */
+
+body.dark .repo-pagination {
+  background: var(--surface);
+  border-top-color: var(--border-soft);
+}
+
+body.dark .repo-pagination button {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .repo-pagination button:hover:not(:disabled) {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+body.dark .repo-pagination button:disabled {
+  background: var(--surface-soft);
+  color: var(--text-muted);
+  opacity: 0.45;
+}
+
+body.dark .repo-pagination span {
+  color: var(--text-muted);
+}
+
+
+/* Detalle por día */
+
+body.dark .repo-day-card {
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: 0 8px 20px var(--shadow-dark);
+}
+
+body.dark .repo-day-header {
+  border-bottom-color: var(--border-soft);
+}
+
+body.dark .repo-day-header h2 {
+  color: var(--text-primary);
+}
+
+body.dark .repo-day-header h2 i {
+  color: #f0a0bd;
+}
+
+body.dark .repo-day-header > span {
+  background: var(--wine-soft);
+  color: #f0a0bd;
+  border: 1px solid var(--wine-hover);
+}
+
+body.dark .repo-file-column {
+  background: var(--surface-card);
+  border-color: var(--border);
+}
+
+body.dark .repo-tipo-header {
+  border-bottom-color: var(--border-soft);
+}
+
+body.dark .repo-tipo-title {
+  color: var(--text-primary);
+}
+
+body.dark .repo-file-item {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+body.dark .repo-file-info span {
+  color: var(--text-secondary);
+}
+
+body.dark .repo-file-item .bxs-file-pdf {
+  color: #f29b9b;
+}
+
+body.dark .repo-file-item .bxs-spreadsheet {
+  color: #7dd3a6;
+}
+
+body.dark .repo-file-actions button {
+  background: var(--surface-card);
+}
+
+body.dark .repo-file-actions button:nth-child(1) {
+  border-color: var(--wine-hover);
+  color: #f0a0bd;
+}
+
+body.dark .repo-file-actions button:nth-child(1):hover {
+  background: var(--wine);
+  color: #ffffff;
+}
+
+body.dark .repo-file-actions button:nth-child(2) {
+  border-color: #806f43;
+  color: #cdbd81;
+}
+
+body.dark .repo-file-actions button:nth-child(2):hover {
+  background: #29231c;
+  color: #cdbd81;
+}
+
+body.dark .repo-file-actions button:nth-child(3) {
+  border-color: #653039;
+  color: #f29b9b;
+}
+
+body.dark .repo-file-actions button:nth-child(3):hover {
+  background: #30191d;
+  color: #ffc3c3;
+}
+
+body.dark .repo-no-files {
+  color: var(--text-muted);
+}
+
+
+/* Modal carga */
+
+body.dark .repo-modal-overlay,
+body.dark .repo-delete-overlay {
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+body.dark .repo-modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 50px var(--shadow-dark);
+}
+
+body.dark .repo-modal-header {
+  background: linear-gradient(135deg, #751638 0%, #4a0f25 100%);
+  border-bottom: 3px solid #806f43;
+}
+
+body.dark .repo-modal-header h2,
+body.dark .repo-modal-header p,
+body.dark .repo-modal-close {
+  color: #ffffff;
+}
+
+body.dark .repo-modal-close:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+}
+
+body.dark .repo-dropzone {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .repo-dropzone:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+}
+
+body.dark .repo-selected-files p {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .repo-modal-actions {
+  background: var(--surface);
+  border-top-color: var(--border-soft);
+}
+
+body.dark .repo-modal-actions button {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .repo-modal-actions button:hover:not(:disabled) {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+
+/* Modal eliminar */
+
+body.dark .repo-delete-modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  box-shadow: 0 20px 40px var(--shadow-dark);
+}
+
+body.dark .repo-delete-icon {
+  background: #30191d;
+  color: #f29b9b;
+  border: 1px solid #653039;
+}
+
+body.dark .repo-delete-modal h2 {
+  color: var(--text-primary);
+}
+
+body.dark .repo-delete-modal p {
+  color: var(--text-secondary);
+}
+
+body.dark .repo-delete-actions button:first-child {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .repo-delete-actions button:first-child:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+body.dark .repo-delete-actions button:last-child {
+  background: #30191d;
+  border-color: #653039;
+  color: #f29b9b;
+}
+
+body.dark .repo-delete-actions button:last-child:hover {
+  background: #4a2027;
+  border-color: #ef6464;
+  color: #ffc3c3;
+}
+
+
+/* Toast */
+
+body.dark .repo-toast {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 5px solid #22a447;
+  box-shadow: 0 10px 30px var(--shadow-dark);
+}
+
+body.dark .repo-toast-error {
+  border-left-color: #ef6464;
+}
+
+body.dark .repo-toast-icon {
+  background: #15281f;
+  color: #7dd3a6;
+}
+
+body.dark .repo-toast-error .repo-toast-icon {
+  background: #30191d;
+  color: #f29b9b;
+}
+
+body.dark .repo-toast strong {
+  color: var(--text-primary);
+}
+
+body.dark .repo-toast p {
+  color: var(--text-secondary);
+}
+
+body.dark .repo-toast button {
+  color: var(--text-muted);
+}
+
+body.dark .repo-toast button:hover {
+  color: var(--text-primary);
+}
+
+
+/* Scrolls */
+
+body.dark .repo-files-scroll::-webkit-scrollbar,
+body.dark .repo-table-card::-webkit-scrollbar {
+  width: 8px;
+  height: 10px;
+}
+
+body.dark .repo-files-scroll::-webkit-scrollbar-track,
+body.dark .repo-table-card::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+body.dark .repo-files-scroll::-webkit-scrollbar-thumb,
+body.dark .repo-table-card::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+body.dark .repo-files-scroll::-webkit-scrollbar-thumb:hover,
+body.dark .repo-table-card::-webkit-scrollbar-thumb:hover {
+  background: var(--wine-hover);
+}
+
+
+/* Autofill */
+
+body.dark .repo-search-input input:-webkit-autofill,
+body.dark .repo-search-input input:-webkit-autofill:hover,
+body.dark .repo-search-input input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text-primary);
+  box-shadow: 0 0 0 1000px var(--input-bg) inset;
+}

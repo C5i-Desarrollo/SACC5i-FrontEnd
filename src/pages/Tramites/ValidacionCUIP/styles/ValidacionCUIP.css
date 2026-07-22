@@ -1081,3 +1081,497 @@
     flex-direction: column;
   }
 }
+
+/* ============================================
+   DARK MODE - VALIDACION CUIP
+   ============================================ */
+
+/* Contenedor principal */
+
+body.dark .cuip-main {
+  background: var(--grey);
+  color: var(--text-primary);
+}
+
+body.dark .cuip-loading {
+  color: var(--text-secondary);
+}
+
+body.dark .cuip-loading i {
+  color: #d16b92;
+}
+
+
+/* Header persona */
+
+body.dark .cuip-header-card {
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: 0 10px 24px var(--shadow-dark);
+}
+
+body.dark .cuip-header-top {
+  background: linear-gradient(135deg, #751638 0%, #4a0f25 100%);
+  border-bottom-color: #806f43;
+}
+
+body.dark .cuip-btn-volver {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.24);
+  color: #ffffff;
+}
+
+body.dark .cuip-btn-volver:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.38);
+}
+
+body.dark .cuip-persona-chip {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+}
+
+body.dark .cuip-persona-chip i {
+  color: #cdbd81;
+}
+
+body.dark .cuip-persona-credencial {
+  background: var(--surface-card);
+  border-color: var(--border);
+}
+
+body.dark .cuip-persona-avatar {
+  background: var(--surface-soft);
+  border-color: var(--border);
+  color: #f0a0bd;
+}
+
+body.dark .cuip-persona-identidad h2 {
+  color: var(--text-primary);
+}
+
+body.dark .cuip-persona-identidad p {
+  color: var(--text-secondary);
+}
+
+body.dark .cuip-persona-dato-item {
+  background: var(--surface-soft);
+  border-color: var(--border);
+}
+
+body.dark .cuip-persona-dato-item span {
+  color: var(--text-muted);
+}
+
+body.dark .cuip-persona-dato-item strong {
+  color: var(--text-primary);
+}
+
+
+/* Progreso global */
+
+body.dark .cuip-progreso-card {
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface-card) 100%);
+  border-color: var(--border);
+  box-shadow: 0 10px 24px var(--shadow-dark);
+}
+
+body.dark .cuip-progreso-title-wrap h3 {
+  color: var(--text-primary);
+}
+
+body.dark .cuip-progreso-title-wrap h3 i {
+  color: #f0a0bd;
+}
+
+body.dark .cuip-progreso-title-wrap p {
+  color: var(--text-secondary);
+}
+
+body.dark .cuip-progreso-pill {
+  background: var(--surface-card);
+  border-color: var(--border);
+  box-shadow: 0 4px 12px var(--shadow-dark);
+}
+
+body.dark .cuip-progreso-pill.ok {
+  background: #15281f;
+  border-color: #285a40;
+  color: #7dd3a6;
+}
+
+body.dark .cuip-progreso-pill.riesgo {
+  background: #30191d;
+  border-color: #653039;
+  color: #f29b9b;
+}
+
+body.dark .cuip-progreso-pill.proceso {
+  background: #182235;
+  border-color: #304869;
+  color: #8fb8ff;
+}
+
+body.dark .cuip-stat-card {
+  background: var(--surface-card);
+  border-color: var(--border);
+}
+
+body.dark .cuip-stat-card span {
+  color: var(--text-muted);
+}
+
+body.dark .cuip-stat-card.validados {
+  background: #15281f;
+  border-color: #285a40;
+}
+
+body.dark .cuip-stat-card.validados i,
+body.dark .cuip-stat-card.validados small,
+body.dark .cuip-stat-card.validados strong {
+  color: #7dd3a6;
+}
+
+body.dark .cuip-stat-card.rechazados {
+  background: #30191d;
+  border-color: #653039;
+}
+
+body.dark .cuip-stat-card.rechazados i,
+body.dark .cuip-stat-card.rechazados small,
+body.dark .cuip-stat-card.rechazados strong {
+  color: #f29b9b;
+}
+
+body.dark .cuip-stat-card.total {
+  background: var(--surface-soft);
+  border-color: var(--border);
+}
+
+body.dark .cuip-stat-card.total i,
+body.dark .cuip-stat-card.total small,
+body.dark .cuip-stat-card.total strong {
+  color: #f0a0bd;
+}
+
+body.dark .cuip-progreso-foot-label {
+  color: var(--text-secondary);
+}
+
+body.dark .cuip-progreso-bar-wrap {
+  background: var(--surface-soft);
+}
+
+body.dark .cuip-progreso-bar {
+  background: linear-gradient(90deg, #22a447 0%, #176f32 100%);
+}
+
+body.dark .cuip-progreso-pct {
+  color: #7dd3a6;
+}
+
+
+/* Toolbar flotante */
+
+body.dark .cuip-toolbar .cuip-btn-secondary {
+  background: linear-gradient(180deg, var(--surface-card) 0%, var(--surface-soft) 100%);
+  border-color: var(--border);
+  color: var(--text-secondary);
+  box-shadow: 0 8px 18px var(--shadow-dark);
+}
+
+body.dark .cuip-toolbar .cuip-btn-secondary:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+body.dark .cuip-btn-toggle-secciones {
+  color: #f0a0bd;
+}
+
+body.dark .cuip-btn-toggle-secciones.activo {
+  background: var(--wine-soft);
+  border-color: var(--wine-hover);
+  color: #f0a0bd;
+}
+
+body.dark .cuip-btn-validar-todo {
+  background: #15281f;
+  color: #7dd3a6;
+  border: 1px solid #285a40;
+  box-shadow: 0 8px 18px rgba(40, 136, 68, 0.2);
+}
+
+body.dark .cuip-btn-validar-todo:hover:not(:disabled) {
+  background: #1f4731;
+  border-color: #3bc263;
+  color: #9ff0bf;
+}
+
+body.dark .cuip-btn-validar-todo.deseleccionar {
+  background: var(--wine);
+  color: #ffffff;
+  border-color: var(--wine-hover);
+  box-shadow: 0 8px 18px rgba(163, 41, 88, 0.24);
+}
+
+body.dark .cuip-btn-validar-todo.deseleccionar:hover:not(:disabled) {
+  background: var(--wine-hover);
+}
+
+body.dark .cuip-btn-validar-todo:disabled {
+  background: var(--surface-soft);
+  color: var(--text-muted);
+  border-color: var(--border);
+  opacity: 0.55;
+}
+
+body.dark .cuip-btn-acciones-menu {
+  background: linear-gradient(135deg, rgba(138, 23, 66, 0.9), rgba(74, 30, 49, 0.86));
+  border-color: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  box-shadow: 0 12px 26px var(--shadow-dark);
+}
+
+body.dark .cuip-btn-acciones-menu:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+body.dark .cuip-btn-acciones-menu.abierto {
+  background: linear-gradient(135deg, var(--wine-hover), var(--wine));
+}
+
+body.dark .cuip-acciones-dropdown {
+  background: rgba(40, 33, 38, 0.92);
+  border-color: var(--border);
+  box-shadow: 0 14px 30px var(--shadow-dark);
+}
+
+body.dark .cuip-acciones-item {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+  box-shadow: 0 5px 12px var(--shadow-dark);
+}
+
+body.dark .cuip-acciones-item:hover:not(:disabled) {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+body.dark .cuip-acciones-item.aprobar,
+body.dark .cuip-acciones-item.accion-validar {
+  background: #15281f;
+  border-color: #285a40;
+  color: #7dd3a6;
+}
+
+body.dark .cuip-acciones-item.rechazar {
+  background: #30191d;
+  border-color: #653039;
+  color: #f29b9b;
+}
+
+body.dark .cuip-acciones-item.accion-toggle {
+  background: #182235;
+  border-color: #304869;
+  color: #8fb8ff;
+}
+
+body.dark .cuip-acciones-item.accion-validar.deseleccionar {
+  background: var(--wine-soft);
+  border-color: var(--wine-hover);
+  color: #f0a0bd;
+}
+
+body.dark .cuip-acciones-item:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+body.dark .cuip-toolbar-status.aprobado {
+  background: #15281f;
+  border-color: #285a40;
+  color: #7dd3a6;
+}
+
+body.dark .cuip-toolbar-status.con-cita {
+  background: #182235;
+  border-color: #304869;
+  color: #8fb8ff;
+}
+
+
+/* Buscador de requisitos */
+
+body.dark .cuip-buscador-requisitos-card {
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: 0 10px 24px var(--shadow-dark);
+}
+
+body.dark .cuip-buscador-requisitos-head h4 {
+  color: var(--text-primary);
+}
+
+body.dark .cuip-buscador-requisitos-head h4 i {
+  color: #f0a0bd;
+}
+
+body.dark .cuip-buscador-requisitos-head span {
+  color: var(--text-muted);
+}
+
+body.dark .cuip-buscador-requisitos {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+}
+
+body.dark .cuip-buscador-requisitos:focus-within {
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .cuip-buscador-requisitos > i {
+  color: var(--text-muted);
+}
+
+body.dark .cuip-buscador-requisitos:focus-within > i {
+  color: #d16b92;
+}
+
+body.dark .cuip-buscador-requisitos input {
+  color: var(--text-primary);
+}
+
+body.dark .cuip-buscador-requisitos input::placeholder {
+  color: var(--text-muted);
+}
+
+body.dark .cuip-buscador-clear {
+  background: var(--surface-soft);
+  color: #d16b92;
+}
+
+body.dark .cuip-buscador-clear:hover {
+  background: var(--surface-hover);
+  color: #f0a0bd;
+}
+
+body.dark .cuip-seccion-anchor.is-target {
+  box-shadow:
+    0 0 0 2px rgba(240, 160, 189, 0.45),
+    0 12px 22px rgba(0, 0, 0, 0.28);
+}
+
+
+/* Paginación de secciones */
+
+body.dark .cuip-pag-info-secciones,
+body.dark .cuip-pag-footer-info {
+  color: var(--text-secondary);
+}
+
+body.dark .cuip-pag-num {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .cuip-pag-num:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+body.dark .cuip-pag-num.activa {
+  background: var(--wine);
+  border-color: var(--wine-hover);
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(163, 41, 88, 0.28);
+}
+
+
+/* Acciones finales */
+
+body.dark .cuip-acciones-finales {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 24px var(--shadow-dark);
+}
+
+body.dark .cuip-btn-rechazar {
+  background: var(--surface-card);
+  border-color: #653039;
+  color: #f29b9b;
+}
+
+body.dark .cuip-btn-rechazar:hover:not(:disabled) {
+  background: #30191d;
+  border-color: #ef6464;
+  color: #ffc3c3;
+}
+
+body.dark .cuip-btn-rechazar:disabled {
+  background: var(--surface-soft);
+  color: var(--text-muted);
+  border-color: var(--border);
+  opacity: 0.55;
+}
+
+body.dark .cuip-btn-aprobar-cita {
+  background: #15281f;
+  color: #7dd3a6;
+  border: 1px solid #285a40;
+  box-shadow: 0 4px 12px rgba(40, 136, 68, 0.22);
+}
+
+body.dark .cuip-btn-aprobar-cita:hover:not(:disabled) {
+  background: #1f4731;
+  border-color: #3bc263;
+  color: #9ff0bf;
+}
+
+body.dark .cuip-btn-aprobar-cita:disabled {
+  background: var(--surface-soft);
+  color: var(--text-muted);
+  border-color: var(--border);
+  opacity: 0.55;
+}
+
+body.dark .cuip-cita-generada {
+  background: #15281f;
+  border-color: #285a40;
+  color: #7dd3a6;
+}
+
+body.dark .cuip-btn-completar {
+  background: var(--wine);
+  color: #ffffff;
+  border: 1px solid var(--wine-hover);
+}
+
+body.dark .cuip-btn-completar:hover:not(:disabled) {
+  background: var(--wine-hover);
+  box-shadow: 0 4px 12px rgba(163, 41, 88, 0.28);
+}
+
+body.dark .cuip-btn-completar:disabled {
+  background: var(--surface-soft);
+  color: var(--text-muted);
+  border-color: var(--border);
+  opacity: 0.55;
+}
+
+
+/* Autofill */
+
+body.dark .cuip-buscador-requisitos input:-webkit-autofill,
+body.dark .cuip-buscador-requisitos input:-webkit-autofill:hover,
+body.dark .cuip-buscador-requisitos input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text-primary);
+  box-shadow: 0 0 0 1000px var(--input-bg) inset;
+}

@@ -248,3 +248,147 @@
     justify-content: center;
   }
 }
+
+/* ==========================================
+   DARK MODE - FILTROS DE USUARIOS
+   ========================================== */
+
+/* Contenedor principal */
+
+body.dark .usuarios-filtros-container {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-primary);
+  box-shadow: 0 10px 24px var(--shadow-dark);
+}
+
+
+/* Header */
+
+body.dark .filtros-header {
+  border-bottom-color: var(--border-soft);
+}
+
+body.dark .filtros-titulo {
+  color: #f0a0bd;
+}
+
+body.dark .filtros-titulo svg {
+  color: #cdbd81;
+}
+
+body.dark .filtros-total {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .filtros-total svg {
+  color: #cdbd81;
+}
+
+body.dark .filtros-total strong {
+  color: #f0a0bd;
+}
+
+
+/* Inputs */
+
+body.dark .input-icono {
+  color: #cdbd81;
+}
+
+body.dark .filtro-input {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+body.dark .filtro-input::placeholder {
+  color: var(--text-muted);
+}
+
+body.dark .filtro-input:focus {
+  background: var(--input-bg);
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+
+/* Selects */
+
+body.dark .filtro-select {
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23f0a0bd' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+}
+
+body.dark .filtro-select:focus {
+  background-color: var(--input-bg);
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .filtro-select option {
+  background: var(--surface-card);
+  color: var(--text-primary);
+}
+
+
+/* Botón crear */
+
+body.dark .btn-crear {
+  background: linear-gradient(135deg, var(--wine-hover), var(--wine));
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(163, 41, 88, 0.26);
+}
+
+body.dark .btn-crear:hover {
+  background: linear-gradient(135deg, #b6406d, #8a1742);
+  box-shadow: 0 6px 18px rgba(163, 41, 88, 0.34);
+}
+
+
+/* Botón cancelar */
+
+body.dark .btn-crear.cancelar {
+  background: #30191d;
+  color: #f29b9b;
+  border-color: #653039;
+  box-shadow: none;
+}
+
+body.dark .btn-crear.cancelar:hover {
+  background: #4a2027;
+  border-color: #ef6464;
+  color: #ffc3c3;
+}
+
+
+/* Botón limpiar */
+
+body.dark .btn-limpiar {
+  background: var(--surface-card);
+  color: var(--text-secondary);
+  border-color: var(--border);
+}
+
+body.dark .btn-limpiar:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+
+/* Autofill */
+
+body.dark .filtro-input:-webkit-autofill,
+body.dark .filtro-input:-webkit-autofill:hover,
+body.dark .filtro-input:-webkit-autofill:focus,
+body.dark .filtro-select:-webkit-autofill,
+body.dark .filtro-select:-webkit-autofill:hover,
+body.dark .filtro-select:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text-primary);
+  box-shadow: 0 0 0 1000px var(--input-bg) inset;
+}

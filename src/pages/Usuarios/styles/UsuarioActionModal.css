@@ -171,3 +171,136 @@
     width: 100%;
   }
 }
+
+/* ==========================================
+   DARK MODE - MODAL ACTIVAR / DESACTIVAR USUARIO
+   ========================================== */
+
+/* Overlay y modal */
+
+body.dark .uam-overlay {
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(3px);
+}
+
+body.dark .uam-modal {
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: 0 24px 60px var(--shadow-dark);
+  color: var(--text-primary);
+}
+
+
+/* Header */
+
+body.dark .uam-header {
+  background: linear-gradient(120deg, #29231c 0%, #3a2630 100%);
+  border-bottom-color: var(--border-soft);
+}
+
+body.dark .uam-title-wrap h3 {
+  color: #f0a0bd;
+}
+
+body.dark .uam-title-wrap p {
+  color: var(--text-secondary);
+}
+
+body.dark .uam-close {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: #d16b92;
+}
+
+body.dark .uam-close:hover:not(:disabled) {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: #f0a0bd;
+}
+
+body.dark .uam-close:disabled {
+  opacity: 0.65;
+}
+
+
+/* Body */
+
+body.dark .uam-body {
+  background: var(--surface);
+}
+
+body.dark .uam-user {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .uam-user strong {
+  color: var(--text-primary);
+}
+
+body.dark .uam-user span {
+  color: #f0a0bd;
+}
+
+body.dark .uam-body small {
+  color: var(--text-muted);
+}
+
+
+/* Footer */
+
+body.dark .uam-footer {
+  background: var(--surface);
+  border-top-color: var(--border-soft);
+}
+
+
+/* Botones */
+
+body.dark .uam-btn-secondary {
+  background: var(--surface-card);
+  color: var(--text-secondary);
+  border-color: var(--border);
+}
+
+body.dark .uam-btn-secondary:hover:not(:disabled) {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+body.dark .uam-btn-success {
+  background: #15281f;
+  color: #7dd3a6;
+  border-color: #285a40;
+}
+
+body.dark .uam-btn-success:hover:not(:disabled) {
+  background: #1f4731;
+  border-color: #3bc263;
+  color: #9ff0bf;
+}
+
+body.dark .uam-btn-danger {
+  background: #30191d;
+  color: #f29b9b;
+  border-color: #653039;
+}
+
+body.dark .uam-btn-danger:hover:not(:disabled) {
+  background: #4a2027;
+  border-color: #ef6464;
+  color: #ffc3c3;
+}
+
+body.dark .uam-btn-warning {
+  background: var(--wine);
+  color: #ffffff;
+  border-color: var(--wine-hover);
+}
+
+body.dark .uam-btn-warning:hover:not(:disabled) {
+  background: var(--wine-hover);
+  border-color: #d16b92;
+}

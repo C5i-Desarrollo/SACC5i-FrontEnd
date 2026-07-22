@@ -92,3 +92,158 @@ body.dark .page-header .page-titulo svg {
 body.dark .page-header .page-subtitulo {
   color: #bbb;
 }
+
+/* ==========================================
+   PAGE HEADER - PALETA INSTITUCIONAL PUEBLA
+   ========================================== */
+
+.page-header {
+  margin-bottom: 20px;
+  margin-top: -12px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+
+/* ==========================================
+   BREADCRUMB
+   ========================================== */
+
+.page-header .breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 4px;
+  padding: 0;
+  background: transparent !important;
+  border: none;
+  box-shadow: none;
+  list-style: none;
+  font-size: 13px;
+  border-radius: 0;
+}
+
+.page-header .breadcrumb a {
+  color: #6b7280;
+  text-decoration: none;
+  font-weight: 400;
+  transition: color 0.2s ease;
+}
+
+.page-header .breadcrumb a:hover {
+  color: #7d2447;
+  text-decoration: underline;
+}
+
+.page-header .breadcrumb span {
+  color: #c0b8a0;
+  font-size: 12px;
+}
+
+.page-header .breadcrumb strong {
+  color: #7d2447;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+
+/* ==========================================
+   TÍTULO
+   ========================================== */
+
+.page-header .page-titulo {
+  margin: 0 0 2px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #3d3d3d;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.2;
+  background: transparent;
+  transition: color 0.25s ease;
+}
+
+.page-header .page-titulo svg {
+  color: #7d2447;
+  flex-shrink: 0;
+  transition: color 0.25s ease;
+}
+
+
+/* ==========================================
+   SUBTÍTULO
+   ========================================== */
+
+.page-header .page-subtitulo {
+  margin: 0;
+  font-size: 15px;
+  color: #8a8a8a;
+  font-weight: 400;
+}
+
+
+/* ==========================================
+   DARK MODE - PAGE HEADER
+   ========================================== */
+
+body.dark .page-header {
+  background: transparent;
+  color: var(--text-primary);
+}
+
+body.dark .page-header .breadcrumb a {
+  color: var(--text-muted);
+}
+
+body.dark .page-header .breadcrumb a:hover {
+  color: #f0a0bd;
+}
+
+body.dark .page-header .breadcrumb span {
+  color: #806f43;
+}
+
+body.dark .page-header .breadcrumb strong {
+  color: #f0a0bd;
+}
+
+body.dark .page-header .page-titulo {
+  color: var(--text-primary);
+}
+
+body.dark .page-header .page-titulo svg {
+  color: #f0a0bd;
+}
+
+body.dark .page-header .page-subtitulo {
+  color: var(--text-secondary);
+}
+
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+
+@media (max-width: 768px) {
+  .page-header {
+    margin-top: -6px;
+    margin-bottom: 16px;
+  }
+
+  .page-header .page-titulo {
+    font-size: 26px;
+  }
+
+  .page-header .page-subtitulo {
+    font-size: 14px;
+  }
+
+  .page-header .breadcrumb {
+    font-size: 12px;
+    flex-wrap: wrap;
+  }
+}

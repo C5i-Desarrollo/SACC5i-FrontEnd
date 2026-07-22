@@ -35,3 +35,41 @@
   border: 1px solid #f5c6cb;
   color: #721c24;
 }
+
+/* ==========================================
+   DARK MODE - USUARIOS PRINCIPAL
+   ========================================== */
+
+body.dark .usuarios-container {
+  background: var(--grey);
+  color: var(--text-primary);
+}
+
+body.dark .usuarios-loading {
+  color: var(--text-secondary);
+}
+
+body.dark .usuarios-loading .spinner {
+  border-color: var(--border);
+  border-top-color: var(--wine-hover);
+}
+
+
+/* Mensajes de notificación */
+
+body.dark .usuarios-mensaje {
+  border-color: var(--border);
+  box-shadow: 0 8px 18px var(--shadow-dark);
+}
+
+body.dark .usuarios-mensaje.success {
+  background-color: #15281f;
+  border-color: #285a40;
+  color: #7dd3a6;
+}
+
+body.dark .usuarios-mensaje.error {
+  background-color: #30191d;
+  border-color: #653039;
+  color: #f29b9b;
+}

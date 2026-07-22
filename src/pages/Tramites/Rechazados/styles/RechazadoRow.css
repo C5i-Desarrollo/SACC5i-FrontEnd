@@ -143,3 +143,110 @@
     max-width: 200px;
   }
 }
+
+/* ============================================
+   DARK MODE - RECHAZADO ROW
+   ============================================ */
+
+/* Nombre / puesto / etapa */
+
+body.dark .rechazados-nombre {
+  color: var(--text-primary);
+}
+
+body.dark .rechazados-puesto {
+  color: #f0a0bd;
+}
+
+body.dark .rechazados-etapa {
+  color: var(--text-secondary);
+}
+
+
+/* Motivo editable */
+
+body.dark .rechazados-motivo-text {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .rechazados-motivo-text:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+body.dark .rechazados-motivo-text i {
+  color: var(--text-muted);
+}
+
+body.dark .rechazados-motivo-edit textarea {
+  background: var(--input-bg);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+body.dark .rechazados-motivo-edit textarea::placeholder {
+  color: var(--text-muted);
+}
+
+body.dark .rechazados-motivo-edit textarea:focus {
+  outline: none;
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+
+/* Botones editar motivo */
+
+body.dark .rechazados-btn-save {
+  background-color: #15281f;
+  color: #7dd3a6;
+  border: 1px solid #285a40;
+}
+
+body.dark .rechazados-btn-save:hover {
+  background-color: #1f4731;
+  color: #9ff0bf;
+  border-color: #3bc263;
+}
+
+body.dark .rechazados-btn-cancel {
+  background-color: #30191d;
+  color: #f29b9b;
+  border: 1px solid #653039;
+}
+
+body.dark .rechazados-btn-cancel:hover {
+  background-color: #4a2027;
+  color: #ffc3c3;
+  border-color: #ef6464;
+}
+
+
+/* Fecha */
+
+body.dark .rechazados-fecha {
+  color: var(--text-secondary);
+}
+
+
+/* Botón generar oficio */
+
+body.dark .rechazados-btn-oficio {
+  background-color: var(--wine);
+  color: #ffffff;
+}
+
+body.dark .rechazados-btn-oficio:hover {
+  background-color: var(--wine-hover);
+  box-shadow: 0 4px 10px rgba(163, 41, 88, 0.28);
+}
+
+body.dark .rechazados-btn-oficio:disabled {
+  background-color: var(--surface-soft);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  cursor: not-allowed;
+}

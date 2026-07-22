@@ -207,3 +207,186 @@
   min-width: 40px;
   text-align: right;
 }
+
+/* ============================================
+   DARK MODE - REVISION DOCUMENTOS
+   ============================================ */
+
+/* Contenedor */
+
+body.dark .rev-documentos {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  box-shadow: 0 10px 24px var(--shadow-dark);
+}
+
+
+/* Header */
+
+body.dark .rev-documentos-header {
+  background: linear-gradient(135deg, #751638 0%, #4a0f25 100%);
+  color: #ffffff;
+  border-bottom: 1px solid #806f43;
+}
+
+body.dark .rev-documentos-titulo h3,
+body.dark .rev-documentos-titulo i {
+  color: #ffffff;
+}
+
+
+/* Botón validar todo */
+
+body.dark .rev-btn-validar-todo {
+  background: #15281f;
+  color: #7dd3a6;
+  border: 1px solid #285a40;
+}
+
+body.dark .rev-btn-validar-todo:hover:not(:disabled) {
+  background: #1f4731;
+  border-color: #3bc263;
+  color: #9ff0bf;
+}
+
+body.dark .rev-btn-validar-todo:disabled {
+  background: var(--surface-soft);
+  color: var(--text-muted);
+  border-color: var(--border);
+  opacity: 0.55;
+}
+
+
+/* Lista */
+
+body.dark .rev-documentos-lista {
+  background: var(--surface);
+}
+
+body.dark .rev-doc-item {
+  background: var(--surface);
+  border-bottom-color: var(--border-soft);
+}
+
+body.dark .rev-doc-item:hover {
+  background: var(--surface-hover);
+}
+
+body.dark .rev-doc-item.validado {
+  background: #15281f;
+}
+
+body.dark .rev-doc-item.rechazado {
+  background: #30191d;
+}
+
+body.dark .rev-doc-item.no-aplica {
+  background: #182235;
+}
+
+body.dark .rev-doc-numero {
+  color: var(--text-muted);
+}
+
+body.dark .rev-doc-nombre {
+  color: var(--text-primary);
+}
+
+
+/* Tag No Aplica */
+
+body.dark .rev-doc-tag-no-aplica {
+  background: #182235;
+  border-color: #304869;
+  color: #8fb8ff;
+}
+
+
+/* Botones de documento */
+
+body.dark .rev-doc-btn-validar,
+body.dark .rev-doc-btn-ver,
+body.dark .rev-doc-btn-na {
+  background: var(--surface-card);
+  border-color: var(--border);
+}
+
+body.dark .rev-doc-btn-validar:hover:not(:disabled),
+body.dark .rev-doc-btn-ver:hover:not(:disabled),
+body.dark .rev-doc-btn-na:hover:not(:disabled) {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+}
+
+body.dark .rev-doc-btn-validar i,
+body.dark .rev-doc-btn-ver i {
+  color: var(--text-muted);
+}
+
+body.dark .rev-doc-btn-na i {
+  color: #8fb8ff;
+}
+
+
+/* Botón validar activo */
+
+body.dark .rev-doc-btn-validar.activo {
+  background: #15281f;
+  border-color: #285a40;
+}
+
+body.dark .rev-doc-btn-validar.activo i {
+  color: #7dd3a6;
+}
+
+
+/* Botón ver rechazado */
+
+body.dark .rev-doc-btn-ver.rechazado {
+  background: #30191d;
+  border-color: #653039;
+}
+
+body.dark .rev-doc-btn-ver.rechazado i {
+  color: #f29b9b;
+}
+
+
+/* Botón No Aplica activo */
+
+body.dark .rev-doc-btn-na.activo {
+  background: #182235;
+  border-color: #304869;
+}
+
+body.dark .rev-doc-btn-na.activo i {
+  color: #8fb8ff;
+}
+
+body.dark .rev-doc-btn-validar:disabled,
+body.dark .rev-doc-btn-ver:disabled,
+body.dark .rev-doc-btn-na:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+
+/* Progreso */
+
+body.dark .rev-progreso {
+  background: var(--surface);
+  border-top: 1px solid var(--border-soft);
+}
+
+body.dark .rev-progreso-barra {
+  background: var(--surface-soft);
+}
+
+body.dark .rev-progreso-fill {
+  background: linear-gradient(135deg, #22a447, #176f32);
+}
+
+body.dark .rev-progreso-text {
+  color: var(--text-primary);
+}
