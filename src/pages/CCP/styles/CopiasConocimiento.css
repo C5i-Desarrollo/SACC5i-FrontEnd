@@ -95,3 +95,76 @@
     align-self: flex-end;
   }
 }
+
+/* ============================================================
+   DARK MODE - COPIAS CONOCIMIENTO CCP BASE
+   Variables globales + layout de página
+   ============================================================ */
+
+/* Variables CCP en modo oscuro */
+
+body.dark {
+  --ccp-primary: var(--wine);
+  --ccp-primary-dark: #4a0f25;
+  --ccp-primary-mid: var(--wine-hover);
+  --ccp-primary-pale: var(--wine-soft);
+  --ccp-primary-pale2: #321b27;
+
+  --ccp-green: #7dd3a6;
+  --ccp-green-pale: #15281f;
+
+  --ccp-amber: #cdbd81;
+  --ccp-amber-pale: #29231c;
+
+  --ccp-border: var(--border);
+  --ccp-bg: var(--grey);
+  --ccp-white: var(--surface);
+  --ccp-text: var(--text-primary);
+  --ccp-text-light: var(--text-secondary);
+  --ccp-text-xlight: var(--text-muted);
+
+  --ccp-shadow-sm: 0 4px 12px var(--shadow-dark);
+  --ccp-shadow-md: 0 10px 24px var(--shadow-dark);
+}
+
+
+/* Página */
+
+body.dark .ccp-page {
+  background: var(--grey);
+  color: var(--text-primary);
+}
+
+
+/* Error banner */
+
+body.dark .ccp-error-banner {
+  background: #30191d;
+  border-color: #653039;
+  color: #f29b9b;
+}
+
+body.dark .ccp-error-banner i {
+  color: #ef6464;
+}
+
+
+/* Vista */
+
+body.dark .ccp-view {
+  color: var(--text-primary);
+}
+
+
+/* Topbar listado */
+
+body.dark .ccp-listado-topbar {
+  color: var(--text-primary);
+}
+
+
+/* Wrapper del buscador externo */
+
+body.dark .ccp-search-alta-externa {
+  color: var(--text-primary);
+}

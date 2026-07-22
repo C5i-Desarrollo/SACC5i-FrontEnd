@@ -364,3 +364,267 @@
   .ccp-btn-save,
   .ccp-btn-back { width: 100%; justify-content: center; }
 }
+
+/* ============================================
+   DARK MODE - FORMULARIO CCP
+   ============================================ */
+
+/* Card principal */
+
+body.dark .ccp-form-card {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-primary);
+  box-shadow: 0 10px 24px var(--shadow-dark);
+}
+
+
+/* Titlebar */
+
+body.dark .ccp-form-titlebar {
+  background: var(--wine-soft);
+  border-bottom-color: var(--border);
+}
+
+body.dark .ccp-form-badge {
+  background: var(--wine);
+}
+
+body.dark .ccp-form-badge i {
+  color: #ffffff;
+}
+
+body.dark .ccp-form-titulo {
+  color: var(--text-primary);
+}
+
+body.dark .ccp-form-subtitulo {
+  color: var(--text-secondary);
+}
+
+body.dark .ccp-req {
+  color: #f0a0bd;
+}
+
+
+/* Botón editar */
+
+body.dark .ccp-btn-editar-fixed {
+  background: var(--surface-card);
+  border-color: var(--wine-hover);
+  color: #f0a0bd;
+}
+
+body.dark .ccp-btn-editar-fixed:hover,
+body.dark .ccp-btn-editar-fixed.activo {
+  background: var(--wine);
+  border-color: var(--wine-hover);
+  color: #ffffff;
+}
+
+body.dark .ccp-btn-editar-fixed.activo:hover {
+  background: var(--wine-hover);
+}
+
+
+/* Secciones */
+
+body.dark .ccp-section {
+  border-bottom-color: var(--border-soft);
+}
+
+body.dark .ccp-section-num {
+  background: var(--wine);
+  color: #ffffff;
+}
+
+body.dark .ccp-section-header h3 {
+  color: var(--text-primary);
+}
+
+body.dark .ccp-section-header p {
+  color: var(--text-secondary);
+}
+
+
+/* Campos */
+
+body.dark .ccp-field label {
+  color: var(--text-muted);
+}
+
+body.dark .ccp-input {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+body.dark .ccp-input::placeholder {
+  color: var(--text-muted);
+}
+
+body.dark .ccp-input:hover:not(:focus) {
+  border-color: var(--border);
+}
+
+body.dark .ccp-input:focus {
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .ccp-input-fixed {
+  background: var(--wine-soft);
+  border-color: var(--wine-hover);
+  color: #f0a0bd;
+}
+
+body.dark .ccp-input-locked {
+  background: var(--surface-soft);
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+
+body.dark .ccp-input-locked:focus {
+  border-color: var(--border);
+  box-shadow: none;
+}
+
+
+/* Preview oficio */
+
+body.dark .ccp-oficio-preview {
+  background: var(--wine-soft);
+  border: 1px solid var(--wine-hover);
+  color: #f0a0bd;
+}
+
+
+/* Asunto */
+
+body.dark .ccp-asunto-builder {
+  background: var(--surface-card);
+  border-color: var(--border);
+}
+
+body.dark .ccp-chip-label {
+  background: var(--wine-soft);
+  color: #f0a0bd;
+  border-color: var(--wine-hover);
+}
+
+body.dark .ccp-chip-input {
+  background: var(--input-bg);
+  border-color: var(--wine-hover);
+  color: #f0a0bd;
+}
+
+body.dark .ccp-chip-input::placeholder {
+  color: var(--text-muted);
+}
+
+body.dark .ccp-chip-input:focus {
+  border-style: solid;
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .ccp-asunto-field-group label {
+  color: var(--text-muted);
+}
+
+body.dark .ccp-asunto-preview {
+  background: var(--wine-soft);
+  border-left-color: var(--wine-hover);
+}
+
+body.dark .ccp-asunto-preview i {
+  color: #f0a0bd;
+}
+
+body.dark .ccp-asunto-preview p {
+  color: var(--text-secondary);
+}
+
+
+/* Volante */
+
+body.dark .ccp-check-pill {
+  background: var(--surface-card);
+  border-color: var(--border);
+}
+
+body.dark .ccp-check-pill:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+}
+
+body.dark .ccp-check-pill input[type="checkbox"] {
+  accent-color: var(--wine-hover);
+}
+
+body.dark .ccp-check-pill:has(input:checked) {
+  background: var(--wine-soft);
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .ccp-check-pill span {
+  color: var(--text-primary);
+}
+
+body.dark .ccp-volante-preview {
+  background: var(--surface-card);
+  border-color: var(--wine-hover);
+  color: #f0a0bd;
+}
+
+
+/* Footer */
+
+body.dark .ccp-form-footer {
+  background: var(--surface);
+  border-top-color: var(--border-soft);
+}
+
+body.dark .ccp-btn-back {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .ccp-btn-back:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+body.dark .ccp-btn-save {
+  background: var(--wine);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(163, 41, 88, 0.28);
+}
+
+body.dark .ccp-btn-save:hover:not(:disabled) {
+  background: var(--wine-hover);
+  box-shadow: 0 6px 16px rgba(163, 41, 88, 0.34);
+}
+
+body.dark .ccp-btn-save:disabled {
+  background: var(--surface-soft);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+
+/* Autofill */
+
+body.dark .ccp-input:-webkit-autofill,
+body.dark .ccp-input:-webkit-autofill:hover,
+body.dark .ccp-input:-webkit-autofill:focus,
+body.dark .ccp-chip-input:-webkit-autofill,
+body.dark .ccp-chip-input:-webkit-autofill:hover,
+body.dark .ccp-chip-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text-primary);
+  box-shadow: 0 0 0 1000px var(--input-bg) inset;
+}
