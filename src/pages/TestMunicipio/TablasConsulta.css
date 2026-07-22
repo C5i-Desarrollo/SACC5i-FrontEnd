@@ -1,0 +1,294 @@
+/* ==========================================
+   TABLAS CONSULTA
+   Resumen + Detalle
+   ========================================== */
+
+.consulta-card {
+  margin-top: 30px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 22px;
+  border: 1px solid #e5d8dc;
+  box-shadow: 0 8px 22px rgba(128, 0, 32, 0.08);
+  box-sizing: border-box;
+}
+
+.consulta-detalle-card {
+  margin-top: 18px;
+}
+
+.consulta-card-header {
+  margin-bottom: 20px;
+}
+
+.consulta-subtitulo {
+  display: block;
+  color: #8a1538;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.consulta-card-header h2 {
+  margin: 0;
+  color: #1f1f1f;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+
+/* ==========================================
+   BUSCADOR
+   ========================================== */
+
+.consulta-search {
+  width: 100%;
+  padding: 13px 15px;
+  border-radius: 10px;
+  border: 1px solid #d6c8cc;
+  margin-bottom: 18px;
+  outline: none;
+  background: #ffffff;
+  color: #222222;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.consulta-search::placeholder {
+  color: #8a7d82;
+}
+
+.consulta-search:focus {
+  border-color: #8a1538;
+  box-shadow: 0 0 0 3px rgba(138, 21, 56, 0.12);
+}
+
+
+/* ==========================================
+   TABLAS
+   ========================================== */
+
+.consulta-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.consulta-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  table-layout: fixed;
+}
+
+.consulta-table thead tr {
+  background: #8b0028;
+  color: #ffffff;
+}
+
+.consulta-table th {
+  padding: 14px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.consulta-table td {
+  padding: 14px;
+  color: #444444;
+  background: #ffffff;
+  border-bottom: 1px solid #efe4e8;
+  word-break: break-word;
+}
+
+.consulta-table tbody tr:nth-child(even) td {
+  background: #fbf4f6;
+}
+
+.consulta-table tbody tr:hover td {
+  background: #f7eaf0;
+}
+
+.consulta-resumen-table tbody tr {
+  cursor: pointer;
+}
+
+.consulta-row-activa td {
+  background: #f5dfe7 !important;
+}
+
+.consulta-col-numero {
+  width: 80px;
+  text-align: center !important;
+  font-weight: 700;
+}
+
+.consulta-col-center {
+  text-align: center !important;
+}
+
+.consulta-col-total {
+  width: 180px;
+  text-align: center !important;
+}
+
+.consulta-badge-total {
+  display: inline-block;
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  min-width: 42px;
+}
+
+.consulta-empty {
+  padding: 20px !important;
+  text-align: center !important;
+  color: #777777 !important;
+  background: #fafafa !important;
+  font-weight: 500;
+}
+
+
+/* ==========================================
+   DARK MODE - TABLAS CONSULTA
+   ========================================== */
+
+body.dark .consulta-card {
+  background: var(--surface);
+  border-color: var(--border-soft);
+  color: var(--text-primary);
+  box-shadow: 0 10px 24px var(--shadow-dark);
+}
+
+body.dark .consulta-subtitulo {
+  color: #f0a0bd;
+}
+
+body.dark .consulta-card-header h2 {
+  color: var(--text-primary);
+}
+
+body.dark .consulta-search {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+body.dark .consulta-search::placeholder {
+  color: var(--text-muted);
+}
+
+body.dark .consulta-search:focus {
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .consulta-table {
+  background: var(--surface-card);
+}
+
+body.dark .consulta-table thead tr {
+  background: #751638;
+  color: #ffffff;
+}
+
+body.dark .consulta-table th {
+  color: #ffffff;
+  border-color: var(--border-soft);
+}
+
+body.dark .consulta-table td {
+  background: var(--surface-card);
+  color: var(--text-secondary);
+  border-bottom-color: var(--border-soft);
+}
+
+body.dark .consulta-table tbody tr:nth-child(even) td {
+  background: #241e23;
+}
+
+body.dark .consulta-table tbody tr:hover td {
+  background: var(--surface-hover);
+}
+
+body.dark .consulta-row-activa td {
+  background: #4a1e31 !important;
+  color: var(--text-primary);
+}
+
+body.dark .consulta-badge-total {
+  background: #16281f;
+  color: #7dd3a6;
+  border: 1px solid #285a40;
+}
+
+body.dark .consulta-empty {
+  background: var(--surface-card) !important;
+  color: var(--text-muted) !important;
+}
+
+
+/* ==========================================
+   SCROLL
+   ========================================== */
+
+.consulta-table-wrapper::-webkit-scrollbar {
+  height: 10px;
+}
+
+.consulta-table-wrapper::-webkit-scrollbar-track {
+  background: #f0eeee;
+  border-radius: 999px;
+}
+
+.consulta-table-wrapper::-webkit-scrollbar-thumb {
+  background: #c9b6be;
+  border-radius: 999px;
+}
+
+.consulta-table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #8a1538;
+}
+
+body.dark .consulta-table-wrapper::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+body.dark .consulta-table-wrapper::-webkit-scrollbar-thumb {
+  background: var(--border);
+}
+
+body.dark .consulta-table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: var(--wine-hover);
+}
+
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+
+@media (max-width: 768px) {
+  .consulta-card {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .consulta-card-header h2 {
+    font-size: 22px;
+  }
+
+  .consulta-search {
+    font-size: 13px;
+  }
+
+  .consulta-table {
+    min-width: 900px;
+  }
+}

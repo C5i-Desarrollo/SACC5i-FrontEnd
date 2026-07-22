@@ -141,4 +141,214 @@
   word-break: break-word;
 }
 
-  /*Ya quedo, pero no se subio. jeje*/
+/* ==========================================
+   TABLA DE MOVIMIENTOS
+   ========================================== */
+
+.tabla-container {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 20px;
+  border: 1px solid #d6d6d6;
+  margin-top: 20px;
+  box-sizing: border-box;
+}
+
+.header-tabla {
+  margin-bottom: 20px;
+}
+
+.subtitulo {
+  color: #8a1538;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.header-tabla h1 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.1;
+  color: #222222;
+}
+
+.tabla-box {
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  overflow-x: auto;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tabla-estilizada {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.tabla-estilizada thead {
+  background: #8a1538;
+  color: #ffffff;
+}
+
+.tabla-estilizada th {
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: middle;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.tabla-estilizada td {
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: middle;
+  border-bottom: 1px solid #eeeeee;
+  color: #444444;
+  background: #ffffff;
+  word-break: break-word;
+}
+
+.tabla-estilizada tbody tr:hover td {
+  background: #fafafa;
+}
+
+.btn-detalles {
+  border: 1px solid #8a1538;
+  background: #ffffff;
+  color: #8a1538;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.btn-detalles:hover {
+  background: #8a1538;
+  color: #ffffff;
+}
+
+
+/* ==========================================
+   DARK MODE - TABLA DE MOVIMIENTOS
+   ========================================== */
+
+body.dark .tabla-container {
+  background: var(--surface);
+  border-color: var(--border-soft);
+  color: var(--text-primary);
+}
+
+body.dark .header-tabla h1 {
+  color: var(--text-primary);
+}
+
+body.dark .subtitulo {
+  color: #f0a0bd;
+}
+
+body.dark .tabla-box {
+  background: var(--surface-card);
+  box-shadow: 0 10px 24px var(--shadow-dark);
+}
+
+body.dark .tabla-estilizada {
+  background: var(--surface-card);
+}
+
+body.dark .tabla-estilizada thead {
+  background: #751638;
+  color: #ffffff;
+}
+
+body.dark .tabla-estilizada th {
+  color: #ffffff;
+  border-color: var(--border-soft);
+}
+
+body.dark .tabla-estilizada td {
+  background: var(--surface-card);
+  color: var(--text-secondary);
+  border-bottom-color: var(--border-soft);
+}
+
+body.dark .tabla-estilizada tbody tr:hover td {
+  background: var(--surface-hover);
+}
+
+body.dark .btn-detalles {
+  background: var(--surface-card);
+  border-color: var(--wine-hover);
+  color: #d16b92;
+}
+
+body.dark .btn-detalles:hover {
+  background: var(--wine-soft);
+  border-color: #d16b92;
+  color: #f0a0bd;
+}
+
+
+/* ==========================================
+   SCROLL TABLA
+   ========================================== */
+
+.tabla-box::-webkit-scrollbar {
+  height: 10px;
+}
+
+.tabla-box::-webkit-scrollbar-track {
+  background: #f0eeee;
+  border-radius: 999px;
+}
+
+.tabla-box::-webkit-scrollbar-thumb {
+  background: #c9b6be;
+  border-radius: 999px;
+}
+
+.tabla-box::-webkit-scrollbar-thumb:hover {
+  background: #8a1538;
+}
+
+body.dark .tabla-box::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+body.dark .tabla-box::-webkit-scrollbar-thumb {
+  background: var(--border);
+}
+
+body.dark .tabla-box::-webkit-scrollbar-thumb:hover {
+  background: var(--wine-hover);
+}
+
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+
+@media (max-width: 768px) {
+  .tabla-container {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .header-tabla h1 {
+    font-size: 22px;
+  }
+
+  .tabla-box {
+    padding: 14px;
+  }
+
+  .tabla-estilizada {
+    min-width: 900px;
+  }
+
+  .btn-detalles {
+    padding: 8px 12px;
+  }
+}

@@ -1,18 +1,23 @@
-/* CONTENEDOR */
+/* ==========================================================================
+   CONTENEDOR GENERAL
+========================================================================== */
+
 .filtrado-container {
   width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
   padding: 30px;
   background: #f6f4f4;
   border-radius: 20px;
-  min-height: 100vh;
+  overflow-x: hidden;
   box-sizing: border-box;
   animation: aparecerPantalla 0.4s ease-out forwards;
 }
 
-/* TITULOS */
 /* ==========================================================================
-   BANNER DE CABECERA (DISEÑO VINO)
+   BANNER DE CABECERA
 ========================================================================== */
+
 .filtrado-header-banner {
   background: linear-gradient(135deg, #7a1735 0%, #5a1025 100%);
   border-radius: 12px;
@@ -20,9 +25,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: white;
+  color: #ffffff;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-  border-bottom: 4px solid #c4a173; /* Borde dorado institucional */
+  border-bottom: 4px solid #c4a173;
   margin-bottom: 25px;
 }
 
@@ -53,7 +58,6 @@
   opacity: 0.9;
 }
 
-/* CAJA DE CONTEO A LA DERECHA */
 .banner-content-right {
   display: flex;
   align-items: center;
@@ -97,30 +101,136 @@
   margin-top: 2px;
 }
 
-/* Ajuste responsive para celulares */
-@media (max-width: 768px) {
-  .filtrado-header-banner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-    padding: 20px;
-  }
+/* ==========================================================================
+   RESUMEN GENERAL DE MOVIMIENTOS
+========================================================================== */
+
+.resumen-general-movimientos {
+  background: #ffffff;
+  border: 1px solid #eadde3;
+  border-radius: 16px;
+  padding: 22px;
+  margin: 18px 0 24px;
+  box-shadow: 0 10px 24px rgba(80, 25, 45, 0.08);
 }
 
-/* PANEL */
+.resumen-general-header {
+  margin-bottom: 18px;
+}
+
+.resumen-general-header span {
+  display: block;
+  color: #8a1538;
+  font-weight: 900;
+  font-size: 22px;
+  letter-spacing: 0.8px;
+}
+
+.resumen-general-header p {
+  margin: 4px 0 0;
+  color: #6b5f64;
+  font-size: 14px;
+}
+
+.resumen-general-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.resumen-general-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 86px;
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid #e7d8de;
+  background: #ffffff;
+}
+
+.resumen-general-card strong {
+  display: block;
+  font-size: 30px;
+  line-height: 1;
+  color: #1f1f1f;
+}
+
+.resumen-general-card span {
+  display: block;
+  margin-top: 6px;
+  color: #5f555a;
+  font-size: 14px;
+}
+
+.resumen-general-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+}
+
+.resumen-general-card.total {
+  border-color: #d8b6c4;
+  background: #fff8fb;
+}
+
+.resumen-general-card.total .resumen-general-icon {
+  background: #f4dce6;
+  color: #8a1538;
+}
+
+.resumen-general-card.altas {
+  border-color: #bde7c8;
+  background: #f7fff9;
+}
+
+.resumen-general-card.altas .resumen-general-icon {
+  background: #dff7e5;
+  color: #22a447;
+}
+
+.resumen-general-card.bajas {
+  border-color: #ffc6c6;
+  background: #fff8f8;
+}
+
+.resumen-general-card.bajas .resumen-general-icon {
+  background: #ffe2e2;
+  color: #e34242;
+}
+
+.resumen-general-card.consultas {
+  border-color: #c9d9ff;
+  background: #f8fbff;
+}
+
+.resumen-general-card.consultas .resumen-general-icon {
+  background: #e5edff;
+  color: #3167c7;
+}
+
+/* ==========================================================================
+   PANEL DE FILTROS
+========================================================================== */
+
 .filtros-panel {
+  width: 100%;
+  max-width: 100%;
   margin-top: 30px;
   background: #f2efef;
-  border: 1px solid #ddd;
+  border: 1px solid #dddddd;
   border-radius: 18px;
   padding: 28px;
   display: flex;
-  gap: 60px;
+  gap: 25px;
   align-items: flex-end;
   flex-wrap: wrap;
+  box-sizing: border-box;
 }
 
-/* GRUPOS */
 .grupo-filtro {
   display: flex;
   flex-direction: column;
@@ -129,23 +239,28 @@
 
 .grupo-filtro label {
   font-size: 14px;
-  color: #444;
+  color: #444444;
   font-weight: 600;
 }
 
-/* SELECT */
 .grupo-filtro select {
   width: 280px;
+  max-width: 100%;
   height: 50px;
   border-radius: 10px;
   border: 1px solid #d5d5d5;
   padding: 0 15px;
   font-size: 14px;
-  background: white;
+  background: #ffffff;
   outline: none;
 }
 
-/* BOTONES */
+/* Select de municipio más ancho */
+.filtros-panel .grupo-filtro:first-child select {
+  width: 420px;
+  min-width: 420px;
+}
+
 .botones-movimiento {
   display: flex;
   gap: 14px;
@@ -156,17 +271,16 @@
   height: 50px;
   border-radius: 10px;
   border: 1px solid #d7d7d7;
-  background: white;
+  background: #ffffff;
   font-weight: 700;
   cursor: pointer;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .mov-btn:hover {
   transform: translateY(-1px);
 }
 
-/* ACTIVOS */
 .activo-alta {
   border: 2px solid #4caf50;
   color: #4caf50;
@@ -182,27 +296,35 @@
   color: #1697f6;
 }
 
-/* BUSCADOR */
+/* ==========================================================================
+   BUSCADOR Y FILTROS EXTRA
+========================================================================== */
+
 .search-container {
+  width: 100%;
+  max-width: 100%;
   margin-top: 18px;
   display: flex;
   gap: 15px;
+  flex-wrap: wrap;
+  box-sizing: border-box;
 }
 
 .search-container input {
   flex: 1;
+  min-width: 250px;
   height: 52px;
   border-radius: 10px;
   border: 1px solid #d8d8d8;
   padding: 0 20px;
   font-size: 14px;
   outline: none;
-  background: white;
+  background: #ffffff;
 }
 
-/* BOTON FILTROS */
 .mostrar-btn {
   width: 190px;
+  min-width: 190px;
   border-radius: 10px;
   border: 1px solid #d6ceb2;
   background: #efead8;
@@ -211,29 +333,22 @@
   cursor: pointer;
 }
 
-/* RESULTADOS */
-.resultados-box {
-  margin-top: 25px;
-  background: #1f1f1f;
-  color: #00ff88;
-  border-radius: 12px;
-  padding: 20px;
-  max-height: 450px;
-  overflow-y: auto;
-}
-
-.resultados-box pre {
-  margin: 0;
-  font-size: 13px;
-}
-
-/* FILTROS DE ESTATUS Y FECHAS */
 .extra-filtros {
+  max-width: 100%;
   margin-top: 20px;
   display: flex;
-  gap: 100px;
+  gap: 25px;
   flex-wrap: wrap;
   align-items: flex-end;
+  box-sizing: border-box;
+}
+
+.extra-filtros.oculto {
+  display: none;
+}
+
+.extra-filtros.activo {
+  display: flex;
 }
 
 .extra-group {
@@ -244,7 +359,7 @@
 
 .extra-group label {
   font-size: 14px;
-  color: #444;
+  color: #444444;
   font-weight: 600;
 }
 
@@ -255,7 +370,7 @@
   border-radius: 10px;
   border: 1px solid #d6d6d6;
   padding: 0 15px;
-  background: white;
+  background: #ffffff;
   font-size: 14px;
 }
 
@@ -267,11 +382,9 @@
 .limpiar-btn {
   width: 180px;
   height: 50px;
-  border: none;
   border-radius: 10px;
   border: 1px solid #d6ceb2;
   background: #efead8;
-  color: #8a7a44;
   color: #8a7a44;
   font-weight: 700;
   cursor: pointer;
@@ -283,82 +396,119 @@
   opacity: 0.9;
 }
 
-.extra-filtros.oculto {
-  display: none;
-}
+/* ==========================================================================
+   TABLAS Y TARJETAS DE RESUMEN
+========================================================================== */
 
-.extra-filtros.activo {
-  display: flex;
-}
-
-/* RESPONSIVE Filtrado Municipio */
-
-.filtrado-container {
+.tabla-container {
+  width: 100%;
   max-width: 100%;
   overflow-x: hidden;
+  box-sizing: border-box;
 }
 
-/* Panel de filtros adaptable */
-.filtros-panel {
-  width: 100%;
-  gap: 25px;
-}
-
-.grupo-filtro select {
-  max-width: 100%;
-}
-
-/* Buscador */
-.search-container {
-  width: 100%;
-  flex-wrap: wrap;
-}
-
-.search-container input {
-  min-width: 250px;
-}
-
-.mostrar-btn {
-  min-width: 190px;
-}
-
-/* Tablas de Alta, Baja y Consulta */
-.tabla-container,
 .tabla-box {
   width: 100%;
   max-width: 100%;
   overflow-x: auto;
+  box-sizing: border-box;
 }
 
 .tabla-estilizada {
-  min-width: 1100px;
+  width: 100%;
+  min-width: 980px;
+  table-layout: fixed;
 }
 
-/* Consulta con estilos inline */
 .filtrado-container table {
   min-width: 900px;
 }
 
-/* Tarjetas resumen */
 .tarjetas-resumen {
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 18px;
 }
 
 .tarjeta-resumen {
+  width: 100%;
+  min-width: 0;
   flex: 1 1 240px;
 }
 
-/* Pantallas medianas */
+/* Título "Movimientos de Alta / Baja / Consulta" más chico */
+.filtrado-container h1:not(.banner-title),
+.filtrado-container h2:not(.banner-title) {
+  font-size: 24px !important;
+  line-height: 1.1 !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+========================================================================== */
+
+@media (max-width: 1400px) {
+  .filtrado-container {
+    padding: 24px;
+  }
+
+  .filtros-panel {
+    gap: 24px;
+  }
+
+  .filtros-panel .grupo-filtro:first-child select {
+    width: 380px;
+    min-width: 380px;
+  }
+
+  .mov-btn {
+    min-width: 115px;
+  }
+
+  .tabla-estilizada {
+    min-width: 1050px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .filtros-panel {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+  }
+
+  .filtros-panel .grupo-filtro:first-child select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .botones-movimiento {
+    flex-wrap: wrap;
+  }
+
+  .search-container {
+    flex-wrap: wrap;
+  }
+
+  .mostrar-btn {
+    height: 52px;
+  }
+
+  .tabla-estilizada {
+    min-width: 1100px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .resumen-general-grid {
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
+  }
+}
+
 @media (max-width: 1024px) {
   .filtrado-container {
     padding: 22px;
-  }
-
-  .filtrado-title {
-    font-size: 34px;
   }
 
   .filtros-panel {
@@ -382,19 +532,30 @@
   }
 }
 
-/* Pantallas pequeñas */
 @media (max-width: 768px) {
   .filtrado-container {
     padding: 16px;
     border-radius: 14px;
   }
 
-  .filtrado-title {
-    font-size: 28px;
+  .filtrado-header-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
   }
 
-  .filtrado-description {
-    font-size: 13px;
+  .banner-content-right {
+    width: 100%;
+  }
+
+  .banner-stat-box {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .resumen-general-header span {
+    font-size: 18px;
   }
 
   .filtros-panel {
@@ -442,108 +603,333 @@
   }
 }
 
-.filtrado-container {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-  box-sizing: border-box;
-}
-
-.filtros-panel,
-.search-container,
-.extra-filtros {
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-.tabla-container {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
-  box-sizing: border-box;
-}
-
-.tabla-box {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: auto;
-  box-sizing: border-box;
-}
-
-.tabla-estilizada {
-  width: 100%;
-  min-width: 980px;
-  table-layout: fixed;
-}
-
-.tarjetas-resumen {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 18px;
-  width: 100%;
-}
-
-.tarjeta-resumen {
-  width: 100%;
-  min-width: 0;
-}
-
-@media (max-width: 1400px) {
-  .filtrado-container {
-    padding: 24px;
-  }
-
-  .filtros-panel {
-    gap: 30px;
-  }
-
-  .grupo-filtro select {
-    width: 240px;
-  }
-
-  .mov-btn {
-    min-width: 115px;
-  }
-
-  .tabla-estilizada {
-    min-width: 1050px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .filtros-panel {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 18px;
-  }
-
-  .botones-movimiento {
-    flex-wrap: wrap;
-  }
-
-  .search-container {
-    flex-wrap: wrap;
-  }
-
-  .mostrar-btn {
-    height: 52px;
-  }
-
-  .tabla-estilizada {
-    min-width: 1100px;
+@media (max-width: 640px) {
+  .resumen-general-grid {
+    grid-template-columns: 1fr;
   }
 }
 
 /* ==========================================================================
-   ANIMACIÓN DE ENTRADA SUAVE PARA TODA LA PANTALLA
+   ANIMACIÓN
 ========================================================================== */
+
 @keyframes aparecerPantalla {
   from {
     opacity: 0;
     transform: translateY(15px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* ==========================================
+   DARK MODE - FILTRADO POR MUNICIPIO
+   ========================================== */
+
+/* Contenedor principal */
+
+body.dark .filtrado-container {
+  background: var(--grey);
+  color: var(--text-primary);
+}
+
+
+/* Banner principal */
+
+body.dark .filtrado-header-banner {
+  background: linear-gradient(135deg, #751638 0%, #4a0f25 100%);
+  border-bottom-color: #806f43;
+  box-shadow: 0 10px 24px var(--shadow-dark);
+}
+
+body.dark .banner-subtitle,
+body.dark .banner-description {
+  color: #f1d8e2;
+}
+
+body.dark .banner-title {
+  color: #ffffff;
+}
+
+body.dark .banner-stat-box {
+  background: rgba(0, 0, 0, 0.24);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+body.dark .stat-icon,
+body.dark .stat-label,
+body.dark .stat-value {
+  color: #ffffff;
+}
+
+
+/* Resumen general de movimientos */
+
+body.dark .resumen-general-movimientos {
+  background: var(--surface);
+  border-color: var(--border-soft);
+  box-shadow: 0 10px 24px var(--shadow-dark);
+}
+
+body.dark .resumen-general-header span {
+  color: #f0a0bd;
+}
+
+body.dark .resumen-general-header p {
+  color: var(--text-secondary);
+}
+
+body.dark .resumen-general-card {
+  background: var(--surface-card);
+  border-color: var(--border);
+}
+
+body.dark .resumen-general-card strong {
+  color: var(--text-primary);
+}
+
+body.dark .resumen-general-card span {
+  color: var(--text-secondary);
+}
+
+body.dark .resumen-general-card.total {
+  background: #2d1d26;
+  border-color: #6b2a46;
+}
+
+body.dark .resumen-general-card.total .resumen-general-icon {
+  background: #4a1e31;
+  color: #f0a0bd;
+}
+
+body.dark .resumen-general-card.altas {
+  background: #16281f;
+  border-color: #285a40;
+}
+
+body.dark .resumen-general-card.altas .resumen-general-icon {
+  background: #1f4731;
+  color: #7dd3a6;
+}
+
+body.dark .resumen-general-card.bajas {
+  background: #30191d;
+  border-color: #653039;
+}
+
+body.dark .resumen-general-card.bajas .resumen-general-icon {
+  background: #4a2027;
+  color: #f29b9b;
+}
+
+body.dark .resumen-general-card.consultas {
+  background: #182235;
+  border-color: #304869;
+}
+
+body.dark .resumen-general-card.consultas .resumen-general-icon {
+  background: #21385c;
+  color: #8fb8ff;
+}
+
+
+/* Panel de filtros */
+
+body.dark .filtros-panel {
+  background: var(--surface);
+  border-color: var(--border-soft);
+}
+
+body.dark .grupo-filtro label {
+  color: var(--text-secondary);
+}
+
+body.dark .grupo-filtro select,
+body.dark .extra-group select,
+body.dark .extra-group input,
+body.dark .search-container input {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+body.dark .grupo-filtro select:focus,
+body.dark .extra-group select:focus,
+body.dark .extra-group input:focus,
+body.dark .search-container input:focus {
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .grupo-filtro select option {
+  background: var(--surface-card);
+  color: var(--text-primary);
+}
+
+body.dark .search-container input::placeholder,
+body.dark .extra-group input::placeholder {
+  color: var(--text-muted);
+}
+
+
+/* Botones de tipo de movimiento */
+
+body.dark .mov-btn {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .mov-btn:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+body.dark .activo-alta {
+  background: #16281f;
+  border-color: #3bc263;
+  color: #7dd3a6;
+}
+
+body.dark .activo-baja {
+  background: #30191d;
+  border-color: #ef6464;
+  color: #f29b9b;
+}
+
+body.dark .activo-consulta {
+  background: #182235;
+  border-color: #4c8dff;
+  color: #8fb8ff;
+}
+
+
+/* Botones de filtros */
+
+body.dark .mostrar-btn,
+body.dark .limpiar-btn {
+  background: #29231c;
+  border-color: #806f43;
+  color: #cdbd81;
+}
+
+body.dark .mostrar-btn:hover,
+body.dark .limpiar-btn:hover {
+  background: #352c21;
+  border-color: #9c8750;
+}
+
+
+/* Filtros extra */
+
+body.dark .extra-filtros {
+  background: transparent;
+}
+
+body.dark .extra-group label {
+  color: var(--text-secondary);
+}
+
+
+/* Sección de resultados / tablas */
+
+body.dark .tabla-container,
+body.dark .tabla-box {
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+body.dark .tabla-container h1,
+body.dark .tabla-container h2,
+body.dark .tabla-box h1,
+body.dark .tabla-box h2 {
+  color: var(--text-primary);
+}
+
+body.dark .tabla-container p,
+body.dark .tabla-box p {
+  color: var(--text-secondary);
+}
+
+body.dark .filtrado-container table {
+  background: var(--surface);
+  color: var(--text-secondary);
+}
+
+body.dark .filtrado-container table thead th,
+body.dark .tabla-estilizada th {
+  background: #751638;
+  color: #ffffff;
+  border-color: var(--border-soft);
+}
+
+body.dark .filtrado-container table tbody tr,
+body.dark .tabla-estilizada tbody tr {
+  background: var(--surface);
+}
+
+body.dark .filtrado-container table tbody tr:hover,
+body.dark .tabla-estilizada tbody tr:hover {
+  background: var(--surface-hover);
+}
+
+body.dark .filtrado-container table td,
+body.dark .tabla-estilizada td {
+  color: var(--text-secondary);
+  border-color: var(--border-soft);
+}
+
+
+/* Tarjetas resumen de Alta/Baja */
+
+body.dark .tarjeta-resumen {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+body.dark .tarjeta-resumen span,
+body.dark .tarjeta-resumen p {
+  color: var(--text-secondary);
+}
+
+
+/* Estados vacíos o textos auxiliares */
+
+body.dark .loading-state,
+body.dark .empty-state,
+body.dark .empty-state p {
+  color: var(--text-muted);
+}
+
+body.dark .empty-state i {
+  color: #665860;
+}
+
+
+/* Scroll horizontal */
+
+body.dark .tabla-box::-webkit-scrollbar,
+body.dark .filtrado-container::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+body.dark .tabla-box::-webkit-scrollbar-track,
+body.dark .filtrado-container::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+body.dark .tabla-box::-webkit-scrollbar-thumb,
+body.dark .filtrado-container::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+body.dark .tabla-box::-webkit-scrollbar-thumb:hover,
+body.dark .filtrado-container::-webkit-scrollbar-thumb:hover {
+  background: var(--wine-hover);
 }
