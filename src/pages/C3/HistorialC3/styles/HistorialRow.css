@@ -110,3 +110,405 @@
     background: #f8d7da;
     color: #842029;
 }
+
+/* ================================
+   BADGES EN MODO OSCURO
+   ================================ */
+
+body.dark .hist-badge-validado {
+  background: rgba(34, 197, 94, 0.18);
+  color: #86efac;
+  border: 1px solid rgba(34, 197, 94, 0.35);
+}
+
+body.dark .hist-badge-rechazado {
+  background: rgba(239, 68, 68, 0.18);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+body.dark .hist-badge-dictaminado {
+  background: rgba(59, 130, 246, 0.18);
+  color: #93c5fd;
+  border: 1px solid rgba(59, 130, 246, 0.35);
+}
+
+body.dark .hist-badge-pendiente {
+  background: rgba(245, 158, 11, 0.18);
+  color: #fcd34d;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+/* =====================================================
+   HISTORIAL C3 — MODO OSCURO UNIFICADO
+   Paleta Panel de Validación C3
+===================================================== */
+
+body.dark .hist-container {
+  --hist-bg: #111013;
+  --hist-card: #1d1b22;
+  --hist-card-soft: #26212a;
+  --hist-hover: #302a33;
+  --hist-border: #403742;
+  --hist-border-soft: #4b414d;
+  --hist-guinda: #7b1842;
+  --hist-guinda-hover: #922454;
+  --hist-text: #f4f1f5;
+  --hist-text-soft: #a99faa;
+
+  color: var(--hist-text);
+}
+
+/* ================================
+   TARJETAS DE ESTADÍSTICAS
+================================ */
+
+body.dark .hist-stats-panel,
+body.dark .hist-stats {
+  color: var(--hist-text);
+}
+
+body.dark .hist-stat-card {
+  background: var(--hist-card);
+  border-color: var(--hist-border);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+body.dark .hist-stat-card:hover {
+  background: var(--hist-card-soft);
+  border-color: var(--hist-border-soft);
+}
+
+body.dark .hist-stat-value,
+body.dark .hist-stat-info strong {
+  color: var(--hist-text);
+}
+
+body.dark .hist-stat-label,
+body.dark .hist-stat-info span,
+body.dark .hist-stat-info small {
+  color: var(--hist-text-soft);
+}
+
+/* Total procesados */
+
+body.dark .hist-card-total i,
+body.dark .hist-stat-card:nth-child(1) .hist-stat-icon {
+  background: rgba(123, 24, 66, 0.28);
+  color: #e5a8c1;
+}
+
+/* Validados */
+
+body.dark .hist-card-ok i,
+body.dark .hist-stat-card:nth-child(2) .hist-stat-icon {
+  background: rgba(55, 129, 94, 0.22);
+  color: #8ed0aa;
+}
+
+/* Rechazados */
+
+body.dark .hist-card-rej i,
+body.dark .hist-stat-card:nth-child(3) .hist-stat-icon {
+  background: rgba(168, 67, 73, 0.22);
+  color: #e9a0a4;
+}
+
+/* Mixtos */
+
+body.dark .hist-card-mix i {
+  background: rgba(178, 139, 65, 0.22);
+  color: #dfc181;
+}
+
+/* ================================
+   BUSCADOR PRINCIPAL
+================================ */
+
+body.dark .hist-search-wrap {
+  background: var(--hist-card);
+  border-color: var(--hist-border);
+  box-shadow: none;
+}
+
+body.dark .hist-search-wrap:focus-within {
+  border-color: #9b4568;
+  box-shadow: 0 0 0 3px rgba(123, 24, 66, 0.22);
+}
+
+body.dark .hist-search-wrap > i {
+  color: var(--hist-text-soft);
+}
+
+body.dark .hist-search-wrap input {
+  color: var(--hist-text);
+}
+
+body.dark .hist-search-wrap input::placeholder {
+  color: #817884;
+}
+
+/* Botón de filtros */
+
+body.dark .hist-search-filter-btn {
+  background: var(--hist-card-soft);
+  border-color: var(--hist-border-soft);
+  color: #d8a5ba;
+}
+
+body.dark .hist-search-filter-btn:hover {
+  background: #352d37;
+  border-color: #765065;
+}
+
+body.dark .hist-search-filter-btn.is-active {
+  background: linear-gradient(
+    135deg,
+    #922454 0%,
+    var(--hist-guinda) 100%
+  );
+  border-color: #a43c68;
+  color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(123, 24, 66, 0.28);
+}
+
+/* Botón limpiar búsqueda */
+
+body.dark .hist-search-clear {
+  background: #352d37;
+  color: #dba4ba;
+}
+
+body.dark .hist-search-clear:hover {
+  background: #453846;
+  color: #ffffff;
+}
+
+/* Botón refrescar */
+
+body.dark .hist-refresh-btn-small {
+  background: var(--hist-card);
+  border-color: var(--hist-border);
+  color: #d8a5ba;
+}
+
+body.dark .hist-refresh-btn-small:hover {
+  background: var(--hist-card-soft);
+  border-color: #765065;
+}
+
+/* ================================
+   PANEL DESPLEGABLE DE FILTROS
+================================ */
+
+body.dark .hist-filtros-panel {
+  background: var(--hist-card);
+  border-color: var(--hist-border);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.24);
+}
+
+body.dark .hist-filtro-group label {
+  color: var(--hist-text-soft);
+}
+
+body.dark .hist-filtro-group input,
+body.dark .hist-filtro-group select {
+  background: var(--hist-card-soft);
+  border-color: var(--hist-border-soft);
+  color: var(--hist-text);
+  color-scheme: dark;
+}
+
+body.dark .hist-filtro-group input::placeholder {
+  color: #817884;
+}
+
+body.dark .hist-filtro-group input:focus,
+body.dark .hist-filtro-group select:focus {
+  border-color: #9b4568;
+  box-shadow: 0 0 0 3px rgba(123, 24, 66, 0.2);
+}
+
+body.dark .hist-filtro-group select option {
+  background: var(--hist-card-soft);
+  color: var(--hist-text);
+}
+
+/* Botones del panel */
+
+body.dark .hist-btn-aplicar {
+  background: var(--hist-guinda);
+  color: #ffffff;
+  border: 1px solid var(--hist-guinda);
+}
+
+body.dark .hist-btn-aplicar:hover {
+  background: var(--hist-guinda-hover);
+  border-color: var(--hist-guinda-hover);
+}
+
+body.dark .hist-btn-limpiar {
+  background: var(--hist-card-soft);
+  color: var(--hist-text);
+  border-color: var(--hist-border-soft);
+}
+
+body.dark .hist-btn-limpiar:hover {
+  background: #352d37;
+  border-color: #665569;
+}
+
+/* ================================
+   CONTENEDOR Y TABLA
+================================ */
+
+body.dark .hist-card {
+  background: var(--hist-card);
+  border-color: var(--hist-border);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+}
+
+body.dark .hist-table {
+  color: var(--hist-text);
+}
+
+body.dark .hist-table thead {
+  background: var(--hist-guinda);
+  color: #ffffff;
+}
+
+body.dark .hist-table thead th {
+  color: #ffffff;
+  border-bottom-color: #96335c;
+}
+
+body.dark .hist-table tbody tr {
+  background: var(--hist-card);
+  border-bottom-color: var(--hist-border);
+}
+
+body.dark .hist-table tbody tr:nth-child(even) {
+  background: #211e25;
+}
+
+body.dark .hist-table tbody tr:hover {
+  background: var(--hist-hover);
+}
+
+body.dark .hist-table tbody td {
+  color: var(--hist-text);
+}
+
+/* ================================
+   TEXTOS DE CELDAS
+================================ */
+
+body.dark .hist-solicitud-cell strong {
+  color: #ffffff;
+}
+
+body.dark .hist-analista-cell span,
+body.dark .hist-fecha-cell span {
+  color: var(--hist-text);
+}
+
+body.dark .hist-solicitud-cell small,
+body.dark .hist-analista-cell small,
+body.dark .hist-fecha-cell small {
+  color: var(--hist-text-soft);
+}
+
+/* ================================
+   BADGES PRINCIPALES
+================================ */
+
+body.dark .hist-badge {
+  border: 1px solid transparent;
+}
+
+body.dark .hist-badge-validado {
+  background: rgba(55, 129, 94, 0.22);
+  color: #9ad7b3;
+  border-color: rgba(87, 164, 124, 0.38);
+}
+
+body.dark .hist-badge-rechazado {
+  background: rgba(168, 67, 73, 0.22);
+  color: #efaaae;
+  border-color: rgba(195, 91, 97, 0.38);
+}
+
+body.dark .hist-badge-dictaminado {
+  background: rgba(73, 101, 145, 0.24);
+  color: #adc4e8;
+  border-color: rgba(98, 132, 184, 0.4);
+}
+
+body.dark .hist-badge-pendiente {
+  background: rgba(178, 139, 65, 0.22);
+  color: #dfc181;
+  border-color: rgba(196, 159, 88, 0.4);
+}
+
+/* ================================
+   MINI ESTADÍSTICAS DE LA TABLA
+================================ */
+
+body.dark .hist-stat-total {
+  background: #353039;
+  color: #d4ced6;
+}
+
+body.dark .hist-stat-ok {
+  background: rgba(55, 129, 94, 0.22);
+  color: #9ad7b3;
+}
+
+body.dark .hist-stat-rej {
+  background: rgba(168, 67, 73, 0.22);
+  color: #efaaae;
+}
+
+/* ================================
+   ESTADOS CARGANDO Y VACÍO
+================================ */
+
+body.dark .hist-loading,
+body.dark .hist-empty {
+  background: var(--hist-card);
+  border-color: var(--hist-border);
+  color: var(--hist-text);
+}
+
+body.dark .hist-loading i {
+  color: #d69ab3;
+}
+
+body.dark .hist-empty i {
+  color: #817884;
+}
+
+body.dark .hist-empty small {
+  color: var(--hist-text-soft);
+}
+
+/* ================================
+   SCROLLBAR
+================================ */
+
+body.dark .hist-card {
+  scrollbar-color: #554b59 #17151a;
+}
+
+body.dark .hist-card::-webkit-scrollbar-track {
+  background: #17151a;
+}
+
+body.dark .hist-card::-webkit-scrollbar-thumb {
+  background: #554b59;
+  border: 2px solid #17151a;
+}
+
+body.dark .hist-card::-webkit-scrollbar-thumb:hover {
+  background: #706274;
+}
