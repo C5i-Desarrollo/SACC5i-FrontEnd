@@ -398,3 +398,558 @@
   font-weight: 700;
   font-size: 13px;
 }
+
+/* ==========================================
+   TABLA BAJA / MOVIMIENTOS
+   ========================================== */
+
+.tabla-container {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 20px;
+  border: 1px solid #d6d6d6;
+  margin-top: 20px;
+  box-sizing: border-box;
+}
+
+.header-tabla {
+  margin-bottom: 20px;
+}
+
+.subtitulo {
+  color: #8a1538;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.header-tabla h1 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.1;
+  color: #222222;
+}
+
+.tabla-box {
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  overflow-x: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tabla-estilizada {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.tabla-estilizada thead {
+  background: #8a1538;
+  color: #ffffff;
+}
+
+.tabla-estilizada th {
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: middle;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.tabla-estilizada td {
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: middle;
+  border-bottom: 1px solid #eeeeee;
+  color: #444444;
+  background: #ffffff;
+  word-break: break-word;
+}
+
+.tabla-estilizada tbody tr:hover td {
+  background: #fafafa;
+}
+
+.btn-detalles {
+  border: 1px solid #8a1538;
+  background: #ffffff;
+  color: #8a1538;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.btn-detalles:hover {
+  background: #8a1538;
+  color: #ffffff;
+}
+
+
+/* ==========================================
+   MODAL DETALLE BAJA
+   ========================================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.modal-baja {
+  width: 850px;
+  max-width: 95%;
+  max-height: 90vh;
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  background: #7a1235;
+  color: #ffffff;
+  padding: 18px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.btn-cerrar {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modal-body {
+  padding: 30px;
+  overflow-y: auto;
+}
+
+.modal-body h4 {
+  margin-top: 18px;
+  margin-bottom: 12px;
+  color: #111827;
+}
+
+.titulo-seccion {
+  font-size: 15px;
+  font-weight: 700;
+  color: #7a1235;
+  margin-top: 25px;
+  margin-bottom: 18px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #ececec;
+}
+
+.detalle-grid,
+.info-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  row-gap: 16px;
+  column-gap: 30px;
+  margin-bottom: 25px;
+}
+
+.detalle-grid span:first-child,
+.modal-baja .label {
+  font-weight: 700;
+  color: #374151;
+  letter-spacing: 0.2px;
+}
+
+.modal-baja .valor {
+  color: #111827;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.modal-body textarea,
+.campo-observaciones {
+  width: 100%;
+  min-height: 120px;
+  resize: none;
+  border: 1px solid #d8d8d8;
+  border-radius: 10px;
+  padding: 14px;
+  background: #fafafa;
+  color: #111827;
+  font-size: 14px;
+  margin-top: 10px;
+  box-sizing: border-box;
+}
+
+.modal-footer,
+.contenedor-botones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  padding-top: 20px;
+  margin-top: 30px;
+  border-top: 1px solid #ececec;
+}
+
+.btn-modal,
+.btn-pdf,
+.btn-guardar,
+.btn-cancelar,
+.btn-cerrar-modal {
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-pdf {
+  background: #7a1235;
+  color: #ffffff;
+  border: none;
+}
+
+.btn-pdf:hover {
+  background: #64102c;
+}
+
+.btn-guardar {
+  background: #f4f4f4;
+  color: #333333;
+  border: 1px solid #d6d6d6;
+}
+
+.btn-guardar:hover {
+  background: #ebebeb;
+}
+
+.btn-cancelar,
+.btn-cerrar-modal {
+  background: #ffffff;
+  color: #555555;
+  border: 1px solid #d6d6d6;
+}
+
+.btn-cancelar:hover,
+.btn-cerrar-modal:hover {
+  background: #f5f5f5;
+}
+
+
+/* ==========================================
+   BADGES
+   ========================================== */
+
+.badge-manual {
+  display: inline-block;
+  background: rgba(122, 18, 53, 0.12);
+  color: #7a1235;
+  border: 1px solid rgba(122, 18, 53, 0.35);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.badge-sistema {
+  display: inline-block;
+  background: rgba(162, 146, 97, 0.16);
+  color: #6f5f2d;
+  border: 1px solid rgba(162, 146, 97, 0.45);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+
+/* ==========================================
+   DARK MODE - TABLA BAJA / MOVIMIENTOS
+   ========================================== */
+
+body.dark .tabla-container {
+  background: var(--surface);
+  border-color: var(--border-soft);
+  color: var(--text-primary);
+}
+
+body.dark .header-tabla h1 {
+  color: var(--text-primary);
+}
+
+body.dark .subtitulo {
+  color: #f0a0bd;
+}
+
+body.dark .tabla-box {
+  background: var(--surface-card);
+  box-shadow: 0 10px 24px var(--shadow-dark);
+}
+
+body.dark .tabla-estilizada {
+  background: var(--surface-card);
+}
+
+body.dark .tabla-estilizada thead {
+  background: #751638;
+  color: #ffffff;
+}
+
+body.dark .tabla-estilizada th {
+  color: #ffffff;
+  border-color: var(--border-soft);
+}
+
+body.dark .tabla-estilizada td {
+  background: var(--surface-card);
+  color: var(--text-secondary);
+  border-bottom-color: var(--border-soft);
+}
+
+body.dark .tabla-estilizada tbody tr:hover td {
+  background: var(--surface-hover);
+}
+
+body.dark .btn-detalles {
+  background: var(--surface-card);
+  border-color: var(--wine-hover);
+  color: #d16b92;
+}
+
+body.dark .btn-detalles:hover {
+  background: var(--wine-soft);
+  border-color: #d16b92;
+  color: #f0a0bd;
+}
+
+
+/* ==========================================
+   DARK MODE - MODAL DETALLE BAJA
+   ========================================== */
+
+body.dark .modal-overlay {
+  background: rgba(0, 0, 0, 0.65);
+}
+
+body.dark .modal-baja {
+  background: var(--surface);
+  color: var(--text-primary);
+  box-shadow: 0 18px 44px var(--shadow-dark);
+}
+
+body.dark .modal-header {
+  background: #751638;
+  color: #ffffff;
+}
+
+body.dark .btn-cerrar {
+  color: #ffffff;
+}
+
+body.dark .modal-body {
+  background: var(--surface);
+}
+
+body.dark .modal-body h4 {
+  color: var(--text-primary);
+}
+
+body.dark .titulo-seccion {
+  color: #f0a0bd;
+  border-bottom-color: var(--border-soft);
+}
+
+body.dark .detalle-grid span:first-child,
+body.dark .modal-baja .label {
+  color: var(--text-secondary);
+}
+
+body.dark .modal-baja .valor {
+  color: var(--text-primary);
+}
+
+body.dark .modal-body textarea,
+body.dark .campo-observaciones {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+body.dark .modal-body textarea:focus,
+body.dark .campo-observaciones:focus {
+  outline: none;
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .modal-footer,
+body.dark .contenedor-botones {
+  border-top-color: var(--border-soft);
+}
+
+body.dark .btn-pdf {
+  background: var(--wine);
+  color: #ffffff;
+}
+
+body.dark .btn-pdf:hover {
+  background: var(--wine-hover);
+}
+
+body.dark .btn-guardar,
+body.dark .btn-cancelar,
+body.dark .btn-cerrar-modal {
+  background: var(--surface-card);
+  color: var(--text-secondary);
+  border-color: var(--border);
+}
+
+body.dark .btn-guardar:hover,
+body.dark .btn-cancelar:hover,
+body.dark .btn-cerrar-modal:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+
+/* ==========================================
+   DARK MODE - BADGES
+   ========================================== */
+
+body.dark .badge-manual {
+  background: #4a1e31;
+  color: #f0a0bd;
+  border-color: #8a1742;
+}
+
+body.dark .badge-sistema {
+  background: #29231c;
+  color: #cdbd81;
+  border-color: #806f43;
+}
+
+
+/* ==========================================
+   SCROLL
+   ========================================== */
+
+.tabla-box::-webkit-scrollbar,
+.modal-body::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+.tabla-box::-webkit-scrollbar-track,
+.modal-body::-webkit-scrollbar-track {
+  background: #f0eeee;
+  border-radius: 999px;
+}
+
+.tabla-box::-webkit-scrollbar-thumb,
+.modal-body::-webkit-scrollbar-thumb {
+  background: #c9b6be;
+  border-radius: 999px;
+}
+
+.tabla-box::-webkit-scrollbar-thumb:hover,
+.modal-body::-webkit-scrollbar-thumb:hover {
+  background: #8a1538;
+}
+
+body.dark .tabla-box::-webkit-scrollbar-track,
+body.dark .modal-body::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+body.dark .tabla-box::-webkit-scrollbar-thumb,
+body.dark .modal-body::-webkit-scrollbar-thumb {
+  background: var(--border);
+}
+
+body.dark .tabla-box::-webkit-scrollbar-thumb:hover,
+body.dark .modal-body::-webkit-scrollbar-thumb:hover {
+  background: var(--wine-hover);
+}
+
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+
+@media (max-width: 768px) {
+  .tabla-container {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .header-tabla h1 {
+    font-size: 22px;
+  }
+
+  .tabla-box {
+    padding: 14px;
+  }
+
+  .tabla-estilizada {
+    min-width: 900px;
+  }
+
+  .modal-baja {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .modal-header {
+    padding: 16px 20px;
+  }
+
+  .modal-header h3 {
+    font-size: 17px;
+  }
+
+  .modal-body {
+    padding: 20px;
+  }
+
+  .detalle-grid,
+  .info-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .modal-footer,
+  .contenedor-botones {
+    flex-direction: column;
+  }
+
+  .btn-modal,
+  .btn-pdf,
+  .btn-guardar,
+  .btn-cancelar,
+  .btn-cerrar-modal,
+  .btn-detalles {
+    width: 100%;
+  }
+}
