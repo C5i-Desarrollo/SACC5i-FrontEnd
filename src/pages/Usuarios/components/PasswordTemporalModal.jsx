@@ -11,11 +11,13 @@ import {
   FiCheckCircle,
   FiXCircle,
   FiAlertCircle,
-  FiUser
+  FiUser,
+  FiUserCheck
 } from 'react-icons/fi';
 import '../styles/PasswordTemporalModal.css';
 
-const DURACIONES = [1, 3, 7, 15, 30, 60, 90];
+// CAMBIO: Ahora permite elegir exactamente 1, 3, 7, 10, 30 y 40 días
+const DURACIONES = [1, 3, 7, 10, 30, 40];
 
 const ACTION_TEXT = {
   generada: 'Contraseña temporal generada',
@@ -68,6 +70,7 @@ export default function PasswordTemporalModal({
 }) {
   const [duracionDias, setDuracionDias] = useState('7');
   const [motivo, setMotivo] = useState('Cobertura por vacaciones');
+  const [usuarioTemporal, setUsuarioTemporal] = useState(''); // CAMBIO: Guardar el nuevo usuario
   const [motivoRevocacion, setMotivoRevocacion] = useState('');
 
   const accesoActivo = estado?.acceso_activo || null;
@@ -77,6 +80,7 @@ export default function PasswordTemporalModal({
     if (!open) return;
     setDuracionDias('7');
     setMotivo('Cobertura por vacaciones');
+    setUsuarioTemporal('');
     setMotivoRevocacion('');
   }, [open, usuario?.id]);
 
@@ -84,9 +88,14 @@ export default function PasswordTemporalModal({
 
   const handleGenerate = (event) => {
     event.preventDefault();
+    if (!usuarioTemporal.trim()) {
+      alert('Debes ingresar un nombre o usuario para la persona que lo ocupará temporalmente');
+      return;
+    }
     onGenerate({
       duracion_dias: Number(duracionDias),
-      motivo: String(motivo || '').trim() || undefined
+      motivo: String(motivo || '').trim() || undefined,
+      usuario_temporal: String(usuarioTemporal || '').trim()
     });
   };
 
@@ -133,8 +142,24 @@ export default function PasswordTemporalModal({
             </div>
 
             <form className="uptm-grid" onSubmit={handleGenerate}>
+              <div className="uptm-field uptm-field-full">
+                <label>Usuario / Nombre de la persona delegada *</label>
+                <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+                  <FiUserCheck style={{ position: 'absolute', left: '10px', color: '#666' }} />
+                  <input
+                    type="text"
+                    style={{ paddingLeft: '32px', width: '100%' }}
+                    value={usuarioTemporal}
+                    onChange={(e) => setUsuarioTemporal(e.target.value)}
+                    placeholder="Ej. Roberto Gómez - Cubre turno"
+                    disabled={Boolean(accesoActivo) || loading || processing}
+                    required
+                  />
+                </div>
+              </div>
+
               <div className="uptm-field">
-                <label>Duración (días)</label>
+                <label>Duración (máximo 40 días)</label>
                 <select
                   value={duracionDias}
                   onChange={(e) => setDuracionDias(e.target.value)}
@@ -142,7 +167,7 @@ export default function PasswordTemporalModal({
                 >
                   {DURACIONES.map((dias) => (
                     <option key={dias} value={dias}>
-                      {dias} día{dias === 1 ? '' : 's'}
+                      {dias} día{dias === 1 ? '' : 's'} {dias === 40 ? '(Límite máximo)' : ''}
                     </option>
                   ))}
                 </select>
@@ -153,7 +178,7 @@ export default function PasswordTemporalModal({
                 <textarea
                   value={motivo}
                   onChange={(e) => setMotivo(e.target.value)}
-                  rows={3}
+                  rows={2}
                   placeholder="Ej. Cobertura por vacaciones del titular"
                   disabled={Boolean(accesoActivo) || loading || processing}
                 />
@@ -184,11 +209,14 @@ export default function PasswordTemporalModal({
                 Compártela por un canal seguro. Solo se mostrará completa en este momento.
               </p>
               <div className="uptm-secret-row">
-                <code>{generatedPassword}</code>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  <small style={{ color: '#666' }}>Usuario temporal: <strong>{accesoActivo?.usuario_temporal || usuarioTemporal}</strong></small>
+                  <code>Contraseña: {generatedPassword}</code>
+                </div>
                 <button
                   type="button"
                   className="uptm-btn uptm-btn-copy"
-                  onClick={() => onCopyPassword(generatedPassword)}
+                  onClick={() => onCopyPassword(`Usuario: ${accesoActivo?.usuario_temporal || usuarioTemporal} | Contraseña: ${generatedPassword}`)}
                 >
                   <FiCopy size={15} /> Copiar
                 </button>
@@ -203,6 +231,15 @@ export default function PasswordTemporalModal({
             ) : accesoActivo ? (
               <>
                 <div className="uptm-status-grid">
+                  {accesoActivo.usuario_temporal && (
+                    <div style={{ gridColumn: '1 / -1', background: '#f5f5f5', padding: '8px', borderRadius: '6px', borderLeft: '3px solid #007bff' }}>
+                      <span className="uptm-label">Persona delegada actualmente:</span>
+                      <strong style={{ fontSize: '14px', color: '#333' }}>
+                        <FiUserCheck style={{ marginRight: '6px', verticalAlign: 'middle' }} />
+                        {accesoActivo.usuario_temporal}
+                      </strong>
+                    </div>
+                  )}
                   <div>
                     <span className="uptm-label">Creada por</span>
                     <strong>{accesoActivo.creado_por_nombre || 'Sistema'}</strong>

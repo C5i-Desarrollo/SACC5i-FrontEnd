@@ -394,14 +394,15 @@ export default function Usuarios({ setPageTitle }) {
     setPasswordTemporalGenerada('');
   };
 
-  const handleGenerarPasswordTemporal = async ({ duracion_dias, motivo }) => {
+  const handleGenerarPasswordTemporal = async ({ duracion_dias, motivo, usuario_temporal }) => {
     if (!usuarioTemporal?.id) return;
 
     setTemporalProcessing(true);
     try {
       const response = await generarPasswordTemporal(usuarioTemporal.id, {
         duracion_dias,
-        motivo
+        motivo,
+        usuario_temporal // 👈 AGREGAMOS ESTO AQUÍ
       });
 
       const passwordTemporal = response?.data?.password_temporal || '';
@@ -411,7 +412,7 @@ export default function Usuarios({ setPageTitle }) {
 
       setPasswordTemporalGenerada(passwordTemporal);
 
-      mostrarMensaje(`Contraseña temporal generada. Vigencia hasta: ${expiraEn}`, 'success');
+      mostrarMensaje(`Contraseña temporal generada para '${usuario_temporal}'. Vigencia hasta: ${expiraEn}`, 'success');
       showNotification('Contraseña temporal generada', 'success');
 
       await cargarEstadoPasswordTemporal(usuarioTemporal.id);
