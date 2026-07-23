@@ -933,3 +933,29 @@ body.dark .tabla-box::-webkit-scrollbar-thumb:hover,
 body.dark .filtrado-container::-webkit-scrollbar-thumb:hover {
   background: var(--wine-hover);
 }
+
+
+.municipio-select__control {
+  cursor: pointer !important;
+}
+
+/* Área donde se escribe */
+.municipio-select__input-container,
+.municipio-select__input-container input {
+  cursor: text !important;
+}
+
+/* Botón X para borrar */
+.municipio-select__clear-indicator {
+  cursor: pointer !important;
+}
+
+/* Flecha para desplegar */
+.municipio-select__dropdown-indicator {
+  cursor: pointer !important;
+}
+
+/* Municipios de la lista */
+.municipio-select__option {
+  cursor: pointer !important;
+}
