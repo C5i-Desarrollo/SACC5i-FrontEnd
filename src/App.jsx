@@ -171,9 +171,9 @@ function DashboardLayout() {
     }
   }, [isDireccion, selectedAnalista]);
 
-  useEffect(() => {
-    setPageTitle(null);
-  }, [activeSection]);
+  // useEffect(() => {
+  //   setPageTitle(null);
+  // }, [activeSection]);
 
   useEffect(() => {
     if (!isSidebarAnimating) return undefined;
