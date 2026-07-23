@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import FiltrosControles from "./FiltrosControles";
 import TablaAlta from "./TablaAlta";
 import TablaBaja from "./TablaBaja";
+import { useAuth } from "../../context/AuthContext";
 
 import {
   TablaConsultaResumen,
@@ -16,15 +17,21 @@ import { obtenerAltasRegistradas } from "../../services/altaService";
 import { obtenerBajasRegistradas, obtenerBajasEditables } from "../../services/bajaService";
 
 export default function TestMunicipio({ setPageTitle }) {
-  useEffect(() => {
-    if (setPageTitle) {
-      setPageTitle({
-        titulo: "Dashboard",
-        subtitulo: "Selecciona un municipio y tipo de movimiento para revisar los trámites registrados",
-        icon: <FiFilter className="nav-icon-highlight" />
-      });
-    }
-  }, [setPageTitle]);
+  const { user } = useAuth();
+useEffect(() => {
+  if (!setPageTitle) return;
+
+  setPageTitle({
+    titulo: user?.rol === "direccion"
+      ? "Dashboard"
+      : "Filtrado Municipio",
+    subtitulo:
+      "Selecciona un municipio y tipo de movimiento para revisar los trámites registrados",
+    icon: <FiFilter className="nav-icon-highlight" />
+  });
+
+  return () => setPageTitle(null);
+}, [setPageTitle, user]);
   const [municipioNombre, setMunicipioNombre] = useState("");
   const [tipoTramite, setTipoTramite] = useState("alta");
   const [terminoBusqueda, setTerminoBusqueda] = useState("");
