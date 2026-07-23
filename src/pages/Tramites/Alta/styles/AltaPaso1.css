@@ -658,3 +658,52 @@
     font-size: 18px;
   }
 }
+
+/* =====================================================
+   MODO OSCURO - MODAL CAMBIOS PENDIENTES
+===================================================== */
+
+body.dark .alta-confirm-overlay{
+    background:rgba(0,0,0,.70);
+}
+
+body.dark .alta-confirm-card{
+    background:#1d1b22;
+    border:1px solid #403742;
+    box-shadow:0 12px 35px rgba(0,0,0,.55);
+}
+
+body.dark .alta-confirm-head{
+    background:#7b1842;
+    border-bottom:1px solid #403742;
+}
+
+body.dark .alta-confirm-head h4{
+    color:#fff;
+}
+
+body.dark .alta-confirm-body{
+    color:#f4f1f5;
+}
+
+body.dark .alta-confirm-actions{
+    border-top:1px solid #403742;
+}
+
+body.dark .alta-confirm-actions .btn-secondary{
+    background:#26212a;
+    color:#f4f1f5;
+    border:1px solid #403742;
+}
+
+body.dark .alta-confirm-actions .btn-secondary:hover{
+    background:#34303a;
+}
+
+body.dark .alta-confirm-danger{
+    background:#7b1842;
+}
+
+body.dark .alta-confirm-danger:hover{
+    background:#922454;
+}

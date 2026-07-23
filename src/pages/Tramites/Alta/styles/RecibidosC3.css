@@ -1806,8 +1806,8 @@ body.dark .rc3-mail-shell {
 }
 
 body.dark .rc3-mail-list-panel {
-  border-right-color: #383751;
-  background: linear-gradient(180deg, #27263d 0%, #222238 100%);
+  background: #1d1b22;
+  border-right-color: #403742;
 }
 
 body.dark .rc3-mail-list-standalone {
@@ -1817,8 +1817,8 @@ body.dark .rc3-mail-list-standalone {
 
 body.dark .rc3-mail-list-header,
 body.dark .rc3-paginacion-mail {
-  border-color: #393852;
-  background: #2d2b45;
+  background: #1d1b22;
+  border-color: #403742;
 }
 
 body.dark .rc3-mail-table-title {
@@ -1856,17 +1856,21 @@ body.dark .rc3-mail-range {
 }
 
 body.dark .rc3-mail-row {
-  border-bottom-color: #383751;
-  background: #26253c;
+  background: #1d1b22;
+  border-bottom-color: #403742;
+}
+
+body.dark .rc3-mail-row:nth-child(even) {
+  background: #26212a;
 }
 
 body.dark .rc3-mail-row:hover {
-  background: #312f49;
+  background: #34303a;
 }
 
 body.dark .rc3-mail-row.is-active {
-  background: #393455;
-  box-shadow: inset 3px 0 0 #c2b29a;
+  background: #302a33;
+  box-shadow: inset 3px 0 0 #7b1842;
 }
 
 body.dark .rc3-mail-row-check {
@@ -1933,7 +1937,7 @@ body.dark .rc3-row-action-disabled {
 }
 
 body.dark .rc3-mail-detail-panel {
-  background: linear-gradient(180deg, #24233a 0%, #222236 100%);
+  background: #1d1b22;
 }
 
 body.dark .rc3-mail-detail-header {
@@ -1957,9 +1961,9 @@ body.dark .rc3-mail-secondary-btn,
 body.dark .rc3-mail-detail-card,
 body.dark .rc3-mail-observaciones,
 body.dark .rc3-mail-extra-data {
-  border-color: #42405c;
-  background: #2d2b45;
-  color: #ece4d8;
+  background: #26212a;
+  border-color: #403742;
+  color: #f4f1f5;
 }
 
 body.dark .rc3-mail-secondary-btn {
@@ -1988,8 +1992,8 @@ body.dark .rc3-mail-detail-empty {
 }
 
 body.dark .rc3-mail-extra-item {
-  border-color: #4a4866;
-  background: #35334c;
+  background: #302a33;
+  border-color: #403742;
 }
 
 body.dark .rc3-empty-mail {
@@ -2219,8 +2223,10 @@ body.dark .rc3-view-switch-btn:hover {
   color: #f4dcc1;
 }
 
-body.dark .rc3-detail-modal-backdrop {
-  background: rgba(8, 8, 12, 0.68);
+body.dark .rc3-detail-modal {
+  background: #1d1b22;
+  border-color: #403742;
+  box-shadow: 0 32px 60px rgba(0, 0, 0, 0.58);
 }
 
 body.dark .rc3-detail-modal {
@@ -2238,4 +2244,234 @@ body.dark .rc3-detail-modal-close:hover {
   border-color: #a58a75;
   background: #403a55;
   color: #f4dcc1;
+}
+
+/* ==========================================
+   DARK MODE - PANEL DE FILTROS
+========================================== */
+
+body.dark .rc3-filtros-panel{
+    background:#1d1b22;
+    border:1px solid #403742;
+    box-shadow:0 8px 20px rgba(0,0,0,.25);
+}
+
+body.dark .rc3-filtro-group label{
+    color:#a99faa;
+}
+
+body.dark .rc3-filtro-group select{
+    background:#26212a;
+    color:#f4f1f5;
+    border:1px solid #403742;
+}
+
+body.dark .rc3-filtro-group select:focus{
+    border-color:#7b1842;
+    box-shadow:0 0 0 3px rgba(123,24,66,.18);
+}
+
+body.dark .rc3-filtro-group select option{
+    background:#26212a;
+    color:#f4f1f5;
+}
+
+body.dark .rc3-filtro-aplicar{
+    background:#7b1842;
+    color:#fff;
+}
+
+body.dark .rc3-filtro-aplicar:hover{
+    background:#922454;
+}
+
+body.dark .rc3-filtro-limpiar{
+    background:#26212a;
+    color:#f4f1f5;
+    border:1px solid #403742;
+}
+
+body.dark .rc3-filtro-limpiar:hover{
+    background:#34303a;
+    border-color:#4a4761;
+}
+
+/* Modal principal */
+body.dark .rc3-detail-modal {
+  background: #1d1b22 !important;
+  border: 1px solid #403742 !important;
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Contenido general del modal */
+body.dark .rc3-mail-detail,
+body.dark .rc3-mail-detail-panel {
+  background: #1d1b22 !important;
+  color: #f4f1f5 !important;
+}
+
+/* Tarjetas internas */
+body.dark .rc3-mail-detail-card,
+body.dark .rc3-mail-observaciones,
+body.dark .rc3-mail-extra-data {
+  background: #26212a !important;
+  border: 1px solid #403742 !important;
+  color: #f4f1f5 !important;
+}
+
+/* Separadores */
+body.dark .rc3-mail-detail-header {
+  border-bottom-color: #403742 !important;
+}
+
+/* Títulos y valores principales */
+body.dark .rc3-mail-detail-main h3,
+body.dark .rc3-mail-kv strong,
+body.dark .rc3-mail-observaciones p,
+body.dark .rc3-mail-extra-item strong {
+  color: #f4f1f5 !important;
+}
+
+/* Etiquetas y texto secundario */
+body.dark .rc3-mail-detail-caption,
+body.dark .rc3-mail-detail-meta,
+body.dark .rc3-mail-detail-card h4,
+body.dark .rc3-mail-observaciones h4,
+body.dark .rc3-mail-extra-data h4,
+body.dark .rc3-mail-kv span {
+  color: #a99faa !important;
+}
+
+/* Botones secundarios */
+body.dark .rc3-mail-secondary-btn {
+  background: #26212a !important;
+  border: 1px solid #403742 !important;
+  color: #f4f1f5 !important;
+}
+
+body.dark .rc3-mail-secondary-btn:hover {
+  background: #34303a !important;
+  border-color: #4a4761 !important;
+}
+
+/* Botón cerrar */
+body.dark .rc3-detail-modal-close {
+  background: #26212a !important;
+  border: 1px solid #403742 !important;
+  color: #f4f1f5 !important;
+}
+
+body.dark .rc3-detail-modal-close:hover {
+  background: #34303a !important;
+  border-color: #4a4761 !important;
+}
+
+body.dark .rc3-mail-row {
+  background: #1d1b22 !important;
+  border-bottom-color: #403742 !important;
+}
+
+body.dark .rc3-mail-row:nth-child(even) {
+  background: #26212a !important;
+}
+
+body.dark .rc3-mail-row:hover {
+  background: #34303a !important;
+}
+
+body.dark .rc3-mail-row.is-active {
+  background: #302a33 !important;
+  box-shadow: inset 3px 0 0 #7b1842 !important;
+}
+
+/* ============================================
+   CHIP "NUMERO DE OFICIO C3" - MODO OSCURO
+============================================ */
+
+body.dark .rc3-oficio-highlight{
+    background: #26212a !important;
+    border: 1px solid #403742 !important;
+    border-radius: 10px;
+}
+
+body.dark .rc3-oficio-highlight span{
+    color: #a99faa !important;
+}
+
+body.dark .rc3-oficio-highlight strong{
+    color: #f4f1f5 !important;
+}
+
+/* ==========================================
+   BOTÓN REVISIÓN DE REQUISITOS DESHABILITADO
+   MODO OSCURO
+========================================== */
+
+body.dark .rc3-btn-disabled {
+  background: #26212a !important;
+  color: #8f8791 !important;
+  border: 1px solid #403742 !important;
+  box-shadow: none !important;
+}
+
+body.dark .rc3-btn-disabled:hover {
+  background: #26212a !important;
+  color: #8f8791 !important;
+  border-color: #403742 !important;
+  cursor: not-allowed;
+}
+
+body.dark .rc3-btn-revision {
+  background: #7b1842 !important;
+  color: #ffffff !important;
+  border: 1px solid #7b1842 !important;
+}
+
+body.dark .rc3-btn-revision:hover:not(:disabled) {
+  background: #922454 !important;
+  border-color: #922454 !important;
+}
+
+/* =====================================================
+   BOTÓN REVISIÓN DE REQUISITOS DEL MODAL - MODO OSCURO
+===================================================== */
+
+/* Disponible */
+body.dark .rc3-detail-modal
+.rc3-mail-actions-bar
+.rc3-btn-revision {
+  background: #26212a !important;
+  color: #f4f1f5 !important;
+  border: 1px solid #403742 !important;
+  box-shadow: none !important;
+}
+
+/* Hover cuando sí se puede seleccionar */
+body.dark .rc3-detail-modal
+.rc3-mail-actions-bar
+.rc3-btn-revision:hover:not(:disabled) {
+  background: #34303a !important;
+  color: #ffffff !important;
+  border-color: #7b1842 !important;
+  box-shadow: none !important;
+}
+
+/* No disponible */
+body.dark .rc3-detail-modal
+.rc3-mail-actions-bar
+.rc3-btn-disabled {
+  background: #26212a !important;
+  color: #8f8791 !important;
+  border: 1px solid #403742 !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+/* Evitar que cambie al pasar el cursor si está deshabilitado */
+body.dark .rc3-detail-modal
+.rc3-mail-actions-bar
+.rc3-btn-disabled:hover {
+  background: #26212a !important;
+  color: #8f8791 !important;
+  border-color: #403742 !important;
 }
