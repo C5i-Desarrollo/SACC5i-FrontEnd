@@ -66,6 +66,7 @@ export default function AltaPaso2({
   nextEnabled = true,
   onComplete,
   isNuevaSolicitud = false,
+  bloquearRevisionRequisitos = false,
   regionNombre,
   regionId
 }) {
@@ -635,7 +636,8 @@ export default function AltaPaso2({
         <button
           className={`alta-btn-revision ${estaIniciandoRevision ? 'alta-btn-revision-loading' : ''}`}
           onClick={() => handleIniciarRevision(persona)}
-          disabled={estaIniciandoRevision}
+          disabled={estaIniciandoRevision || bloquearRevisionRequisitos}
+          title={bloquearRevisionRequisitos ? 'Acción deshabilitada para administradores' : 'Iniciar revisión de requisitos'}
         >
           {estaIniciandoRevision
             ? <><i className='bx bx-loader-alt bx-spin'></i> Iniciando...</>

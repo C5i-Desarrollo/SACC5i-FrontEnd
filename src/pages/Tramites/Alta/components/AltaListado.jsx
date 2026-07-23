@@ -4,10 +4,10 @@ import '../styles/AltaListado.css';
 
 const ITEMS_PER_PAGE = 10;
 
-export default function AltaListado({ 
-  solicitudes, 
-  loading, 
-  onNuevaSolicitud, 
+export default function AltaListado({
+  solicitudes,
+  loading,
+  onNuevaSolicitud,
   onVerSolicitud,
   onRefresh,
   regionNombre,
@@ -218,64 +218,64 @@ export default function AltaListado({
       </header>
 
       {(!hideLocalSearch || !hideToolbarActions) && (
-      <div className={`al-toolbar ${hideLocalSearch ? 'al-toolbar-only-actions' : ''}`}>
-        {!hideLocalSearch && (
-          <div className="al-search-box">
-            <i className='bx bx-search'></i>
-            <input
-              type="text"
-              placeholder="Buscar por numero de solicitud o municipio"
-              value={busquedaActiva}
-              onChange={(e) => {
-                if (usaBusquedaGlobal) {
-                  if (onSearchChange) onSearchChange(e.target.value);
-                } else {
-                  setBusquedaInterna(e.target.value);
-                }
-              }}
-            />
-            {busquedaActiva && (
-              <button
-                type="button"
-                className="al-search-clear"
-                aria-label="Limpiar busqueda"
-                onClick={() => {
+        <div className={`al-toolbar ${hideLocalSearch ? 'al-toolbar-only-actions' : ''}`}>
+          {!hideLocalSearch && (
+            <div className="al-search-box">
+              <i className='bx bx-search'></i>
+              <input
+                type="text"
+                placeholder="Buscar por numero de solicitud o municipio"
+                value={busquedaActiva}
+                onChange={(e) => {
                   if (usaBusquedaGlobal) {
-                    if (onSearchChange) onSearchChange('');
+                    if (onSearchChange) onSearchChange(e.target.value);
                   } else {
-                    setBusquedaInterna('');
+                    setBusquedaInterna(e.target.value);
+                  }
+                }}
+              />
+              {busquedaActiva && (
+                <button
+                  type="button"
+                  className="al-search-clear"
+                  aria-label="Limpiar busqueda"
+                  onClick={() => {
+                    if (usaBusquedaGlobal) {
+                      if (onSearchChange) onSearchChange('');
+                    } else {
+                      setBusquedaInterna('');
+                    }
+                  }}
+                >
+                  <i className='bx bx-x'></i>
+                </button>
+              )}
+            </div>
+          )}
+
+          {!hideToolbarActions && (
+            <div className="al-toolbar-actions">
+              <button
+                className={`al-filtros-btn ${mostrarFiltros ? 'al-filtros-btn-active' : ''}`}
+                onClick={() => {
+                  if (usaFiltrosExternos) {
+                    onShowFiltersExternalChange(!mostrarFiltros);
+                  } else {
+                    setMostrarFiltrosLocal(!mostrarFiltros);
                   }
                 }}
               >
-                <i className='bx bx-x'></i>
+                <i className='bx bx-slider-alt'></i>
+                {mostrarFiltros ? 'Ocultar filtros' : 'Mostrar filtros'}
               </button>
-            )}
-          </div>
-        )}
 
-        {!hideToolbarActions && (
-          <div className="al-toolbar-actions">
-            <button
-              className={`al-filtros-btn ${mostrarFiltros ? 'al-filtros-btn-active' : ''}`}
-              onClick={() => {
-                if (usaFiltrosExternos) {
-                  onShowFiltersExternalChange(!mostrarFiltros);
-                } else {
-                  setMostrarFiltrosLocal(!mostrarFiltros);
-                }
-              }}
-            >
-              <i className='bx bx-slider-alt'></i>
-              {mostrarFiltros ? 'Ocultar filtros' : 'Mostrar filtros'}
-            </button>
-
-            <button className="al-refresh-btn" onClick={handleRefresh} title="Refrescar listado">
-              <i className='bx bx-refresh'></i>
-              Actualizar
-            </button>
-          </div>
-        )}
-      </div>
+              <button className="al-refresh-btn" onClick={handleRefresh} title="Refrescar listado">
+                <i className='bx bx-refresh'></i>
+                Actualizar
+              </button>
+            </div>
+          )}
+        </div>
       )}
 
       {/* Panel de filtros */}
@@ -339,18 +339,18 @@ export default function AltaListado({
                 <td>
                   {solicitud.es_tramite_dependencia
                     ? <span className="al-badge al-badge-dependencia" title={solicitud.dependencia_nombre}>
-                        <i className='bx bx-buildings'></i> {solicitud.dependencia_nombre || 'Dependencia'}
-                      </span>
+                      <i className='bx bx-buildings'></i> {solicitud.dependencia_nombre || 'Dependencia'}
+                    </span>
                     : <span className="al-badge al-badge-municipio">
-                        <i className='bx bx-map-pin'></i> Municipio
-                      </span>
+                      <i className='bx bx-map-pin'></i> Municipio
+                    </span>
                   }
                 </td>
                 <td>{solicitud.municipio_nombre || 'N/A'}</td>
                 <td>{solicitud.fecha_solicitud ? new Date(solicitud.fecha_solicitud).toLocaleDateString() : 'N/A'}</td>
                 <td className="text-center">{solicitud.total_personas || 0}</td>
                 <td>
-                  <button 
+                  <button
                     className="al-btn-detalle"
                     onClick={() => onVerSolicitud(solicitud.id)}
                   >
