@@ -547,6 +547,18 @@
   }
 }
 
+.al-btn-detalle:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: grayscale(0.25);
+  box-shadow: none;
+}
+
+.al-btn-detalle:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
 /* ==========================================
    DARK MODE - ALTA LISTADO
    ========================================== */

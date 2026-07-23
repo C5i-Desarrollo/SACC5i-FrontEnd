@@ -415,7 +415,7 @@ export default function Alta({ setPageTitle }) {
               )}
             </div>
 
-            {isStep('listado') && (
+            {isStep('listado') && !esAdminMultiRegion && (
               <button className="alta-btn-nueva" onClick={handleNuevaSolicitud}>
                 <MdAdd size={20} /> Nueva Solicitud
               </button>
@@ -546,6 +546,7 @@ export default function Alta({ setPageTitle }) {
             nextEnabled={false}
             onComplete={handleComplete}
             isNuevaSolicitud={esNuevaTramite}
+            bloquearRevisionRequisitos={esAdminMultiRegion}
             regionNombre={(solicitudPaso2 || solicitudActual)?.region_nombre || (esAdminMultiRegion ? regionSeleccionadaNombre : user?.region_nombre)}
             regionId={(solicitudPaso2 || solicitudActual)?.region_id || (esAdminMultiRegion ? regionActivaId : user?.region_id)}
           />
