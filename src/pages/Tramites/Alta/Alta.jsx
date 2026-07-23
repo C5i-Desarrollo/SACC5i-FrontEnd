@@ -1,4 +1,5 @@
-import { useEffect, useState, useCallback, useMemo } from 'react';
+import { useEffect, useState, useCallback, useMemo, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
 import { useNotification } from '../../../context/NotificationContext';
 import { useAltaSolicitudes } from '../../../hooks/alta/useAltaSolicitudes';
@@ -6,10 +7,10 @@ import { useAltaCatalogos } from '../../../hooks/alta/useAltaCatalogos';
 import { useAltaSteps } from '../../../hooks/alta/useAltaSteps';
 
 // Iconos
-import { 
-  MdAssignment, 
-  MdAdd, 
-  MdDescription, 
+import {
+  MdAssignment,
+  MdAdd,
+  MdDescription,
   MdMoveToInbox,
   MdHistory
 } from 'react-icons/md';
@@ -27,9 +28,13 @@ const UNSAVED_CHANGES_MESSAGE = 'Tienes cambios sin guardar en la solicitud de a
 export default function Alta({ setPageTitle }) {
   const { user } = useAuth();
   const { showNotification } = useNotification();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const solicitudNotificacionParam = searchParams.get('solicitud');
+  const personaNotificacionParam = searchParams.get('persona');
+  const solicitudNotificacionProcesadaRef = useRef(null);
   const esAdminMultiRegion = user?.rol === 'admin' || user?.rol === 'super_admin';
   const [selectedRegionId, setSelectedRegionId] = useState(() => (user?.region_id ? String(user.region_id) : ''));
-  
+
   const {
     solicitudes,
     solicitudActual,
@@ -134,18 +139,18 @@ export default function Alta({ setPageTitle }) {
   useEffect(() => {
     if (setPageTitle) {
       const timer = setTimeout(() => {
-      setPageTitle({
-        titulo: "Trámites de Alta",
-        subtitulo: "Gestión de solicitudes de alta de personal",
-        icon: <MdAssignment className="nav-icon-highlight" />
-      });
-    }, 0);
-   return () => {
-      clearTimeout(timer);
-      setPageTitle(null);
-    };
-  }
-}, [setPageTitle]);
+        setPageTitle({
+          titulo: "Trámites de Alta",
+          subtitulo: "Gestión de solicitudes de alta de personal",
+          icon: <MdAssignment className="nav-icon-highlight" />
+        });
+      }, 0);
+      return () => {
+        clearTimeout(timer);
+        setPageTitle(null);
+      };
+    }
+  }, [setPageTitle]);
 
   useEffect(() => {
     cargarSolicitudes();
@@ -222,18 +227,46 @@ export default function Alta({ setPageTitle }) {
     });
   }, []);
 
-  const handleVerSolicitud = async (id) => {
+  const handleVerSolicitud = useCallback(async (id) => {
     try {
       const solicitud = await obtenerSolicitud(id);
+
       if (esAdminMultiRegion && solicitud?.region_id) {
         setSelectedRegionId(String(solicitud.region_id));
       }
+
       setEsNuevaTramite(false);
+      setPaso1Draft(null);
+      setPaso2Draft(null);
+      setHasUnsavedPaso1(false);
+      setHasUnsavedPaso2(false);
+
       goToPaso2(solicitud);
     } catch (error) {
       showNotification('Error al cargar la solicitud', 'error');
     }
-  };
+  }, [obtenerSolicitud, esAdminMultiRegion, goToPaso2, showNotification]);
+
+  useEffect(() => {
+    if (!solicitudNotificacionParam) return;
+
+    const claveNotificacion = `${solicitudNotificacionParam}-${personaNotificacionParam || ''}`;
+
+    if (solicitudNotificacionProcesadaRef.current === claveNotificacion) {
+      return;
+    }
+
+    solicitudNotificacionProcesadaRef.current = claveNotificacion;
+
+    handleVerSolicitud(solicitudNotificacionParam).then(() => {
+      setSearchParams({}, { replace: true });
+    });
+  }, [
+    solicitudNotificacionParam,
+    personaNotificacionParam,
+    handleVerSolicitud,
+    setSearchParams
+  ]);
 
   const handleSubmitPaso1 = async (formData) => {
     const payload = esAdminMultiRegion
@@ -346,7 +379,7 @@ export default function Alta({ setPageTitle }) {
 
   return (
     <div className="alta-container">
-      
+
       {/* NAVEGACION TIPO GMAIL */}
       {isVistaBandeja && (
         <div className="alta-gmail-toolbar">
