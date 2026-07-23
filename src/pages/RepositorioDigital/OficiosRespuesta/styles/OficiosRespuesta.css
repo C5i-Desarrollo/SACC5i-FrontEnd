@@ -599,3 +599,392 @@
     width: 100%;
   }
 }
+
+/* ==========================================
+   DARK MODE - ORV
+   ========================================== */
+
+/* Base */
+
+body.dark .orv-shell,
+body.dark .orv-card {
+  background: transparent;
+  color: var(--text-primary);
+}
+
+body.dark .orv-head h2 {
+  color: #f0a0bd;
+}
+
+body.dark .orv-head p {
+  color: var(--text-secondary);
+}
+
+
+/* Select año */
+
+body.dark .orv-year-select {
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23f0a0bd' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 12px 12px;
+  padding-right: 36px;
+}
+
+body.dark .orv-year-select:focus {
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .orv-year-select option {
+  background: var(--surface-card);
+  color: var(--text-primary);
+}
+
+
+/* Buscador */
+
+body.dark .orv-search-wrap {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+}
+
+body.dark .orv-search-wrap:focus-within {
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .orv-search-wrap i {
+  color: var(--text-muted);
+}
+
+body.dark .orv-search-wrap:focus-within i {
+  color: #d16b92;
+}
+
+body.dark .orv-search-wrap input {
+  color: var(--text-primary);
+}
+
+body.dark .orv-search-wrap input::placeholder {
+  color: var(--text-muted);
+}
+
+
+/* Botones */
+
+body.dark .orv-btn-primary {
+  background: var(--wine);
+  border-color: var(--wine-hover);
+  color: #ffffff;
+}
+
+body.dark .orv-btn-primary:hover {
+  background: var(--wine-hover);
+  border-color: var(--wine-hover);
+}
+
+body.dark .orv-btn-soft {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .orv-btn-soft:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+body.dark .orv-btn-danger {
+  background: #30191d;
+  border-color: #653039;
+  color: #f29b9b;
+}
+
+body.dark .orv-btn-danger:hover {
+  background: #4a2027;
+  border-color: #ef6464;
+  color: #ffc3c3;
+}
+
+body.dark .orv-btn:disabled {
+  background: var(--surface-soft);
+  border-color: var(--border);
+  color: var(--text-muted);
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+
+/* Upload */
+
+body.dark .orv-upload {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .orv-upload i {
+  color: #f0a0bd;
+}
+
+body.dark .orv-upload:hover,
+body.dark .orv-upload.is-active {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  box-shadow: 0 10px 20px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .orv-upload.is-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+/* Tabla */
+
+body.dark .orv-table-wrap {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+body.dark .orv-table {
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+body.dark .orv-table th {
+  background: #751638;
+  color: #ffffff;
+  border-bottom-color: rgba(255, 255, 255, 0.18);
+}
+
+body.dark .orv-table td {
+  background: var(--surface);
+  border-bottom-color: var(--border-soft);
+  color: var(--text-secondary);
+}
+
+body.dark .orv-table tbody tr:hover td {
+  background: var(--surface-hover);
+}
+
+body.dark .orv-table input[type='checkbox'] {
+  accent-color: var(--wine-hover);
+}
+
+body.dark .orv-empty {
+  background: var(--surface);
+  color: var(--text-muted);
+}
+
+body.dark .orv-pagination {
+  color: var(--text-secondary);
+}
+
+
+/* Explorador */
+
+body.dark .orv-explorer-head h3 {
+  color: #f0a0bd;
+}
+
+body.dark .orv-explorer-head p {
+  color: var(--text-secondary);
+}
+
+body.dark .orv-folder-label {
+  color: var(--text-primary);
+}
+
+body.dark .orv-folder-label i {
+  color: #f0a0bd;
+}
+
+body.dark .orv-day-badge {
+  background: var(--wine-soft);
+  color: #f0a0bd;
+  border: 1px solid var(--wine-hover);
+}
+
+body.dark .orv-day-meta-label {
+  color: var(--text-muted);
+}
+
+body.dark .orv-explorer-panel {
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: 0 16px 36px var(--shadow-dark);
+}
+
+body.dark .orv-explorer-item {
+  background: transparent;
+  color: var(--text-primary);
+}
+
+body.dark .orv-explorer-item + .orv-explorer-item {
+  border-top-color: var(--border-soft);
+}
+
+body.dark .orv-explorer-item:hover {
+  background: var(--surface-hover);
+}
+
+body.dark .orv-explorer-item:focus-visible {
+  outline-color: rgba(240, 160, 189, 0.34);
+}
+
+body.dark .orv-explorer-icon {
+  background: var(--wine-soft);
+  color: #f0a0bd;
+  box-shadow: inset 0 0 0 1px var(--wine-hover);
+}
+
+body.dark .orv-explorer-title {
+  color: var(--text-primary);
+}
+
+body.dark .orv-explorer-subtitle {
+  color: var(--text-secondary);
+}
+
+body.dark .orv-explorer-arrow {
+  background: var(--surface-soft);
+  color: #f0a0bd;
+}
+
+body.dark .orv-explorer-empty {
+  background: var(--surface);
+  color: var(--text-muted);
+}
+
+
+/* Modal */
+
+body.dark .orv-modal-backdrop {
+  background: rgba(0, 0, 0, 0.74);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+body.dark .orv-modal {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-primary);
+  box-shadow: 0 18px 50px var(--shadow-dark);
+}
+
+body.dark .orv-modal-upload {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+body.dark .orv-modal h3 {
+  color: #f0a0bd;
+}
+
+body.dark .orv-modal p {
+  color: var(--text-secondary);
+}
+
+body.dark .orv-modal label {
+  color: var(--text-secondary);
+}
+
+body.dark .orv-modal input,
+body.dark .orv-modal select {
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+body.dark .orv-modal input::placeholder {
+  color: var(--text-muted);
+}
+
+body.dark .orv-modal input:focus,
+body.dark .orv-modal select:focus {
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .orv-modal select {
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23f0a0bd' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 12px 12px;
+  padding-right: 36px;
+}
+
+body.dark .orv-modal select option {
+  background: var(--surface-card);
+  color: var(--text-primary);
+}
+
+body.dark .orv-upload-list li {
+  color: var(--text-secondary);
+}
+
+
+/* Expedientes manuales */
+
+body.dark .orv-manual-expedientes {
+  background: var(--surface-card);
+  border-color: var(--border);
+  box-shadow: inset 0 0 0 1px var(--border-soft);
+}
+
+body.dark .orv-manual-row {
+  background: var(--surface);
+  border-color: var(--border-soft);
+}
+
+body.dark .orv-manual-filename {
+  color: var(--text-secondary);
+}
+
+
+/* Scrolls */
+
+body.dark .orv-table-wrap::-webkit-scrollbar,
+body.dark .orv-upload-list::-webkit-scrollbar,
+body.dark .orv-manual-expedientes::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+body.dark .orv-table-wrap::-webkit-scrollbar-track,
+body.dark .orv-upload-list::-webkit-scrollbar-track,
+body.dark .orv-manual-expedientes::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+body.dark .orv-table-wrap::-webkit-scrollbar-thumb,
+body.dark .orv-upload-list::-webkit-scrollbar-thumb,
+body.dark .orv-manual-expedientes::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+body.dark .orv-table-wrap::-webkit-scrollbar-thumb:hover,
+body.dark .orv-upload-list::-webkit-scrollbar-thumb:hover,
+body.dark .orv-manual-expedientes::-webkit-scrollbar-thumb:hover {
+  background: var(--wine-hover);
+}
+
+
+/* Autofill */
+
+body.dark .orv-search-wrap input:-webkit-autofill,
+body.dark .orv-search-wrap input:-webkit-autofill:hover,
+body.dark .orv-search-wrap input:-webkit-autofill:focus,
+body.dark .orv-modal input:-webkit-autofill,
+body.dark .orv-modal input:-webkit-autofill:hover,
+body.dark .orv-modal input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text-primary);
+  box-shadow: 0 0 0 1000px var(--input-bg) inset;
+}

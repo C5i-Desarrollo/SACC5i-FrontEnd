@@ -609,3 +609,392 @@
     width: 100%;
   }
 }
+
+/* ==========================================
+   DARK MODE - RDV
+   ========================================== */
+
+/* Base */
+
+body.dark .rdv-shell,
+body.dark .rdv-card {
+  background: transparent;
+  color: var(--text-primary);
+}
+
+body.dark .rdv-head h2 {
+  color: #f0a0bd;
+}
+
+body.dark .rdv-head p {
+  color: var(--text-secondary);
+}
+
+
+/* Select año */
+
+body.dark .rdv-year-select {
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23f0a0bd' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 12px 12px;
+  padding-right: 36px;
+}
+
+body.dark .rdv-year-select:focus {
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .rdv-year-select option {
+  background: var(--surface-card);
+  color: var(--text-primary);
+}
+
+
+/* Buscador */
+
+body.dark .rdv-search-wrap {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+}
+
+body.dark .rdv-search-wrap:focus-within {
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .rdv-search-wrap i {
+  color: var(--text-muted);
+}
+
+body.dark .rdv-search-wrap:focus-within i {
+  color: #d16b92;
+}
+
+body.dark .rdv-search-wrap input {
+  color: var(--text-primary);
+}
+
+body.dark .rdv-search-wrap input::placeholder {
+  color: var(--text-muted);
+}
+
+
+/* Botones */
+
+body.dark .rdv-btn-primary {
+  background: var(--wine);
+  border-color: var(--wine-hover);
+  color: #ffffff;
+}
+
+body.dark .rdv-btn-primary:hover {
+  background: var(--wine-hover);
+  border-color: var(--wine-hover);
+}
+
+body.dark .rdv-btn-soft {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .rdv-btn-soft:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: var(--text-primary);
+}
+
+body.dark .rdv-btn-danger {
+  background: #30191d;
+  border-color: #653039;
+  color: #f29b9b;
+}
+
+body.dark .rdv-btn-danger:hover {
+  background: #4a2027;
+  border-color: #ef6464;
+  color: #ffc3c3;
+}
+
+body.dark .rdv-btn:disabled {
+  background: var(--surface-soft);
+  border-color: var(--border);
+  color: var(--text-muted);
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+
+/* Upload */
+
+body.dark .rdv-upload {
+  background: var(--surface-card);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+body.dark .rdv-upload i {
+  color: #f0a0bd;
+}
+
+body.dark .rdv-upload:hover,
+body.dark .rdv-upload.is-active {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  box-shadow: 0 10px 20px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .rdv-upload.is-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+/* Tabla */
+
+body.dark .rdv-table-wrap {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+body.dark .rdv-table {
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+body.dark .rdv-table th {
+  background: #751638;
+  color: #ffffff;
+  border-bottom-color: rgba(255, 255, 255, 0.18);
+}
+
+body.dark .rdv-table td {
+  background: var(--surface);
+  border-bottom-color: var(--border-soft);
+  color: var(--text-secondary);
+}
+
+body.dark .rdv-table tbody tr:hover td {
+  background: var(--surface-hover);
+}
+
+body.dark .rdv-table input[type='checkbox'] {
+  accent-color: var(--wine-hover);
+}
+
+body.dark .rdv-empty {
+  background: var(--surface);
+  color: var(--text-muted);
+}
+
+body.dark .rdv-pagination {
+  color: var(--text-secondary);
+}
+
+
+/* Explorador */
+
+body.dark .rdv-explorer-head h3 {
+  color: #f0a0bd;
+}
+
+body.dark .rdv-explorer-head p {
+  color: var(--text-secondary);
+}
+
+body.dark .rdv-folder-label {
+  color: var(--text-primary);
+}
+
+body.dark .rdv-folder-label i {
+  color: #f0a0bd;
+}
+
+body.dark .rdv-day-badge {
+  background: var(--wine-soft);
+  color: #f0a0bd;
+  border: 1px solid var(--wine-hover);
+}
+
+body.dark .rdv-day-meta-label {
+  color: var(--text-muted);
+}
+
+body.dark .rdv-explorer-panel {
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: 0 16px 36px var(--shadow-dark);
+}
+
+body.dark .rdv-explorer-item {
+  background: transparent;
+  color: var(--text-primary);
+}
+
+body.dark .rdv-explorer-item + .rdv-explorer-item {
+  border-top-color: var(--border-soft);
+}
+
+body.dark .rdv-explorer-item:hover {
+  background: var(--surface-hover);
+}
+
+body.dark .rdv-explorer-item:focus-visible {
+  outline-color: rgba(240, 160, 189, 0.34);
+}
+
+body.dark .rdv-explorer-icon {
+  background: var(--wine-soft);
+  color: #f0a0bd;
+  box-shadow: inset 0 0 0 1px var(--wine-hover);
+}
+
+body.dark .rdv-explorer-title {
+  color: var(--text-primary);
+}
+
+body.dark .rdv-explorer-subtitle {
+  color: var(--text-secondary);
+}
+
+body.dark .rdv-explorer-arrow {
+  background: var(--surface-soft);
+  color: #f0a0bd;
+}
+
+body.dark .rdv-explorer-empty {
+  background: var(--surface);
+  color: var(--text-muted);
+}
+
+
+/* Modal */
+
+body.dark .rdv-modal-backdrop {
+  background: rgba(0, 0, 0, 0.74);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+body.dark .rdv-modal {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-primary);
+  box-shadow: 0 18px 50px var(--shadow-dark);
+}
+
+body.dark .rdv-modal-upload {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+body.dark .rdv-modal h3 {
+  color: #f0a0bd;
+}
+
+body.dark .rdv-modal p {
+  color: var(--text-secondary);
+}
+
+body.dark .rdv-modal label {
+  color: var(--text-secondary);
+}
+
+body.dark .rdv-modal input,
+body.dark .rdv-modal select {
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text-primary);
+}
+
+body.dark .rdv-modal input::placeholder {
+  color: var(--text-muted);
+}
+
+body.dark .rdv-modal input:focus,
+body.dark .rdv-modal select:focus {
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .rdv-modal select {
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23f0a0bd' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 12px 12px;
+  padding-right: 36px;
+}
+
+body.dark .rdv-modal select option {
+  background: var(--surface-card);
+  color: var(--text-primary);
+}
+
+body.dark .rdv-upload-list li {
+  color: var(--text-secondary);
+}
+
+
+/* Expedientes manuales */
+
+body.dark .rdv-manual-expedientes {
+  background: var(--surface-card);
+  border-color: var(--border);
+  box-shadow: inset 0 0 0 1px var(--border-soft);
+}
+
+body.dark .rdv-manual-row {
+  background: var(--surface);
+  border-color: var(--border-soft);
+}
+
+body.dark .rdv-manual-filename {
+  color: var(--text-secondary);
+}
+
+
+/* Scrolls */
+
+body.dark .rdv-table-wrap::-webkit-scrollbar,
+body.dark .rdv-upload-list::-webkit-scrollbar,
+body.dark .rdv-manual-expedientes::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+body.dark .rdv-table-wrap::-webkit-scrollbar-track,
+body.dark .rdv-upload-list::-webkit-scrollbar-track,
+body.dark .rdv-manual-expedientes::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+
+body.dark .rdv-table-wrap::-webkit-scrollbar-thumb,
+body.dark .rdv-upload-list::-webkit-scrollbar-thumb,
+body.dark .rdv-manual-expedientes::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+body.dark .rdv-table-wrap::-webkit-scrollbar-thumb:hover,
+body.dark .rdv-upload-list::-webkit-scrollbar-thumb:hover,
+body.dark .rdv-manual-expedientes::-webkit-scrollbar-thumb:hover {
+  background: var(--wine-hover);
+}
+
+
+/* Autofill */
+
+body.dark .rdv-search-wrap input:-webkit-autofill,
+body.dark .rdv-search-wrap input:-webkit-autofill:hover,
+body.dark .rdv-search-wrap input:-webkit-autofill:focus,
+body.dark .rdv-modal input:-webkit-autofill,
+body.dark .rdv-modal input:-webkit-autofill:hover,
+body.dark .rdv-modal input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text-primary);
+  box-shadow: 0 0 0 1000px var(--input-bg) inset;
+}

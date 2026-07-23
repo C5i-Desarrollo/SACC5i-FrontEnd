@@ -269,3 +269,392 @@
     grid-template-columns: 1fr !important;
   }
 }
+
+.alta-date-field-container {
+  position: relative;
+  overflow: visible;
+  width: 100%;
+}
+
+.alta-birth-datepicker-wrapper {
+  display: block;
+  width: 100%;
+}
+
+.alta-date-field-wrap {
+  display: grid;
+  grid-template-columns: 1fr 56px;
+  align-items: stretch;
+  width: 100%;
+  min-height: 40px;
+  border: 1px solid #ddd1d1;
+  border-radius: 8px;
+  background: #ffffff;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.alta-date-field-wrap:hover {
+  border-color: #c8b8bf;
+}
+
+.alta-date-field-wrap:focus-within {
+  border-color: #7d2447;
+  box-shadow: 0 0 0 3px rgba(125, 36, 71, 0.14);
+}
+
+.alta-date-field-wrap.is-filled {
+  border-color: #c4b47f;
+  box-shadow: 0 0 0 2px rgba(196, 180, 127, 0.16);
+}
+
+.alta-date-field-wrap.is-disabled {
+  opacity: 0.65;
+}
+
+.alta-date-field-wrap input,
+.alta-date-field-wrap input:focus {
+  min-height: 40px;
+  border: none !important;
+  border-radius: 0;
+  box-shadow: none !important;
+  outline: none;
+  padding: 0 12px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: normal;
+  color: #3d3d3d;
+  background: #ffffff;
+}
+
+.alta-date-field-wrap input::placeholder {
+  color: #aaa;
+  font-weight: 400;
+  letter-spacing: normal;
+}
+
+.alta-date-trigger {
+  border: none;
+  border-left: 1px solid #ddd1d1;
+  background: #7d2447;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  line-height: 1;
+  transition: background-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.alta-date-trigger i {
+  font-size: 22px;
+  line-height: 1;
+  display: block;
+}
+
+.alta-date-trigger:hover {
+  background: #6b1f3d;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.alta-date-trigger:active {
+  background: #5e1a35;
+}
+
+.alta-date-trigger:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.55);
+}
+
+.alta-birth-calendar-popper {
+  z-index: 2600 !important;
+}
+
+.alta-birth-calendar-popper[data-placement^='bottom'] .alta-birth-calendar {
+  transform-origin: top left;
+  animation: altaDatePickerDropDown 0.18s ease-out both;
+}
+
+.alta-birth-calendar-popper[data-placement^='top'] .alta-birth-calendar {
+  transform-origin: bottom left;
+  animation: altaDatePickerDropUp 0.18s ease-out both;
+}
+
+@keyframes altaDatePickerDropDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes altaDatePickerDropUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.alta-birth-calendar {
+  width: min(92vw, 352px);
+  border: 1px solid #eadfe3 !important;
+  border-radius: 14px !important;
+  background: #ffffff !important;
+  box-shadow: 0 24px 46px rgba(42, 15, 26, 0.26) !important;
+  font-family: inherit !important;
+  padding: 8px 10px 10px !important;
+  box-sizing: border-box;
+}
+
+.alta-birth-calendar .react-datepicker__month-container {
+  width: 100%;
+  float: none;
+}
+
+.alta-birth-calendar .react-datepicker__header {
+  background: #ffffff;
+  border-bottom: 1px solid #eee5e8;
+  padding: 4px 0 10px;
+}
+
+.alta-birth-calendar .react-datepicker__day-names {
+  margin-top: 8px;
+}
+
+.alta-birth-calendar .react-datepicker__day-name {
+  width: 2.28rem;
+  line-height: 1.95rem;
+  margin: 0.08rem;
+  color: #252225;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.alta-birth-calendar .react-datepicker__month {
+  margin: 10px 0 0;
+}
+
+.alta-birth-calendar .react-datepicker__day {
+  width: 2.28rem;
+  line-height: 2.18rem;
+  margin: 0.08rem;
+  border-radius: 999px;
+  color: #3a3134;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.alta-birth-calendar .react-datepicker__day:hover {
+  background: #f2e8ec;
+  color: #531f35;
+}
+
+.alta-birth-calendar .react-datepicker__day--keyboard-selected,
+.alta-birth-calendar .react-datepicker__day--selected {
+  background: #7d2447;
+  color: #ffffff;
+}
+
+.alta-birth-calendar .react-datepicker__day--outside-month {
+  color: #8f8a8c;
+}
+
+.alta-birth-calendar .react-datepicker__day--disabled {
+  color: #c6c2c3;
+}
+
+.alta-birth-calendar-header {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) 34px;
+  align-items: center;
+  gap: 10px;
+  padding: 2px 4px 0;
+}
+
+.alta-birth-calendar-header-center {
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  color: #241f21;
+  font-weight: 700;
+}
+
+.alta-birth-calendar-header-center.is-day {
+  gap: 14px;
+}
+
+.alta-birth-calendar-header-center.is-month,
+.alta-birth-calendar-header-center.is-year {
+  gap: 8px;
+}
+
+.alta-birth-calendar-label-btn {
+  border: none;
+  background: transparent;
+  color: #241f21;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 2px 8px;
+  border-radius: 10px;
+  transition: background-color 0.16s ease, color 0.16s ease;
+}
+
+.alta-birth-calendar-label-btn.is-month-label {
+  width: 124px;
+  max-width: 124px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.alta-birth-calendar-label-btn.is-year-label {
+  width: 88px;
+  max-width: 88px;
+  text-align: center;
+}
+
+.alta-birth-calendar-label-btn:hover {
+  background: #f6edf0;
+  color: #7d2447;
+}
+
+.alta-birth-calendar-range-label {
+  font-size: 20px;
+  font-weight: 700;
+  color: #3d4a5e;
+  width: 88px;
+  text-align: center;
+}
+
+.alta-birth-calendar-nav {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #6f6669;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.alta-birth-calendar-nav:hover {
+  background: #f6edf0;
+  border-color: #d9c6cf;
+  color: #7d2447;
+}
+
+.alta-birth-calendar-nav:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.alta-birth-calendar-nav i {
+  font-size: 22px;
+}
+
+.alta-birth-calendar .react-datepicker__month-wrapper {
+  max-width: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px 12px;
+  margin-top: 10px;
+}
+
+.alta-birth-calendar .react-datepicker__month-text {
+  margin: 0;
+  width: 100%;
+  line-height: 2.45rem;
+  border-radius: 12px;
+  color: #35455b;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.alta-birth-calendar .react-datepicker__month-text:hover {
+  background: #f2e8ec;
+  color: #531f35;
+}
+
+.alta-birth-calendar .react-datepicker__month-text--keyboard-selected,
+.alta-birth-calendar .react-datepicker__month-text--selected {
+  background: #e7eefb;
+  color: #2338dd;
+  box-shadow: inset 0 0 0 1px #aac3ee;
+}
+
+.alta-birth-calendar .react-datepicker__year-wrapper {
+  max-width: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 14px;
+  margin-top: 10px;
+}
+
+.alta-birth-calendar .react-datepicker__year-text {
+  margin: 0;
+  width: 100%;
+  line-height: 2.6rem;
+  border-radius: 12px;
+  color: #35455b;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.alta-birth-calendar .react-datepicker__year-text:hover {
+  background: #f2e8ec;
+  color: #531f35;
+}
+
+.alta-birth-calendar .react-datepicker__year-text--keyboard-selected,
+.alta-birth-calendar .react-datepicker__year-text--selected {
+  background: #e7eefb;
+  color: #2338dd;
+  box-shadow: inset 0 0 0 1px #aac3ee;
+}
+
+@media (max-width: 768px) {
+  .alta-date-field-wrap {
+    min-height: 40px;
+    grid-template-columns: 1fr 54px;
+  }
+
+  .alta-date-field-wrap input,
+  .alta-date-field-wrap input:focus {
+    min-height: 40px;
+    padding: 0 12px;
+    font-size: 13px;
+  }
+
+  .alta-birth-calendar {
+    width: min(92vw, 332px);
+    padding: 8px !important;
+  }
+
+  .alta-birth-calendar .react-datepicker__day,
+  .alta-birth-calendar .react-datepicker__day-name {
+    width: clamp(1.95rem, 11vw, 2.2rem);
+    line-height: clamp(1.95rem, 11vw, 2.2rem);
+    margin: 0.05rem;
+  }
+
+  .alta-birth-calendar-label-btn,
+  .alta-birth-calendar-range-label {
+    font-size: 17px;
+  }
+
+  .alta-birth-calendar .react-datepicker__month-text,
+  .alta-birth-calendar .react-datepicker__year-text {
+    line-height: 2.3rem;
+    font-size: 18px;
+  }
+}

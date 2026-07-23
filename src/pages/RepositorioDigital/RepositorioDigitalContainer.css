@@ -70,3 +70,41 @@
     font-size: 0.88rem;
   }
 }
+
+/* ==========================================
+   DARK MODE - RDC TABS
+   ========================================== */
+
+body.dark .rdc-container {
+  background: transparent;
+  color: var(--text-primary);
+}
+
+body.dark .rdc-tabs {
+  border-bottom-color: var(--border-soft);
+}
+
+body.dark .rdc-tab {
+  background: transparent;
+  color: var(--text-muted);
+  border-bottom-color: transparent;
+}
+
+body.dark .rdc-tab:hover {
+  background: var(--surface-hover);
+  color: #f0a0bd;
+}
+
+body.dark .rdc-tab.is-active {
+  background: transparent;
+  color: #f0a0bd;
+  border-bottom-color: var(--wine-hover);
+}
+
+body.dark .rdc-tab i {
+  color: inherit;
+}
+
+body.dark .rdc-content {
+  color: var(--text-primary);
+}
