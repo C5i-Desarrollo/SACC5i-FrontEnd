@@ -3,7 +3,7 @@ import { FiRefreshCw } from 'react-icons/fi';
 import { usePermissions } from '../../../hooks/usePermissions';
 import Dashboard from '../../../pages/Dashboard/Dashboard';
 import Alta from '../../../pages/Tramites/Alta/Alta';
-import Baja from '../../../pages/Tramites/Baja/Baja';
+import Baja from '../../../pages/Tramites/Baja/Baja'; 
 import Consulta from '../../../pages/Tramites/Consulta/Consulta';
 import Usuarios from '../../../pages/Usuarios/Usuarios';
 import EditarPerfil from '../../../pages/Perfil/EditarPerfil';
@@ -89,14 +89,16 @@ function MainContent({
 
 const renderContent = () => {
   switch (activeSection) {
-    case 'Dashboard':
-      if (esVistaDireccion) {
-        return renderDireccionSelector({
-          mensaje: 'Selecciona un analista para consultar la vista operativa desde el menu lateral.',
-          nextSectionOnSelect: 'EnProceso'
-        });
-      }
-      return <Dashboard />;
+   case 'Dashboard':
+  if (esVistaDireccion) {
+    return can('VIEW_TEST_MUNICIPIO') ? (
+      <TestMunicipio setPageTitle={setPageTitle} />
+    ) : (
+      <NoPermiso />
+    );
+  }
+
+  return <Dashboard />;
 
     case 'PanelDireccion':
       if (esVistaDireccion) {
