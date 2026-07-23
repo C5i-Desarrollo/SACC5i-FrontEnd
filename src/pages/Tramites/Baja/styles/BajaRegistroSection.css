@@ -113,3 +113,48 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* ==========================================
+   DARK MODE - REGISTRO DE BAJA
+========================================== */
+
+body.dark .baja-selected-persona {
+    background: #26212a;
+    border-color: #403742;
+    color: #f4f1f5;
+}
+
+body.dark .baja-info-chip {
+    background: #29231c;
+    border-color: #806f43;
+    color: #cdbd81;
+}
+
+body.dark .form-group label {
+    color: #a99faa;
+}
+
+body.dark .baja-autocomplete-list {
+    background: #1d1b22;
+    border-color: #403742;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+}
+
+body.dark .baja-autocomplete-item {
+    background: #1d1b22;
+    color: #f4f1f5;
+    border-bottom-color: #403742;
+}
+
+body.dark .baja-autocomplete-item:hover {
+    background: #34303a;
+}
+
+body.dark .baja-autocomplete-empty,
+body.dark .baja-help-muted {
+    color: #a99faa;
+}
+
+body.dark .baja-help-error {
+    color: #f29b9b;
+}

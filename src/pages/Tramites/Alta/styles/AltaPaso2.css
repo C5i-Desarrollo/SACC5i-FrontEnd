@@ -880,6 +880,80 @@ body.dark .alta-resumen-personas {
   border-color: #333;
 }
 
+/* =====================================================
+   MODALES DE CONFIRMACIÓN - DARK MODE
+===================================================== */
+
+body.dark .alta-modal-overlay{
+    background: rgba(0,0,0,.72);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+body.dark .alta-modal-card{
+    background:#1d1b22;
+    border:1px solid #403742;
+    box-shadow:0 24px 60px rgba(0,0,0,.60);
+}
+
+body.dark .alta-modal-header{
+    background:#7b1842;
+    border-bottom:2px solid #b3a060;
+    color:#fff;
+}
+
+body.dark .alta-modal-body{
+    background:#1d1b22;
+    color:#f4f1f5;
+}
+
+body.dark .alta-modal-body p{
+    color:#a99faa;
+}
+
+body.dark .alta-modal-body textarea{
+    background:#26212a;
+    color:#f4f1f5;
+    border:1px solid #403742;
+}
+
+body.dark .alta-modal-body textarea::placeholder{
+    color:#8f8791;
+}
+
+body.dark .alta-modal-body textarea:focus{
+    border-color:#7b1842;
+    box-shadow:0 0 0 3px rgba(123,24,66,.18);
+}
+
+body.dark .alta-modal-footer,
+body.dark .alta-modal-actions{
+    background:#1d1b22;
+    border-top:1px solid #403742;
+}
+
+body.dark .btn-secondary{
+    background:#26212a;
+    color:#f4f1f5;
+    border:1px solid #403742;
+}
+
+body.dark .btn-secondary:hover{
+    background:#34303a;
+    border-color:#4a4761;
+}
+
+body.dark .alta-modal-close{
+    background:#26212a;
+    color:#f4f1f5;
+    border:1px solid #403742;
+}
+
+body.dark .alta-modal-close:hover{
+    background:#34303a;
+    border-color:#4a4761;
+}
+
 /* ================================
    RESPONSIVE
    ================================ */
@@ -931,3 +1005,40 @@ body.dark .alta-resumen-personas {
     width: 100%;
   }
 }
+
+/* =====================================================
+   BOTON REGRESAR - DARK
+===================================================== */
+
+body.dark .btn-volver-listado{
+    background:#26212a;
+    color:#f4f1f5;
+    border:1px solid #403742;
+}
+
+body.dark .btn-volver-listado:hover{
+    background:#34303a;
+    border-color:#5a4f60;
+}
+
+/* =====================================================
+   BOTON SIGUIENTE - DARK
+===================================================== */
+
+body.dark .btn-siguiente-listado{
+    background:#7b1842;
+    color:#fff;
+    border:1px solid #7b1842;
+}
+
+body.dark .btn-siguiente-listado:hover:not(:disabled){
+    background:#922454;
+    border-color:#922454;
+}
+
+body.dark .btn-siguiente-listado:disabled{
+    background:#403742;
+    color:#8b8791;
+    border-color:#403742;
+}
+
