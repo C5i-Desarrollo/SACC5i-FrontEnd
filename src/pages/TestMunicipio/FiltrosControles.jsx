@@ -1,4 +1,137 @@
 import React from "react";
+import Select from "react-select";
+
+
+const estilosMunicipio = {
+  control: (base, state) => ({
+    ...base,
+    minHeight: "45px",
+    backgroundColor: "#ffffff",
+    borderColor: state.isFocused ? "#7a1735" : "#d6d6d6",
+    borderRadius: "8px",
+    boxShadow: state.isFocused
+      ? "0 0 0 2px rgba(122, 23, 53, 0.12)"
+      : "none",
+    cursor: "text",
+
+    "&:hover": {
+      borderColor: "#7a1735",
+    },
+  }),
+
+  menu: (base) => ({
+    ...base,
+    backgroundColor: "#ffffff",
+    borderRadius: "8px",
+    overflow: "hidden",
+    zIndex: 99999,
+  }),
+
+  menuPortal: (base) => ({
+    ...base,
+    zIndex: 99999,
+  }),
+
+  menuList: (base) => ({
+    ...base,
+    maxHeight: "300px",
+    backgroundColor: "#ffffff",
+    padding: "4px 0",
+  }),
+
+  option: (base, state) => ({
+    ...base,
+    backgroundColor: state.isSelected
+      ? "#7a1735"
+      : state.isFocused
+        ? "#f4e6eb"
+        : "#ffffff",
+
+    color: state.isSelected ? "#ffffff" : "#222222",
+    cursor: "pointer",
+    fontSize: "14px",
+
+    "&:active": {
+      backgroundColor: "#ead1db",
+    },
+  }),
+
+  singleValue: (base) => ({
+    ...base,
+    color: "#222222",
+  }),
+
+  input: (base) => ({
+    ...base,
+    color: "#222222",
+  }),
+
+  placeholder: (base) => ({
+    ...base,
+    color: "#777777",
+  }),
+
+  dropdownIndicator: (base) => ({
+    ...base,
+    color: "#7a1735",
+
+    "&:hover": {
+      color: "#5d1028",
+    },
+  }),
+};
+
+function SelectMunicipioBuscable({
+  value,
+  onChange,
+  children,
+}) {
+  const opciones = React.Children.toArray(children)
+    .filter(
+      (opcion) =>
+        React.isValidElement(opcion) &&
+        opcion.props.value
+    )
+    .map((opcion) => ({
+      value: opcion.props.value,
+      label: React.Children.toArray(
+        opcion.props.children
+      )
+        .join("")
+        .trim(),
+    }));
+
+  const opcionSeleccionada =
+    opciones.find(
+      (opcion) => opcion.value === value
+    ) || null;
+
+  return (
+    <Select
+    classNamePrefix="municipio-select"
+      options={opciones}
+      value={opcionSeleccionada}
+      onChange={(opcion) =>
+        onChange({
+          target: {
+            value: opcion?.value || "",
+          },
+        })
+      }
+      placeholder="Buscar o seleccionar municipio..."
+      noOptionsMessage={() => "Municipio no encontrado"}
+      isSearchable
+      isClearable
+      styles={estilosMunicipio}
+      menuPosition="fixed"
+      menuPortalTarget={
+        typeof document !== "undefined"
+          ? document.body
+          : undefined
+      }
+    />
+  );
+}
 
 export default function FiltrosControles({
   municipioNombre,
@@ -30,11 +163,12 @@ export default function FiltrosControles({
         <div className="grupo-filtro">
           <label>Municipio</label>
           
-          <select
-            value={municipioNombre}
-            onChange={(e) => setMunicipioNombre(e.target.value)}
-           
-          >
+        <SelectMunicipioBuscable
+  value={municipioNombre}
+  onChange={(e) =>
+    setMunicipioNombre(e.target.value)
+  }
+>
             <option value="" disabled>Seleccionar municipio...</option> 
 
             <option value="ACAJETE">ACAJETE</option>
@@ -256,7 +390,7 @@ export default function FiltrosControles({
 
             <option value="TODOS">SELECCIONAR TODOS LOS MUNICIPIOS...</option>
          
-          </select>
+          </SelectMunicipioBuscable>
         </div>
 
         <div className="grupo-filtro">

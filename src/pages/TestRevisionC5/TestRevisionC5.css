@@ -1049,3 +1049,36 @@ body.dark .paginacion-limpia span {
 body.dark .envoltura-magica-bitacora > div {
   background-color: rgba(0, 0, 0, 0.72) !important;
 }
+
+
+
+body.dark .municipio-select__control {
+  background: var(--input-bg) !important;
+  border-color: var(--input-border) !important;
+}
+
+body.dark .municipio-select__single-value,
+body.dark .municipio-select__input-container {
+  color: var(--text-primary) !important;
+}
+
+body.dark .municipio-select__placeholder {
+  color: var(--text-muted) !important;
+}
+
+body.dark .municipio-select__menu,
+body.dark .municipio-select__menu-list,
+body.dark .municipio-select__option {
+  background: var(--surface-card) !important;
+  color: var(--text-primary) !important;
+}
+
+body.dark .municipio-select__option--is-focused {
+  background: #442c37 !important;
+  color: #ffffff !important;
+}
+
+body.dark .municipio-select__option--is-selected {
+  background: #751638 !important;
+  color: #ffffff !important;
+}
