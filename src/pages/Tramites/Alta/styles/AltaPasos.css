@@ -48,3 +48,71 @@
     font-size: 11px !important;
   }
 }
+
+/* ================================
+   DARK MODE - INDICADOR DE PASOS
+   ================================ */
+
+/* Contenedor */
+
+body.dark .pasos-indicador {
+  color: var(--text-primary);
+}
+
+
+/* Línea */
+
+body.dark .paso-linea {
+  background-color: var(--border);
+}
+
+body.dark .paso-completado ~ .paso-linea {
+  background-color: var(--border);
+}
+
+
+/* Número del paso */
+
+body.dark .paso-numero {
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+body.dark .paso-activo .paso-numero {
+  background: var(--wine);
+  border-color: var(--wine-hover);
+  color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(163, 41, 88, 0.2);
+}
+
+body.dark .paso-completado .paso-numero {
+  background: var(--wine);
+  border-color: var(--wine-hover);
+  color: #ffffff;
+}
+
+
+/* Texto */
+
+body.dark .paso-texto {
+  color: var(--text-muted);
+}
+
+body.dark .paso-activo .paso-texto {
+  color: #f0a0bd;
+  font-weight: 700;
+}
+
+body.dark .paso-completado .paso-texto {
+  color: #f0a0bd;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+
+/* Línea entre pasos completados */
+
+body.dark .paso-completado + .paso-linea {
+  background-color: var(--wine-hover);
+}

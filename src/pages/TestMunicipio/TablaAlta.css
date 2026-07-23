@@ -232,64 +232,186 @@
 
 
 /* ==========================================
-   DARK MODE - TABLA DE MOVIMIENTOS
+   DARK MODE FIX - ALTA TABLE / PASO 2
    ========================================== */
 
-body.dark .tabla-container {
-  background: var(--surface);
-  border-color: var(--border-soft);
-  color: var(--text-primary);
+body.dark .alta-card,
+body.dark .paso2-main-container,
+body.dark .paso2-contenido {
+  background: var(--surface) !important;
+  color: var(--text-primary) !important;
 }
 
-body.dark .header-tabla h1 {
-  color: var(--text-primary);
+
+/* Mensaje azul */
+
+body.dark .alta-info-msg {
+  background: #182235 !important;
+  border: 1px solid #304869 !important;
+  color: #8fb8ff !important;
 }
 
-body.dark .subtitulo {
-  color: #f0a0bd;
+body.dark .alta-info-msg i {
+  color: #8fb8ff !important;
 }
 
-body.dark .tabla-box {
-  background: var(--surface-card);
-  box-shadow: 0 10px 24px var(--shadow-dark);
+
+/* Resumen */
+
+body.dark .alta-resumen-personas {
+  background: var(--surface-card) !important;
+  border: 1px solid var(--border) !important;
 }
 
-body.dark .tabla-estilizada {
-  background: var(--surface-card);
+body.dark .alta-resumen-item {
+  background: var(--surface-soft) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-secondary) !important;
 }
 
-body.dark .tabla-estilizada thead {
-  background: #751638;
-  color: #ffffff;
+body.dark .alta-resumen-item strong,
+body.dark .alta-resumen-item span {
+  color: var(--text-primary) !important;
 }
 
-body.dark .tabla-estilizada th {
-  color: #ffffff;
-  border-color: var(--border-soft);
+body.dark .alta-resumen-item i {
+  color: #d16b92 !important;
 }
 
-body.dark .tabla-estilizada td {
-  background: var(--surface-card);
-  color: var(--text-secondary);
-  border-bottom-color: var(--border-soft);
+body.dark .alta-resumen-enviada,
+body.dark .alta-resumen-enviadas {
+  background: #15281f !important;
+  border-color: #285a40 !important;
+  color: #7dd3a6 !important;
 }
 
-body.dark .tabla-estilizada tbody tr:hover td {
-  background: var(--surface-hover);
+body.dark .alta-resumen-enviada i,
+body.dark .alta-resumen-enviadas i {
+  color: #7dd3a6 !important;
 }
 
-body.dark .btn-detalles {
-  background: var(--surface-card);
-  border-color: var(--wine-hover);
-  color: #d16b92;
+
+/* Scroll tabla */
+
+body.dark .alta-table-scroll {
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
 }
 
-body.dark .btn-detalles:hover {
-  background: var(--wine-soft);
-  border-color: #d16b92;
-  color: #f0a0bd;
+
+/* Tabla */
+
+body.dark .alta-table {
+  background: var(--surface-card) !important;
+  color: var(--text-primary) !important;
 }
 
+body.dark .alta-table thead {
+  background: #751638 !important;
+}
+
+body.dark .alta-table thead tr,
+body.dark .alta-table th {
+  background: #751638 !important;
+  color: #ffffff !important;
+  border-color: var(--border-soft) !important;
+}
+
+body.dark .alta-table tbody,
+body.dark .alta-table tbody tr {
+  background: var(--surface-card) !important;
+}
+
+body.dark .alta-table td {
+  background: var(--surface-card) !important;
+  color: var(--text-secondary) !important;
+  border-bottom-color: var(--border-soft) !important;
+}
+
+body.dark .alta-table tbody tr:hover td {
+  background: var(--surface-hover) !important;
+}
+
+body.dark .alta-table td strong,
+body.dark .alta-table .alta-nombre,
+body.dark .alta-table .persona-nombre {
+  color: var(--text-primary) !important;
+}
+
+body.dark .alta-table td small,
+body.dark .alta-table .alta-muted {
+  color: var(--text-muted) !important;
+}
+
+
+/* Fase actual */
+
+body.dark .alta-table .fase-badge,
+body.dark .alta-table .fase-actual,
+body.dark .alta-table .estado-fase {
+  background: #182235 !important;
+  border: 1px solid #304869 !important;
+  color: #8fb8ff !important;
+}
+
+body.dark .alta-table .fase-badge i,
+body.dark .alta-table .fase-actual i,
+body.dark .alta-table .estado-fase i {
+  color: #8fb8ff !important;
+}
+
+
+/* Botones de acciones */
+
+body.dark .alta-table button,
+body.dark .alta-table .btn-revision,
+body.dark .alta-table .btn-requisitos,
+body.dark .alta-table .btn-revision-requisitos {
+  background: var(--surface-card) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-secondary) !important;
+}
+
+body.dark .alta-table button:hover:not(:disabled),
+body.dark .alta-table .btn-revision:hover:not(:disabled),
+body.dark .alta-table .btn-requisitos:hover:not(:disabled),
+body.dark .alta-table .btn-revision-requisitos:hover:not(:disabled) {
+  background: var(--wine) !important;
+  border-color: var(--wine-hover) !important;
+  color: #ffffff !important;
+}
+
+body.dark .alta-table button:disabled,
+body.dark .alta-table .btn-revision:disabled,
+body.dark .alta-table .btn-requisitos:disabled,
+body.dark .alta-table .btn-revision-requisitos:disabled {
+  background: var(--surface-soft) !important;
+  border-color: var(--border) !important;
+  color: var(--text-muted) !important;
+  opacity: 0.65 !important;
+  cursor: not-allowed !important;
+}
+
+
+/* Scroll horizontal */
+
+body.dark .alta-table-scroll::-webkit-scrollbar {
+  height: 10px;
+}
+
+body.dark .alta-table-scroll::-webkit-scrollbar-track {
+  background: var(--surface) !important;
+}
+
+body.dark .alta-table-scroll::-webkit-scrollbar-thumb {
+  background: var(--border) !important;
+  border-radius: 999px;
+}
+
+body.dark .alta-table-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--wine-hover) !important;
+}
 
 /* ==========================================
    SCROLL TABLA
@@ -325,6 +447,141 @@ body.dark .tabla-box::-webkit-scrollbar-thumb:hover {
   background: var(--wine-hover);
 }
 
+/* ==========================================
+   DARK MODE FIX - PASO 2 TOP NAV Y TABLA
+   ========================================== */
+
+/* Contenedor de navegación superior */
+
+body.dark .btn-volver-container,
+body.dark .paso2-top-nav {
+  background: transparent !important;
+  color: var(--text-primary) !important;
+}
+
+
+/* Botón regresar */
+
+body.dark .paso2-top-nav .btn-volver-listado,
+body.dark .btn-volver-container .btn-volver-listado {
+  background: var(--surface-card) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-secondary) !important;
+  box-shadow: none !important;
+}
+
+body.dark .paso2-top-nav .btn-volver-listado:hover:not(:disabled),
+body.dark .btn-volver-container .btn-volver-listado:hover:not(:disabled) {
+  background: var(--surface-hover) !important;
+  border-color: var(--wine-hover) !important;
+  color: var(--text-primary) !important;
+}
+
+
+/* Botón siguiente */
+
+body.dark .paso2-top-nav .btn-siguiente-listado,
+body.dark .btn-volver-container .btn-siguiente-listado {
+  background: var(--wine) !important;
+  border: 1px solid var(--wine-hover) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 10px rgba(163, 41, 88, 0.22) !important;
+}
+
+body.dark .paso2-top-nav .btn-siguiente-listado:hover:not(:disabled),
+body.dark .btn-volver-container .btn-siguiente-listado:hover:not(:disabled) {
+  background: var(--wine-hover) !important;
+  color: #ffffff !important;
+}
+
+body.dark .paso2-top-nav .btn-siguiente-listado:disabled,
+body.dark .btn-volver-container .btn-siguiente-listado:disabled {
+  background: var(--surface-soft) !important;
+  border-color: var(--border) !important;
+  color: var(--text-muted) !important;
+  opacity: 0.65 !important;
+  box-shadow: none !important;
+  cursor: not-allowed !important;
+}
+
+
+/* Nombre de persona en tabla */
+
+body.dark .alta-table tbody td:first-child,
+body.dark .alta-table tbody td:first-child strong,
+body.dark .alta-table .alta-persona-nombre,
+body.dark .alta-table .persona-nombre,
+body.dark .alta-table .nombre-persona {
+  color: var(--text-primary) !important;
+  font-weight: 700 !important;
+}
+
+
+/* Celdas de la tabla */
+
+body.dark .alta-table tbody td {
+  color: var(--text-secondary) !important;
+}
+
+body.dark .alta-table tbody td:nth-child(2),
+body.dark .alta-table tbody td:nth-child(3),
+body.dark .alta-table tbody td:nth-child(4) {
+  color: var(--text-secondary) !important;
+}
+
+
+/* Badge fase actual */
+
+body.dark .alta-table .badge,
+body.dark .alta-table .fase-badge,
+body.dark .alta-table .fase-actual,
+body.dark .alta-table .estado-fase {
+  background: #182235 !important;
+  border: 1px solid #304869 !important;
+  color: #8fb8ff !important;
+}
+
+
+/* Botón revisión de requisitos */
+
+body.dark .alta-table .btn-revision-requisitos,
+body.dark .alta-table .btn-requisitos,
+body.dark .alta-table .btn-revision,
+body.dark .alta-table button {
+  background: var(--surface-card) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-secondary) !important;
+}
+
+body.dark .alta-table .btn-revision-requisitos:hover:not(:disabled),
+body.dark .alta-table .btn-requisitos:hover:not(:disabled),
+body.dark .alta-table .btn-revision:hover:not(:disabled),
+body.dark .alta-table button:hover:not(:disabled) {
+  background: var(--wine) !important;
+  border-color: var(--wine-hover) !important;
+  color: #ffffff !important;
+}
+
+body.dark .alta-table .btn-revision-requisitos:disabled,
+body.dark .alta-table .btn-requisitos:disabled,
+body.dark .alta-table .btn-revision:disabled,
+body.dark .alta-table button:disabled {
+  background: var(--surface-soft) !important;
+  border-color: var(--border) !important;
+  color: var(--text-muted) !important;
+  opacity: 0.65 !important;
+  cursor: not-allowed !important;
+}
+
+
+/* Por si el nombre viene dentro de span o div */
+
+body.dark .alta-table td:first-child *,
+body.dark .alta-table .nombre-completo,
+body.dark .alta-table .persona-fullname {
+  color: var(--text-primary) !important;
+}
+
 
 /* ==========================================
    RESPONSIVE
@@ -352,3 +609,4 @@ body.dark .tabla-box::-webkit-scrollbar-thumb:hover {
     padding: 8px 12px;
   }
 }
+
