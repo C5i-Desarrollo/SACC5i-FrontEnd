@@ -521,14 +521,14 @@ export default function AltaPaso2({
     }
 
     const estatusDesc = String(persona.estatus_descriptivo || '');
-    
+
     if (estatusDesc === 'Finalizado') return { label: 'Finalizado', css: 'fase-revision-ok' };
     if (estatusDesc === 'Cita Programada') return { label: 'Cita Programada', css: 'fase-espera' };
 
     const faseCuip = String(persona.fase_cuip || '').toLowerCase();
     const faseRevision = String(persona.fase_revision || '').toLowerCase();
 
-    if (faseCuip === 'completado') return { label: 'Validación CUIP Completada', css: 'fase-cuip-ok' }; 
+    if (faseCuip === 'completado') return { label: 'Validación CUIP Completada', css: 'fase-cuip-ok' };
     if (faseCuip === 'en_proceso') return { label: 'CUIP en Proceso', css: 'fase-cuip-proceso' };
 
     const labelsRevision = {
@@ -541,7 +541,7 @@ export default function AltaPaso2({
 
     if (faseRevision && faseRevision !== 'pendiente') return labelsRevision[faseRevision] || { label: faseRevision, css: 'fase-otro' };
     if (!persona.validado) return { label: 'Pendiente Validación', css: 'fase-pendiente' };
-    if (persona.observaciones_c3) return { label: 'Aprobado C3', css: 'fase-cuip-ok' }; 
+    if (persona.observaciones_c3) return { label: 'Aprobado C3', css: 'fase-cuip-ok' };
 
     return { label: 'Pendiente Revisión', css: 'fase-espera' };
   };
@@ -598,6 +598,7 @@ export default function AltaPaso2({
           >
             Editar
           </button>
+
           <button
             className={`btn btn-sm ${persona.validado ? 'btn-outline-success' : 'btn-success'}`}
             onClick={() => handleValidar(persona.id)}
@@ -623,15 +624,13 @@ export default function AltaPaso2({
       );
     }
 
-    if (solicitudEnviadaC3) {
-      return (
-        <button className="alta-btn-revision" disabled>
-          REVISION DE REQUISITOS <span>&rsaquo;</span>
-        </button>
-      );
-    }
+    const puedeIniciarRevisionPersona =
+      soloLectura &&
+      puedeIrARevision(persona) &&
+      !yaPasoRevision(persona) &&
+      (puedeIniciarRevisionEnSolicitud || solicitudEnviadaC3);
 
-    if (soloLectura && puedeIniciarRevisionEnSolicitud && puedeIrARevision(persona)) {
+    if (puedeIniciarRevisionPersona) {
       return (
         <button
           className={`alta-btn-revision ${estaIniciandoRevision ? 'alta-btn-revision-loading' : ''}`}
@@ -645,9 +644,8 @@ export default function AltaPaso2({
       );
     }
 
-    const deshabilitado = !puedeIrARevision(persona) || yaPasoRevision(persona);
     return (
-      <button className="alta-btn-revision" disabled={deshabilitado}>
+      <button className="alta-btn-revision" disabled>
         REVISION DE REQUISITOS <span>&rsaquo;</span>
       </button>
     );

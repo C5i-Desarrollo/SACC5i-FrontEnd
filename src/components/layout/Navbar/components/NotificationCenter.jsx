@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { FiBell, FiCheckCircle, FiCircle, FiMoreVertical, FiTrash2, FiX } from 'react-icons/fi';
 import '../styles/NotificationCenter.css';
 
@@ -55,6 +56,8 @@ const NotificationCenter = ({
   removeNotification,
   removeFromHistory
 }) => {
+  const navigate = useNavigate();
+
   const hasNotifications = totalCount > 0;
   const canMarkAllAsRead = unreadCount > 0;
   const canMarkAllAsUnread = hasNotifications && unreadCount < totalCount;
@@ -75,7 +78,18 @@ const NotificationCenter = ({
     } else {
       markAsRead(notification.id);
     }
+
     setActiveNotificationMenuId(null);
+  };
+
+  const handleVerDetalle = (notification) => {
+    if (!notification?.url) return;
+
+    markAsRead(notification.id);
+    setActiveNotificationMenuId(null);
+    onCloseNotificationMenu();
+
+    navigate(notification.url);
   };
 
   const handleClearNotificationHistory = () => {
@@ -100,17 +114,27 @@ const NotificationCenter = ({
         >
           <FiBell size={20} className="notif-bell-icon" />
         </span>
+
         {unreadCount > 0 && (
           <span className="notif-badge">{unreadCount > 99 ? '99+' : unreadCount}</span>
         )}
       </button>
 
-      <div className={`notif-dropdown notif-center-dropdown${showNotificationMenu ? ' show' : ''}`} role="dialog" aria-label="Centro de notificaciones">
+      <div
+        className={`notif-dropdown notif-center-dropdown${showNotificationMenu ? ' show' : ''}`}
+        role="dialog"
+        aria-label="Centro de notificaciones"
+      >
         <div className="notif-center-header">
           <div>
             <h4>Notificaciones</h4>
-            <p>{hasNotifications ? `${totalCount} en bandeja - ${unreadCount} sin leer` : 'No hay notificaciones registradas'}</p>
+            <p>
+              {hasNotifications
+                ? `${totalCount} en bandeja - ${unreadCount} sin leer`
+                : 'No hay notificaciones registradas'}
+            </p>
           </div>
+
           <button
             type="button"
             className="notif-center-close"
@@ -130,6 +154,7 @@ const NotificationCenter = ({
           >
             Marcar todas leidas
           </button>
+
           <button
             type="button"
             className="notif-center-action"
@@ -138,6 +163,7 @@ const NotificationCenter = ({
           >
             Marcar todas no leidas
           </button>
+
           <button
             type="button"
             className="notif-center-action is-danger"
@@ -151,7 +177,7 @@ const NotificationCenter = ({
         <div className="notif-center-list">
           {!hasNotifications ? (
             <div className="notif-center-empty">
-              <i className='bx bx-bell-off'></i>
+              <i className="bx bx-bell-off"></i>
               <p>Las notificaciones nuevas apareceran aqui.</p>
             </div>
           ) : (
@@ -171,7 +197,22 @@ const NotificationCenter = ({
                       <span className="notif-item-type">{notificationMeta.label}</span>
                       <span className="notif-item-time">{formatNotificationDate(notification.timestamp)}</span>
                     </div>
+
+                    {notification.title && (
+                      <strong className="notif-item-title">{notification.title}</strong>
+                    )}
+
                     <p>{notification.message}</p>
+
+                    {notification.url && (
+                      <button
+                        type="button"
+                        className="notif-item-detail-btn"
+                        onClick={() => handleVerDetalle(notification)}
+                      >
+                        Ver detalle
+                      </button>
+                    )}
                   </div>
 
                   <div className="notif-item-menu">
