@@ -386,3 +386,196 @@
     font-size: 18px;
   }
 }
+
+/* ================================
+   DARK MODE - DATEPICKER ALTA
+   ================================ */
+
+/* Campo contenedor */
+
+body.dark .alta-date-field-wrap {
+  background: var(--input-bg);
+  border-color: var(--input-border);
+}
+
+body.dark .alta-date-field-wrap:hover {
+  border-color: var(--border);
+}
+
+body.dark .alta-date-field-wrap:focus-within {
+  border-color: var(--wine-hover);
+  box-shadow: 0 0 0 3px rgba(163, 41, 88, 0.16);
+}
+
+body.dark .alta-date-field-wrap.is-filled {
+  border-color: #806f43;
+  box-shadow: 0 0 0 2px rgba(205, 189, 129, 0.16);
+}
+
+body.dark .alta-date-field-wrap.is-disabled {
+  opacity: 0.65;
+}
+
+body.dark .alta-date-field-wrap input,
+body.dark .alta-date-field-wrap input:focus {
+  background: var(--input-bg);
+  color: var(--text-primary);
+}
+
+body.dark .alta-date-field-wrap input::placeholder {
+  color: var(--text-muted);
+}
+
+
+/* Botón calendario */
+
+body.dark .alta-date-trigger {
+  background: var(--wine);
+  color: #ffffff;
+  border-left-color: var(--border);
+}
+
+body.dark .alta-date-trigger:hover {
+  background: var(--wine-hover);
+}
+
+body.dark .alta-date-trigger:active {
+  background: #4a0f25;
+}
+
+body.dark .alta-date-trigger:focus-visible {
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.55);
+}
+
+
+/* Calendario */
+
+body.dark .alta-birth-calendar {
+  background: var(--surface) !important;
+  border-color: var(--border) !important;
+  color: var(--text-primary) !important;
+  box-shadow: 0 24px 46px var(--shadow-dark) !important;
+}
+
+body.dark .alta-birth-calendar .react-datepicker__month-container {
+  background: var(--surface);
+}
+
+body.dark .alta-birth-calendar .react-datepicker__header {
+  background: var(--surface);
+  border-bottom-color: var(--border-soft);
+}
+
+body.dark .alta-birth-calendar .react-datepicker__day-name {
+  color: var(--text-secondary);
+}
+
+body.dark .alta-birth-calendar .react-datepicker__month {
+  background: var(--surface);
+}
+
+body.dark .alta-birth-calendar .react-datepicker__day {
+  color: var(--text-secondary);
+}
+
+body.dark .alta-birth-calendar .react-datepicker__day:hover {
+  background: var(--surface-hover);
+  color: #f0a0bd;
+}
+
+body.dark .alta-birth-calendar .react-datepicker__day--keyboard-selected,
+body.dark .alta-birth-calendar .react-datepicker__day--selected {
+  background: var(--wine);
+  color: #ffffff;
+}
+
+body.dark .alta-birth-calendar .react-datepicker__day--outside-month {
+  color: var(--text-muted);
+}
+
+body.dark .alta-birth-calendar .react-datepicker__day--disabled {
+  color: #665860;
+}
+
+
+/* Header calendario */
+
+body.dark .alta-birth-calendar-header-center {
+  color: var(--text-primary);
+}
+
+body.dark .alta-birth-calendar-label-btn {
+  color: var(--text-primary);
+}
+
+body.dark .alta-birth-calendar-label-btn:hover {
+  background: var(--wine-soft);
+  color: #f0a0bd;
+}
+
+body.dark .alta-birth-calendar-range-label {
+  color: var(--text-primary);
+}
+
+body.dark .alta-birth-calendar-nav {
+  color: var(--text-muted);
+}
+
+body.dark .alta-birth-calendar-nav:hover {
+  background: var(--surface-hover);
+  border-color: var(--wine-hover);
+  color: #f0a0bd;
+}
+
+body.dark .alta-birth-calendar-nav:disabled {
+  color: #665860;
+  opacity: 0.35;
+}
+
+
+/* Selector de meses */
+
+body.dark .alta-birth-calendar .react-datepicker__month-text {
+  color: var(--text-secondary);
+}
+
+body.dark .alta-birth-calendar .react-datepicker__month-text:hover {
+  background: var(--surface-hover);
+  color: #f0a0bd;
+}
+
+body.dark .alta-birth-calendar .react-datepicker__month-text--keyboard-selected,
+body.dark .alta-birth-calendar .react-datepicker__month-text--selected {
+  background: var(--wine-soft);
+  color: #f0a0bd;
+  box-shadow: inset 0 0 0 1px var(--wine-hover);
+}
+
+
+/* Selector de años */
+
+body.dark .alta-birth-calendar .react-datepicker__year-text {
+  color: var(--text-secondary);
+}
+
+body.dark .alta-birth-calendar .react-datepicker__year-text:hover {
+  background: var(--surface-hover);
+  color: #f0a0bd;
+}
+
+body.dark .alta-birth-calendar .react-datepicker__year-text--keyboard-selected,
+body.dark .alta-birth-calendar .react-datepicker__year-text--selected {
+  background: var(--wine-soft);
+  color: #f0a0bd;
+  box-shadow: inset 0 0 0 1px var(--wine-hover);
+}
+
+
+/* Autofill */
+
+body.dark .alta-date-field-wrap input:-webkit-autofill,
+body.dark .alta-date-field-wrap input:-webkit-autofill:hover,
+body.dark .alta-date-field-wrap input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--text-primary);
+  box-shadow: 0 0 0 1000px var(--input-bg) inset !important;
+}
