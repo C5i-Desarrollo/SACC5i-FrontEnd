@@ -4,9 +4,13 @@
  * con filtros, estadísticas y tabla detallada.
  */
 
+import * as XLSX from 'xlsx';
+import { useNotification } from '../../../context/NotificationContext';
 import { useEffect, useMemo, useState } from 'react';
 import { MdHistory } from 'react-icons/md';
 import { useHistorialC3 } from '../../../hooks/historial';
+import { ocultarHistorialC3PorMesApi } from '../../../services/api';
+import { useAuth } from '../../../context/AuthContext';
 import {
   buildPersonSearchableText,
   matchesSearchQuery,
@@ -21,6 +25,19 @@ import './styles/HistorialRow.css';
 const REGISTROS_POR_PAGINA = 10;
 
 export default function HistorialC3({ setPageTitle }) {
+  const { showNotification } = useNotification();
+  const { user } = useAuth();
+  const rolActual = user?.rol || user?.role;
+const puedeBorrarHistorial = ['admin', 'super_admin', 'validador_c3'].includes(rolActual);
+
+  const obtenerMesActual = () => {
+    const fecha = new Date();
+    return `${fecha.getFullYear()}-${String(fecha.getMonth() + 1).padStart(2, '0')}`;
+  };
+
+  const [modalBorrarMes, setModalBorrarMes] = useState(false);
+  const [mesSeleccionado, setMesSeleccionado] = useState(obtenerMesActual);
+  const [borrandoMes, setBorrandoMes] = useState(false);
   const {
     tramites,
     loading,
@@ -45,6 +62,84 @@ export default function HistorialC3({ setPageTitle }) {
 
     return () => setPageTitle(null);
   }, [setPageTitle]);
+
+  const descargarExcel = () => {
+    if (filasFiltradas.length === 0) {
+      showNotification('No hay registros para descargar.', 'warning');
+      return;
+    }
+
+    const filasExcel = filasFiltradas.map(({ tramite, persona }) => ({
+      'No. Solicitud': tramite.numero_solicitud || '—',
+      Municipio: tramite.municipio_nombre || '—',
+      Región: tramite.region_nombre || '—',
+      Resultado: obtenerTextoDictamen(persona),
+      'Nombre Persona': obtenerNombreCompleto(persona),
+      Puesto: persona.puesto_nombre || '—',
+      'Analista C5': tramite.analista_extension
+        ? `${tramite.analista_nombre || '—'} - Ext. ${tramite.analista_extension}`
+        : (tramite.analista_nombre || '—'),
+      'Validador C3': tramite.validador_c3_nombre || '—',
+      'Fecha Dictamen': persona.updated_at
+        ? `${formatearFecha(persona.updated_at)} ${formatearHora(persona.updated_at)}`
+        : '—'
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(filasExcel);
+
+    worksheet['!cols'] = [
+      { wch: 16 },
+      { wch: 24 },
+      { wch: 18 },
+      { wch: 18 },
+      { wch: 34 },
+      { wch: 26 },
+      { wch: 32 },
+      { wch: 24 },
+      { wch: 22 }
+    ];
+
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Historial C3');
+
+    const fechaArchivo = new Date().toISOString().slice(0, 10);
+    XLSX.writeFile(workbook, `Historial_Dictamenes_C3_${fechaArchivo}.xlsx`);
+
+    showNotification('Archivo Excel generado correctamente.', 'success');
+  };
+
+  const borrarHistorialPorMes = async () => {
+    const [anio, mes] = String(mesSeleccionado || '').split('-');
+
+    if (!anio || !mes) {
+      showNotification('Selecciona un mes válido.', 'warning');
+      return;
+    }
+
+    setBorrandoMes(true);
+
+    try {
+      const response = await ocultarHistorialC3PorMesApi({
+        anio: Number(anio),
+        mes: Number(mes)
+      });
+
+      showNotification(
+        response.data?.message || 'Historial C3 borrado correctamente.',
+        'success'
+      );
+
+      setModalBorrarMes(false);
+      await cargarHistorial();
+    } catch (error) {
+      showNotification(
+        error.response?.data?.message || 'Error al borrar historial C3.',
+        'error'
+      );
+    } finally {
+      setBorrandoMes(false);
+    }
+  };
 
   const handleBusqueda = (valor) => {
     actualizarFiltro('busqueda', valor);
@@ -218,6 +313,80 @@ export default function HistorialC3({ setPageTitle }) {
         onKeyDown={handleKeyDown}
       />
 
+      <div className="hist-actions-bar">
+        <button
+          type="button"
+          className="hist-action-btn hist-action-excel"
+          onClick={descargarExcel}
+          disabled={filasFiltradas.length === 0}
+        >
+          <i className="bx bx-download"></i>
+          Descargar Excel
+        </button>
+
+        {puedeBorrarHistorial && (
+          <button
+            type="button"
+            className="hist-action-btn hist-action-delete"
+            onClick={() => setModalBorrarMes(true)}
+          >
+            <i className="bx bx-trash"></i>
+            Borrar por mes
+          </button>
+        )}
+
+        {modalBorrarMes && (
+          <div className="hist-modal-backdrop">
+            <div className="hist-modal-card">
+              <div className="hist-modal-header">
+                <h3>Borrar historial por mes</h3>
+                <button
+                  type="button"
+                  onClick={() => setModalBorrarMes(false)}
+                  disabled={borrandoMes}
+                >
+                  <i className="bx bx-x"></i>
+                </button>
+              </div>
+
+              <p className="hist-modal-text">
+                Esta acción ocultará del Historial C3 los dictámenes del mes seleccionado.
+                Los trámites reales no se eliminarán.
+              </p>
+
+              <label className="hist-modal-field">
+                Mes a borrar
+                <input
+                  type="month"
+                  value={mesSeleccionado}
+                  onChange={(e) => setMesSeleccionado(e.target.value)}
+                  disabled={borrandoMes}
+                />
+              </label>
+
+              <div className="hist-modal-actions">
+                <button
+                  type="button"
+                  className="hist-modal-btn hist-modal-cancel"
+                  onClick={() => setModalBorrarMes(false)}
+                  disabled={borrandoMes}
+                >
+                  Cancelar
+                </button>
+
+                <button
+                  type="button"
+                  className="hist-modal-btn hist-modal-delete"
+                  onClick={borrarHistorialPorMes}
+                  disabled={borrandoMes}
+                >
+                  {borrandoMes ? 'Borrando...' : 'Confirmar borrado'}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
       {/* Estadísticas */}
       <HistorialStats stats={stats} />
 

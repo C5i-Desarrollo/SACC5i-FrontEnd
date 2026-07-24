@@ -382,3 +382,145 @@ body.dark .hist-pag-info {
 /* =====================================================
   cambio en el color de mi filtro
 ===================================================== */ 
+
+.hist-actions-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin: 12px 0 18px;
+}
+
+.hist-action-btn {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hist-action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.hist-action-excel {
+  background: #15803d;
+  color: #ffffff;
+}
+
+.hist-action-excel:hover:not(:disabled) {
+  background: #166534;
+}
+
+.hist-action-delete {
+  background: #b91c1c;
+  color: #ffffff;
+}
+
+.hist-action-delete:hover:not(:disabled) {
+  background: #991b1b;
+}
+
+.hist-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.58);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.hist-modal-card {
+  width: min(460px, 100%);
+  background: var(--surface-card, #ffffff);
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+}
+
+.hist-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hist-modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--text-primary, #111827);
+}
+
+.hist-modal-header button {
+  border: none;
+  background: transparent;
+  color: var(--text-secondary, #6b7280);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.hist-modal-text {
+  margin: 14px 0;
+  color: var(--text-secondary, #6b7280);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.hist-modal-field {
+  display: grid;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-primary, #111827);
+}
+
+.hist-modal-field input {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border, #d1d5db);
+  background: var(--input-bg, #ffffff);
+  color: var(--text-primary, #111827);
+}
+
+.hist-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.hist-modal-btn {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.hist-modal-cancel {
+  background: var(--surface-soft, #f3f4f6);
+  color: var(--text-primary, #111827);
+}
+
+.hist-modal-delete {
+  background: #b91c1c;
+  color: #ffffff;
+}
+
+.hist-modal-delete:hover:not(:disabled) {
+  background: #991b1b;
+}
+
+.hist-modal-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
