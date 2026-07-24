@@ -215,6 +215,10 @@ export const obtenerHistorialC3 = (params = {}) => {
   return api.get('/tramites/alta/historial-c3', { params });
 };
 
+export const ocultarHistorialC3PorMesApi = (data) => {
+  return api.patch('/tramites/alta/historial-c3/ocultar-mes', data);
+};
+
 export const obtenerPersonasRechazadas = (params = {}) => {
   return api.get('/tramites/alta/personas-rechazadas', { params });
 };
