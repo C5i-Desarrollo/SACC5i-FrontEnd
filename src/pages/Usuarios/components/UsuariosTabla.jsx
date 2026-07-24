@@ -175,6 +175,25 @@ export default function UsuariosTabla({
                       <div className="info-principal">
                         <h4 className="info-nombre">{usuario.nombre_completo}</h4>
                         <code className="info-usuario">{usuario.usuario}</code>
+                        
+                        {/* 👇 NUEVA ETIQUETA DE DELEGADO */}
+                        {usuario.delegado_a && (
+                          <div style={{
+                            marginTop: '8px',
+                            backgroundColor: '#fff3cd',
+                            color: '#856404',
+                            padding: '4px 8px',
+                            borderRadius: '4px',
+                            fontSize: '12px',
+                            fontWeight: '600',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '4px',
+                            border: '1px solid #ffeeba'
+                          }}>
+                            <FiClock size={12} /> Delegado a: {usuario.delegado_a}
+                          </div>
+                        )}
                       </div>
 
                       <div className="info-detalles">
