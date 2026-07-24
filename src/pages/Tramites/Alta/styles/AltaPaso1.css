@@ -707,3 +707,275 @@ body.dark .alta-confirm-danger{
 body.dark .alta-confirm-danger:hover{
     background:#922454;
 }
+
+/* =====================================================
+   SELECT BUSCABLE DE MUNICIPIO
+===================================================== */
+
+.alta-select-municipio {
+  width: 100%;
+}
+
+/* Caja principal: mismo tamaño que los demás campos */
+.alta-select-municipio .municipio-select__control {
+  width: 100%;
+  height: 41px;
+  min-height: 41px;
+
+  border: 1.5px solid #e0ddd5;
+  border-radius: 10px;
+  background: #ffffff;
+
+  box-shadow: none;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.25s ease;
+}
+
+/* Cuando se selecciona o se escribe */
+.alta-select-municipio .municipio-select__control--is-focused {
+  border-color: #b3a060 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Contenedor del texto */
+.alta-select-municipio .municipio-select__value-container {
+  height: 100%;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+}
+
+/* Texto seleccionado */
+.alta-select-municipio .municipio-select__single-value {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Texto para escribir */
+.alta-select-municipio .municipio-select__input-container {
+  margin: 0;
+  padding: 0;
+}
+
+.alta-select-municipio .municipio-select__input-container input {
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Texto de ejemplo */
+.alta-select-municipio .municipio-select__placeholder {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Área de la flecha y la X */
+.alta-select-municipio .municipio-select__indicators {
+  height: 40px;
+}
+
+.alta-select-municipio .municipio-select__dropdown-indicator,
+.alta-select-municipio .municipio-select__clear-indicator {
+  padding: 8px;
+  cursor: pointer;
+}
+
+/* Línea antes de la flecha */
+.alta-select-municipio .municipio-select__indicator-separator {
+  height: 22px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+
+body:not(.dark)
+  .alta-select-municipio-filled
+  .municipio-select__control,
+body:not(.dark)
+  .alta-select-municipio-filled
+  .municipio-select__control:hover,
+body:not(.dark)
+  .alta-select-municipio-filled
+  .municipio-select__control--is-focused {
+  border-color: #c4b47f !important;
+  box-shadow: 0 0 0 2px rgba(196, 180, 127, 0.16) !important;
+  background: #ffffff !important;
+}
+
+
+
+/* =====================================================
+   SELECT MUNICIPIO - MODO OSCURO
+===================================================== */
+
+/* Campo principal */
+body.dark
+  .alta-select-municipio
+  .municipio-select__control,
+body.dark
+  .alta-select-municipio
+  .municipio-select__control:hover {
+  background-color: #1b171a !important;
+  border-color: #5b4650 !important;
+  box-shadow: none !important;
+}
+
+/* Campo enfocado cuando está vacío */
+body.dark
+  .alta-select-municipio:not(.alta-select-municipio-filled)
+  .municipio-select__control--is-focused {
+  background-color: #1b171a !important;
+  border-color: #b3a060 !important;
+  box-shadow: none !important;
+}
+
+/* Campo lleno: conserva el borde dorado */
+body.dark
+  .alta-select-municipio-filled
+  .municipio-select__control,
+body.dark
+  .alta-select-municipio-filled
+  .municipio-select__control:hover,
+body.dark
+  .alta-select-municipio-filled
+  .municipio-select__control--is-focused {
+  background-color: #1b171a !important;
+  border-color: #c4b47f !important;
+  box-shadow: 0 0 0 2px rgba(196, 180, 127, 0.16) !important;
+}
+
+/* Evitar fondos internos diferentes */
+body.dark
+  .alta-select-municipio
+  .municipio-select__value-container,
+body.dark
+  .alta-select-municipio
+  .municipio-select__input-container,
+body.dark
+  .alta-select-municipio
+  .municipio-select__input-container input,
+body.dark
+  .alta-select-municipio
+  .municipio-select__indicators {
+  background-color: transparent !important;
+}
+
+/* Texto seleccionado */
+body.dark
+  .alta-select-municipio
+  .municipio-select__single-value {
+  color: #ffffff !important;
+}
+
+/* Texto que se escribe */
+body.dark
+  .alta-select-municipio
+  .municipio-select__input-container,
+body.dark
+  .alta-select-municipio
+  .municipio-select__input-container input {
+  color: #ffffff !important;
+}
+
+/* Placeholder */
+body.dark
+  .alta-select-municipio
+  .municipio-select__placeholder {
+  color: #aaa0a5 !important;
+}
+
+/* Flecha y X */
+body.dark
+  .alta-select-municipio
+  .municipio-select__dropdown-indicator,
+body.dark
+  .alta-select-municipio
+  .municipio-select__clear-indicator {
+  color: #c8bcc2 !important;
+}
+
+body.dark
+  .alta-select-municipio
+  .municipio-select__dropdown-indicator:hover,
+body.dark
+  .alta-select-municipio
+  .municipio-select__clear-indicator:hover {
+  color: #ffffff !important;
+}
+
+/* Línea antes de la flecha */
+body.dark
+  .alta-select-municipio
+  .municipio-select__indicator-separator {
+  background-color: #55474d !important;
+}
+
+/* Menú desplegable */
+body.dark .municipio-select__menu,
+body.dark .municipio-select__menu-list {
+  background-color: #1b171a !important;
+  color: #ffffff !important;
+}
+
+/* Opciones normales */
+body.dark .municipio-select__option {
+  background-color: #1b171a !important;
+  color: #ffffff !important;
+}
+
+/* Opción señalada */
+body.dark .municipio-select__option--is-focused {
+  background-color: #432c36 !important;
+  color: #ffffff !important;
+}
+
+/* Opción seleccionada */
+body.dark .municipio-select__option--is-selected {
+  background-color: #8a1538 !important;
+  color: #ffffff !important;
+}
+
+/* Sin resultados */
+body.dark .municipio-select__no-options-message {
+  background-color: #1b171a !important;
+  color: #aaa0a5 !important;
+}
+
+/* =====================================================
+   BARRA DE DESPLAZAMIENTO OSCURA
+===================================================== */
+
+body.dark .municipio-select__menu-list {
+  color-scheme: dark;
+  scrollbar-width: thin;
+  scrollbar-color: #66545c #1b171a;
+}
+
+body.dark .municipio-select__menu-list::-webkit-scrollbar {
+  width: 10px;
+}
+
+body.dark .municipio-select__menu-list::-webkit-scrollbar-track {
+  background-color: #1b171a !important;
+}
+
+body.dark .municipio-select__menu-list::-webkit-scrollbar-thumb {
+  background-color: #66545c !important;
+  border: 2px solid #1b171a;
+  border-radius: 10px;
+}
+
+body.dark .municipio-select__menu-list::-webkit-scrollbar-thumb:hover {
+  background-color: #846d77 !important;
+}
+
+body.dark .municipio-select__menu-list::-webkit-scrollbar-button {
+  background-color: #1b171a !important;
+}
+
+

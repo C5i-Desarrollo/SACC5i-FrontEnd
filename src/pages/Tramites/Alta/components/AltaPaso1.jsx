@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import Select from 'react-select';
 import { useAltaForm } from '../../../../hooks/alta/useAltaForm';
 import { useNotification } from '../../../../context/NotificationContext';
 import { FiFileText } from 'react-icons/fi';
 import { getTodayIsoDate, isFutureIsoDate, isValidIsoDate } from '../../../../utils/dateValidation';
 import BirthDatePicker from './BirthDatePicker';
 import '../styles/AltaPaso1.css';
+
 
 const NUMERO_OFICIO_C5_EJEMPLO = 'SSP/SII/C5I/DT/3263/2026';
 const OFICIO_C5_SEGMENT_SIZES = [3, 3, 3, 2, 4, 4];
@@ -91,6 +93,24 @@ export default function AltaPaso1({
     () => new Set((municipios || []).map((municipio) => String(municipio.id))),
     [municipios]
   );
+  const opcionesMunicipios = useMemo(
+  () =>
+    (municipios || []).map((municipio) => ({
+      value: String(municipio.id),
+      label: municipio.nombre,
+    })),
+  [municipios]
+);
+
+const municipioSeleccionado = useMemo(
+  () =>
+    opcionesMunicipios.find(
+      (opcion) => opcion.value === String(formData.municipio_id || '')
+    ) || null,
+  [opcionesMunicipios, formData.municipio_id]
+);
+
+
 
   useEffect(() => {
     const incomingSignature = JSON.stringify(normalizedInitialData);
@@ -358,14 +378,41 @@ export default function AltaPaso1({
           {/* Municipio */}
           <div className="alta-form-group">
             <label htmlFor="municipio_id">Municipio *</label>
-            <select id="municipio_id" {...getFieldProps('municipio_id')} className={getInputClass('municipio_id')} required>
-              <option value="">Seleccione...</option>
-              {municipios.map(municipio => (
-                <option key={municipio.id} value={municipio.id}>
-                  {municipio.nombre}
-                </option>
-              ))}
-            </select>
+
+<Select
+  inputId="municipio_id"
+  name="municipio_id"
+  className={`alta-select-municipio ${
+  formData.municipio_id
+    ? 'alta-select-municipio-filled'
+    : ''
+}`}
+  classNamePrefix="municipio-select"
+  options={opcionesMunicipios}
+  value={municipioSeleccionado}
+  onChange={(opcion) =>
+    setValue('municipio_id', opcion?.value || '')
+  }
+  placeholder="Buscar o seleccionar municipio..."
+  noOptionsMessage={() => 'Municipio no encontrado'}
+  isSearchable
+  isClearable
+  isDisabled={submitting}
+  menuPosition="fixed"
+  menuPortalTarget={
+    typeof document !== 'undefined'
+      ? document.body
+      : undefined
+  }
+  styles={{
+    menuPortal: (base) => ({
+      ...base,
+      zIndex: 9999,
+    }),
+  }}
+/>
+
+
           </div>
 
           {/* Número de Solicitud */}
