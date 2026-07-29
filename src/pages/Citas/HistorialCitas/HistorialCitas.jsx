@@ -31,19 +31,21 @@ function formatHora(horaString) {
 }
 
 const ESTADOS_CONFIG = {
-  programada:   { label: 'PROGRAMADA',   cls: 'hc-badge-prog' },
-  completada:   { label: 'ASISTIÓ',      cls: 'hc-badge-asistio' },
-  cancelada:    { label: 'NO ASISTIÓ',   cls: 'hc-badge-no' },
-  reprogramada: { label: 'REAGENDADA',   cls: 'hc-badge-rep' }
+  programada: { label: 'PROGRAMADA', cls: 'hc-badge-prog' },
+  completada: { label: 'ASISTIÓ', cls: 'hc-badge-asistio' },
+  cancelada: { label: 'NO ASISTIÓ', cls: 'hc-badge-no' },
+  reprogramada: { label: 'REAGENDADA', cls: 'hc-badge-rep' },
+  vencida: { label: 'VENCIDA', cls: 'hc-badge-vencida' },
+  rechazada: { label: 'RECHAZADA', cls: 'hc-badge-no' }
 };
 
 const ESTADOS_FILTRO = [
-  { key: 'todas',       label: 'Mostrar todo' },
-  { key: 'pendientes',  label: 'Programadas' },
+  { key: 'todas', label: 'Mostrar todo' },
+  { key: 'pendientes', label: 'Programadas' },
   { key: 'asistencias', label: 'Asistencias' },
   { key: 'reagendadas', label: 'Reagendadas' },
-  { key: 'vencidas',    label: 'Vencidas' },
-  { key: 'rechazadas',  label: 'Rechazadas' }
+  { key: 'vencidas', label: 'Vencidas' },
+  { key: 'rechazadas', label: 'Rechazadas' }
 ];
 
 const VISTAS_FECHA_BASE = [
@@ -81,9 +83,9 @@ function ReenviarCorreoModal({ cita, onClose, onConfirm, loading }) {
             </p>
             <div className="hc-field">
               <label>Correo electrónico de destino *</label>
-              <input 
-                type="email" 
-                value={correo} 
+              <input
+                type="email"
+                value={correo}
                 onChange={(e) => setCorreo(e.target.value)}
                 placeholder="ejemplo@correo.com"
                 required
@@ -194,7 +196,7 @@ export default function HistorialCitas({
     }
   }, [modalReagenda, reprogramarCita, showNotification]);
 
-  
+
   // ── HANDLER PARA REENVIAR NOTIFICACIÓN ──
   // ── HANDLER PARA REENVIAR NOTIFICACIÓN ──
   const handleReenviarCorreo = useCallback(async (nuevoCorreo) => {
@@ -399,7 +401,8 @@ export default function HistorialCitas({
               </thead>
               <tbody>
                 {citas.map(cita => {
-                  const est = ESTADOS_CONFIG[cita.estado] || ESTADOS_CONFIG.programada;
+                  const estadoProceso = cita.estado_vista || cita.estado;
+                  const est = ESTADOS_CONFIG[estadoProceso] || ESTADOS_CONFIG.programada;
                   const isUpdating = updatingId === cita.id;
                   return (
                     <tr key={cita.id}>
@@ -486,7 +489,7 @@ export default function HistorialCitas({
         {/* ── MODAL REENVIAR RÁPIDO ── */}
         {modalReenviar && (
           <ReenviarCorreoModal
-          key={modalReenviar.id + modalReenviar.correo_destinatario}
+            key={modalReenviar.id + modalReenviar.correo_destinatario}
             cita={modalReenviar}
             onClose={() => setModalReenviar(null)}
             onConfirm={handleReenviarCorreo}
@@ -544,7 +547,21 @@ function AccionCita({ cita, readOnly, isUpdating, onAbrirReagenda, onContinuarPr
     );
   }
 
-  switch (cita.estado) {
+  const estadoProceso = cita.estado_vista || cita.estado;
+
+  switch (estadoProceso) {
+
+    case 'vencida':
+      return (
+        <button
+          className="hc-btn hc-btn-guinda"
+          onClick={onContinuarProceso}
+          title="La cita venció, pero puedes registrar la asistencia si el elemento sí acudió"
+        >
+          <i className="bx bx-play-circle"></i> CONTINUAR PROCESO
+        </button>
+      );
+
     case 'programada':
       if (esMismoDia) {
         return (
