@@ -562,7 +562,9 @@ function AccionCita({ cita, readOnly, isUpdating, onAbrirReagenda, onContinuarPr
         </button>
       );
 
+    // 👇 SOLUCIÓN: Agrupamos 'programada' y 'reprogramada' para que tengan los mismos botones
     case 'programada':
+    case 'reprogramada':
       if (esMismoDia) {
         return (
           <button
@@ -589,13 +591,6 @@ function AccionCita({ cita, readOnly, isUpdating, onAbrirReagenda, onContinuarPr
       return (
         <button className="hc-btn hc-btn-reagendar" onClick={() => onAbrirReagenda('reagendar')}>
           <i className="bx bx-refresh"></i> REAGENDAR CITA
-        </button>
-      );
-
-    case 'reprogramada':
-      return (
-        <button className="hc-btn hc-btn-guinda" onClick={() => onAbrirReagenda('reagendar')}>
-          <i className="bx bx-calendar-check"></i> CONFIRMAR NUEVA FECHA
         </button>
       );
 
