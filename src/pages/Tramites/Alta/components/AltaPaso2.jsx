@@ -99,6 +99,40 @@ export default function AltaPaso2({
   const borradorDescartandoRef = useRef(false);
   const todayIso = useMemo(() => getTodayIsoDate(), []);
 
+  // --- LÓGICA DEL BUSCADOR ESTILO "REACT-SELECT" ---
+  const [puestoText, setPuestoText] = useState('');
+  const [mostrarPuestos, setMostrarPuestos] = useState(false);
+  const dropdownPuestoRef = useRef(null);
+
+  // Sincroniza el texto si estás editando a alguien o eliges de la lista
+  useEffect(() => {
+    if (formData.puesto_id) {
+      const puestoObj = puestos.find(p => String(p.id) === String(formData.puesto_id));
+      if (puestoObj) setPuestoText(puestoObj.nombre);
+    } else {
+      setPuestoText('');
+    }
+  }, [formData.puesto_id, puestos]);
+
+  // Cierra el menú flotante si haces clic afuera
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownPuestoRef.current && !dropdownPuestoRef.current.contains(event.target)) {
+        setMostrarPuestos(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Filtra los puestos según lo que escribas
+  const puestosFiltrados = useMemo(() => {
+    const municipales = puestos.filter((p) => p.es_competencia_municipal);
+    const termino = puestoText.trim().toLowerCase();
+    if (!termino || formData.puesto_id) return municipales;
+    return municipales.filter(p => p.nombre.toLowerCase().includes(termino));
+  }, [puestoText, puestos, formData.puesto_id]);
+
   const faseActualSolicitud = String(solicitud?.fase_actual || '').toLowerCase();
   const FASES_EDITABLES = ['datos_solicitud', 'validacion_personal'];
   const FASES_CON_REVISION_DISPONIBLE = ['dictaminado_c3', 'validado_c3', 'revision_requisitos', 'validacion_cuip', 'cita_programada', 'finalizado'];
@@ -798,16 +832,78 @@ export default function AltaPaso2({
                   style={{ textTransform: 'uppercase' }}
                 />
               </div>
-              <div className="alta-form-group">
-                <label htmlFor="persona_puesto_id">Puesto Solicitado <span className="required">*</span></label>
-                <select id="persona_puesto_id" {...getFieldProps('puesto_id')} className={getInputClass('puesto_id')} required>
-                  <option value="">Seleccione un puesto...</option>
-                  <optgroup label="Competencia Municipal">
-                    {puestosMunicipales.map(puesto => (
-                      <option key={puesto.id} value={puesto.id}>{puesto.nombre}</option>
-                    ))}
-                  </optgroup>
-                </select>
+              <div className="alta-form-group alta-form-group-dropdown" ref={dropdownPuestoRef}>
+                <label htmlFor="persona_puesto_input">Puesto Solicitado <span className="required">*</span></label>
+                
+                <div className="alta-custom-select-container">
+                  <input
+                    id="persona_puesto_input"
+                    type="text"
+                    className={`${getInputClass('puesto_id')} alta-custom-select-input`}
+                    placeholder="Seleccione un puesto..."
+                    value={puestoText}
+                    onChange={(e) => {
+                      setPuestoText(e.target.value);
+                      setMostrarPuestos(true);
+                      if (formData.puesto_id) setValue('puesto_id', '');
+                    }}
+                    onFocus={() => setMostrarPuestos(true)}
+                    autoComplete="off"
+                    required={!formData.puesto_id}
+                  />
+                  
+                  {puestoText && (
+                    <i 
+                      className="bx bx-x alta-custom-select-clear" 
+                      onMouseDown={(e) => {
+                        e.preventDefault(); 
+                        setPuestoText('');
+                        setValue('puesto_id', '');
+                        setMostrarPuestos(true);
+                        document.getElementById('persona_puesto_input').focus();
+                      }}
+                    ></i>
+                  )}
+
+                  {/* Se eliminó el separador (divider) para igualar el diseño */}
+
+                  <i 
+                    className="bx bx-chevron-down alta-custom-select-arrow"
+                    onMouseDown={(e) => {
+                      e.preventDefault(); 
+                      setMostrarPuestos(prev => !prev); 
+                    }}
+                  ></i>
+
+                  {mostrarPuestos && (
+                    <ul className="alta-custom-select-menu">
+                      {puestosFiltrados.length > 0 ? (
+                        puestosFiltrados.map(puesto => {
+                          const isSelected = String(puesto.id) === String(formData.puesto_id);
+                          return (
+                            <li
+                              key={puesto.id}
+                              className={`alta-custom-select-option ${isSelected ? 'selected' : ''}`}
+                              onMouseDown={(e) => {
+                                e.preventDefault();
+                                setValue('puesto_id', puesto.id);
+                                setPuestoText(puesto.nombre);
+                                setMostrarPuestos(false);
+                              }}
+                              /* Se eliminaron los estilos en línea de hover para usar puro CSS */
+                            >
+                              {puesto.nombre}
+                            </li>
+                          );
+                        })
+                      ) : (
+                        <li className="alta-custom-select-empty">
+                          No se encontraron resultados
+                        </li>
+                      )}
+                    </ul>
+                  )}
+                </div>
               </div>
             </div>
             <div className="btn-group">

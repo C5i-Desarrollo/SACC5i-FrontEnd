@@ -243,6 +243,12 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
+  
+}
+
+.alta-form-group-dropdown {
+  position: relative; /* <--- ESTA ES LA LÍNEA QUE FALTABA */
+  z-index: 9999;
 }
 
 .alta-form-group label {
@@ -1006,6 +1012,123 @@ body.dark .alta-modal-close:hover{
   }
 }
 
+/* =====================================================
+   BUSCADOR DE PUESTOS (CUSTOM SELECT)
+===================================================== */
+.alta-custom-select-container {
+  position: relative;
+  display: block;
+  width: 100%;
+  z-index: 100;
+}
+
+/* El input hereda de tu input normal, pero con más padding derecho */
+.alta-custom-select-input {
+  width: 100%;
+  padding-right: 65px !important;
+  box-sizing: border-box;
+}
+
+.alta-custom-select-clear {
+  position: absolute;
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #999;
+  font-size: 18px;
+  z-index: 2;
+  padding: 2px;
+  transition: color 0.2s;
+}
+
+.alta-custom-select-clear:hover {
+  color: #dc2626; /* Rojo al pasar el mouse */
+}
+
+/* ELIMINAMOS la clase .alta-custom-select-divider */
+
+.alta-custom-select-arrow {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #555;
+  font-size: 20px;
+  z-index: 2;
+  padding: 2px;
+  pointer-events: auto; 
+}
+
+/* Menú desplegable */
+.alta-custom-select-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: 220px;
+  overflow-y: auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 1000;
+  margin: 0;
+  padding: 4px 0;
+  list-style: none;
+}
+
+.alta-custom-select-option {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  transition: background-color 0.1s, color 0.1s;
+}
+
+/* Hover estilo nativo (Azul clarito) */
+.alta-custom-select-option:hover {
+  background-color: #e8f0fe; /* Color idéntico a tu captura */
+  color: #333; /* El texto se mantiene oscuro */
+}
+
+/* Opción seleccionada */
+.alta-custom-select-option.selected {
+  background-color: #d2e3fc;
+  color: #1a73e8;
+  font-weight: 600;
+}
+
+.alta-custom-select-empty {
+  padding: 8px 12px;
+  color: #999;
+  font-size: 14px;
+}
+
+
+
+/* --- DARK MODE PARA EL BUSCADOR --- */
+body.dark .alta-custom-select-clear,
+body.dark .alta-custom-select-arrow {
+  color: #8f8791;
+}
+body.dark .alta-custom-select-menu {
+  background-color: #1d1b22;
+  border-color: #403742;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+}
+body.dark .alta-custom-select-option {
+  color: #f4f1f5;
+}
+body.dark .alta-custom-select-option:hover {
+  background-color: #34303a; /* Gris oscuro para el hover en dark mode */
+  color: #fff;
+}
+body.dark .alta-custom-select-option.selected {
+  background-color: rgba(123, 24, 66, 0.4);
+  color: #e8d3aa;
+}
 /* =====================================================
    BOTON REGRESAR - DARK
 ===================================================== */
