@@ -248,7 +248,7 @@
 
 .alta-form-group-dropdown {
   position: relative; /* <--- ESTA ES LA LÍNEA QUE FALTABA */
-  z-index: 9999;
+  z-index: 100;
 }
 
 .alta-form-group label {
