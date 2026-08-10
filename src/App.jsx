@@ -68,9 +68,84 @@ function DashboardLayout() {
   const ignoreNextPopstateRef = useRef(false);
   const isDireccion = user?.rol === 'direccion' || user?.rol === "coordinador";
   const isDashboardSection = activeSection === 'Dashboard';
-  
+
   // 1. AÑADIMOS EL ESTADO PARA EL TÍTULO DEL NAVBAR AQUÍ
   const [pageTitle, setPageTitle] = useState(null);
+
+const getDefaultNavbarTitle = (section) => {
+  switch (section) {
+    case 'TestMunicipio':
+      return {
+        titulo: 'Filtrado por Municipio',
+        icon: <i className="bx bx-filter-alt nav-icon-highlight"></i>
+      };
+
+    case 'EnProceso':
+      return {
+        titulo: 'En Proceso',
+        icon: <i className="bx bx-loader-circle nav-icon-highlight"></i>
+      };
+
+    case 'HistorialCitas':
+      return {
+        titulo: 'Citas',
+        icon: <i className="bx bx-calendar nav-icon-highlight"></i>
+      };
+
+    case 'Baja':
+      return {
+        titulo: 'Baja de Personal',
+        icon: <i className="bx bxs-user-minus nav-icon-highlight"></i>
+      };
+
+    case 'Finalizados':
+      return {
+        titulo: 'Finalizados',
+        icon: <i className="bx bxs-calendar-check nav-icon-highlight"></i>
+      };
+
+    case 'RechazosC3':
+      return {
+        titulo: 'Trámites No Procedentes',
+        icon: <i className="bx bxs-x-circle nav-icon-highlight"></i>
+      };
+
+    case 'Alta':
+      return {
+        titulo: 'Trámites de Alta',
+        icon: <i className="bx bx-user-plus nav-icon-highlight"></i>
+      };
+
+    case 'Consulta':
+      return {
+        titulo: 'Consulta de Trámites',
+        icon: <i className="bx bx-search nav-icon-highlight"></i>
+      };
+
+    case 'ListadoNominal':
+      return {
+        titulo: 'Listado Nominal',
+        icon: <i className="bx bx-list-ul nav-icon-highlight"></i>
+      };
+
+    case 'PersonalActivo':
+      return {
+        titulo: 'Personal Activo',
+        icon: <i className="bx bx-id-card nav-icon-highlight"></i>
+      };
+
+    case 'Dashboard':
+    default:
+      return {
+        titulo: 'Dashboard',
+        icon: <i className="bx bx-grid-alt nav-icon-highlight"></i>
+      };
+  }
+};
+const navbarTitle =
+  activeSection === 'TestMunicipio'
+    ? getDefaultNavbarTitle('TestMunicipio')
+    : pageTitle || getDefaultNavbarTitle(activeSection);
 
   const sectionToPath = {
     Dashboard: '/dashboard',
@@ -133,14 +208,15 @@ function DashboardLayout() {
       ? pathname.slice(0, -1)
       : pathname;
 
+    if (cleanPath === '/dashboard') {
+      return isDireccion ? 'TestMunicipio' : 'Dashboard';
+    }
+
     const mappedSection = pathToSection[cleanPath];
+
     if (mappedSection) {
       if (isDireccion && mappedSection === 'PanelDireccion') return 'EnProceso';
       return mappedSection;
-    }
-
-    if (cleanPath === '/dashboard') {
-      return 'Dashboard';
     }
 
     return cleanPath.startsWith('/dashboard') ? 'Dashboard' : null;
@@ -305,22 +381,23 @@ function DashboardLayout() {
 
   return (
     <div className={`container ${isSidebarAnimating ? 'sidebar-animating' : ''} ${isDashboardSection ? 'dashboard-active' : ''}`}>
-      <Sidebar 
-        isHidden={isSidebarHidden} 
+      <Sidebar
+        isHidden={isSidebarHidden}
         activeSection={activeSection}
         onSectionChange={handleSectionChange}
       />
       <section id="content">
-        <Navbar 
+        <Navbar
           onToggleSidebar={handleToggleSidebar}
           onSectionChange={handleSectionChange}
           isSidebarHidden={isSidebarHidden}
           isDireccion={isDireccion}
           selectedAnalista={selectedAnalista}
-          pageTitle={pageTitle} /* 2. LE PASAMOS EL TÍTULO AL NAVBAR PARA QUE LO DIBUJE */
+          onChangeAnalista={() => setSelectedAnalista(null)}
+          pageTitle={navbarTitle}
         />
-        <MainContent 
-          activeSection={activeSection} 
+        <MainContent
+          activeSection={activeSection}
           isDireccion={isDireccion}
           selectedAnalista={selectedAnalista}
           onSelectedAnalistaChange={setSelectedAnalista}
@@ -370,7 +447,7 @@ function App() {
 
               <Route path="/dashboard/carga-documentos" element={<TestCargaDocumentos />} />
               {/* <Route path="/dashboard/historial-documentos" element={<HistorialDocumentos />} /> */}
-              
+
               {/* AQUÍ: Monta ProtectedRouter para todas las rutas protegidas */}
               <Route path="/*" element={<ProtectedRouter />} />
               <Route path="*" element={<NotFound />} />

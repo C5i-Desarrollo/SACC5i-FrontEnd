@@ -13,7 +13,8 @@ const Navbar = ({
   pageTitle,
   isSidebarHidden,
   isDireccion = false,
-  selectedAnalista = null
+  selectedAnalista = null,
+  onChangeAnalista
 }) => {
   const { user, logout } = useAuth();
   const {
@@ -132,6 +133,11 @@ const Navbar = ({
   };
 
   const handleOpenAnalistaSelector = () => {
+    if (isDireccion) {
+      onChangeAnalista?.();
+      return;
+    }
+
     onSectionChange('Dashboard');
   };
 
@@ -149,103 +155,103 @@ const Navbar = ({
   const obtenerNombreMunicipio = () => {
     // 1. Si el backend ya nos manda el nombre limpio y bonito
     if (user?.municipio_nombre) return user.municipio_nombre;
-    
+
     // 2. Si el usuario es tipo "mun_acajete", le quitamos el "mun_" y lo capitalizamos
     const identificador = user?.usuario || user?.nombre || '';
     if (identificador.startsWith('mun_')) {
       const nombreLimpio = identificador.replace('mun_', '');
       return nombreLimpio.charAt(0).toUpperCase() + nombreLimpio.slice(1);
     }
-    
+
     // 3. Fallback en caso de que sea un usuario raro
     return user?.nombre || 'Desconocido';
   };
 
-  const ubicacionText = isMunicipio 
-    ? `Municipio: ${obtenerNombreMunicipio()}` 
+  const ubicacionText = isMunicipio
+    ? `Municipio: ${obtenerNombreMunicipio()}`
     : `Region: ${regionDisplayText}`;
 
   return (
     <nav id="content-nav">
-        <button type="button" className="nav-menu-toggle" onClick={onToggleSidebar} aria-label="Mostrar/Ocultar menu lateral">
-          <i className={`bx ${isSidebarHidden ? 'bx-chevrons-right' : 'bx-chevrons-left'} bx-sm`}></i>
-        </button>
+      <button type="button" className="nav-menu-toggle" onClick={onToggleSidebar} aria-label="Mostrar/Ocultar menu lateral">
+        <i className={`bx ${isSidebarHidden ? 'bx-chevrons-right' : 'bx-chevrons-left'} bx-sm`}></i>
+      </button>
 
-        {pageTitle && (
-          <div className="nav-page-title-container">
-            <div className="nav-title-wrapper">
-              {pageTitle.icon}
-              <div className="nav-text-group">
-                <span className="nav-main-title">{pageTitle.titulo}</span>
-              </div>
+      {pageTitle && (
+        <div className="nav-page-title-container">
+          <div className="nav-title-wrapper">
+            {pageTitle.icon}
+            <div className="nav-text-group">
+              <span className="nav-main-title">{pageTitle.titulo}</span>
             </div>
           </div>
-        )}
-
-        <div className="nav-spacer" style={{ flexGrow: 1 }}></div>
-
-        <div className="nav-right-actions">
-          {/* Lógica para Repositorio / Selector Analista */}
-          {isDireccion ? (
-            <button
-              type="button"
-              className="nav-user-picker-pill"
-              title="Seleccionar analista"
-              onClick={handleOpenAnalistaSelector}
-            >
-              <FiUsers size={14} />
-              <span>{selectedAnalista?.nombre || 'Seleccionar usuario'}</span>
-            </button>
-          ) : !isMunicipio ? ( 
-            /* Solo renderizamos este botón si NO es municipio */
-            <button
-              type="button"
-              className="nav-repo-pill"
-              title="Ir a Repositorio Digital"
-              onClick={handleOpenRepositorioDigital}
-            >
-              <FiDatabase size={14} />
-              <span>Repositorio Digital</span>
-            </button>
-          ) : null}
-
-          {/* Pastilla dinámica (Región o Municipio) */}
-          <div className="nav-region-pill" title={ubicacionText}>
-            <i className={isMunicipio ? 'bx bx-buildings' : 'bx bx-map'}></i>
-            <span>{ubicacionText}</span>
-          </div>
-
-          <NotificationCenter
-            notificationRef={notificationRef}
-            showNotificationMenu={showNotificationMenu}
-            onToggleNotificationMenu={() => handleToggleMenu('notification')}
-            onCloseNotificationMenu={closeNotificationMenu}
-            bellAnimationTick={bellAnimationTick}
-            unreadCount={unreadCount}
-            totalCount={totalCount}
-            notificationHistory={notificationHistory}
-            activeNotificationMenuId={activeNotificationMenuId}
-            setActiveNotificationMenuId={setActiveNotificationMenuId}
-            markAllAsRead={markAllAsRead}
-            markAllAsUnread={markAllAsUnread}
-            clearHistory={clearHistory}
-            markAsRead={markAsRead}
-            markAsUnread={markAsUnread}
-            removeNotification={removeNotification}
-            removeFromHistory={removeFromHistory}
-          />
-
-          <ProfileMenu
-            profileRef={profileRef}
-            showProfileMenu={showProfileMenu}
-            onToggleProfileMenu={() => handleToggleMenu('profile')}
-            user={user}
-            isDarkMode={isDarkMode}
-            onToggleDarkMode={handleDarkModeToggle}
-            onProfileMenuClick={handleProfileMenuClick}
-          />
         </div>
-      </nav>
+      )}
+
+      <div className="nav-spacer" style={{ flexGrow: 1 }}></div>
+
+      <div className="nav-right-actions">
+        {/* Lógica para Repositorio / Selector Analista */}
+        {isDireccion ? (
+          <button
+            type="button"
+            className="nav-user-picker-pill"
+            title="Seleccionar analista"
+            onClick={handleOpenAnalistaSelector}
+          >
+            <FiUsers size={14} />
+            <span>{selectedAnalista?.nombre || 'Seleccionar usuario'}</span>
+          </button>
+        ) : !isMunicipio ? (
+          /* Solo renderizamos este botón si NO es municipio */
+          <button
+            type="button"
+            className="nav-repo-pill"
+            title="Ir a Repositorio Digital"
+            onClick={handleOpenRepositorioDigital}
+          >
+            <FiDatabase size={14} />
+            <span>Repositorio Digital</span>
+          </button>
+        ) : null}
+
+        {/* Pastilla dinámica (Región o Municipio) */}
+        <div className="nav-region-pill" title={ubicacionText}>
+          <i className={isMunicipio ? 'bx bx-buildings' : 'bx bx-map'}></i>
+          <span>{ubicacionText}</span>
+        </div>
+
+        <NotificationCenter
+          notificationRef={notificationRef}
+          showNotificationMenu={showNotificationMenu}
+          onToggleNotificationMenu={() => handleToggleMenu('notification')}
+          onCloseNotificationMenu={closeNotificationMenu}
+          bellAnimationTick={bellAnimationTick}
+          unreadCount={unreadCount}
+          totalCount={totalCount}
+          notificationHistory={notificationHistory}
+          activeNotificationMenuId={activeNotificationMenuId}
+          setActiveNotificationMenuId={setActiveNotificationMenuId}
+          markAllAsRead={markAllAsRead}
+          markAllAsUnread={markAllAsUnread}
+          clearHistory={clearHistory}
+          markAsRead={markAsRead}
+          markAsUnread={markAsUnread}
+          removeNotification={removeNotification}
+          removeFromHistory={removeFromHistory}
+        />
+
+        <ProfileMenu
+          profileRef={profileRef}
+          showProfileMenu={showProfileMenu}
+          onToggleProfileMenu={() => handleToggleMenu('profile')}
+          user={user}
+          isDarkMode={isDarkMode}
+          onToggleDarkMode={handleDarkModeToggle}
+          onProfileMenuClick={handleProfileMenuClick}
+        />
+      </div>
+    </nav>
   );
 };
 
