@@ -383,32 +383,41 @@ export default function BajaRegistradasSection({
               </div>
             )}
 
-            {allowEdicion && mostrarAccionesToolbar && (
-            <div className="baja-toolbar-actions baja-toolbar-actions-wrap">
-              <button type="button" className="baja-filtros-btn baja-btn-add-persona" onClick={abrirAgregar}>
-                <FiUserPlus /> Agregar persona
-              </button>
-              <button
-                type="button"
-                className="baja-filtros-btn baja-btn-export"
-                onClick={() => onExportarBajasExcel?.(false)}
-                disabled={!puedeExportarBajasCompleto || exportingBajasExcel}
-              >
-                <MdFileDownload /> Exportar todo a Excel
-              </button>
-              <button
-                type="button"
-                className="baja-filtros-btn baja-btn-export baja-btn-export-secondary"
-                onClick={() => onExportarBajasExcel?.(true)}
-                disabled={!puedeExportarBajasSeleccion || exportingBajasExcel}
-              >
-                <MdFileDownload /> Exportar seleccionados ({selectedRowsBajas.length})
-              </button>
-            </div>
+            {mostrarAccionesToolbar && (allowEdicion || onExportarBajasExcel) && (
+              <div className="baja-toolbar-actions baja-toolbar-actions-wrap">
+                {allowEdicion && (
+                  <button type="button" className="baja-filtros-btn baja-btn-add-persona" onClick={abrirAgregar}>
+                    <FiUserPlus /> Agregar persona
+                  </button>
+                )}
+
+                {onExportarBajasExcel && (
+                  <>
+                    <button
+                      type="button"
+                      className="baja-filtros-btn baja-btn-export"
+                      onClick={() => onExportarBajasExcel?.(false)}
+                      disabled={!puedeExportarBajasCompleto || exportingBajasExcel}
+                    >
+                      <MdFileDownload /> Exportar todo a Excel
+                    </button>
+
+                    {mostrarColumnaSeleccion && (
+                      <button
+                        type="button"
+                        className="baja-filtros-btn baja-btn-export baja-btn-export-secondary"
+                        onClick={() => onExportarBajasExcel?.(true)}
+                        disabled={!puedeExportarBajasSeleccion || exportingBajasExcel}
+                      >
+                        <MdFileDownload /> Exportar seleccionados ({selectedRowsBajas.length})
+                      </button>
+                    )}
+                  </>
+                )}
+              </div>
             )}
           </div>
         )}
-
         <div className="baja-table-wrap">
           {loadingBajas ? (
             <div className="baja-state"><i className='bx bx-loader-alt bx-spin'></i> {textoCargando}</div>

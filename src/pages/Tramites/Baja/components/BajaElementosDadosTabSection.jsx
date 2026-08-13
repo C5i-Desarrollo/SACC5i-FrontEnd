@@ -9,7 +9,7 @@ export default function BajaElementosDadosTabSection({ baja }) {
         descripcion="Los elementos registrados aqui ya no aparecen en la tabla de finalizados disponibles."
         allowEdicion={false}
         mostrarBuscador={true}
-        mostrarAccionesToolbar={false}
+        mostrarAccionesToolbar={true}
         mostrarColumnaSeleccion={false}
         mostrarColumnaAcciones={false}
         mostrarPaginacion={true}
@@ -25,14 +25,14 @@ export default function BajaElementosDadosTabSection({ baja }) {
         onEditarBajaLocal={baja.editarBajaLocal}
         onEliminarBajaLocal={baja.eliminarBajaLocal}
         onLimpiarBajasLocales={baja.limpiarBajasLocales}
-        onExportarBajasExcel={baja.exportarBajasExcel}
+        onExportarBajasExcel={baja.exportarBajasSistemaExcel}
         exportingBajasExcel={baja.exportingBajasExcel}
-        puedeExportarBajasCompleto={false}
+        puedeExportarBajasCompleto={Number(baja.paginacionBajas?.total ?? baja.bajasTablaSoloLectura?.length ?? 0) > 0}
         puedeExportarBajasSeleccion={false}
         selectedRowsBajas={[]}
         allBajasCurrentSelected={false}
-        onToggleSelectBaja={() => {}}
-        onToggleSelectAllBajas={() => {}}
+        onToggleSelectBaja={() => { }}
+        onToggleSelectAllBajas={() => { }}
         formatDate={baja.formatDate}
         paginacionBajas={baja.paginacionBajas}
         onPaginaAnterior={() => baja.setPaginaBajas((p) => Math.max(1, p - 1))}
