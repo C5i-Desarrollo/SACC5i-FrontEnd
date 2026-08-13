@@ -85,3 +85,59 @@
 .baja-modal-actions .btn-secondary:hover {
     background: #f7f3f4;
 }
+
+/* DARK MODE - MODAL CONFIRMAR BAJA */
+body.dark .baja-modal-overlay {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+body.dark .baja-modal-card {
+    background: var(--surface-card);
+    border-color: var(--border);
+    box-shadow: 0 22px 45px var(--shadow-dark);
+}
+
+body.dark .baja-modal-header {
+    border-bottom: 1px solid var(--border-soft);
+    background: linear-gradient(135deg, var(--wine), var(--wine-soft));
+}
+
+body.dark .baja-modal-header h4 {
+    color: var(--text-primary);
+}
+
+body.dark .baja-modal-body {
+    color: var(--text-secondary);
+}
+
+body.dark .baja-modal-resumen {
+    background: var(--surface);
+    border-color: var(--border);
+    color: var(--text-primary);
+}
+
+body.dark .baja-modal-resumen span {
+    color: var(--text-primary);
+}
+
+body.dark .baja-modal-actions .btn {
+    background: var(--surface-card);
+    border-color: var(--border);
+    color: var(--text-primary);
+}
+
+body.dark .baja-modal-actions .btn-secondary {
+    background: var(--surface);
+    color: var(--text-secondary);
+}
+
+body.dark .baja-modal-actions .btn-secondary:hover {
+    background: var(--surface-hover);
+}
+
+body.dark .btn-process {
+    background: linear-gradient(135deg, var(--wine), var(--wine-hover));
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.36);
+}
+
