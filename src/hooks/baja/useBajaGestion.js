@@ -649,6 +649,50 @@ export const useBajaGestion = ({ analistaId = null, isDireccion = false } = {}) 
     }
   }, [bajasTablaEditable, formatDate, selectedRowsBajas, showNotification]);
 
+  const exportarBajasSistemaExcel = useCallback(async () => {
+    const totalRegistros = Number(
+      paginacionBajas?.total ?? bajasTablaSoloLectura?.length ?? 0
+    );
+
+    if (totalRegistros <= 0) {
+      showNotification('No hay elementos dados de baja para exportar', 'warning');
+      return;
+    }
+
+    setExportingBajasExcel(true);
+
+    try {
+      const { registros } = await obtenerBajasRegistradas({
+        busqueda: busquedaBajas,
+        pagina: 1,
+        analista_id: analistaId,
+        limit: totalRegistros
+      });
+
+      const registrosExcel = (registros || [])
+        .map(separarNombreYApellidos)
+        .map((item) => ({
+          ...item,
+          baja_fecha: formatDate(item.baja_fecha)
+        }));
+
+      await descargarExcelBajas(registrosExcel, 'Bajas_Del_Sistema_Completo.xlsx');
+
+      showNotification('Excel de bajas del sistema generado correctamente', 'success');
+    } catch (error) {
+      showNotification(error?.response?.data?.message || 'No se pudo exportar el archivo Excel', 'error');
+    } finally {
+      setExportingBajasExcel(false);
+    }
+  }, [
+    analistaId,
+    bajasTablaSoloLectura,
+    busquedaBajas,
+    formatDate,
+    paginacionBajas,
+    showNotification
+  ]);
+
   return {
     busquedaDisponiblesInput,
     setBusquedaDisponiblesInput,
@@ -724,6 +768,7 @@ export const useBajaGestion = ({ analistaId = null, isDireccion = false } = {}) 
     toggleSelectBaja,
     seleccionarTodoBajas,
     catalogoBajas,
-    exportarBajasExcel
+    exportarBajasExcel,
+    exportarBajasSistemaExcel
   };
 };
