@@ -76,6 +76,7 @@ export default function TestRevisionC5({ setPageTitle }) {
     "Listado de Personal Activo",
     "Cambio de Rango / Categoria",
     "Listado Nominal",
+    "Actualizacion de informacion"
   ];
   const estatuses = ["Aprobado", "Rechazado"];
 

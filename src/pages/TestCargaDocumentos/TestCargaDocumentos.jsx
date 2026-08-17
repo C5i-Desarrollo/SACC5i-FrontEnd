@@ -49,6 +49,7 @@ export default function TestCargaDocumentos({ setPageTitle }) {
     "Listado de Personal Activo",
     "Cambio de Rango / Categoria",
     "Listado Nominal",
+    "Actualizacion de informacion"
   ];
 
   const mostrarToast = (tipo, titulo, msj) => {

@@ -125,12 +125,31 @@ export default function AltaPaso2({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // Filtra los puestos según lo que escribas
+    // Filtra y ORDENA los puestos dándole prioridad a los que "empiezan con" el texto
   const puestosFiltrados = useMemo(() => {
     const municipales = puestos.filter((p) => p.es_competencia_municipal);
     const termino = puestoText.trim().toLowerCase();
+    
+    // Si no hay texto o ya seleccionó uno, regresamos todos
     if (!termino || formData.puesto_id) return municipales;
-    return municipales.filter(p => p.nombre.toLowerCase().includes(termino));
+
+    return municipales
+      .filter(p => p.nombre.toLowerCase().includes(termino)) // Primero filtramos
+      .sort((a, b) => {
+        const nombreA = a.nombre.toLowerCase();
+        const nombreB = b.nombre.toLowerCase();
+        
+        const empiezaConA = nombreA.startsWith(termino);
+        const empiezaConB = nombreB.startsWith(termino);
+
+        // Si A empieza con el término y B no, A va primero
+        if (empiezaConA && !empiezaConB) return -1;
+        // Si B empieza con el término y A no, B va primero
+        if (!empiezaConA && empiezaConB) return 1;
+        
+        // Si ambos empiezan igual, o ambos solo lo contienen, los ordenamos alfabéticamente
+        return nombreA.localeCompare(nombreB);
+      });
   }, [puestoText, puestos, formData.puesto_id]);
 
   const faseActualSolicitud = String(solicitud?.fase_actual || '').toLowerCase();
