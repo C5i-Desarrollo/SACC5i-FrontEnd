@@ -189,23 +189,21 @@ export default function CitaModal({ persona, onConfirmar, onCancelar, submitting
             />
           </div>
 
-          {/* Email de prueba */}
-          <div className="cm-field cm-field-test">
-            <label className="cm-label cm-label-test">
-              <i className="bx bx-test-tube"></i> Correo de prueba 
-              <span className="cm-badge-test">Solo pruebas</span>
+          {/* Correo del enlace */}
+          <div className="cm-field">
+            <label className="cm-label">
+              <i className="bx bx-envelope"></i> Correo del enlace
             </label>
             <input
               type="email"
               className={`cm-input ${errores.emailOverride ? 'cm-input-error' : ''}`}
               value={emailOverride}
               onChange={e => { setEmailOverride(e.target.value); setErrores(p => ({ ...p, emailOverride: undefined })); }}
-              placeholder="tu@correo.com — redirige el correo a esta dirección"
+              placeholder="ejemplo@municipio.gob.mx"
             />
             {errores.emailOverride && <span className="cm-error-msg">{errores.emailOverride}</span>}
             <p className="cm-hint">
-              Si se especifica, el correo se enviará a esta dirección en lugar del analista registrado.
-              Útil durante pruebas antes de pasar a producción.
+              Ingrese el correo electrónico al que se enviará la notificación oficial y el acuse de la cita.
             </p>
           </div>
 
@@ -312,12 +310,6 @@ export default function CitaModal({ persona, onConfirmar, onCancelar, submitting
             <i className="bx bx-arrow-back"></i> Atrás
           </button>
           <div className="cm-footer-actions">
-          <button className="cm-btn-copy-generate" onClick={handleCopiarYGenerar} disabled={submitting || copying}>
-            {submitting || copying
-              ? <><i className="bx bx-loader-alt bx-spin"></i> Generando...</>
-              : <><i className="bx bx-copy"></i> COPIAR Y GENERAR CITA</>
-            }
-          </button>
           <button
             className="cm-btn-send"
             onClick={handleConfirmar}
