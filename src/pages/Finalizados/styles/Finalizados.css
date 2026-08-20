@@ -480,6 +480,58 @@
   overflow-x: auto;
 }
 
+/* =========================================
+   Controles del Header (Filtros y ZIP)
+   ========================================= */
+
+.fz-controls-wrapper {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.fz-region-select-wrap {
+  min-width: 220px;
+  padding: 0 10px;
+}
+
+.fz-region-select {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Estilos del Botón ZIP con estados activo/inactivo */
+.fz-btn-zip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #6e1530;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.fz-btn-zip:hover:not(:disabled) {
+  background: #87193b; /* Un guinda un poco más claro para el hover */
+}
+
+.fz-btn-zip:disabled {
+  background: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+}
+
 /* ============================================
    DARK MODE - FINALIZADOS / FZ
    ============================================ */

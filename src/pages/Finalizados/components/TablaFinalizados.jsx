@@ -32,9 +32,28 @@ function Paginacion({ pagina, totalPaginas, onCambiar }) {
   );
 }
 
+const REGIONES_OFICIALES = [
+  { id: 1, nombre: 'Huejotzingo' },
+  { id: 2, nombre: 'Izúcar' },
+  { id: 3, nombre: 'Cuapiaxtla de Madero' },
+  { id: 4, nombre: 'Libres' },
+  { id: 5, nombre: 'Puebla' },
+  { id: 6, nombre: 'Tehuacán' },
+  { id: 7, nombre: 'Teziutlán' },
+  { id: 8, nombre: 'Zacatlán' },
+  { id: 9, nombre: 'Palmar de Bravo' }
+];
+
 export default function TablaFinalizados({
   registros,
   loading,
+  canManageAll,
+  regionId,
+  onRegionChange,
+  selectedIds,
+  onSelectIds,
+  onDescargarZip,
+  downloadingZip,
   readOnly,
   busquedaInput,
   onBusquedaChange,
@@ -58,29 +77,61 @@ export default function TablaFinalizados({
   const fileInputConstanciaRef = useRef({});
   const fileInputAcuseRef = useRef({});
 
-return (
-  <section className="fz-wrapper">
-    <div className="fz-header">
-      <div>
-        <h3>Gestión de Expedientes Concluidos</h3>
-        <p>
-          Control de emisión, carga de constancia y carga de acuse de persona por expediente.
-        </p>
+  return (
+    <section className="fz-wrapper">
+      <div className="fz-header">
+        <div>
+          <h3>Gestión de Expedientes Concluidos</h3>
+          <p>Control de emisión, carga de constancia y carga de acuse de persona por expediente.</p>
+        </div>
+
+        <div className="fz-controls-wrapper">
+          
+          {canManageAll && (
+            <>
+              {/* Select de Región */}
+              <div className="fz-search-modern fz-region-select-wrap">
+                <i className="bx bx-map" style={{ color: '#6e1530' }}></i>
+                <select 
+                  className="fz-region-select"
+                  value={regionId} 
+                  onChange={(e) => onRegionChange(e.target.value)}
+                >
+                  <option value="">Todas las regiones</option>
+                  {REGIONES_OFICIALES.map(r => (
+                    <option key={r.id} value={r.id}>{r.nombre}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Botón de ZIP */}
+              <button 
+                type="button"
+                className="fz-btn-zip" 
+                onClick={onDescargarZip} 
+                disabled={selectedIds.length === 0 || downloadingZip}
+                title={selectedIds.length === 0 ? "Selecciona registros en la tabla para descargar" : "Descargar archivos"}
+              >
+                {downloadingZip ? <i className="bx bx-loader-alt bx-spin" /> : <i className="bx bxs-file-archive" />}
+                {downloadingZip ? 'Empaquetando...' : `Descargar ZIP (${selectedIds.length})`}
+              </button>
+            </>
+          )}
+
+          {/* Buscador */}
+          <div className="fz-search-modern">
+            <i className="bx bx-search"></i>
+            <input
+              type="text"
+              value={busquedaInput}
+              onChange={(e) => onBusquedaChange(e.target.value)}
+              placeholder="Buscar por nombre, oficio o CUIP..."
+            />
+          </div>
+        </div>
       </div>
 
-      <div className="fz-search-modern">
-        <i className="bx bx-search"></i>
-
-        <input
-          type="text"
-          value={busquedaInput}
-          onChange={(e) => onBusquedaChange(e.target.value)}
-          placeholder="Buscar por nombre, oficio o CUIP..."
-        />
-      </div>
-    </div>
-
-    <div className="fz-table-wrap">
+      <div className="fz-table-wrap">
         {loading ? (
           <div className="fz-state"><i className="bx bx-loader-alt bx-spin" /> Cargando finalizados...</div>
         ) : registros.length === 0 ? (
@@ -89,6 +140,15 @@ return (
           <table className="fz-table">
             <thead>
               <tr>
+                {canManageAll && (
+                  <th style={{ width: '40px' }}>
+                    <input 
+                      type="checkbox" 
+                      checked={registros.length > 0 && selectedIds.length === registros.length}
+                      onChange={(e) => onSelectIds(e.target.checked ? registros.map(r => r.id) : [])}
+                    />
+                  </th>
+                )}
                 <th>Nombre del elemento</th>
                 <th>Puesto</th>
                 <th>No. de oficio</th>
@@ -120,6 +180,21 @@ return (
 
                 return (
                   <tr key={registro.id}>
+                    {canManageAll && (
+                      <td>
+                        <input 
+                          type="checkbox" 
+                          checked={selectedIds.includes(registro.id)}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              onSelectIds([...selectedIds, registro.id]);
+                            } else {
+                              onSelectIds(selectedIds.filter(id => id !== registro.id));
+                            }
+                          }}
+                        />
+                      </td>
+                    )}
                     <td>
                       <strong>{registro.nombre_elemento}</strong>
                     </td>

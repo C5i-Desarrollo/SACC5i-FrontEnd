@@ -105,6 +105,12 @@ export const getEstadisticasAdmin = () => {
   return api.get('/admin/estadisticas');
 };
 
+//descargar zip
+export const descargarZipFinalizadosApi = async (ids) => {
+  return await api.post('/tramites/alta/finalizados/zip', { ids }, { responseType: 'blob' });
+};
+// Nota: en tu getFinalizadosApi asegúrate de que params.region_id se envíe en la petición GET si lo recibe.
+
 // ===== CATÁLOGOS =====
 export const getTiposOficio = () => {
   return api.get('/catalogos/tipos-oficio');

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useNotification } from '../../context/NotificationContext';
+import { usePermissions } from '../../hooks/usePermissions';
 import {
   getFinalizadosApi,
   actualizarFase1FinalizadoApi,
@@ -8,11 +9,11 @@ import {
   verConstanciaFinalizadoApi,
   subirAcusePersonaFinalizadoApi,
   eliminarAcusePersonaFinalizadoApi,
-  verAcusePersonaFinalizadoApi
+  verAcusePersonaFinalizadoApi,
+  descargarZipFinalizadosApi
 } from '../../services/api';
 import TablaFinalizados from './components/TablaFinalizados';
 import { MdAssignmentTurnedIn } from 'react-icons/md'; 
-
 
 export default function Finalizados({
   setPageTitle,
@@ -21,6 +22,9 @@ export default function Finalizados({
   requireAnalista = false
 }) {
   const { showNotification } = useNotification();
+  const { isAdmin, isSuperAdmin, userRole } = usePermissions();
+  const canManageAll = isAdmin() || isSuperAdmin() || userRole === 'direccion' || userRole === 'coordinador';
+
   const [registros, setRegistros] = useState([]);
   const [loading, setLoading] = useState(false);
   const [busquedaInput, setBusquedaInput] = useState('');
@@ -35,6 +39,12 @@ export default function Finalizados({
   const [deletingConstanciaId, setDeletingConstanciaId] = useState(null);
   const [deletingAcusePersonaId, setDeletingAcusePersonaId] = useState(null);
   const [deleteTarget, setDeleteTarget] = useState(null);
+  
+  // Nuevos estados para el ZIP y Regiones
+  const [regionId, setRegionId] = useState('');
+  const [selectedIds, setSelectedIds] = useState([]);
+  const [downloadingZip, setDownloadingZip] = useState(false);
+
   const analistaNumerico = Number(analistaId);
   const hasAnalistaFilter = Number.isFinite(analistaNumerico) && analistaNumerico > 0;
 
@@ -42,7 +52,7 @@ export default function Finalizados({
     setPageTitle?.({
       titulo: 'Finalizados',
       subtitulo: 'Control de fase final, constancias y acuses de persona',
-      icon: <MdAssignmentTurnedIn className="nav-icon-highlight" /> // <--- Aquí agregas el ícono
+      icon: <MdAssignmentTurnedIn className="nav-icon-highlight" />
     });
 
     return () => setPageTitle?.(null);
@@ -69,6 +79,7 @@ export default function Finalizados({
     try {
       const params = { busqueda, pagina, limit: 10 };
       if (hasAnalistaFilter) params.analista_id = analistaNumerico;
+      if (regionId) params.region_id = regionId;
 
       const { data } = await getFinalizadosApi(params);
       setRegistros(data?.data?.registros || []);
@@ -79,7 +90,7 @@ export default function Finalizados({
     } finally {
       setLoading(false);
     }
-  }, [busqueda, pagina, showNotification, requireAnalista, hasAnalistaFilter, analistaNumerico]);
+  }, [busqueda, pagina, showNotification, requireAnalista, hasAnalistaFilter, analistaNumerico, regionId]);
 
   useEffect(() => {
     cargarFinalizados();
@@ -231,6 +242,29 @@ export default function Finalizados({
     setDeleteTarget(null);
   }, [deleteTarget, handleEliminarAcusePersona, handleEliminarConstancia]);
 
+  // Esta es la función que faltaba
+  const handleDescargarZip = async () => {
+    if (selectedIds.length === 0) return;
+    setDownloadingZip(true);
+    try {
+      const response = await descargarZipFinalizadosApi(selectedIds);
+      const blob = new Blob([response.data], { type: 'application/zip' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `Expedientes_Seleccionados_${Date.now()}.zip`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+      showNotification('ZIP descargado correctamente', 'success');
+    } catch (err) {
+      showNotification('Error al generar el ZIP. Verifica que los archivos existan.', 'error');
+    } finally {
+      setDownloadingZip(false);
+    }
+  };
+
   return (
     <main className="fz-container">
       <TablaFinalizados
@@ -255,6 +289,14 @@ export default function Finalizados({
         onVerAcusePersona={handleVerAcusePersona}
         viewingConstanciaId={viewingConstanciaId}
         viewingAcusePersonaId={viewingAcusePersonaId}
+        
+        canManageAll={canManageAll}
+        regionId={regionId}
+        onRegionChange={(val) => { setRegionId(val); setPagina(1); }}
+        selectedIds={selectedIds}
+        onSelectIds={setSelectedIds}
+        onDescargarZip={handleDescargarZip}
+        downloadingZip={downloadingZip}
       />
 
       {deleteTarget?.registroId && (
