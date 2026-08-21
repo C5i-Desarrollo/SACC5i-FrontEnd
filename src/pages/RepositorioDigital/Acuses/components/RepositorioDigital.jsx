@@ -15,7 +15,7 @@ import { useNotification } from '../../../../context/NotificationContext';
 import { usePermissions } from '../../../../hooks/usePermissions';
 import '../styles/RepositorioDigital.css';
 
-const MAX_UPLOAD_FILES = 10;
+const MAX_UPLOAD_FILES = 20;
 
 const buildFileKey = (file) => `${file.name}-${file.size}-${file.lastModified || 0}`;
 
@@ -106,6 +106,8 @@ export default function RepositorioDigital({ setPageTitle }) {
   const [deletingSelected, setDeletingSelected] = useState(false);
 
   const [showYearModal, setShowYearModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [confirmConfig, setConfirmConfig] = useState({ title: '', message: '', onConfirm: null });
   const currentYear = new Date().getFullYear();
   const yearOptions = Array.from({ length: 15 }, (_, idx) => currentYear - 5 + idx);
   const [yearToCreate, setYearToCreate] = useState(currentYear);
@@ -341,21 +343,30 @@ export default function RepositorioDigital({ setPageTitle }) {
     if (incomingFiles.length > 0) setUploadFiles(incomingFiles);
   };
 
-  const onConfirmUpload = async () => {
-    if (!pendingUploadFiles.length || !selectedYearNode || !canUpload) return;
-
+  // --- Función auxiliar que ejecuta la subida (y reemplaza si es necesario) ---
+  const executeUploadBatch = async (duplicatesToReplace = []) => {
     setUploading(true);
     try {
       for (const file of pendingUploadFiles) {
         const key = buildFileKey(file);
         const folio = String(foliosByFile[key] || '').trim().toUpperCase();
         const customName = buildCustomFileName(file.name, customNamesByFile[key]);
+        const finalName = customName || file.name;
 
+        // Si es un duplicado y el usuario aceptó reemplazarlo, borramos el viejo primero
+        const dup = duplicatesToReplace.find(d => d.key === key);
+        if (dup) {
+          await eliminarArchivoRepositorioApi(dup.existingId);
+        }
+
+        // Subimos el archivo nuevo
         await subirArchivoRepositorioApi(selectedYearNode.id, file, {
           folio,
-          original_name: customName
+          original_name: finalName
         });
       }
+      
+      // Refrescamos las vistas
       if (selectedDay) {
         await refreshFiles(selectedYearNode.id, search, filesPage, selectedDay);
       } else {
@@ -363,15 +374,64 @@ export default function RepositorioDigital({ setPageTitle }) {
       }
       await refreshTree();
       success(`Se subieron ${pendingUploadFiles.length} archivo(s) correctamente`);
-    } catch (err) {
-      error(extractErrorMessage(err, 'No se pudieron subir los archivos'));
-    } finally {
-      setUploading(false);
+      
+      // Limpiamos el modal de subida
       setPendingUploadFiles([]);
       setShowUploadMetaModal(false);
       setFoliosByFile({});
       setCustomNamesByFile({});
+    } catch (err) {
+      error(extractErrorMessage(err, 'No se pudieron subir algunos archivos'));
+    } finally {
+      setUploading(false);
     }
+  };
+
+  // --- Nueva función principal de confirmación con alerta de duplicados ---
+  const onConfirmUpload = async () => {
+    if (!pendingUploadFiles.length || !selectedYearNode || !canUpload) return;
+
+    setUploading(true);
+    const duplicates = [];
+
+    // 1. Buscar si los archivos ya existen en el servidor
+    try {
+      for (const file of pendingUploadFiles) {
+        const key = buildFileKey(file);
+        const customName = buildCustomFileName(file.name, customNamesByFile[key]);
+        const finalName = customName || file.name;
+
+        // Usamos la API de búsqueda para ver si ese nombre exacto ya existe en este año
+        const res = await getRepositorioFilesApi(selectedYearNode.id, finalName, 1, 10, '');
+        const matches = res.data?.data || [];
+        
+        const exactMatch = matches.find(m => m.original_name.toLowerCase() === finalName.toLowerCase());
+        if (exactMatch) {
+          duplicates.push({ file, key, existingId: exactMatch.id, finalName });
+        }
+      }
+    } catch (err) {
+      console.warn("Error verificando duplicados", err);
+    }
+
+    // 2. Si hay duplicados, pausamos y mostramos la alerta de reemplazo
+    if (duplicates.length > 0) {
+      setUploading(false);
+      
+      setConfirmConfig({
+        title: 'Archivos duplicados detectados',
+        message: `Se encontraron ${duplicates.length} archivo(s) que ya existen en el repositorio (Ej. "${duplicates[0].finalName}"). ¿Deseas reemplazar los archivos existentes por los nuevos?`,
+        onConfirm: async () => {
+          setShowConfirmModal(false);
+          await executeUploadBatch(duplicates);
+        }
+      });
+      setShowConfirmModal(true);
+      return;
+    }
+
+    // 3. Si todo está limpio, subimos directo
+    await executeUploadBatch([]);
   };
 
   const onCreateYear = async () => {
@@ -443,46 +503,60 @@ export default function RepositorioDigital({ setPageTitle }) {
     }
   };
 
-  const onDeleteSingle = async (file) => {
+  const onDeleteSingle = (file) => {
     if (!canUpload) return;
-    const confirmed = window.confirm(`¿Eliminar el archivo "${file.original_name}"?`);
-    if (!confirmed) return;
-
-    try {
-      await eliminarArchivoRepositorioApi(file.id);
-      if (selectedDay) {
-        await refreshFiles(selectedYearNode.id, search, filesPage, selectedDay);
-      } else {
-        await refreshDays(selectedYearNode.id, search);
+    
+    // En lugar del window.confirm, abrimos nuestro modal personalizado
+    setConfirmConfig({
+      title: 'Eliminar archivo',
+      message: `¿Estás seguro de que deseas eliminar el archivo "${file.original_name}"? Esta acción no se puede deshacer.`,
+      onConfirm: async () => {
+        try {
+          await eliminarArchivoRepositorioApi(file.id);
+          if (selectedDay) {
+            await refreshFiles(selectedYearNode.id, search, filesPage, selectedDay);
+          } else {
+            await refreshDays(selectedYearNode.id, search);
+          }
+          await refreshTree();
+          success('Archivo eliminado correctamente');
+        } catch (err) {
+          error(extractErrorMessage(err, 'No se pudo eliminar el archivo'));
+        } finally {
+          setShowConfirmModal(false);
+        }
       }
-      await refreshTree();
-      success('Archivo eliminado correctamente');
-    } catch (err) {
-      error(extractErrorMessage(err, 'No se pudo eliminar el archivo'));
-    }
+    });
+    setShowConfirmModal(true);
   };
 
-  const onDeleteSelected = async () => {
+  const onDeleteSelected = () => {
     if (!canUpload || selectedFileIds.length === 0) return;
 
-    const confirmed = window.confirm(`¿Eliminar ${selectedFileIds.length} archivo(s) seleccionado(s)?`);
-    if (!confirmed) return;
-
-    setDeletingSelected(true);
-    try {
-      await eliminarArchivosRepositorioBulkApi(selectedFileIds);
-      if (selectedDay) {
-        await refreshFiles(selectedYearNode.id, search, filesPage, selectedDay);
-      } else {
-        await refreshDays(selectedYearNode.id, search);
+    setConfirmConfig({
+      title: 'Eliminar múltiples archivos',
+      message: `¿Estás seguro de que deseas eliminar ${selectedFileIds.length} archivo(s) seleccionado(s)? Esta acción no se puede deshacer.`,
+      onConfirm: async () => {
+        setDeletingSelected(true);
+        try {
+          await eliminarArchivosRepositorioBulkApi(selectedFileIds);
+          if (selectedDay) {
+            await refreshFiles(selectedYearNode.id, search, filesPage, selectedDay);
+          } else {
+            await refreshDays(selectedYearNode.id, search);
+          }
+          await refreshTree();
+          success(`${selectedFileIds.length} archivo(s) eliminado(s)`);
+          setSelectedFileIds([]); // Limpiamos la selección
+        } catch (err) {
+          error(extractErrorMessage(err, 'No se pudieron eliminar los archivos seleccionados'));
+        } finally {
+          setDeletingSelected(false);
+          setShowConfirmModal(false);
+        }
       }
-      await refreshTree();
-      success(`${selectedFileIds.length} archivo(s) eliminado(s)`);
-    } catch (err) {
-      error(extractErrorMessage(err, 'No se pudieron eliminar los archivos seleccionados'));
-    } finally {
-      setDeletingSelected(false);
-    }
+    });
+    setShowConfirmModal(true);
   };
 
   const allChecked = files.length > 0 && selectedFileIds.length === files.length;
@@ -509,7 +583,11 @@ export default function RepositorioDigital({ setPageTitle }) {
               <option key={node.id} value={node.id}>{node.nombre}</option>
             ))}
           </select>
-
+          {viewMode === 'files' && selectedDayNode && (
+            <button type="button" className="rdv-btn rdv-btn-soft" style={{ marginLeft: 'auto', marginRight: '10px' }} onClick={onBackToDays}>
+              <i className="bx bx-arrow-back" /> Volver a días
+            </button>
+          )}
           {canCreateYear && (
             <button type="button" className="rdv-btn rdv-btn-primary" onClick={() => setShowYearModal(true)}>
               <i className="bx bx-calendar-plus" /> Crear año
@@ -570,7 +648,7 @@ export default function RepositorioDigital({ setPageTitle }) {
             onDrop={onDropUpload}
           >
             <i className="bx bx-cloud-upload" />
-            <span>Arrastra o da clic para subir (PDF/Excel, max 10 por lote)</span>
+            <span>Arrastra o da clic para subir (PDF/Excel, max 20 por lote)</span>
           </div>
         )}
 
@@ -597,11 +675,7 @@ export default function RepositorioDigital({ setPageTitle }) {
                 </p>
               </div>
 
-              {viewMode === 'files' && selectedDayNode && (
-                <button type="button" className="rdv-btn rdv-btn-soft" onClick={onBackToDays}>
-                  <i className="bx bx-arrow-back" /> Volver a días
-                </button>
-              )}
+              
             </div>
 
             {viewMode === 'days' ? (
@@ -796,6 +870,34 @@ export default function RepositorioDigital({ setPageTitle }) {
               </button>
               <button type="button" className="rdv-btn rdv-btn-primary" onClick={onConfirmUpload} disabled={uploading || pendingUploadFiles.length === 0}>
                 {uploading ? 'Subiendo...' : `Subir ${pendingUploadFiles.length} archivo(s)`}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showConfirmModal && (
+        <div className="rdv-modal-backdrop" role="presentation">
+          <div className="rdv-modal" role="dialog" aria-modal="true">
+            <h3><i className="bx bx-trash" style={{ color: '#d9534f', marginRight: '8px' }}></i>{confirmConfig.title}</h3>
+            <p>{confirmConfig.message}</p>
+
+            <div className="rdv-modal-actions" style={{ marginTop: '20px' }}>
+              <button 
+                type="button" 
+                className="rdv-btn rdv-btn-soft" 
+                onClick={() => setShowConfirmModal(false)}
+                disabled={deletingSelected}
+              >
+                Cancelar
+              </button>
+              <button 
+                type="button" 
+                className="rdv-btn rdv-btn-danger" 
+                onClick={confirmConfig.onConfirm}
+                disabled={deletingSelected}
+              >
+                {deletingSelected ? 'Eliminando...' : 'Sí, eliminar'}
               </button>
             </div>
           </div>
